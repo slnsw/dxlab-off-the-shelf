@@ -1,6 +1,6 @@
 {
-  "name": "portfolio",
-  "version": "0.1.2",
+  "name": "dxlab-off-the-shelf",
+  "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=10.16.3"
@@ -12,9 +12,17 @@
     "test": "jest"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.2",
+    "@apollo/react-ssr": "^3.1.2",
     "@types/jest": "^24.0.18",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
+    "apollo-link-http": "^1.5.16",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "9.0.7",
     "react": "16.10.1",
     "react-dom": "16.10.1"
