@@ -1,8 +1,8 @@
 module.exports = {
-  '*.{js,ts,tsx,scss}': [
+  '*.{js,ts,tsx}': [
     'eslint --fix',
-    'stylelint **/*.scss --fix',
     'npm test -- --forceExit --runInBand --bail --findRelatedTests',
     'git add',
   ],
+  '*.{scss}': ['stylelint **/*.scss --fix', 'git add'],
 };

@@ -49,6 +49,7 @@
     "husky": "^3.0.8",
     "hygen": "^4.0.9",
     "jest": "^24.9.0",
+    "jest-css-modules": "^2.1.0",
     "lint-staged": "^9.4.1",
     "node-sass": "^4.12.0",
     "prettier": "^1.18.2",
@@ -63,5 +64,10 @@
     "stylelint-webpack-plugin": "^1.0.1",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+    }
   }
 }
