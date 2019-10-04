@@ -31,6 +31,7 @@ const BookCards: React.FunctionComponent<Props> = ({
 
           return (
             <BookCard
+              key={book.id}
               id={book.id}
               title={book.title}
               imageUrl={book.sizes.large.sourceUrl}

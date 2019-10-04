@@ -1,19 +1,18 @@
 import React from 'react';
 import Head from 'next/head';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 
 import BookCards from '../components/BookCards';
-import Modal from '../components/Modal';
+import BookCardModal from '../components/BookCardModal';
 
 import { withApollo } from '../lib/apollo';
+import useQuery from '../lib/hooks/use-query';
 
 import css from './index.scss';
 
-const BOOKS = gql`
+const BOOKS = /* GraphQL */ `
   {
     offTheShelf {
-      books {
+      books(limit: 100) {
         id
         title
         sizes {
@@ -31,22 +30,16 @@ const BOOKS = gql`
 const Home = () => {
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
+  const [modalId, setModalId] = React.useState();
 
-  const {
-    // loading,
-    error,
-    // data = {
-    //   offTheShelf: {
-    //     books: [],
-    //   },
-    // },
-    data,
-  } = useQuery(BOOKS, {
+  const { loading, error, data } = useQuery(BOOKS, {
     ssr: true,
   });
 
   if (error) {
-    return error;
+    console.log(error);
+
+    return null;
   }
 
   const books = data && data.offTheShelf && data.offTheShelf.books;
@@ -57,6 +50,7 @@ const Home = () => {
     // console.log(e.target.getBoundingClientRect());
 
     setInitialModalSize(e.target.getBoundingClientRect());
+    setModalId(id);
     setIsModalActive(true);
   };
 
@@ -67,30 +61,37 @@ const Home = () => {
         <link rel="icon" href="/static/favicon.ico" importance="low" />
       </Head>
 
-      <Modal
-        isActive={isModalActive}
-        initialSize={initialModalSize}
-        onClose={() => setIsModalActive(false)}
-      >
-        Testing!!
-      </Modal>
+      {isModalActive && modalId && (
+        <BookCardModal
+          id={modalId}
+          isActive={isModalActive}
+          initialSize={initialModalSize}
+          onClose={() => setIsModalActive(false)}
+        ></BookCardModal>
+      )}
 
       <div className={css.bookShelf}>
-        <BookCards
-          books={books}
-          className={css.bookCards}
-          onClick={handleBookCardClick}
-        ></BookCards>
-        <BookCards
-          books={books}
-          className={css.bookCards}
-          onClick={handleBookCardClick}
-        ></BookCards>
-        <BookCards
-          books={books}
-          className={css.bookCards}
-          onClick={handleBookCardClick}
-        ></BookCards>
+        {loading && 'Loading...'}
+
+        {!loading && books.length > 0 && (
+          <>
+            <BookCards
+              books={books.slice(0, 30)}
+              className={css.bookCards}
+              onClick={handleBookCardClick}
+            ></BookCards>
+            <BookCards
+              books={books.slice(30, 60)}
+              className={css.bookCards}
+              onClick={handleBookCardClick}
+            ></BookCards>
+            <BookCards
+              books={books.slice(60, 100)}
+              className={css.bookCards}
+              onClick={handleBookCardClick}
+            ></BookCards>
+          </>
+        )}
       </div>
     </>
   );

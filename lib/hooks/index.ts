@@ -3,6 +3,8 @@ import * as React from 'react';
 /**
  * Listen for a particular key press
  */
+// TODO: Fix this issue, very naughty Kaho!
+/* eslint-disable react-hooks/exhaustive-deps */
 export function useKeyPress(targetKey) {
   // State for keeping track of whether key is pressed
   const [keyPressed, setKeyPressed] = React.useState(false);
@@ -34,10 +36,13 @@ export function useKeyPress(targetKey) {
 
   return keyPressed;
 }
+/* eslint-enable react-hooks/exhaustive-deps */
 
 /**
  * Get window size
  */
+// TODO: Fix this issue, very naughty Kaho!
+/* eslint-disable react-hooks/exhaustive-deps */
 export function useWindowSize(width: number = 800, height: number = 600) {
   const isClient = typeof window === 'object';
 
@@ -52,7 +57,7 @@ export function useWindowSize(width: number = 800, height: number = 600) {
 
   React.useEffect(() => {
     if (!isClient) {
-      return false;
+      return null;
     }
 
     /**
@@ -77,3 +82,4 @@ export function useWindowSize(width: number = 800, height: number = 600) {
 
   return windowSize;
 }
+/* eslint-enable react-hooks/exhaustive-deps */

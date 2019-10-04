@@ -1,11 +1,13 @@
 import * as React from 'react';
-
 import { motion, AnimatePresence } from 'framer-motion';
+
+import Overlay from '../Overlay';
+
 import { useKeyPress, useWindowSize } from '../../lib/hooks';
 
 import css from './Modal.scss';
 
-type Props = {
+export type Props = {
   isActive?: boolean;
   initialSize?: {
     x: number;
@@ -33,31 +35,41 @@ const Modal: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <AnimatePresence>
-      {isActive && (
-        <motion.div
-          initial={{
-            opacity: 1,
-            x: initialSize.x,
-            y: initialSize.y,
-            width: initialSize.width,
-            height: initialSize.height,
-          }}
-          animate={{
-            opacity: 1,
-            x: 16,
-            y: 16,
-            width: windowSize.width - 64,
-            height: windowSize.height - 64,
-          }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className={[css.modal, className || ''].join(' ')}
-        >
-          {children}
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <>
+      <Overlay isActive={isActive} onClick={onClose}></Overlay>
+
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            initial={{
+              opacity: 1,
+              x: initialSize.x,
+              y: initialSize.y,
+              width: initialSize.width,
+              height: initialSize.height,
+            }}
+            animate={{
+              opacity: 1,
+              x: 16,
+              y: 16,
+              width: windowSize.width - 32,
+              height: windowSize.height - 32,
+            }}
+            exit={{
+              opacity: 0,
+              x: initialSize.x,
+              y: initialSize.y,
+              width: initialSize.width,
+              height: initialSize.height,
+            }}
+            transition={{ duration: 0.3 }}
+            className={[css.modal, className || ''].join(' ')}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

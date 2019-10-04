@@ -1,5 +1,21 @@
 @import '../styles/global.scss';
 
+/*
+ * BASE STYLES
+ * Style base HTML tags here
+ * ========================================================================== */
+
+html {
+  box-sizing: border-box;
+  font-size: $font-size-rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   color: $colour-white;

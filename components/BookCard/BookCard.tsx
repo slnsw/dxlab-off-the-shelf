@@ -16,8 +16,8 @@ const BookCard: React.FunctionComponent<Props> = ({
   id,
   title,
   imageUrl,
-  imageWidth,
-  imageHeight,
+  imageWidth = 0,
+  imageHeight = 0,
   className,
   onClick,
 }) => {
@@ -30,7 +30,6 @@ const BookCard: React.FunctionComponent<Props> = ({
         }
       }}
     >
-      {/* {title} */}
       <img
         src={imageUrl}
         alt={title}
