@@ -24,7 +24,7 @@ const globalConfig = withCSS(
       // however we may want to introduce again once all types
       // issues fixed
       // https://github.com/zeit/next.js/issues/7687#issuecomment-506440999
-      customConfig.plugins = config.plugins.filter(plugin => {
+      customConfig.plugins = config.plugins.filter((plugin) => {
         if (plugin.constructor.name === 'ForkTsCheckerWebpackPlugin')
           return false;
         return true;
@@ -68,7 +68,7 @@ const globalConfig = withCSS(
     cssLoaderOptions: {
       localIdentName: '[name]_[local]_[hash:base64:5]',
     },
-  })
+  }),
 );
 
 module.exports = globalConfig;

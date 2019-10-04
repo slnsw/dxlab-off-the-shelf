@@ -1,7 +1,7 @@
 import React from 'react';
 import App from 'next/app';
 
-// import { withApollo } from '../lib/apollo';
+import '../styles/base.scss';
 
 class MyApp extends App {
   // Only uncomment this method if you have blocking data requirements for

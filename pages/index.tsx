@@ -3,10 +3,11 @@ import Head from 'next/head';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
-import { withApollo } from '../lib/apollo';
-// import { Query } from 'apollo-client';
+import BookCards from '../components/BookCards';
 
-import Nav from '../components/nav';
+import { withApollo } from '../lib/apollo';
+
+import css from './index.scss';
 
 const BOOKS = gql`
   {
@@ -14,6 +15,13 @@ const BOOKS = gql`
       books {
         id
         title
+        sizes {
+          large {
+            sourceUrl
+            width
+            height
+          }
+        }
       }
     }
   }
@@ -22,7 +30,7 @@ const BOOKS = gql`
 const Home = () => {
   const {
     // loading,
-    // error,
+    error,
     // data = {
     //   offTheShelf: {
     //     books: [],
@@ -33,46 +41,24 @@ const Home = () => {
     ssr: true,
   });
 
-  // const { books } = data.offTheShelf;
+  if (error) {
+    return error;
+  }
 
   const books = data && data.offTheShelf && data.offTheShelf.books;
-
-  console.log(books);
 
   return (
     <div>
       <Head>
-        <title>Home</title>
+        <title>Off the Shelf</title>
         <link rel="icon" href="/static/favicon.ico" importance="low" />
       </Head>
 
-      <Nav />
-
-      <div className="hero">
-        <h1 className="title">Off the Shelf</h1>
-        {books &&
-          books.map((book) => {
-            return <p key={book.id}>{book.title}</p>;
-          })}
+      <div className={css.bookShelf}>
+        <BookCards books={books} className={css.bookCards}></BookCards>
+        <BookCards books={books} className={css.bookCards}></BookCards>
+        <BookCards books={books} className={css.bookCards}></BookCards>
       </div>
-
-      <style jsx>{`
-        .hero {
-          width: 100%;
-          color: #333;
-        }
-        .title {
-          margin: 0;
-          width: 100%;
-          padding-top: 80px;
-          line-height: 1.15;
-          font-size: 48px;
-        }
-        .title,
-        .description {
-          text-align: center;
-        }
-      `}</style>
     </div>
   );
 };
