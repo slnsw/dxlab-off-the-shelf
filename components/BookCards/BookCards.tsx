@@ -9,11 +9,13 @@ import css from './BookCards.scss';
 type Props = {
   books: any[];
   className?: string;
+  onClick?: Function;
 };
 
 const BookCards: React.FunctionComponent<Props> = ({
   books = [],
   className,
+  onClick,
 }) => {
   const [ref, { height }] = useDimensions();
 
@@ -34,6 +36,7 @@ const BookCards: React.FunctionComponent<Props> = ({
               imageUrl={book.sizes.large.sourceUrl}
               imageWidth={imageWidth}
               imageHeight={height}
+              onClick={onClick}
             ></BookCard>
           );
         })}

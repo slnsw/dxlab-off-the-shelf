@@ -1,0 +1,79 @@
+import * as React from 'react';
+
+/**
+ * Listen for a particular key press
+ */
+export function useKeyPress(targetKey) {
+  // State for keeping track of whether key is pressed
+  const [keyPressed, setKeyPressed] = React.useState(false);
+
+  // If pressed key is our target key then set to true
+  function downHandler({ key }) {
+    if (key === targetKey) {
+      setKeyPressed(true);
+    }
+  }
+
+  // If released key is our target key then set to false
+  const upHandler = ({ key }) => {
+    if (key === targetKey) {
+      setKeyPressed(false);
+    }
+  };
+
+  // Add event listeners
+  React.useEffect(() => {
+    window.addEventListener('keydown', downHandler);
+    window.addEventListener('keyup', upHandler);
+    // Remove event listeners on cleanup
+    return () => {
+      window.removeEventListener('keydown', downHandler);
+      window.removeEventListener('keyup', upHandler);
+    };
+  }, [downHandler, upHandler]); // Empty array ensures that effect is only run on mount and unmount
+
+  return keyPressed;
+}
+
+/**
+ * Get window size
+ */
+export function useWindowSize(width: number = 800, height: number = 600) {
+  const isClient = typeof window === 'object';
+
+  function getSize() {
+    return {
+      width: isClient ? window.innerWidth : width,
+      height: isClient ? window.innerHeight : height,
+    };
+  }
+
+  const [windowSize, setWindowSize] = React.useState(getSize);
+
+  React.useEffect(() => {
+    if (!isClient) {
+      return false;
+    }
+
+    /**
+     * Handle resize events.
+     *
+     * Since Safari will sometimes fire resize events during a scroll,
+     * check to make sure that the window size has actually changed.
+     */
+    function handleResize() {
+      const currentSize = getSize();
+      if (
+        currentSize.width !== windowSize.width ||
+        currentSize.height !== windowSize.height
+      ) {
+        setWindowSize(currentSize);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [getSize, isClient, windowSize.height, windowSize.width]); // Empty array ensures that effect is only run on mount and unmount
+
+  return windowSize;
+}

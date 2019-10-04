@@ -9,6 +9,7 @@ type Props = {
   imageWidth: number;
   imageHeight: number;
   className?: string;
+  onClick?: Function;
 };
 
 const BookCard: React.FunctionComponent<Props> = ({
@@ -18,14 +19,16 @@ const BookCard: React.FunctionComponent<Props> = ({
   imageWidth,
   imageHeight,
   className,
+  onClick,
 }) => {
   return (
     <article
       className={[css.bookCard, className || ''].join(' ')}
-      // style={{
-      //   width: imageWidth,
-      //   height: imageHeight,
-      // }}
+      onClick={(e) => {
+        if (typeof onClick === 'function') {
+          onClick(e, id);
+        }
+      }}
     >
       {/* {title} */}
       <img

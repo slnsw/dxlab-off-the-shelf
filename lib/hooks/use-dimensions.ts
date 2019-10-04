@@ -24,6 +24,7 @@ function useDimensions({ liveMeasure = true } = {}) {
     setNode(refNode);
   }, []);
 
+  /* eslint-disable consistent-return */
   useLayoutEffect(() => {
     if (node) {
       const measure = () =>
@@ -42,9 +43,8 @@ function useDimensions({ liveMeasure = true } = {}) {
         };
       }
     }
-
-    // return null;
   }, [liveMeasure, node]);
+  /* eslint-enable consistent-return */
 
   return [ref, dimensions, node];
 }
