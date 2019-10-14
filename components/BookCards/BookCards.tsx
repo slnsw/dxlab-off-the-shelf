@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import BookCard from '../BookCard';
+import BookSpines from '../BookSpines';
 
 import useDimensions from '../../lib/hooks/use-dimensions';
 
@@ -26,22 +27,26 @@ const BookCards: React.FunctionComponent<Props> = ({
       {books
         .filter(
           (book) =>
-            book.sizes && book.sizes.large && book.sizes.large.sourceUrl,
+            book.sizes && book.sizes.medium && book.sizes.medium.sourceUrl,
         )
         .map((book) => {
-          const ratio = book.sizes.large.width / book.sizes.large.height;
+          const ratio = book.sizes.medium.width / book.sizes.medium.height;
           const imageWidth = ratio * height;
 
           return (
-            <BookCard
-              key={book.id}
-              id={book.id}
-              title={book.title}
-              imageUrl={book.sizes.large.sourceUrl}
-              imageWidth={imageWidth}
-              imageHeight={height}
-              onClick={onClick}
-            ></BookCard>
+            <>
+              <BookCard
+                key={book.id}
+                id={book.id}
+                title={book.title}
+                imageUrl={book.sizes.medium.sourceUrl}
+                imageWidth={imageWidth}
+                imageHeight={height}
+                onClick={onClick}
+              ></BookCard>
+
+              <BookSpines />
+            </>
           );
         })}
     </div>

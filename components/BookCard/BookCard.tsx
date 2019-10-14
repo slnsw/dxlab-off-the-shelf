@@ -34,6 +34,7 @@ const BookCard: React.FunctionComponent<Props> = ({
         src={imageUrl}
         alt={title}
         className={css.image}
+        lazy
         style={{
           width: imageWidth,
           height: imageHeight,

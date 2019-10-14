@@ -1,0 +1,13 @@
+@import '../../styles/global.scss';
+
+.bookSpine {
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+}
+
+.image {
+  display: block;
+  max-height: 90%;
+  width: auto;
+}
