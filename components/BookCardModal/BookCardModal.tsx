@@ -11,6 +11,11 @@ const BOOK = `
     offTheShelf {
       book(id: $id) {
         title
+        sizes {
+          large {
+            sourceUrl
+          }
+        }
       }
     }
   }
@@ -55,7 +60,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
     return null;
   }
 
-  console.log(data);
+  // console.log(data);
 
   const book = (data && data.offTheShelf && data.offTheShelf.book) || {};
 
@@ -66,7 +71,18 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       className={[css.bookCardModal, className || ''].join(' ')}
       onClose={onClose}
     >
-      {loading ? 'Loading...' : book.title}
+      {loading ? (
+        'Loading...'
+      ) : (
+        <>
+          <img
+            src={book.sizes.large.sourceUrl}
+            alt={book.title}
+            className={css.image}
+          />{' '}
+          {book.title}
+        </>
+      )}
     </Modal>
   );
 };

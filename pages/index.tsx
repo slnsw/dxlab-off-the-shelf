@@ -73,7 +73,7 @@ const Home = () => {
       <div className={css.bookShelf}>
         {loading && 'Loading...'}
 
-        {!loading && books.length > 0 && (
+        {!loading && books && books.length > 0 && (
           <>
             <BookCards
               books={books.slice(0, 30)}

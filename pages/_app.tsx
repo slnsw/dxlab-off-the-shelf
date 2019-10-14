@@ -1,6 +1,8 @@
 import React from 'react';
 import App from 'next/app';
 
+import { initGA } from '../lib/analytics';
+
 import '../node_modules/normalize.css/normalize.css';
 import '../styles/base.scss';
 
