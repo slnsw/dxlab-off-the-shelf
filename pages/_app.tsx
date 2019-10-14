@@ -4,6 +4,12 @@ import App from 'next/app';
 import '../node_modules/normalize.css/normalize.css';
 import '../styles/base.scss';
 
+declare global {
+  interface Window {
+    GA_INITIALIZED?: boolean;
+  }
+}
+
 class MyApp extends App {
   // Only uncomment this method if you have blocking data requirements for
   // every single page in your application. This disables the ability to
@@ -16,6 +22,15 @@ class MyApp extends App {
   //
   //   return { ...appProps }
   // }
+
+  componentDidMount() {
+    if (typeof window !== 'undefined') {
+      if (!window.GA_INITIALIZED) {
+        initGA();
+        window.GA_INITIALIZED = true;
+      }
+    }
+  }
 
   render() {
     const { Component, pageProps } = this.props;

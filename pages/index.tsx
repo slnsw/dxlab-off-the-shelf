@@ -58,7 +58,7 @@ const Home = () => {
     <>
       <Head>
         <title>Off the Shelf</title>
-        <link rel="icon" href="/static/favicon.ico" importance="low" />
+        <link rel="icon" href="/favicon.ico" importance="low" />
       </Head>
 
       {isModalActive && modalId && (
