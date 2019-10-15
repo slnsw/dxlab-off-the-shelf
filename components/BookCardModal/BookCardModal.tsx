@@ -34,6 +34,14 @@ type Props = {
   onClose?: Function;
 };
 
+const BookCardModalWrapper: React.FunctionComponent<Props> = (props) => {
+  if (!props.id) {
+    return null;
+  }
+
+  return <BookCardModal {...props} />;
+};
+
 const BookCardModal: React.FunctionComponent<Props> = ({
   id,
   isActive,
@@ -41,13 +49,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   className,
   onClose,
 }) => {
-  console.log(id);
-
-  // if (!id) {
-  //   return null;
-  // }
-  // console.log(id);
-
   const { loading, error, data } = useQuery(BOOK, {
     variables: {
       id,
@@ -59,8 +60,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
     return null;
   }
-
-  // console.log(data);
 
   const book = (data && data.offTheShelf && data.offTheShelf.book) || {};
 
@@ -87,4 +86,4 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   );
 };
 
-export default BookCardModal;
+export default BookCardModalWrapper;
