@@ -10,7 +10,12 @@ const BookSpine: React.FunctionComponent<Props> = ({ className }) => {
   const spineId = Math.floor(Math.random() * 96) + 1;
   return (
     <div className={[css.bookSpine, className || ''].join(' ')}>
-      <img src={`/images/spines/${spineId}.png`} className={css.image} lazy />
+      <img
+        src={`/images/spines/${spineId}.png`}
+        className={css.image}
+        lazy
+        alt="spine"
+      />
     </div>
   );
 };

@@ -36,7 +36,7 @@ const BookCards: React.FunctionComponent<Props> = ({
           return (
             <>
               <BookCard
-                key={book.id}
+                key={book.id * 2 + 1}
                 id={book.id}
                 title={book.title}
                 imageUrl={book.sizes.medium.sourceUrl}
@@ -45,7 +45,7 @@ const BookCards: React.FunctionComponent<Props> = ({
                 onClick={onClick}
               ></BookCard>
 
-              <BookSpines />
+              <BookSpines key={book.id * 2} count={book.spines} />
             </>
           );
         })}

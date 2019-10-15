@@ -6,14 +6,13 @@ import css from './BookSpines.scss';
 
 type Props = {
   className?: string;
+  count: number;
 };
 
-const BookSpines: React.FunctionComponent<Props> = ({ className }) => {
-  const spines = Math.floor(Math.random() * 4) + 1;
-  console.log(spines);
+const BookSpines: React.FunctionComponent<Props> = ({ className, count }) => {
   return (
     <div className={[css.bookSpines, className || ''].join(' ')}>
-      {[...Array(spines)].map((i) => {
+      {[...Array(count)].map((i) => {
         return <BookSpine key={i} />;
       })}
     </div>

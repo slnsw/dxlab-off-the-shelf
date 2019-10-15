@@ -2,24 +2,25 @@ import * as React from 'react';
 
 import Modal from '../Modal';
 
-import useQuery from '../../lib/hooks/use-query';
+// import useQuery from '../../lib/hooks/use-query';
+import useBookData from '../../lib/hooks/use-book-data';
 
 import css from './BookCardModal.scss';
 
-const BOOK = `
-  query getBook($id: Int!) {
-    offTheShelf {
-      book(id: $id) {
-        title
-        sizes {
-          large {
-            sourceUrl
-          }
-        }
-      }
-    }
-  }
-`;
+// const BOOK = `
+//   query getBook($id: Int!) {
+//     offTheShelf {
+//       book(id: $id) {
+//         title
+//         sizes {
+//           large {
+//             sourceUrl
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
 
 type Props = {
   id: number;
@@ -49,11 +50,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   className,
   onClose,
 }) => {
-  const { loading, error, data } = useQuery(BOOK, {
-    variables: {
-      id,
-    },
-  });
+  // const { loading, error, data } = useQuery(BOOK, {
+  const { loading, error, book } = useBookData(id);
 
   if (error) {
     console.log(error);
@@ -61,7 +59,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
     return null;
   }
 
-  const book = (data && data.offTheShelf && data.offTheShelf.book) || {};
+  // const book = (data && data.offTheShelf && data.offTheShelf.book) || {};
 
   return (
     <Modal
@@ -79,7 +77,88 @@ const BookCardModal: React.FunctionComponent<Props> = ({
             alt={book.title}
             className={css.image}
           />{' '}
-          {book.title}
+          <div className={css.info}>
+            <h1>{book.title}</h1>
+            {book.primoRecord && (
+              <>
+                {book.primoRecord.creator && (
+                  <p>Author: {book.primoRecord.creator}</p>
+                )}
+                {book.primoRecord.publisher && (
+                  <p>Publisher: {book.primoRecord.publisher}</p>
+                )}
+                {book.primoRecord.access && <p>{book.primoRecord.access}</p>}
+                {book.primoRecord.accessConditions && (
+                  <p>Access: {book.primoRecord.accessConditions}</p>
+                )}
+                {book.primoRecord.callNumber && (
+                  <p>Call number: {book.primoRecord.callNumber}</p>
+                )}
+                {book.primoRecord.copyright && (
+                  <p>Copyright: {book.primoRecord.copyright}</p>
+                )}
+                {book.primoRecord.creationDate && (
+                  <p>Date: {book.primoRecord.creationDate}</p>
+                )}
+                {!book.primoRecord.creationDate && book.primoRecord.date && (
+                  <p>Date: {book.primoRecord.date}</p>
+                )}
+                {book.primoRecord.description && (
+                  <p>{book.primoRecord.description}</p>
+                )}
+                {book.primoRecord.dewey && (
+                  <p>Dewey: {book.primoRecord.dewey}</p>
+                )}
+                {book.primoRecord.exhibitions && (
+                  <p>{book.primoRecord.exhibitions}</p>
+                )}
+                {book.primoRecord.format && (
+                  <p>Format: {book.primoRecord.format}</p>
+                )}
+                {book.primoRecord.history && (
+                  <p>History: {book.primoRecord.history}</p>
+                )}
+                {book.primoRecord.holdings &&
+                  book.primoRecord.holdings.map((holding) => {
+                    return (
+                      <p>
+                        {holding.subLocation}, {holding.status},{' '}
+                        {holding.mainLocation}
+                      </p>
+                    );
+                  })}
+                {book.primoRecord.id && <p>ID: {book.primoRecord.id}</p>}
+                {book.primoRecord.isbn && <p>ISBN: {book.primoRecord.isbn}</p>}
+                {book.primoRecord.language && (
+                  <p>Language: {book.primoRecord.language}</p>
+                )}
+                {book.primoRecord.notes && (
+                  <p>Notes: {book.primoRecord.notes}</p>
+                )}
+                {book.primoRecord.personNames && (
+                  <p>Names: {book.primoRecord.personNames}</p>
+                )}
+                {book.primoRecord.physicalDescription && (
+                  <p>{book.primoRecord.physicalDescription}</p>
+                )}
+
+                {book.primoRecord.referenceCode && (
+                  <p>Reference code: {book.primoRecord.referenceCode}</p>
+                )}
+                {book.primoRecord.source && (
+                  <p>Source: {book.primoRecord.source}</p>
+                )}
+                {book.primoRecord.subjects &&
+                  book.primoRecord.subjects.map((subject) => {
+                    return <li>{subject}</li>;
+                  })}
+                {book.primoRecord.topics && (
+                  <p>Topics: {book.primoRecord.topics}</p>
+                )}
+                {book.primoRecord.type && <p>Type: {book.primoRecord.type}</p>}
+              </>
+            )}
+          </div>
         </>
       )}
     </Modal>
