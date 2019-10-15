@@ -64,9 +64,8 @@ $font-size-xxlg: 25/15 * 1rem;
 $font-size-xxxlg: 29.7/15 * 1rem;
 $font-size-xxxxlg: 38.6/15 * 1rem;
 
-$font-family-primary: 'Gotham A', 'Gotham B', Helvetica, sans-serif;
-$font-family-secondary: 'Chronicle Display A', 'Chronicle Display B', Helvetica,
-  sans-serif;
+$font-family-primary: 'Barlow', Helvetica, sans-serif;
+// $font-family-secondary: 'Barlow', Helvetica, sans-serif;
 
 /*
   * Containers
@@ -111,7 +110,7 @@ $ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1); /* easeInOutQuint */
   media-xxlg: $container-width-xxlg;
   font-scale: $font-scale;
   font-family-primary: $font-family-primary;
-  font-family-secondary: $font-family-secondary;
+  // font-family-secondary: $font-family-secondary;
   colour-primary: $colour-primary;
   colour-secondary: $colour-secondary;
   colour-highlight: $colour-highlight;

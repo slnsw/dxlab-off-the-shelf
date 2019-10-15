@@ -1,5 +1,6 @@
 import React from 'react';
 import App from 'next/app';
+import Head from 'next/head';
 
 import { initGA } from '../lib/analytics';
 
@@ -36,7 +37,18 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props;
-    return <Component {...pageProps} />;
+    return (
+      <>
+        <Head>
+          <link
+            href="https://fonts.googleapis.com/css?family=Barlow:400,500,500i,700"
+            rel="stylesheet"
+          />
+        </Head>
+
+        <Component {...pageProps} />
+      </>
+    );
   }
 }
 
