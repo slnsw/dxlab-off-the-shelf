@@ -56,7 +56,7 @@ const Modal: React.FunctionComponent<Props> = ({
               height: windowSize.height - 32,
             }}
             exit={{
-              opacity: 0,
+              opacity: 0.5,
               x: initialSize.x,
               y: initialSize.y,
               width: initialSize.width,

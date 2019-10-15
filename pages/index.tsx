@@ -61,14 +61,12 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" importance="low" />
       </Head>
 
-      {isModalActive && modalId && (
-        <BookCardModal
-          id={modalId}
-          isActive={isModalActive}
-          initialSize={initialModalSize}
-          onClose={() => setIsModalActive(false)}
-        ></BookCardModal>
-      )}
+      <BookCardModal
+        id={modalId}
+        isActive={isModalActive}
+        initialSize={initialModalSize}
+        onClose={() => setIsModalActive(false)}
+      />
 
       <div className={css.bookShelf}>
         {loading && 'Loading...'}
