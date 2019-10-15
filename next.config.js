@@ -1,3 +1,8 @@
+require('dotenv').config();
+
+/* eslint-disable import/no-extraneous-dependencies */
+const webpack = require('webpack');
+/* eslint-enable import/no-extraneous-dependencies */
 const withSass = require('@zeit/next-sass');
 const withCSS = require('@zeit/next-css');
 // const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
@@ -8,6 +13,9 @@ const globalConfig = withCSS(
       const customConfig = {
         ...config,
       };
+
+      // Environment variables
+      customConfig.plugins.push(new webpack.EnvironmentPlugin(process.env));
 
       // Issue with mini-css-extract-plugin throwing warnings about conflicting
       // order. This shouldn't matter for us because we are using CSS Modules.
