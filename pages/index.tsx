@@ -8,14 +8,18 @@ import { withApollo } from '../lib/apollo';
 
 // import css from './index.scss';
 
-const Home = () => {
+const Home = ({ id }) => {
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [modalId, setModalId] = React.useState();
 
-  const handleBookCardClick = (e, id) => {
+  if (id) {
+    console.log('book');
+  }
+
+  const handleBookCardClick = (e, bookCardId) => {
     setInitialModalSize(e.target.getBoundingClientRect());
-    setModalId(id);
+    setModalId(bookCardId);
     setIsModalActive(true);
   };
 

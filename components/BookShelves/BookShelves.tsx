@@ -18,8 +18,11 @@ const BookShelves: React.FunctionComponent<Props> = ({
   onBookClick,
 }) => {
   const [books, setBooks] = React.useState([]);
-  const [currentBooks, setCurrentBooks] = React.useState([null, null, null]);
-  const [currentShelf, setCurrentShelf] = React.useState(1);
+  // const [currentBooks, setCurrentBooks] = React.useState([null, null, null]);
+  // const [
+  //   currentShelf,
+  //   // setCurrentShelf
+  // ] = React.useState(1);
   const [shelves, setShelves] = React.useState([[], [], []]);
   // pull in the books
   const { books: booksOnly, loading } = useBooksData();
@@ -37,7 +40,9 @@ const BookShelves: React.FunctionComponent<Props> = ({
     });
     // shuffle them up
     setBooks(knuthShuffle(unshuffledBooks));
+    /* eslint-disable */
   }, []);
+  /* eslint-enable */
 
   React.useEffect(() => {
     // now split them across 3 shelves...
@@ -47,8 +52,9 @@ const BookShelves: React.FunctionComponent<Props> = ({
       books.slice(aThirdOfTheBooks, aThirdOfTheBooks * 2),
       books.slice(aThirdOfTheBooks * 2, books.length),
     ]);
-    console.log(shelves[currentShelf]);
   }, [books]);
+
+  // console.log(shelves[currentShelf]);
 
   useInterval(() => {
     const num = Math.floor(Math.random() * books.length);
