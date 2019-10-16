@@ -127,7 +127,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                       </p>
                     );
                   })}
-                {book.primoRecord.id && <p>ID: {book.primoRecord.id}</p>}
+                {/* {book.primoRecord.id && <p>ID: {book.primoRecord.id}</p>} */}
                 {book.primoRecord.isbn && <p>ISBN: {book.primoRecord.isbn}</p>}
                 {book.primoRecord.language && (
                   <p>Language: {book.primoRecord.language}</p>
@@ -148,10 +148,16 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                 {book.primoRecord.source && (
                   <p>Source: {book.primoRecord.source}</p>
                 )}
-                {book.primoRecord.subjects &&
-                  book.primoRecord.subjects.map((subject) => {
-                    return <li>{subject}</li>;
-                  })}
+                {book.primoRecord.subjects && (
+                  <p>
+                    Subjects:
+                    <ul>
+                      {book.primoRecord.subjects.map((subject) => {
+                        return <li>{subject}</li>;
+                      })}
+                    </ul>
+                  </p>
+                )}
                 {book.primoRecord.topics && (
                   <p>Topics: {book.primoRecord.topics}</p>
                 )}

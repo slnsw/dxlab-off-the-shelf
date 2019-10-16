@@ -7,36 +7,18 @@ import BookCardModal from '../components/BookCardModal';
 import { withApollo } from '../lib/apollo';
 import useInterval from '../lib/hooks/use-interval';
 import useBooksData from '../lib/hooks/use-books-data';
+import knuthShuffle from '../lib/knuthShuffle';
 
 import css from './index.scss';
-
-const knuthShuffle = (array) => {
-  // This does an in-place shuffle of an array and is order O(n)
-  // Also known as the Fisher-Yates shuffle.
-  let currentIndex = array.length;
-  // copy input array to a variable to stop ESlint having a cry when we change it
-  const out = array;
-  let temporaryValue;
-  let randomIndex;
-  // While there remain elements to shuffle...
-  while (currentIndex !== 0) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    // And swap it with the current element.
-    temporaryValue = out[currentIndex];
-    out[currentIndex] = out[randomIndex];
-    out[randomIndex] = temporaryValue;
-  }
-  return out;
-};
 
 const Home = () => {
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [modalId, setModalId] = React.useState();
   const [books, setBooks] = React.useState([]);
-
+  const [currentBooks, setCurrentBooks] = React.useState([null, null, null]);
+  const [currentShelf, setCurrentShelf] = React.useState(1);
+  const [shelfIds, setShelfIds] = React.useState([[], [], []]);
   // pull in the books
   const { books: booksOnly, loading } = useBooksData();
 
@@ -50,9 +32,9 @@ const Home = () => {
       });
       return { ...book, spines };
     });
-    // console.log(unshuffledBooks[5]);
     // shuffle them up
     setBooks(knuthShuffle(unshuffledBooks));
+    // now split them across 3 shelves...
   }, []);
 
   useInterval(() => {
@@ -61,7 +43,7 @@ const Home = () => {
     const el = document.getElementById(`bookCard-${id}`);
 
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      // el.scrollIntoView({ behavior: 'smooth' });
     }
   }, 5000);
 
