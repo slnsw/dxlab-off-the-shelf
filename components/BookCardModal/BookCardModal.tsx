@@ -21,9 +21,11 @@ type Props = {
 };
 
 const BookCardModalWrapper: React.FunctionComponent<Props> = (props) => {
-  if (!props.id) {
-    return null;
-  }
+  // if (!props.id) {
+  //   return null;
+  // }
+
+  console.log(props.id, props.isActive);
 
   return <BookCardModal {...props} />;
 };
@@ -35,7 +37,15 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   className,
   onClose,
 }) => {
-  const { loading, error, book } = useBookData(id);
+  const {
+    loading,
+    error,
+    book = {
+      sizes: {
+        large: null,
+      },
+    },
+  } = useBookData(id);
 
   if (error) {
     console.log(error);
@@ -54,11 +64,14 @@ const BookCardModal: React.FunctionComponent<Props> = ({
         'Loading...'
       ) : (
         <>
-          <img
-            src={book.sizes.large.sourceUrl}
-            alt={book.title}
-            className={css.image}
-          />{' '}
+          {book.sizes.large && (
+            <img
+              src={book.sizes.large.sourceUrl}
+              alt={book.title}
+              className={css.image}
+            />
+          )}
+
           <div className={css.info}>
             <h1>{book.title}</h1>
             {book.primoRecord && (

@@ -32,12 +32,12 @@ const Modal: React.FunctionComponent<Props> = ({
   children,
   onClose,
 }) => {
-  const escapeKeyPress = useKeyPress('Escape');
+  useKeyPress('Escape', () => {
+    if (typeof onClose === 'function') {
+      onClose();
+    }
+  });
   const windowSize = useWindowSize();
-
-  if (escapeKeyPress && typeof onClose === 'function') {
-    onClose();
-  }
 
   return (
     <>

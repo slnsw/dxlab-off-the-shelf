@@ -1,9 +1,9 @@
 import useQuery from './use-query';
 
 const BOOK = /* GraphQL */ `
-  query getBook($id: Int!) {
+  query getBook($id: Int, $skip: Boolean!) {
     offTheShelf {
-      book(id: $id) {
+      book(id: $id) @skip(if: $skip) {
         title
         sizes {
           large {
@@ -44,19 +44,19 @@ const BOOK = /* GraphQL */ `
           }
         }
       }
-      bookTotal
     }
   }
 `;
 
 const useBookData = (id: number) => {
+  const hasId = Boolean(id);
+
   const { loading, error, data } = useQuery(BOOK, {
     ssr: true,
     variables: {
-      // Dodgey hard coding of id as GraphQL needs one, if for skip to work.
-      id,
-      // id: hasId ? id : 900,
-      // skip: !hasId,
+      // id,
+      id: hasId ? id : null,
+      skip: !hasId,
     },
   });
   const book = data && data.offTheShelf && data.offTheShelf.book;
