@@ -1,17 +1,1 @@
 @import '../styles/global.scss';
-
-.bookShelf {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh);
-  padding: $baseline;
-}
-
-.bookCards {
-  flex: 1;
-  margin-bottom: $baseline;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}

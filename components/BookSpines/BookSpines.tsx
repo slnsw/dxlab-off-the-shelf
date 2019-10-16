@@ -15,8 +15,8 @@ const BookSpines: React.FunctionComponent<Props> = ({ className, spines }) => {
   }
   return (
     <div className={[css.bookSpines, className || ''].join(' ')}>
-      {spines.map((spine) => {
-        return <BookSpine id={spine} />;
+      {spines.map((spine, i) => {
+        return <BookSpine key={`${spine}-${i}`} id={spine} />;
       })}
     </div>
   );

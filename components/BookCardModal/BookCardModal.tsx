@@ -121,7 +121,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                 {book.primoRecord.holdings &&
                   book.primoRecord.holdings.map((holding) => {
                     return (
-                      <p>
+                      <p key={holding.subLocation}>
                         {holding.subLocation}, {holding.status},{' '}
                         {holding.mainLocation}
                       </p>
@@ -149,14 +149,14 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                   <p>Source: {book.primoRecord.source}</p>
                 )}
                 {book.primoRecord.subjects && (
-                  <p>
-                    Subjects:
+                  <>
+                    <p>Subjects:</p>
                     <ul>
                       {book.primoRecord.subjects.map((subject) => {
-                        return <li>{subject}</li>;
+                        return <li key={subject}>{subject}</li>;
                       })}
                     </ul>
-                  </p>
+                  </>
                 )}
                 {book.primoRecord.topics && (
                   <p>Topics: {book.primoRecord.topics}</p>

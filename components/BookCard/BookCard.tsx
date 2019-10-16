@@ -21,6 +21,9 @@ const BookCard: React.FunctionComponent<Props> = ({
   className,
   onClick,
 }) => {
+  if (!imageWidth) {
+    return null;
+  }
   return (
     <article
       id={`bookCard-${id}`}

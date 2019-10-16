@@ -1,0 +1,17 @@
+@import '../../styles/global.scss';
+
+.bookShelves {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh);
+  padding: $baseline;
+}
+
+.bookShelf {
+  flex: 1;
+  margin-bottom: $baseline;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

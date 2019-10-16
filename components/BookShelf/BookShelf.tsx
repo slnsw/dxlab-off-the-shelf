@@ -5,7 +5,7 @@ import BookSpines from '../BookSpines';
 
 import useDimensions from '../../lib/hooks/use-dimensions';
 
-import css from './BookCards.scss';
+import css from './BookShelf.scss';
 
 type Props = {
   books: any[];
@@ -13,7 +13,7 @@ type Props = {
   onClick?: Function;
 };
 
-const BookCards: React.FunctionComponent<Props> = ({
+const BookShelf: React.FunctionComponent<Props> = ({
   books = [],
   className,
   onClick,
@@ -21,14 +21,8 @@ const BookCards: React.FunctionComponent<Props> = ({
   const [ref, dimensions] = useDimensions();
   const { height } = dimensions;
 
-  // React.useEffect(() => {
-  //   if (typeof onChange === 'function') {
-  //     onChange(dimensions);
-  //   }
-  // }, [dimensions]);
-
   return (
-    <div className={[css.bookCards, className || ''].join(' ')} ref={ref}>
+    <div className={[css.bookShelf, className || ''].join(' ')} ref={ref}>
       {books
         .filter(
           (book) =>
@@ -39,9 +33,8 @@ const BookCards: React.FunctionComponent<Props> = ({
           const imageWidth = ratio * height;
 
           return (
-            <>
+            <React.Fragment key={book.id}>
               <BookCard
-                key={book.id * 2 + 1}
                 id={book.id}
                 title={book.title}
                 imageUrl={book.sizes.medium.sourceUrl}
@@ -50,12 +43,12 @@ const BookCards: React.FunctionComponent<Props> = ({
                 onClick={onClick}
               ></BookCard>
 
-              <BookSpines key={book.id * 2} spines={book.spines} />
-            </>
+              <BookSpines spines={book.spines} />
+            </React.Fragment>
           );
         })}
     </div>
   );
 };
 
-export default BookCards;
+export default BookShelf;
