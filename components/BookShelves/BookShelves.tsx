@@ -37,7 +37,9 @@ const BookShelves: React.FunctionComponent<Props> = ({
     });
     // shuffle them up
     setBooks(knuthShuffle(unshuffledBooks));
+    /* eslint-disable */
   }, []);
+  /* eslint-enable */
 
   React.useEffect(() => {
     // now split them across 3 shelves...
@@ -48,6 +50,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
       books.slice(aThirdOfTheBooks * 2, books.length),
     ]);
   }, [books]);
+
+  // console.log(shelves[currentShelf]);
 
   useInterval(() => {
     setCurrentShelf(Math.floor(Math.random() * 3));

@@ -9,7 +9,7 @@
     "dev": "next dev -p 5040",
     "build": "next build",
     "start": "next start",
-    "test": "jest",
+    "test": "node -r dotenv/config ./node_modules/.bin/jest",
     "test:watch": "npm test -- --watch"
   },
   "dependencies": {
