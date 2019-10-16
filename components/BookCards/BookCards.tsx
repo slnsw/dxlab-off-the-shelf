@@ -18,9 +18,14 @@ const BookCards: React.FunctionComponent<Props> = ({
   className,
   onClick,
 }) => {
-  const [ref, { height }] = useDimensions();
+  const [ref, dimensions] = useDimensions();
+  const { height } = dimensions;
 
-  // console.log(height);
+  // React.useEffect(() => {
+  //   if (typeof onChange === 'function') {
+  //     onChange(dimensions);
+  //   }
+  // }, [dimensions]);
 
   return (
     <div className={[css.bookCards, className || ''].join(' ')} ref={ref}>
@@ -45,7 +50,7 @@ const BookCards: React.FunctionComponent<Props> = ({
                 onClick={onClick}
               ></BookCard>
 
-              <BookSpines key={book.id * 2} count={book.spines} />
+              <BookSpines key={book.id * 2} spines={book.spines} />
             </>
           );
         })}

@@ -23,6 +23,7 @@ const BookCard: React.FunctionComponent<Props> = ({
 }) => {
   return (
     <article
+      id={`bookCard-${id}`}
       className={[css.bookCard, className || ''].join(' ')}
       onClick={(e) => {
         if (typeof onClick === 'function') {
@@ -34,7 +35,7 @@ const BookCard: React.FunctionComponent<Props> = ({
         src={imageUrl}
         alt={title}
         className={css.image}
-        lazy="true"
+        // lazy="true"
         style={{
           width: imageWidth,
           height: imageHeight,

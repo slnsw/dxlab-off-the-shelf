@@ -5,7 +5,7 @@ import BookCards from '../components/BookCards';
 import BookCardModal from '../components/BookCardModal';
 
 import { withApollo } from '../lib/apollo';
-// import useQuery from '../lib/hooks/use-query';
+import useInterval from '../lib/hooks/use-interval';
 import useBooksData from '../lib/hooks/use-books-data';
 
 import css from './index.scss';
@@ -35,19 +35,36 @@ const Home = () => {
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [modalId, setModalId] = React.useState();
+  const [books, setBooks] = React.useState([]);
 
   // pull in the books
   const { books: booksOnly, loading } = useBooksData();
-  // console.log(booksOnly[5]);
-  // randomly add spines
-  const unshuffledBooks = booksOnly.map((book) => {
-    const hasSpines = Math.random() < 0.43;
-    const numSpines = hasSpines ? Math.floor(Math.random() * 4) + 1 : 0;
-    return { ...book, spines: numSpines };
-  });
-  // console.log(unshuffledBooks[5]);
-  // shuffle them up
-  const books = knuthShuffle(unshuffledBooks);
+
+  React.useEffect(() => {
+    // randomly add spines
+    const unshuffledBooks = booksOnly.slice(0, 100).map((book) => {
+      const hasSpines = Math.random() < 0.5;
+      const numSpines = hasSpines ? Math.floor(Math.random() * 4) + 1 : 0;
+      const spines = [...Array(numSpines)].map(() => {
+        return Math.floor(Math.random() * 96) + 1;
+      });
+      return { ...book, spines };
+    });
+    // console.log(unshuffledBooks[5]);
+    // shuffle them up
+    setBooks(knuthShuffle(unshuffledBooks));
+  }, []);
+
+  useInterval(() => {
+    const num = Math.floor(Math.random() * books.length) + 1;
+    const { id } = books[num];
+    const el = document.getElementById(`bookCard-${id}`);
+
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, 5000);
+
   // console.log(books[5]);
   const handleBookCardClick = (e, id) => {
     // console.log(e, id);
@@ -58,6 +75,7 @@ const Home = () => {
     setModalId(id);
     setIsModalActive(true);
   };
+  const aThirdOfTheBooks = Math.floor(books.length / 3);
 
   return (
     <>
@@ -79,17 +97,17 @@ const Home = () => {
         {!loading && books && books.length > 0 && (
           <>
             <BookCards
-              books={books.slice(0, 20)}
+              books={books.slice(0, aThirdOfTheBooks)}
               className={css.bookCards}
               onClick={handleBookCardClick}
             ></BookCards>
             <BookCards
-              books={books.slice(20, 40)}
+              books={books.slice(aThirdOfTheBooks, aThirdOfTheBooks * 2)}
               className={css.bookCards}
               onClick={handleBookCardClick}
             ></BookCards>
             <BookCards
-              books={books.slice(40, 60)}
+              books={books.slice(aThirdOfTheBooks * 2, books.length)}
               className={css.bookCards}
               onClick={handleBookCardClick}
             ></BookCards>
