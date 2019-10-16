@@ -2,25 +2,10 @@ import * as React from 'react';
 
 import Modal from '../Modal';
 
-// import useQuery from '../../lib/hooks/use-query';
+// import { usePrevious } from '../../lib/hooks';
 import useBookData from '../../lib/hooks/use-book-data';
 
 import css from './BookCardModal.scss';
-
-// const BOOK = `
-//   query getBook($id: Int!) {
-//     offTheShelf {
-//       book(id: $id) {
-//         title
-//         sizes {
-//           large {
-//             sourceUrl
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
 
 type Props = {
   id: number;
@@ -50,7 +35,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   className,
   onClose,
 }) => {
-  // const { loading, error, data } = useQuery(BOOK, {
   const { loading, error, book } = useBookData(id);
 
   if (error) {
@@ -58,8 +42,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
     return null;
   }
-
-  // const book = (data && data.offTheShelf && data.offTheShelf.book) || {};
 
   return (
     <Modal

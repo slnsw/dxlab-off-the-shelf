@@ -52,16 +52,19 @@ const BOOK = /* GraphQL */ `
 const useBookData = (id: number) => {
   const { loading, error, data } = useQuery(BOOK, {
     ssr: true,
-    variables: { id },
+    variables: {
+      // Dodgey hard coding of id as GraphQL needs one, if for skip to work.
+      id,
+      // id: hasId ? id : 900,
+      // skip: !hasId,
+    },
   });
   const book = data && data.offTheShelf && data.offTheShelf.book;
 
-  // console.log(book);
-
-  if (error) {
-    console.log(error);
-    return null;
-  }
+  // if (error) {
+  //   console.log(error);
+  //   return null;
+  // }
 
   return { loading, error, book };
 };
