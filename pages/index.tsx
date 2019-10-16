@@ -12,19 +12,17 @@ import { withApollo } from '../lib/apollo';
 const Home = ({ query }) => {
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
-  const [modalId, setModalId] = React.useState();
+  const bookId = query && query.id ? query.id : null;
 
   React.useEffect(() => {
-    setModalId(query.id);
-    setIsModalActive(Boolean(query.id));
-  }, [query.id]);
+    setIsModalActive(Boolean(bookId));
+  }, [bookId]);
 
-  const handleBookCardClick = (e, bookCardId) => {
-    Router.push(`/?id=${bookCardId}`);
+  const handleBookCardClick = (e, id) => {
+    Router.push(`/?id=${id}`);
 
     setInitialModalSize(e.target.getBoundingClientRect());
     setIsModalActive(true);
-    // setModalId(bookCardId);
   };
 
   return (
@@ -35,7 +33,7 @@ const Home = ({ query }) => {
       </Head>
 
       <BookCardModal
-        id={modalId}
+        id={bookId}
         isActive={isModalActive}
         initialSize={initialModalSize}
         onClose={() => {

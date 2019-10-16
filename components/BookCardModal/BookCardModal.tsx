@@ -20,16 +20,6 @@ type Props = {
   onClose?: Function;
 };
 
-const BookCardModalWrapper: React.FunctionComponent<Props> = (props) => {
-  // if (!props.id) {
-  //   return null;
-  // }
-
-  console.log(props.id, props.isActive);
-
-  return <BookCardModal {...props} />;
-};
-
 const BookCardModal: React.FunctionComponent<Props> = ({
   id,
   isActive,
@@ -166,4 +156,4 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   );
 };
 
-export default BookCardModalWrapper;
+export default BookCardModal;
