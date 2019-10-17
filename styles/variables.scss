@@ -13,6 +13,9 @@ $colour-secondary: #64c3af;
 $colour-secondary-light: #8fffb6;
 $colour-highlight: #ed0180;
 
+$colour-yellow: #f4cd3b;
+$colour-teal: #4b8291;
+
 $colour-black: #060606;
 $colour-white: #f6f6f6;
 
@@ -114,10 +117,12 @@ $ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1); /* easeInOutQuint */
   colour-primary: $colour-primary;
   colour-secondary: $colour-secondary;
   colour-highlight: $colour-highlight;
+  colour-yellow: $colour-yellow;
+  colour-teal: $colour-teal;
   colour-black: $colour-black;
+  colour-white: $colour-white;
   colour-grey-800: $colour-grey-800;
   colour-grey-900: $colour-grey-900;
-  colour-white: $colour-white;
   border-radius: $border-radius;
   border-radius-md: $border-radius-md;
   border-radius-lg: $border-radius-lg;

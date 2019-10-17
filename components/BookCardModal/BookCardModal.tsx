@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import Modal from '../Modal';
+import OffTheShelfLogoBorders from '../OffTheShelfLogoBorders';
 
-// import { usePrevious } from '../../lib/hooks';
 import useBookData from '../../lib/hooks/use-book-data';
 
 import css from './BookCardModal.scss';
@@ -32,6 +32,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
     error,
     book = {
       sizes: {
+        medium: null,
         large: null,
       },
     },
@@ -54,16 +55,19 @@ const BookCardModal: React.FunctionComponent<Props> = ({
         'Loading...'
       ) : (
         <>
-          {book.sizes.large && (
+          {book.sizes.medium && (
             <img
-              src={book.sizes.large.sourceUrl}
+              src={book.sizes.medium.sourceUrl}
               alt={book.title}
               className={css.image}
             />
           )}
 
           <div className={css.info}>
-            <h1>{book.title}</h1>
+            <OffTheShelfLogoBorders />
+
+            <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
+
             {book.primoRecord && (
               <>
                 {book.primoRecord.creator && (
@@ -146,7 +150,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                 {book.primoRecord.topics && (
                   <p>Topics: {book.primoRecord.topics}</p>
                 )}
-                {book.primoRecord.type && <p>Type: {book.primoRecord.type}</p>}
               </>
             )}
           </div>

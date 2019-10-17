@@ -6,6 +6,11 @@ const BOOK = /* GraphQL */ `
       book(id: $id) @skip(if: $skip) {
         title
         sizes {
+          medium {
+            sourceUrl
+            width
+            height
+          }
           large {
             sourceUrl
             width

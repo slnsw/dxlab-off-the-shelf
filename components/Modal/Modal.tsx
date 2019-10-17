@@ -50,8 +50,10 @@ const Modal: React.FunctionComponent<Props> = ({
               opacity: 1,
               x: initialSize.x,
               y: initialSize.y,
-              width: initialSize.width,
-              height: initialSize.height,
+              // width: initialSize.width,
+              // height: initialSize.height,
+              width: windowSize.width - 32,
+              height: windowSize.height - 32,
             }}
             animate={{
               opacity: 1,
