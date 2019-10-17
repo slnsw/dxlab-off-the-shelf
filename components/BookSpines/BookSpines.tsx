@@ -6,13 +6,17 @@ import css from './BookSpines.scss';
 
 type Props = {
   className?: string;
-  spines: [number];
+  spines: number[];
 };
 
-const BookSpines: React.FunctionComponent<Props> = ({ className, spines }) => {
-  if (!spines) {
+const BookSpines: React.FunctionComponent<Props> = ({
+  className,
+  spines = [],
+}) => {
+  if (spines.length === 0) {
     return null;
   }
+
   return (
     <div className={[css.bookSpines, className || ''].join(' ')}>
       {spines.map((spine, i) => {

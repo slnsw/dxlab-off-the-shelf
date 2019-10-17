@@ -1,4 +1,5 @@
 import * as React from 'react';
+// import { useMotionValue, useSpring } from 'framer-motion';
 
 import BookShelf from '../BookShelf';
 
@@ -26,6 +27,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
   React.useEffect(() => {
     const subset = 200;
+
     // randomly add spines
     const unshuffledBooks = booksOnly.slice(0, subset).map((book) => {
       const hasSpines = Math.random() < 0.5;
@@ -35,6 +37,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
       });
       return { ...book, spines };
     });
+
     // shuffle them up
     setBooks(knuthShuffle(unshuffledBooks));
     /* eslint-disable */
@@ -51,37 +54,29 @@ const BookShelves: React.FunctionComponent<Props> = ({
     ]);
   }, [books]);
 
-  // console.log(shelves[currentShelf]);
-
   useInterval(() => {
     setCurrentShelf(Math.floor(Math.random() * 3));
-    const amountToChange = Math.floor(Math.random() * 6) + 6;
+
+    const amountToChange = Math.floor(Math.random() * 6) + 3;
     const directionToChange = Math.random() < 0.5 ? -1 : 1;
+
     let newCurrentBook =
       currentBooks[currentShelf] + directionToChange * amountToChange;
+
     if (newCurrentBook < 0) {
       newCurrentBook = 0;
     }
+
     if (newCurrentBook >= shelves[currentShelf].length) {
       newCurrentBook = shelves[currentShelf].length - 1;
     }
+
     setCurrentBooks([
       currentShelf === 0 ? newCurrentBook : currentBooks[0],
       currentShelf === 1 ? newCurrentBook : currentBooks[1],
       currentShelf === 2 ? newCurrentBook : currentBooks[2],
     ]);
-    // const num = Math.floor(Math.random() * books.length);
-    const { id } = shelves[currentShelf][newCurrentBook];
-    const el = document.getElementById(`bookCard-${id}`);
-
-    if (el) {
-      // console.log(`Shelf: ${currentShelf}`);
-      // console.log(`dir: ${directionToChange}`);
-      // console.log(`amt: ${amountToChange}`);
-      // console.log(currentBooks);
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, 4000);
+  }, 10000);
 
   return (
     <div className={[css.bookShelves, className || ''].join(' ')}>
@@ -90,20 +85,23 @@ const BookShelves: React.FunctionComponent<Props> = ({
       {!loading && books && books.length > 0 && (
         <>
           <BookShelf
-            key={1}
             books={shelves[0]}
+            scrollToBook={currentBooks[0]}
+            id="bookShelf-0"
             className={css.bookShelf}
             onClick={onBookClick}
           ></BookShelf>
           <BookShelf
-            key={2}
             books={shelves[1]}
+            scrollToBook={currentBooks[1]}
+            id="bookShelf-1"
             className={css.bookShelf}
             onClick={onBookClick}
           ></BookShelf>
           <BookShelf
-            key={3}
             books={shelves[2]}
+            scrollToBook={currentBooks[2]}
+            id="bookShelf-2"
             className={css.bookShelf}
             onClick={onBookClick}
           ></BookShelf>
