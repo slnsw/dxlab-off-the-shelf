@@ -10,6 +10,7 @@ import variables from '../../styles/variables.scss';
 type Props = {
   index?: number;
   strokeWidth?: number;
+  orientation?: 'bottomLeft' | 'topRight';
   colour?: 'white' | 'yellow' | 'teal';
   className?: string;
 };
@@ -17,6 +18,7 @@ type Props = {
 const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
   index = 0,
   strokeWidth = 15,
+  orientation = 'topRight',
   colour = 'white',
   className,
 }) => {
@@ -25,7 +27,22 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
   const { width, height } = dimensions;
   const baseline = strokeWidth * 1.5;
 
-  // console.log(width, height);
+  const paths = {
+    bottomLeft: `
+      M ${baseline} 0 
+      L 0 0
+      L 0 ${height} 
+      L ${width - baseline * 2} ${height} 
+      L ${width - baseline * 2} ${height - baseline}
+    `,
+    topRight: `
+      M 0 ${baseline}
+      L 0 0
+      L ${width - baseline * 2} 0
+      L ${width - baseline * 2} ${height}      
+      L ${width - baseline * 3} ${height}
+    `,
+  };
 
   return (
     <motion.div
@@ -51,13 +68,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
       <motion.svg width={width - baseline * 2} height={height}>
         {width && height && (
           <motion.path
-            d={`
-              M ${baseline} 0 
-              L 0 0
-              L 0 ${height} 
-              L ${width - baseline * 2} ${height} 
-              L ${width - baseline * 2} ${height - baseline}
-            `}
+            d={paths[orientation]}
             fill="transparent"
             strokeWidth={strokeWidth}
             stroke={variables[`colour-${colour}`]}

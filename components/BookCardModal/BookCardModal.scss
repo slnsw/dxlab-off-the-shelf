@@ -1,7 +1,7 @@
 @import '../../styles/global.scss';
 
 .bookCardModal {
-  display: block;
+  display: flex;
 }
 
 .image {
@@ -10,8 +10,14 @@
 }
 
 .info {
-  float: right;
-  width: 40%;
+  width: 100%;
+  margin-left: $baseline-4;
+}
+
+.content {
+  margin-top: -$baseline-5;
+  padding-right: $baseline-5;
+  padding-left: $baseline-4;
 }
 
 .info ul {

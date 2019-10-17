@@ -10,7 +10,7 @@ type Props = {
 };
 
 const OffTheShelfLogoBorders: React.FunctionComponent<Props> = ({
-  strokeWidth = 15,
+  strokeWidth = 10,
   className,
 }) => {
   return (
