@@ -21,9 +21,11 @@ body {
   color: $colour-white;
   font-family: $font-family-primary;
   background-color: $colour-black;
-  // font-weight: 400;
-  // line-height: 1.4;
-  // font-size: 17px;
 
   /* -webkit-font-smoothing: antialiased; */
+}
+
+ul,
+p {
+  margin-top: 0;
 }

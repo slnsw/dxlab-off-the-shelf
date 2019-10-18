@@ -31,6 +31,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
     loading,
     error,
     book = {
+      primoRecord: {},
       sizes: {
         medium: null,
         large: null,
@@ -43,6 +44,9 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
     return null;
   }
+
+  const { primoRecord } = book;
+  const { creator, description } = primoRecord;
 
   return (
     <Modal
@@ -64,65 +68,129 @@ const BookCardModal: React.FunctionComponent<Props> = ({
           )}
 
           <div className={css.info}>
-            <OffTheShelfLogoBorders />
+            <OffTheShelfLogoBorders orientation="topRight" />
 
             <div className={css.content}>
               <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
 
-              {book.primoRecord && (
+              {primoRecord && (
                 <>
-                  {book.primoRecord.creator && (
-                    <p>Author: {book.primoRecord.creator}</p>
+                  {creator && <h2>{creator}</h2>}
+
+                  {description && (
+                    <p className={css.description}>{description}</p>
                   )}
-                  {book.primoRecord.publisher && (
-                    <p>Publisher: {book.primoRecord.publisher}</p>
-                  )}
-                  {book.primoRecord.access && <p>{book.primoRecord.access}</p>}
-                  {book.primoRecord.accessConditions && (
-                    <p>Access: {book.primoRecord.accessConditions}</p>
-                  )}
-                  {book.primoRecord.callNumber && (
-                    <p>Call number: {book.primoRecord.callNumber}</p>
-                  )}
-                  {book.primoRecord.copyright && (
-                    <p>Copyright: {book.primoRecord.copyright}</p>
-                  )}
-                  {book.primoRecord.creationDate && (
-                    <p>Date: {book.primoRecord.creationDate}</p>
-                  )}
-                  {!book.primoRecord.creationDate && book.primoRecord.date && (
-                    <p>Date: {book.primoRecord.date}</p>
-                  )}
-                  {book.primoRecord.description && (
-                    <p>{book.primoRecord.description}</p>
-                  )}
-                  {book.primoRecord.dewey && (
-                    <p>Dewey: {book.primoRecord.dewey}</p>
-                  )}
+
+                  <div className={css.table}>
+                    {[
+                      {
+                        field: 'publisher',
+                        label: 'Publisher',
+                      },
+                      {
+                        field: 'access',
+                        label: 'Access',
+                      },
+                      {
+                        field: 'accessConditions',
+                        label: 'Access conditions',
+                      },
+                      {
+                        field: 'callNumber',
+                        label: 'Call number',
+                      },
+                      {
+                        field: 'copyright',
+                        label: 'Copyright',
+                      },
+                      // TODO: Add this back in and dedupe
+                      // {
+                      //   field: 'creationDate',
+                      //   label: 'Date',
+                      // },
+                      {
+                        field: 'date',
+                        label: 'Date',
+                      },
+                      {
+                        field: 'dewey',
+                        label: 'Dewey',
+                      },
+                      {
+                        field: 'language',
+                        label: 'Language',
+                      },
+                      {
+                        field: 'format',
+                        label: 'Format',
+                      },
+                      {
+                        field: 'history',
+                        label: 'History',
+                      },
+                      {
+                        field: 'isbn',
+                        label: 'ISBN',
+                      },
+                      {
+                        field: 'referenceCode',
+                        label: 'Reference code',
+                      },
+                      {
+                        field: 'holdings',
+                        label: 'Holdings',
+                      },
+                      {
+                        field: 'subjects',
+                        label: 'Subjects',
+                      },
+                    ]
+                      .filter((row) => primoRecord[row.field])
+                      .map((row) => {
+                        return (
+                          <div className={css.row}>
+                            <div className={css.label}>
+                              <p>{row.label}</p>
+                            </div>
+                            <div className={css.value}>
+                              {(() => {
+                                switch (row.field) {
+                                  case 'holdings':
+                                    return primoRecord[row.field].map(
+                                      (holding) => {
+                                        return (
+                                          <p key={holding.subLocation}>
+                                            {holding.subLocation},{' '}
+                                            {holding.status},{' '}
+                                            {holding.mainLocation}
+                                          </p>
+                                        );
+                                      },
+                                    );
+                                  case 'subjects':
+                                    return (
+                                      <ul>
+                                        {book.primoRecord.subjects.map(
+                                          (subject) => {
+                                            return (
+                                              <li key={subject}>{subject}</li>
+                                            );
+                                          },
+                                        )}
+                                      </ul>
+                                    );
+                                  default:
+                                    return <p>{primoRecord[row.field]}</p>;
+                                }
+                              })()}
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+
                   {book.primoRecord.exhibitions && (
                     <p>{book.primoRecord.exhibitions}</p>
-                  )}
-                  {book.primoRecord.format && (
-                    <p>Format: {book.primoRecord.format}</p>
-                  )}
-                  {book.primoRecord.history && (
-                    <p>History: {book.primoRecord.history}</p>
-                  )}
-                  {book.primoRecord.holdings &&
-                    book.primoRecord.holdings.map((holding) => {
-                      return (
-                        <p key={holding.subLocation}>
-                          {holding.subLocation}, {holding.status},{' '}
-                          {holding.mainLocation}
-                        </p>
-                      );
-                    })}
-                  {/* {book.primoRecord.id && <p>ID: {book.primoRecord.id}</p>} */}
-                  {book.primoRecord.isbn && (
-                    <p>ISBN: {book.primoRecord.isbn}</p>
-                  )}
-                  {book.primoRecord.language && (
-                    <p>Language: {book.primoRecord.language}</p>
                   )}
                   {book.primoRecord.notes && (
                     <p>Notes: {book.primoRecord.notes}</p>
@@ -133,22 +201,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                   {book.primoRecord.physicalDescription && (
                     <p>{book.primoRecord.physicalDescription}</p>
                   )}
-
-                  {book.primoRecord.referenceCode && (
-                    <p>Reference code: {book.primoRecord.referenceCode}</p>
-                  )}
                   {book.primoRecord.source && (
                     <p>Source: {book.primoRecord.source}</p>
-                  )}
-                  {book.primoRecord.subjects && (
-                    <>
-                      <p>Subjects:</p>
-                      <ul>
-                        {book.primoRecord.subjects.map((subject) => {
-                          return <li key={subject}>{subject}</li>;
-                        })}
-                      </ul>
-                    </>
                   )}
                   {book.primoRecord.topics && (
                     <p>Topics: {book.primoRecord.topics}</p>

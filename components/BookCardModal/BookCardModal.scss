@@ -2,6 +2,22 @@
 
 .bookCardModal {
   display: flex;
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: $baseline-2;
+    font-weight: 600;
+    font-size: $font-size-xxxlg;
+    line-height: $baseline-6;
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: $baseline-4;
+    color: $colour-yellow;
+    font-weight: 500;
+    font-size: $font-size-xxlg;
+  }
 }
 
 .image {
@@ -11,15 +27,49 @@
 
 .info {
   width: 100%;
+  max-width: 80ch;
   margin-left: $baseline-4;
 }
 
 .content {
-  margin-top: -$baseline-5;
-  padding-right: $baseline-5;
-  padding-left: $baseline-4;
+  margin-top: -$baseline * 8;
+  padding-right: $baseline * 6;
+  padding-left: $baseline * 6;
 }
 
 .info ul {
+  padding: 0;
   list-style: none;
+}
+
+.description {
+  margin-bottom: $baseline-6;
+  font-size: $font-size-xlg;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  font-size: $font-size-lg;
+
+  p {
+    margin-top: 0;
+    margin-bottom: $baseline-2;
+    line-height: $baseline-3;
+  }
+
+  .row {
+    display: flex;
+  }
+
+  .label {
+    flex-basis: 14ch;
+    padding-right: $baseline-2;
+    font-size: $font-size-md;
+    opacity: 0.6;
+  }
+
+  .value {
+    flex: 1;
+  }
 }

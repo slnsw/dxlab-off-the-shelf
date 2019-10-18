@@ -17,8 +17,8 @@ type Props = {
 
 const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
   index = 0,
-  strokeWidth = 15,
-  orientation = 'topRight',
+  strokeWidth = 16,
+  orientation = 'bottomLeft',
   colour = 'white',
   className,
 }) => {
@@ -26,6 +26,8 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
 
   const { width, height } = dimensions;
   const baseline = strokeWidth * 1.5;
+
+  // console.log(width, height);
 
   const paths = {
     bottomLeft: `
