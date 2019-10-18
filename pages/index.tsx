@@ -19,7 +19,7 @@ const Home = ({ query }) => {
     const isActive = Boolean(bookId);
 
     setIsModalActive(isActive);
-    setIsIntervalActive(isActive);
+    setIsIntervalActive(!isActive);
   }, [bookId]);
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {

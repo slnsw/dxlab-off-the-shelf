@@ -17,22 +17,21 @@ function useInterval(callback, delay, isActive = true) {
     let id;
 
     if (delay !== null) {
-      // if (isActive) {
-      console.log('start');
+      if (isActive) {
+        // console.log('start');
 
-      id = setInterval(tick, delay);
-      // }
-      return () => clearInterval(id);
+        id = setInterval(tick, delay);
+      }
 
-      // if (id && isActive === false) {
-      //   console.log('stop');
+      return () => {
+        // console.log('clear', id);
 
-      //   return () => clearInterval(id);
-      // }
+        clearInterval(id);
+      };
     }
 
     return null;
-  }, [delay]);
+  }, [delay, isActive]);
 }
 
 export default useInterval;
