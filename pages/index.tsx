@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import Router from 'next/router';
 
 import BookCardModal from '../components/BookCardModal';
@@ -13,10 +12,14 @@ const Home = ({ query }) => {
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
+  const [isIntervalActive, setIsIntervalActive] = React.useState(true);
   const bookId = query && query.id ? query.id : null;
 
   React.useEffect(() => {
-    setIsModalActive(Boolean(bookId));
+    const isActive = Boolean(bookId);
+
+    setIsModalActive(isActive);
+    setIsIntervalActive(isActive);
   }, [bookId]);
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
@@ -24,16 +27,10 @@ const Home = ({ query }) => {
 
     setInitialModalSize(e.target.getBoundingClientRect());
     setInitialModalImageUrl(imageUrl);
-    setIsModalActive(true);
   };
 
   return (
     <>
-      <Head>
-        <title>Off the Shelf</title>
-        <link rel="icon" href="/favicon.ico" importance="low" />
-      </Head>
-
       <BookCardModal
         id={bookId}
         isActive={isModalActive}
@@ -44,7 +41,10 @@ const Home = ({ query }) => {
         }}
       />
 
-      <BookShelves onBookClick={handleBookCardClick}></BookShelves>
+      <BookShelves
+        onBookClick={handleBookCardClick}
+        isIntervalActive={isIntervalActive}
+      ></BookShelves>
     </>
   );
 };

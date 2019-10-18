@@ -65,6 +65,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
       transition={{
         delay: 1.3,
         transition: 1,
+        damping: 0,
       }}
     >
       <motion.svg width={width - baseline * 2} height={height}>

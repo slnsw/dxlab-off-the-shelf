@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function useInterval(callback, delay) {
+function useInterval(callback, delay, isActive = true) {
   const savedCallback = React.useRef();
 
   // Remember the latest callback.
@@ -13,10 +13,24 @@ function useInterval(callback, delay) {
     function tick() {
       savedCallback.current();
     }
+
+    let id;
+
     if (delay !== null) {
-      const id = setInterval(tick, delay);
+      // if (isActive) {
+      console.log('start');
+
+      id = setInterval(tick, delay);
+      // }
       return () => clearInterval(id);
+
+      // if (id && isActive === false) {
+      //   console.log('stop');
+
+      //   return () => clearInterval(id);
+      // }
     }
+
     return null;
   }, [delay]);
 }

@@ -40,10 +40,12 @@ class MyApp extends App {
     return (
       <>
         <Head>
+          <title>Off the Shelf</title>
           <link
             href="https://fonts.googleapis.com/css?family=Barlow:400,500,500i,700"
             rel="stylesheet"
           />
+          <link rel="icon" href="/favicon.ico" importance="low" />
         </Head>
 
         <Component {...pageProps} />
