@@ -38,6 +38,7 @@ const Modal: React.FunctionComponent<Props> = ({
     }
   });
   const windowSize = useWindowSize();
+  const GUTTER = 0;
 
   return (
     <>
@@ -47,27 +48,33 @@ const Modal: React.FunctionComponent<Props> = ({
         {isActive && (
           <motion.div
             initial={{
-              opacity: 1,
-              x: initialSize.x,
-              y: initialSize.y,
+              opacity: 0,
+              // x: initialSize.x,
+              // y: initialSize.y,
               // width: initialSize.width,
               // height: initialSize.height,
-              width: windowSize.width - 32,
-              height: windowSize.height - 32,
+              x: 0,
+              y: 0,
+              width: windowSize.width - GUTTER,
+              height: windowSize.height - GUTTER,
             }}
             animate={{
               opacity: 1,
-              x: 16,
-              y: 16,
-              width: windowSize.width - 32,
-              height: windowSize.height - 32,
+              x: GUTTER / 2,
+              y: GUTTER / 2,
+              width: windowSize.width - GUTTER,
+              height: windowSize.height - GUTTER,
             }}
             exit={{
-              opacity: 0.5,
-              x: initialSize.x,
-              y: initialSize.y,
-              width: initialSize.width,
-              height: initialSize.height,
+              opacity: 0,
+              // x: initialSize.x,
+              // y: initialSize.y,
+              // width: initialSize.width,
+              // height: initialSize.height,
+              x: 0,
+              y: 0,
+              width: windowSize.width - GUTTER,
+              height: windowSize.height - GUTTER,
             }}
             transition={{ duration: 0.3 }}
             className={[css.modal, className || ''].join(' ')}

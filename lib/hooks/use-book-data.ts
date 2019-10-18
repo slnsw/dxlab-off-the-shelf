@@ -71,6 +71,10 @@ const useBookData = (id: number) => {
   //   return null;
   // }
 
-  return { loading, error, book };
+  return {
+    loading,
+    error,
+    book,
+  };
 };
 export default useBookData;

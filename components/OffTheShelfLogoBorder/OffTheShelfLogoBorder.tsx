@@ -63,7 +63,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
       initial="start"
       animate="end"
       transition={{
-        delay: 1.5,
+        delay: 1.3,
         transition: 1,
       }}
     >
@@ -84,7 +84,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
             }}
             initial="hidden"
             animate="visible"
-            transition={{ duration: 1.5 }}
+            transition={{ duration: 1 }}
           ></motion.path>
         )}
       </motion.svg>

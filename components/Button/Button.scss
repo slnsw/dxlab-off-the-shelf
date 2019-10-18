@@ -1,0 +1,24 @@
+@import '../../styles/global.scss';
+
+.button {
+  display: inline-block;
+  width: fit-content;
+  padding: 0;
+  color: $colour-white;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:hover,
+  &:active {
+    color: $colour-yellow;
+  }
+}
+
+.sm {
+  min-height: 2 * $baseline;
+  font-size: $font-size-sm;
+  line-height: $baseline-1;
+}

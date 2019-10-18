@@ -1,0 +1,12 @@
+@import '../../styles/global.scss';
+
+.ctaButton {
+  width: fit-content;
+  height: fit-content;
+  padding: $baseline-2;
+  color: $colour-white;
+  font-weight: 600;
+  font-size: $font-size-lg;
+  line-height: 1;
+  border: 5px solid $colour-teal;
+}

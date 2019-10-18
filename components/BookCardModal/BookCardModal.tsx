@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Modal from '../Modal';
+import CTAButton from '../CTAButton';
 import OffTheShelfLogoBorders from '../OffTheShelfLogoBorders';
 
 import useBookData from '../../lib/hooks/use-book-data';
@@ -16,6 +17,7 @@ type Props = {
     width: number;
     height: number;
   };
+  initialImageUrl?: string;
   className?: string;
   onClose?: Function;
 };
@@ -24,6 +26,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   id,
   isActive,
   initialSize,
+  initialImageUrl,
   className,
   onClose,
 }) => {
@@ -46,7 +49,11 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   }
 
   const { primoRecord } = book;
-  const { creator, description } = primoRecord;
+  const record = primoRecord || {};
+  const { creator, description } = record;
+
+  const imageUrl =
+    (book.sizes.medium && book.sizes.medium.sourceUrl) || initialImageUrl;
 
   return (
     <Modal
@@ -55,26 +62,19 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       className={[css.bookCardModal, className || ''].join(' ')}
       onClose={onClose}
     >
-      {loading ? (
-        'Loading...'
-      ) : (
-        <>
-          {book.sizes.medium && (
-            <img
-              src={book.sizes.medium.sourceUrl}
-              alt={book.title}
-              className={css.image}
-            />
-          )}
+      {imageUrl && (
+        <img src={imageUrl} alt={book.title} className={css.image} />
+      )}
 
-          <div className={css.info}>
-            <OffTheShelfLogoBorders orientation="topRight" />
+      <div className={css.info}>
+        <OffTheShelfLogoBorders orientation="topRight" />
 
-            <div className={css.content}>
-              <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
-
-              {primoRecord && (
+        <div className={css.content}>
+          {loading
+            ? 'Loading...'
+            : primoRecord && (
                 <>
+                  <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
                   {creator && <h2>{creator}</h2>}
 
                   {description && (
@@ -209,10 +209,12 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                   )}
                 </>
               )}
-            </div>
-          </div>
-        </>
-      )}
+        </div>
+      </div>
+
+      <CTAButton className={css.backButton} onClick={onClose}>
+        Close
+      </CTAButton>
     </Modal>
   );
 };

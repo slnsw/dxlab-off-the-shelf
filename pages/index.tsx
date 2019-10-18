@@ -12,16 +12,18 @@ import { withApollo } from '../lib/apollo';
 const Home = ({ query }) => {
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
+  const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
   const bookId = query && query.id ? query.id : null;
 
   React.useEffect(() => {
     setIsModalActive(Boolean(bookId));
   }, [bookId]);
 
-  const handleBookCardClick = (e, id) => {
+  const handleBookCardClick = (e, { id, title, imageUrl }) => {
     Router.push(`/?id=${id}`);
 
     setInitialModalSize(e.target.getBoundingClientRect());
+    setInitialModalImageUrl(imageUrl);
     setIsModalActive(true);
   };
 
@@ -36,6 +38,7 @@ const Home = ({ query }) => {
         id={bookId}
         isActive={isModalActive}
         initialSize={initialModalSize}
+        initialImageUrl={initialModalImageUrl}
         onClose={() => {
           Router.push('/');
         }}

@@ -30,7 +30,7 @@ const BookCard: React.FunctionComponent<Props> = ({
       className={[css.bookCard, className || ''].join(' ')}
       onClick={(e) => {
         if (typeof onClick === 'function') {
-          onClick(e, id);
+          onClick(e, { id, title, imageUrl });
         }
       }}
     >
