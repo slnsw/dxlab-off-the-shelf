@@ -16,7 +16,7 @@ type Props = {
 };
 
 const BookShelves: React.FunctionComponent<Props> = ({
-  isIntervalActive = true,
+  isIntervalActive = false,
   className,
   onBookClick,
 }) => {
@@ -56,35 +56,35 @@ const BookShelves: React.FunctionComponent<Props> = ({
     ]);
   }, [books]);
 
-  useInterval(
-    () => {
-      console.log('Interval');
+  // useInterval(
+  //   () => {
+  //     console.log('Interval');
 
-      setCurrentShelf(Math.floor(Math.random() * 3));
+  //     setCurrentShelf(Math.floor(Math.random() * 3));
 
-      const amountToChange = Math.floor(Math.random() * 6) + 3;
-      const directionToChange = Math.random() < 0.5 ? -1 : 1;
+  //     const amountToChange = Math.floor(Math.random() * 6) + 3;
+  //     const directionToChange = Math.random() < 0.5 ? -1 : 1;
 
-      let newCurrentBook =
-        currentBooks[currentShelf] + directionToChange * amountToChange;
+  //     let newCurrentBook =
+  //       currentBooks[currentShelf] + directionToChange * amountToChange;
 
-      if (newCurrentBook < 0) {
-        newCurrentBook = 0;
-      }
+  //     if (newCurrentBook < 0) {
+  //       newCurrentBook = 0;
+  //     }
 
-      if (newCurrentBook >= shelves[currentShelf].length) {
-        newCurrentBook = shelves[currentShelf].length - 1;
-      }
+  //     if (newCurrentBook >= shelves[currentShelf].length) {
+  //       newCurrentBook = shelves[currentShelf].length - 1;
+  //     }
 
-      setCurrentBooks([
-        currentShelf === 0 ? newCurrentBook : currentBooks[0],
-        currentShelf === 1 ? newCurrentBook : currentBooks[1],
-        currentShelf === 2 ? newCurrentBook : currentBooks[2],
-      ]);
-    },
-    10000,
-    isIntervalActive,
-  );
+  //     setCurrentBooks([
+  //       currentShelf === 0 ? newCurrentBook : currentBooks[0],
+  //       currentShelf === 1 ? newCurrentBook : currentBooks[1],
+  //       currentShelf === 2 ? newCurrentBook : currentBooks[2],
+  //     ]);
+  //   },
+  //   10000,
+  //   isIntervalActive,
+  // );
 
   return (
     <div className={[css.bookShelves, className || ''].join(' ')}>

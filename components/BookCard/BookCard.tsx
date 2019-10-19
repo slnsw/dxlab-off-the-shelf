@@ -1,5 +1,9 @@
 import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
+import {
+  motion,
+  // useAnimation
+} from 'framer-motion';
 
 import css from './BookCard.scss';
 
@@ -26,18 +30,30 @@ const BookCard: React.FunctionComponent<Props> = ({
 }) => {
   const [ref, inView, entry] = useInView();
 
-  if (typeof onRender === 'function') {
-    onRender(inView, entry, id);
-  }
-
   if (!imageWidth) {
     return null;
   }
 
+  let isMoving;
+
+  if (typeof onRender === 'function') {
+    onRender(inView, entry, id);
+  }
+
   return (
-    <article
+    <motion.article
       id={`bookCard-${id}`}
       className={[css.bookCard, className || ''].join(' ')}
+      animate={{
+        // opacity: inView ? 1 : 0,
+        // rotate: -5,
+        rotate:
+          inView && !isMoving ? [0, -5, 0, -2, 0, -1, 0, -0.5, 0, -0.25] : 0,
+      }}
+      style={{
+        originX: 0,
+        originY: 1,
+      }}
       onClick={(e) => {
         if (typeof onClick === 'function') {
           onClick(e, { id, title, imageUrl });
@@ -54,8 +70,8 @@ const BookCard: React.FunctionComponent<Props> = ({
           width: imageWidth,
           height: imageHeight,
         }}
-      ></img>
-    </article>
+      />
+    </motion.article>
   );
 };
 

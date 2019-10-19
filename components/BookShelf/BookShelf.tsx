@@ -5,6 +5,8 @@ import BookCard from '../BookCard';
 import BookSpines from '../BookSpines';
 
 import useDimensions from '../../lib/hooks/use-dimensions';
+import { usePrevious } from '../../lib/hooks';
+
 import scrollToItem from '../../lib/scroll-to-item';
 
 import css from './BookShelf.scss';
@@ -27,6 +29,11 @@ const BookShelf: React.FunctionComponent<Props> = ({
   const [booksInView, setBooksInView] = React.useState([]);
   const [ref, dimensions, node] = useDimensions();
   const { height } = dimensions;
+
+  const scrollLeft = node ? node.scrollLeft : 0;
+  const prevScrollLeft = usePrevious(scrollLeft);
+
+  console.log(prevScrollLeft, scrollLeft);
 
   React.useEffect(() => {
     const book = books[scrollToBook];

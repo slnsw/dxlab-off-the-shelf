@@ -12,7 +12,7 @@ const Home = ({ query }) => {
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
-  const [isIntervalActive, setIsIntervalActive] = React.useState(true);
+  const [isIntervalActive, setIsIntervalActive] = React.useState(false);
   const bookId = query && query.id ? query.id : null;
 
   React.useEffect(() => {

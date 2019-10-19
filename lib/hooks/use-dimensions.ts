@@ -3,7 +3,7 @@ import { useState, useCallback, useLayoutEffect } from 'react';
 
 function getDimensionObject(node: HTMLElement) {
   const rect = node.getBoundingClientRect();
-  const { scrollWidth } = node;
+  const { scrollWidth, scrollLeft } = node;
 
   return {
     width: rect.width,
@@ -15,6 +15,7 @@ function getDimensionObject(node: HTMLElement) {
     right: rect.right,
     bottom: rect.bottom,
     scrollWidth,
+    scrollLeft,
   };
 }
 
