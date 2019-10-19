@@ -24,6 +24,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
   className,
   onClick,
 }) => {
+  const [booksInView, setBooksInView] = React.useState([]);
   const [ref, dimensions, node] = useDimensions();
   const { height } = dimensions;
 
@@ -39,6 +40,21 @@ const BookShelf: React.FunctionComponent<Props> = ({
       }
     }
   }, [scrollToBook, node, books]);
+
+  const handleBookCardRender = (inView, entry, bookId) => {
+    // Check if already added to local state array `booksInView`
+    const inBooksInView = booksInView.includes(bookId);
+
+    if (inView && inBooksInView === false) {
+      // Append if not already in
+      setBooksInView([...booksInView, bookId]);
+    } else if (inView === false && inBooksInView) {
+      // Remove if still not in view and still in local state
+      setBooksInView(
+        booksInView.filter((inViewBookId) => inViewBookId !== bookId),
+      );
+    }
+  };
 
   return (
     <div
@@ -64,6 +80,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 imageWidth={imageWidth}
                 imageHeight={height}
                 onClick={onClick}
+                onRender={handleBookCardRender}
               ></BookCard>
 
               <BookSpines spines={book.spines} />

@@ -29,7 +29,8 @@
     "normalize.css": "^8.0.1",
     "react": "16.10.1",
     "react-dom": "16.10.1",
-    "react-gtm-module": "^2.0.8"
+    "react-gtm-module": "^2.0.8",
+    "react-intersection-observer": "^8.25.1"
   },
   "devDependencies": {
     "@testing-library/react": "^9.2.0",

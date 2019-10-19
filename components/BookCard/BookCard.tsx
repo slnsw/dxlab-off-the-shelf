@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import css from './BookCard.scss';
 
@@ -10,6 +11,7 @@ type Props = {
   imageHeight: number;
   className?: string;
   onClick?: Function;
+  onRender?: Function;
 };
 
 const BookCard: React.FunctionComponent<Props> = ({
@@ -20,10 +22,18 @@ const BookCard: React.FunctionComponent<Props> = ({
   imageHeight = 0,
   className,
   onClick,
+  onRender,
 }) => {
+  const [ref, inView, entry] = useInView();
+
+  if (typeof onRender === 'function') {
+    onRender(inView, entry, id);
+  }
+
   if (!imageWidth) {
     return null;
   }
+
   return (
     <article
       id={`bookCard-${id}`}
@@ -33,6 +43,7 @@ const BookCard: React.FunctionComponent<Props> = ({
           onClick(e, { id, title, imageUrl });
         }
       }}
+      ref={ref}
     >
       <img
         src={imageUrl}
