@@ -13,6 +13,7 @@ type Props = {
   imageUrl: string;
   imageWidth: number;
   imageHeight: number;
+  isScrolling?: boolean;
   className?: string;
   onClick?: Function;
   onRender?: Function;
@@ -24,6 +25,7 @@ const BookCard: React.FunctionComponent<Props> = ({
   imageUrl,
   imageWidth = 0,
   imageHeight = 0,
+  isScrolling = false,
   className,
   onClick,
   onRender,
@@ -33,8 +35,6 @@ const BookCard: React.FunctionComponent<Props> = ({
   if (!imageWidth) {
     return null;
   }
-
-  let isMoving;
 
   if (typeof onRender === 'function') {
     onRender(inView, entry, id);
@@ -48,7 +48,9 @@ const BookCard: React.FunctionComponent<Props> = ({
         // opacity: inView ? 1 : 0,
         // rotate: -5,
         rotate:
-          inView && !isMoving ? [0, -5, 0, -2, 0, -1, 0, -0.5, 0, -0.25] : 0,
+          inView && isScrolling === false
+            ? [0, -5, 0, -2, 0, -1, 0, -0.5, 0, -0.25]
+            : 0,
       }}
       style={{
         originX: 0,

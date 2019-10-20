@@ -18,7 +18,7 @@ function useInterval(callback, delay, isActive = true) {
 
     if (delay !== null) {
       if (isActive) {
-        // console.log('start');
+        console.log('start');
 
         id = setInterval(tick, delay);
       }

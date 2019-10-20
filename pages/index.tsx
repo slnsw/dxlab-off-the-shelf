@@ -44,6 +44,7 @@ const Home = ({ query }) => {
       <BookShelves
         onBookClick={handleBookCardClick}
         isIntervalActive={isIntervalActive}
+        // isIntervalActive={false}
       ></BookShelves>
     </>
   );
