@@ -16,6 +16,23 @@ const Home = ({ query }) => {
   const bookId = query && query.id ? query.id : null;
 
   React.useEffect(() => {
+    // https://mattwest.design/working-with-the-page-visibility-api/
+    document.addEventListener('visibilitychange', (e) => {
+      const document = e.target as HTMLDocument;
+
+      if (document.hidden) {
+        if (isIntervalActive) {
+          setIsIntervalActive(false);
+        }
+      } else if (isModalActive === false) {
+        setIsIntervalActive(true);
+      }
+    });
+    /* eslint-disable */
+  }, []);
+  /* eslint-enable */
+
+  React.useEffect(() => {
     const isActive = Boolean(bookId);
 
     setIsModalActive(isActive);
