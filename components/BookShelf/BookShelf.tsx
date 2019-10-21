@@ -9,9 +9,10 @@ import {
   // useDebounce
 } from '../../lib/hooks';
 
-import scrollToItem from '../../lib/scroll-to-item';
+import { createScrollToItem } from '../../lib/scroll-to-item';
 
 import css from './BookShelf.scss';
+// import { createScrollToItem } from '../../lib/scroll-to-item';
 
 type Props = {
   books: any[];
@@ -39,6 +40,8 @@ const BookShelf: React.FunctionComponent<Props> = ({
   const [scrollDirection, setScrollDirection] = React.useState(null);
   const scrollLeftRef = React.useRef(0);
 
+  const scrollToItem = React.useRef(null);
+
   // if (scrollDirection) {
   //   console.log(scrollDirection, index);
   // }
@@ -51,7 +54,8 @@ const BookShelf: React.FunctionComponent<Props> = ({
       const bookNode = document.getElementById(`bookCard-${bookId}`);
 
       if (bookNode) {
-        scrollToItem(node, bookNode, null, 8000);
+        scrollToItem.current = createScrollToItem(node, bookNode, null, 8000);
+        scrollToItem.current.start();
       }
     }
   }, [scrollToBook, node, books]);
@@ -98,12 +102,27 @@ const BookShelf: React.FunctionComponent<Props> = ({
     }, 100);
   };
 
+  const cancelScrollToItem = () => {
+    if (scrollToItem.current) {
+      scrollToItem.current.stop();
+    }
+  };
+
+  const cancelScrollToItemOnWheel = (e) => {
+    if (scrollToItem.current && Math.abs(e.deltaX) > 0) {
+      scrollToItem.current.stop();
+    }
+  };
+
   return (
     <div
       id={id}
       className={[css.bookShelf, className || ''].join(' ')}
       ref={ref}
       onScroll={handleScroll}
+      onTouchStart={cancelScrollToItem}
+      onMouseDown={cancelScrollToItem}
+      onWheel={cancelScrollToItemOnWheel}
     >
       {books
         .filter(

@@ -49,4 +49,43 @@ const scrollToItem = (
   }, increment);
 };
 
+export const createScrollToItem = (
+  container: HTMLElement,
+  item: HTMLElement,
+  callback: Function = null,
+  duration: number = 5000,
+  increment: number = 10,
+) => {
+  const start = (container as HTMLElement).scrollLeft;
+  const to = item.offsetLeft - (container as HTMLElement).offsetLeft;
+  const change = to - start;
+  let currentTime = 0;
+  let interval;
+
+  return {
+    start: () => {
+      interval = setInterval(() => {
+        currentTime += increment;
+        container.scrollTo(
+          easeInOutQuad(currentTime, start, change, duration),
+          0,
+        );
+
+        if (currentTime >= duration) {
+          clearTimeout(interval);
+          if (typeof callback === 'function') {
+            callback();
+          }
+        }
+      }, increment);
+    },
+    stop: () => {
+      clearTimeout(interval);
+      if (typeof callback === 'function') {
+        callback();
+      }
+    },
+  };
+};
+
 export default scrollToItem;

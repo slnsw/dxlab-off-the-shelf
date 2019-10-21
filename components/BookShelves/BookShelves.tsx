@@ -60,10 +60,24 @@ const BookShelves: React.FunctionComponent<Props> = ({
     () => {
       console.log('Interval');
 
-      setCurrentShelf(Math.floor(Math.random() * 3));
+      const newShelf = Math.floor(Math.random() * 3);
+      // console.log(newShelf);
+      setCurrentShelf(newShelf);
 
       const amountToChange = Math.floor(Math.random() * 6) + 3;
-      const directionToChange = Math.random() < 0.5 ? -1 : 1;
+      let directionToChange = Math.random() < 0.5 ? -1 : 1;
+      // console.log(currentBooks[currentShelf]);
+
+      if (currentBooks[currentShelf] - amountToChange < 0) {
+        directionToChange = 1;
+      }
+
+      if (
+        currentBooks[currentShelf] + amountToChange >=
+        shelves[currentShelf].length
+      ) {
+        directionToChange = -1;
+      }
 
       let newCurrentBook =
         currentBooks[currentShelf] + directionToChange * amountToChange;
@@ -75,7 +89,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
       if (newCurrentBook >= shelves[currentShelf].length) {
         newCurrentBook = shelves[currentShelf].length - 1;
       }
-
+      // console.log(newCurrentBook);
       setCurrentBooks([
         currentShelf === 0 ? newCurrentBook : currentBooks[0],
         currentShelf === 1 ? newCurrentBook : currentBooks[1],

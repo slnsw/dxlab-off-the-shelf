@@ -16,7 +16,7 @@ const Home = ({ query }) => {
   const [
     isIntervalDisabled,
     // setIsIntervalDisabled
-  ] = React.useState(true);
+  ] = React.useState(false);
   const [isIntervalActive, setIsIntervalActive] = React.useState(true);
   const bookId = query && query.id ? query.id : null;
 
