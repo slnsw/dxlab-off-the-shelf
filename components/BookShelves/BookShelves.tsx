@@ -21,7 +21,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
   onBookClick,
 }) => {
   const [books, setBooks] = React.useState([]);
-  const [currentBooks, setCurrentBooks] = React.useState([20, 20, 20]);
+  const [currentBooks, setCurrentBooks] = React.useState([0, 0, 0]);
   const [currentShelf, setCurrentShelf] = React.useState(1);
   const [shelves, setShelves] = React.useState([[], [], []]);
   // pull in the books

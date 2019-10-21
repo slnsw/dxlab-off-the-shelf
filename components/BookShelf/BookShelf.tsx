@@ -111,9 +111,10 @@ const BookShelf: React.FunctionComponent<Props> = ({
             book.sizes && book.sizes.medium && book.sizes.medium.sourceUrl,
         )
         .map((book) => {
+          const randomVariation = book.id % 22;
           const ratio = book.sizes.medium.width / book.sizes.medium.height;
-          const imageHeight = height - 16;
-          const imageWidth = ratio * height;
+          const imageHeight = height - 16 - randomVariation;
+          const imageWidth = ratio * imageHeight;
 
           return (
             <React.Fragment key={book.id}>
@@ -129,7 +130,11 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 onRender={handleBookCardRender}
               ></BookCard>
 
-              <BookSpines spines={book.spines} />
+              <BookSpines
+                spines={book.spines}
+                isScrolling={isScrolling}
+                scrollDirection={scrollDirection}
+              />
             </React.Fragment>
           );
         })}

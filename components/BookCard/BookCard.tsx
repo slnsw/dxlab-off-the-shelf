@@ -37,7 +37,7 @@ const BookCard: React.FunctionComponent<Props> = ({
 
   React.useEffect(() => {
     if (scrollDirection) {
-      setOriginX(scrollDirection === 'left' ? 1 : 0);
+      setOriginX(scrollDirection === 'right' ? 1 : 0);
     }
   }, [scrollDirection]);
 
@@ -55,7 +55,7 @@ const BookCard: React.FunctionComponent<Props> = ({
     // rotate = [0, -2, 0, -1, 0, -0.5, 0, -0.25, 0, -0.125];
     rotate = 0;
   } else if (isScrolling) {
-    rotate = scrollDirection === 'right' ? -2 : 2;
+    rotate = scrollDirection === 'right' ? 2 : -2;
   } else {
     rotate = 0;
   }
