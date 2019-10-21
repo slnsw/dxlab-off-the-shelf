@@ -1,10 +1,13 @@
 import * as React from 'react';
-// import { useMotionValue, useSpring } from 'framer-motion';
 
 import BookCard from '../BookCard';
 import BookSpines from '../BookSpines';
 
-import useDimensions from '../../lib/hooks/use-dimensions';
+import {
+  useDimensions,
+  // usePrevious,
+  // useDebounce
+} from '../../lib/hooks';
 
 import scrollToItem from '../../lib/scroll-to-item';
 
@@ -33,8 +36,12 @@ const BookShelf: React.FunctionComponent<Props> = ({
 
   const scrollId = React.useRef(null);
   const [isScrolling, setIsScrolling] = React.useState(false);
+  const [scrollDirection, setScrollDirection] = React.useState(null);
+  const scrollLeftRef = React.useRef(0);
 
-  // console.log(isScrolling, index);
+  // if (scrollDirection) {
+  //   console.log(scrollDirection, index);
+  // }
 
   React.useEffect(() => {
     const book = books[scrollToBook];
@@ -64,24 +71,39 @@ const BookShelf: React.FunctionComponent<Props> = ({
     }
   };
 
+  const handleScroll = (e) => {
+    const element = e.target as HTMLElement;
+    const prevScrollLeft = scrollLeftRef.current;
+    scrollLeftRef.current = element.scrollLeft;
+
+    if (isScrolling === false) {
+      setIsScrolling(true);
+    } else if (isScrolling && scrollDirection === null) {
+      const delta = scrollLeftRef.current - prevScrollLeft;
+
+      // if (index === 0) {
+      // console.log(delta, scrollLeftRef.current, prevScrollLeft, index);
+      // }
+
+      setScrollDirection(delta > 0 ? 'right' : 'left');
+    }
+
+    if (scrollId && scrollId.current) {
+      clearTimeout(scrollId.current);
+    }
+
+    scrollId.current = setTimeout(() => {
+      setIsScrolling(false);
+      setScrollDirection(null);
+    }, 100);
+  };
+
   return (
     <div
       id={id}
       className={[css.bookShelf, className || ''].join(' ')}
       ref={ref}
-      onScroll={(e) => {
-        if (isScrolling === false) {
-          setIsScrolling(true);
-        }
-
-        if (scrollId && scrollId.current) {
-          clearTimeout(scrollId.current);
-        }
-
-        scrollId.current = setTimeout(() => {
-          setIsScrolling(false);
-        }, 100);
-      }}
+      onScroll={handleScroll}
     >
       {books
         .filter(
@@ -90,6 +112,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
         )
         .map((book) => {
           const ratio = book.sizes.medium.width / book.sizes.medium.height;
+          const imageHeight = height - 16;
           const imageWidth = ratio * height;
 
           return (
@@ -99,8 +122,9 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 title={book.title}
                 imageUrl={book.sizes.medium.sourceUrl}
                 imageWidth={imageWidth}
-                imageHeight={height}
+                imageHeight={imageHeight}
                 isScrolling={isScrolling}
+                scrollDirection={scrollDirection}
                 onClick={onClick}
                 onRender={handleBookCardRender}
               ></BookCard>

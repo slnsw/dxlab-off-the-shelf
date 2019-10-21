@@ -67,7 +67,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       )}
 
       <div className={css.info}>
-        <OffTheShelfLogoBorders orientation="topRight" />
+        <OffTheShelfLogoBorders orientation="bottomLeft" />
 
         <div className={css.content}>
           {loading

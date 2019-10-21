@@ -1,9 +1,14 @@
 import * as React from 'react';
 
+export { default as useBookData } from './use-book-data';
+export { default as useBooksData } from './use-books-data';
+export { default as useDimensions } from './use-dimensions';
+export { default as useInterval } from './use-interval';
+export { default as useQuery } from './use-query';
+
 /**
  * Listen for a particular key press
  */
-// TODO: Fix this issue, very naughty Kaho!
 /* eslint-disable react-hooks/exhaustive-deps */
 export function useKeyPress(targetKey, callback) {
   // If released key is our target key then set to false
@@ -27,7 +32,6 @@ export function useKeyPress(targetKey, callback) {
 /**
  * Get window size
  */
-// TODO: Fix this issue, very naughty Kaho!
 /* eslint-disable react-hooks/exhaustive-deps */
 export function useWindowSize(width: number = 800, height: number = 600) {
   const isClient = typeof window === 'object';
@@ -85,4 +89,29 @@ export function usePrevious(value) {
 
   // Return previous value (happens before update in useEffect above)
   return ref.current;
+}
+
+/**
+ * Use Debounce for fast changing value
+ * https://usehooks.com/useDebounce/
+ */
+export function useDebounce(value, delay) {
+  // State and setters for debounced value
+  const [debouncedValue, setDebouncedValue] = React.useState(value);
+
+  React.useEffect(() => {
+    // Update debounced value after delay
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    // Cancel the timeout if value changes (also on delay change or unmount)
+    // This is how we prevent debounced value from updating if value is changed ...
+    // .. within the delay period. Timeout gets cleared and restarted.
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]); // Only re-call effect if value or delay changes
+
+  return debouncedValue;
 }

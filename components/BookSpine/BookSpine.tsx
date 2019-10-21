@@ -19,6 +19,7 @@ const BookSpine: React.FunctionComponent<Props> = ({ className, id }) => {
         src={`/images/spines/${id}.png`}
         className={[
           css.image,
+          // css[`height${h}`],
           h === 0 ? css.height0 : '',
           h === 1 ? css.height1 : '',
           h === 2 ? css.height2 : '',

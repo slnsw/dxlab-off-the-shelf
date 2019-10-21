@@ -14,6 +14,7 @@ type Props = {
   imageWidth: number;
   imageHeight: number;
   isScrolling?: boolean;
+  scrollDirection?: 'left' | 'right';
   className?: string;
   onClick?: Function;
   onRender?: Function;
@@ -26,11 +27,19 @@ const BookCard: React.FunctionComponent<Props> = ({
   imageWidth = 0,
   imageHeight = 0,
   isScrolling = false,
+  scrollDirection = null,
   className,
   onClick,
   onRender,
 }) => {
   const [ref, inView, entry] = useInView();
+  const [originX, setOriginX] = React.useState();
+
+  React.useEffect(() => {
+    if (scrollDirection) {
+      setOriginX(scrollDirection === 'left' ? 1 : 0);
+    }
+  }, [scrollDirection]);
 
   if (!imageWidth) {
     return null;
@@ -40,6 +49,17 @@ const BookCard: React.FunctionComponent<Props> = ({
     onRender(inView, entry, id);
   }
 
+  let rotate;
+
+  if (inView && isScrolling === false) {
+    // rotate = [0, -2, 0, -1, 0, -0.5, 0, -0.25, 0, -0.125];
+    rotate = 0;
+  } else if (isScrolling) {
+    rotate = scrollDirection === 'right' ? -2 : 2;
+  } else {
+    rotate = 0;
+  }
+
   return (
     <motion.article
       id={`bookCard-${id}`}
@@ -47,13 +67,14 @@ const BookCard: React.FunctionComponent<Props> = ({
       animate={{
         // opacity: inView ? 1 : 0,
         // rotate: -5,
-        rotate:
-          inView && isScrolling === false
-            ? [0, -5, 0, -2, 0, -1, 0, -0.5, 0, -0.25]
-            : 0,
+        rotate,
+      }}
+      transition={{
+        delay: Math.random() * 0.3,
+        duration: 0.5,
       }}
       style={{
-        originX: 0,
+        originX,
         originY: 1,
       }}
       onClick={(e) => {

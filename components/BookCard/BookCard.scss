@@ -8,5 +8,5 @@
 .image {
   display: block;
   width: auto;
-  height: 100%;
+  // height: calc(100% - #{$baseline-2});
 }
