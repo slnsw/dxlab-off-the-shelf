@@ -45,6 +45,11 @@ class MyApp extends App {
             href="https://fonts.googleapis.com/css?family=Barlow:400,500,500i,700"
             rel="stylesheet"
           />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cloud.typography.com/6321554/7275212/css/fonts.css"
+          />
           <link rel="icon" href="/favicon.ico" importance="low" />
         </Head>
 
