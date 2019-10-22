@@ -61,8 +61,8 @@ const BookCard: React.FunctionComponent<Props> = ({
     // const deltaLog = Math.log10(Math.abs(scrollDelta));
     // console.log(deltaLog);
     // const rotateValue = deltaLog;
-    // const rotateValue = Math.abs(scrollDelta) > 20 ? 1 : 0;
-    // rotate = scrollDirection === 'right' ? rotateValue : rotateValue * -1;
+    const rotateValue = Math.abs(scrollDelta) > 20 ? 1 : 0.5;
+    rotate = scrollDirection === 'right' ? rotateValue : rotateValue * -1;
   } else {
     rotate = 0;
   }

@@ -40,9 +40,9 @@ const BookSpine: React.FunctionComponent<Props> = ({
   let rotate = 0;
 
   if (originX === 1) {
-    rotate = 5.5;
+    rotate = 5.3;
   } else if (originX === 0) {
-    rotate = -5.5;
+    rotate = -5.3;
   }
 
   // if (isScrolling) {
@@ -61,7 +61,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
       }}
       transition={{
         delay: index * 0.05,
-        duration: 0.4,
+        duration: 0.5,
         type: 'spring',
         damping: isScrolling ? 10 : 7,
         stiffness: 150,
