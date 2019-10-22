@@ -9,6 +9,7 @@ type Props = {
   spines: number[];
   isScrolling?: boolean;
   scrollDirection?: 'left' | 'right';
+  scrollDelta?: number;
 };
 
 const BookSpines: React.FunctionComponent<Props> = ({
@@ -16,6 +17,7 @@ const BookSpines: React.FunctionComponent<Props> = ({
   spines = [],
   isScrolling = false,
   scrollDirection = null,
+  scrollDelta = 0,
 }) => {
   if (spines.length === 0) {
     return null;
@@ -27,6 +29,7 @@ const BookSpines: React.FunctionComponent<Props> = ({
         const rIndex = isScrolling ? spines.length - 1 - i : i;
         const lIndex = isScrolling ? i : spines.length - 1 - i;
         const index = scrollDirection === 'right' ? rIndex : lIndex;
+
         return (
           <BookSpine
             key={`${spine}-${i}`}
@@ -34,6 +37,7 @@ const BookSpines: React.FunctionComponent<Props> = ({
             index={index}
             isScrolling={isScrolling}
             scrollDirection={scrollDirection}
+            scrollDelta={scrollDelta}
           />
         );
       })}

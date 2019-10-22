@@ -1,5 +1,6 @@
 /**
  * Create a timer that runs a callback when there is no interaction after a
+ * certain duration
  * @param callback Callback function to be called when timer becomes idle.
  * @param duration Duration in milliseconds.
  */

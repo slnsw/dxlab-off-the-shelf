@@ -38,8 +38,9 @@ const BookShelf: React.FunctionComponent<Props> = ({
   const scrollId = React.useRef(null);
   const [isScrolling, setIsScrolling] = React.useState(false);
   const [scrollDirection, setScrollDirection] = React.useState(null);
-  const scrollLeftRef = React.useRef(0);
 
+  const scrollLeftRef = React.useRef(0);
+  const scrollDeltaRef = React.useRef(0);
   const scrollToItem = React.useRef(null);
 
   React.useEffect(() => {
@@ -77,6 +78,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
     const prevScrollLeft = scrollLeftRef.current;
     scrollLeftRef.current = element.scrollLeft;
     const delta = scrollLeftRef.current - prevScrollLeft;
+    scrollDeltaRef.current = delta;
 
     if (isScrolling === false) {
       setIsScrolling(true);
@@ -141,6 +143,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 imageHeight={imageHeight}
                 isScrolling={isScrolling}
                 scrollDirection={scrollDirection}
+                scrollDelta={scrollDeltaRef.current}
                 onClick={onClick}
                 onRender={handleBookCardRender}
               />
@@ -149,6 +152,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 spines={book.spines}
                 isScrolling={isScrolling}
                 scrollDirection={scrollDirection}
+                scrollDelta={scrollDeltaRef.current}
               />
             </React.Fragment>
           );

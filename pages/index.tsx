@@ -6,6 +6,7 @@ import BookShelves from '../components/BookShelves';
 
 import { withApollo } from '../lib/apollo';
 import { createIdleTimer } from '../lib/idle-timer';
+import { appConfig } from '../configs';
 
 // import css from './index.scss';
 
@@ -23,7 +24,6 @@ const Home = ({ query }) => {
     // setIsIntervalDisabled
   ] = React.useState(true);
   const [isIntervalActive, setIsIntervalActive] = React.useState(true);
-  // const idleTimerRef = React.useRef(null);
 
   const bookId = query && query.id ? query.id : null;
 
@@ -35,10 +35,8 @@ const Home = ({ query }) => {
       () => {
         Router.push('/');
       },
-      5000,
-      {
-        hasLogs: false,
-      },
+      appConfig.idleTimeout,
+      { hasLogs: false },
     );
 
     idleTimer.start();
