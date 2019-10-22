@@ -17,38 +17,14 @@ const easeInOutQuad = (t, b, c, d) => {
 };
 
 /**
- * Scroll a container element to a child element's top.
+ * Factory function to create an instance that controls scrolling
+ * to a child within a container element.
  * @param container Container element.
  * @param item Child element.
  * @param callback Callback function to be called on completion.
  * @param duration Duration in milliseconds.
  * @param increment Milliseconds per tick.
  */
-const scrollToItem = (
-  container: HTMLElement,
-  item: HTMLElement,
-  callback: Function = null,
-  duration: number = 5000,
-  increment: number = 10,
-): void => {
-  const start = (container as HTMLElement).scrollLeft;
-  const to = item.offsetLeft - (container as HTMLElement).offsetLeft;
-  const change = to - start;
-  let currentTime = 0;
-
-  const interval = setInterval(() => {
-    currentTime += increment;
-    container.scrollTo(easeInOutQuad(currentTime, start, change, duration), 0);
-
-    if (currentTime >= duration) {
-      clearTimeout(interval);
-      if (typeof callback === 'function') {
-        callback();
-      }
-    }
-  }, increment);
-};
-
 export const createScrollToItem = (
   container: HTMLElement,
   item: HTMLElement,
@@ -59,6 +35,7 @@ export const createScrollToItem = (
   const start = (container as HTMLElement).scrollLeft;
   const to = item.offsetLeft - (container as HTMLElement).offsetLeft;
   const change = to - start;
+
   let currentTime = 0;
   let interval;
 
@@ -73,6 +50,7 @@ export const createScrollToItem = (
 
         if (currentTime >= duration) {
           clearTimeout(interval);
+
           if (typeof callback === 'function') {
             callback();
           }
@@ -81,11 +59,10 @@ export const createScrollToItem = (
     },
     stop: () => {
       clearTimeout(interval);
+
       if (typeof callback === 'function') {
         callback();
       }
     },
   };
 };
-
-export default scrollToItem;

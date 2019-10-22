@@ -1,56 +1,63 @@
-export const idleTimer = {
-  init(resetDelay = 15) {
-    this.resetDelay = resetDelay;
-  },
+/**
+ * Create a timer that runs a callback when there is no interaction after a
+ * @param callback Callback function to be called when timer becomes idle.
+ * @param duration Duration in milliseconds.
+ */
+export const createIdleTimer = (
+  callback,
+  duration = 15000,
+  { hasLogs } = { hasLogs: false },
+) => {
+  let timeout;
 
-  start(onUserIdle) {
-    this.onUserIdle = onUserIdle;
-    if (!this.timeout) {
-      this.timeout = setTimeout(
-        this.whenUserIdle.bind(this),
-        this.resetDelay * 1000,
-      );
-      this.resetFunc = this.reset.bind(this);
-      window.addEventListener('mousemove', this.resetFunc);
-      window.addEventListener('keydown', this.resetFunc);
-      window.addEventListener('click', this.resetFunc);
-      // console.log('Idle timer started.');
+  const onUserIdle = () => {
+    if (hasLogs) {
+      console.log(`idleTimer.onUserIdle()`, timeout);
     }
-  },
 
-  stop() {
-    if (this.timeout) {
-      // console.log('Idle timer ' + this.timeout + ' stopped.');
-      // cancel event listeners
-      window.removeEventListener('mousemove', this.resetFunc);
-      window.removeEventListener('keydown', this.resetFunc);
-      window.removeEventListener('click', this.resetFunc);
-      // stop the timeout
-      clearTimeout(this.timeout);
-      this.timeout = false;
-      console.log(this.timeout);
+    if (typeof callback === 'function') {
+      callback();
     }
-  },
+  };
 
-  reset() {
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(
-      this.whenUserIdle.bind(this),
-      this.resetDelay * 1000,
-    );
-    // console.log('Idle timer reset by keypress/click/mousemove ' + this.timeout);
-  },
+  const reset = () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(onUserIdle, duration);
 
-  whenUserIdle() {
-    // console.log('user idle! Reloading!!!');
-    // cancel event listeners
-    window.removeEventListener('mousemove', this.resetFunc);
-    window.removeEventListener('keydown', this.resetFunc);
-    window.removeEventListener('click', this.resetFunc);
-    // got to onUserIdle callback
-    this.timeout = false;
-    if (typeof this.onUserIdle === 'function') {
-      this.onUserIdle();
+    if (hasLogs) {
+      console.log(`idleTimer.reset()`, timeout);
     }
-  },
+  };
+
+  return {
+    start: () => {
+      if (!timeout) {
+        if (hasLogs) {
+          console.log('idleTimer.start()', duration);
+        }
+
+        timeout = setTimeout(onUserIdle, duration);
+
+        window.addEventListener('mousemove', reset);
+        window.addEventListener('touchmove', reset);
+        window.addEventListener('keydown', reset);
+        window.addEventListener('click', reset);
+      }
+    },
+    stop: () => {
+      if (timeout) {
+        if (hasLogs) {
+          console.log('idleTimer.stop()', timeout);
+        }
+
+        window.removeEventListener('mousemove', reset);
+        window.removeEventListener('touchmove', reset);
+        window.removeEventListener('keydown', reset);
+        window.removeEventListener('click', reset);
+
+        clearTimeout(timeout);
+        timeout = false;
+      }
+    },
+  };
 };

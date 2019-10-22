@@ -13,12 +13,14 @@ type Props = {
   isIntervalActive?: boolean;
   className?: string;
   onBookClick?: Function;
+  // onShelfScroll?: Function;
 };
 
 const BookShelves: React.FunctionComponent<Props> = ({
   isIntervalActive = false,
   className,
   onBookClick,
+  // onShelfScroll,
 }) => {
   const [books, setBooks] = React.useState([]);
   const [currentBooks, setCurrentBooks] = React.useState([0, 0, 0]);
@@ -58,10 +60,9 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
   useInterval(
     () => {
-      console.log('Interval');
+      console.log('Scroll shelf', currentShelf);
 
       const newShelf = Math.floor(Math.random() * 3);
-      // console.log(newShelf);
       setCurrentShelf(newShelf);
 
       const amountToChange = Math.floor(Math.random() * 6) + 3;
@@ -89,7 +90,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
       if (newCurrentBook >= shelves[currentShelf].length) {
         newCurrentBook = shelves[currentShelf].length - 1;
       }
-      // console.log(newCurrentBook);
+
       setCurrentBooks([
         currentShelf === 0 ? newCurrentBook : currentBooks[0],
         currentShelf === 1 ? newCurrentBook : currentBooks[1],
@@ -113,6 +114,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             id="bookShelf-0"
             className={css.bookShelf}
             onClick={onBookClick}
+            // onScroll={onShelfScroll}
           ></BookShelf>
           <BookShelf
             books={shelves[1]}
@@ -121,6 +123,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             id="bookShelf-1"
             className={css.bookShelf}
             onClick={onBookClick}
+            // onScroll={onShelfScroll}
           ></BookShelf>
           <BookShelf
             books={shelves[2]}
@@ -129,6 +132,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             id="bookShelf-2"
             className={css.bookShelf}
             onClick={onBookClick}
+            // onScroll={onShelfScroll}
           ></BookShelf>
         </>
       )}

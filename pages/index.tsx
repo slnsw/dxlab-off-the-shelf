@@ -5,10 +5,15 @@ import BookCardModal from '../components/BookCardModal';
 import BookShelves from '../components/BookShelves';
 
 import { withApollo } from '../lib/apollo';
+import { createIdleTimer } from '../lib/idle-timer';
 
 // import css from './index.scss';
 
 const Home = ({ query }) => {
+  // --------------------------------------------------------------------------
+  // Hooks
+  // --------------------------------------------------------------------------
+
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
@@ -16,10 +21,36 @@ const Home = ({ query }) => {
   const [
     isIntervalDisabled,
     // setIsIntervalDisabled
-  ] = React.useState(false);
+  ] = React.useState(true);
   const [isIntervalActive, setIsIntervalActive] = React.useState(true);
+  // const idleTimerRef = React.useRef(null);
+
   const bookId = query && query.id ? query.id : null;
 
+  /*
+   * Set idle timer
+   */
+  React.useEffect(() => {
+    const idleTimer = createIdleTimer(
+      () => {
+        Router.push('/');
+      },
+      5000,
+      {
+        hasLogs: false,
+      },
+    );
+
+    idleTimer.start();
+
+    return () => {
+      idleTimer.stop();
+    };
+  }, []);
+
+  /*
+   * Ensure intervals don't run while page is off screen
+   */
   React.useEffect(() => {
     // https://mattwest.design/working-with-the-page-visibility-api/
     document.addEventListener('visibilitychange', (e) => {
@@ -41,6 +72,9 @@ const Home = ({ query }) => {
   }, [isIntervalDisabled]);
   /* eslint-enable */
 
+  /*
+   * Hide and show book modal
+   */
   React.useEffect(() => {
     const isActive = Boolean(bookId);
 
@@ -50,6 +84,10 @@ const Home = ({ query }) => {
       setIsIntervalActive(!isActive);
     }
   }, [bookId, isIntervalDisabled]);
+
+  // --------------------------------------------------------------------------
+  // Handlers
+  // --------------------------------------------------------------------------
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
     Router.push(`/?id=${id}`);
@@ -71,10 +109,10 @@ const Home = ({ query }) => {
       />
 
       <BookShelves
-        onBookClick={handleBookCardClick}
         isIntervalActive={
           isIntervalDisabled === false ? isIntervalActive : false
         }
+        onBookClick={handleBookCardClick}
       ></BookShelves>
     </>
   );

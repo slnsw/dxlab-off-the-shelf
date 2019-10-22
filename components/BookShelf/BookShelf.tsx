@@ -26,7 +26,7 @@ type Props = {
 const BookShelf: React.FunctionComponent<Props> = ({
   books = [],
   scrollToBook,
-  index,
+  // index,
   id,
   className,
   onClick,
@@ -41,10 +41,6 @@ const BookShelf: React.FunctionComponent<Props> = ({
   const scrollLeftRef = React.useRef(0);
 
   const scrollToItem = React.useRef(null);
-
-  // if (scrollDirection) {
-  //   console.log(scrollDirection, index);
-  // }
 
   React.useEffect(() => {
     const book = books[scrollToBook];
@@ -77,21 +73,21 @@ const BookShelf: React.FunctionComponent<Props> = ({
 
   const handleScroll = (e) => {
     const element = e.target as HTMLElement;
+
     const prevScrollLeft = scrollLeftRef.current;
     scrollLeftRef.current = element.scrollLeft;
+    const delta = scrollLeftRef.current - prevScrollLeft;
 
     if (isScrolling === false) {
       setIsScrolling(true);
     } else if (isScrolling && scrollDirection === null) {
-      const delta = scrollLeftRef.current - prevScrollLeft;
-
-      // if (index === 0) {
-      // console.log(delta, scrollLeftRef.current, prevScrollLeft, index);
-      // }
-
       setScrollDirection(delta > 0 ? 'right' : 'left');
     }
 
+    /* Track when scrolling ends by setting a timeout and
+     * clearing it on every scroll. When scrolling ends, the
+     * last timeout will fire.
+     */
     if (scrollId && scrollId.current) {
       clearTimeout(scrollId.current);
     }
@@ -147,7 +143,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 scrollDirection={scrollDirection}
                 onClick={onClick}
                 onRender={handleBookCardRender}
-              ></BookCard>
+              />
 
               <BookSpines
                 spines={book.spines}
