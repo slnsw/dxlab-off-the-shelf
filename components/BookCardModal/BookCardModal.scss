@@ -46,9 +46,24 @@
 }
 
 .content {
+  position: relative;
+  height: calc(100% - #{$baseline * 14});
   margin-top: -$baseline * 8;
   padding-right: $baseline * 10;
   padding-left: $baseline * 6;
+  overflow: auto;
+
+  // &:after {
+  //   content: '';
+  //   position: fixed;
+  //   // left: 0;
+  //   bottom: 0;
+  //   display: block;
+  //   width: calc(60% - #{$baseline * 8});
+  //   height: $baseline-3;
+  //   border-left: 5px solid $colour-teal;
+  //   border-bottom: 5px solid $colour-teal;
+  // }
 }
 
 .description {

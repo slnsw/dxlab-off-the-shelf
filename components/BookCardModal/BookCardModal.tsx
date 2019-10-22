@@ -157,9 +157,11 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                                 switch (row.field) {
                                   case 'holdings':
                                     return primoRecord[row.field].map(
-                                      (holding) => {
+                                      (holding, i) => {
                                         return (
-                                          <p key={holding.subLocation}>
+                                          <p
+                                            key={`${holding.subLocation}-${i}`}
+                                          >
                                             {holding.subLocation},{' '}
                                             {holding.status},{' '}
                                             {holding.mainLocation}
