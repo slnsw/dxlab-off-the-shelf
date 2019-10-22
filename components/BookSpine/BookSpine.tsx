@@ -39,11 +39,16 @@ const BookSpine: React.FunctionComponent<Props> = ({
 
   let rotate = 0;
 
-  if (isScrolling) {
-    const rotateValue = Math.abs(scrollDelta) > 20 ? 1 : 0;
-    rotate = scrollDirection === 'right' ? rotateValue : rotateValue * -1;
-    // rotate = scrollDirection === 'right' ? 2 : -2;
+  if (originX === 1) {
+    rotate = 5.5;
+  } else if (originX === 0) {
+    rotate = -5.5;
   }
+
+  // if (isScrolling) {
+  //   const rotateValue = Math.abs(scrollDelta) > 20 ? 1 : 0;
+  //   rotate = scrollDirection === 'right' ? rotateValue : rotateValue * -1;
+  // }
 
   return (
     <motion.article
@@ -55,12 +60,11 @@ const BookSpine: React.FunctionComponent<Props> = ({
         rotate,
       }}
       transition={{
-        delay: index * 0.1, // Math.random() * 0.3,
+        delay: index * 0.05,
         duration: 0.4,
         type: 'spring',
-        damping: isScrolling ? 10 : 4,
-        stiffness: 200,
-        // ease: 'easeInOut',
+        damping: isScrolling ? 10 : 7,
+        stiffness: 150,
       }}
       style={{
         originX,

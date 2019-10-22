@@ -58,8 +58,11 @@ const BookCard: React.FunctionComponent<Props> = ({
     // rotate = [0, -2, 0, -1, 0, -0.5, 0, -0.25, 0, -0.125];
     rotate = 0;
   } else if (isScrolling) {
-    const rotateValue = Math.abs(scrollDelta) > 20 ? 1 : 0;
-    rotate = scrollDirection === 'right' ? rotateValue : rotateValue * -1;
+    // const deltaLog = Math.log10(Math.abs(scrollDelta));
+    // console.log(deltaLog);
+    // const rotateValue = deltaLog;
+    // const rotateValue = Math.abs(scrollDelta) > 20 ? 1 : 0;
+    // rotate = scrollDirection === 'right' ? rotateValue : rotateValue * -1;
   } else {
     rotate = 0;
   }
@@ -70,7 +73,7 @@ const BookCard: React.FunctionComponent<Props> = ({
       className={[css.bookCard, className || ''].join(' ')}
       animate={{
         rotate,
-        y: isScrolling ? -1 : 0,
+        y: isScrolling ? -0.5 : 0,
       }}
       transition={{
         delay: Math.random() * 0.2,
