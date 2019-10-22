@@ -12,6 +12,7 @@ type Props = {
   id: number;
   index: number;
   isScrolling?: boolean;
+  isHidden?: boolean;
   scrollDirection?: 'left' | 'right';
   scrollDelta?: number;
 };
@@ -21,6 +22,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
   id,
   index,
   isScrolling = false,
+  isHidden = false,
   scrollDirection = null,
   scrollDelta = 0,
 }) => {
@@ -45,26 +47,19 @@ const BookSpine: React.FunctionComponent<Props> = ({
     rotate = -5.3;
   }
 
-  // if (isScrolling) {
-  //   const rotateValue = Math.abs(scrollDelta) > 20 ? 1 : 0;
-  //   rotate = scrollDirection === 'right' ? rotateValue : rotateValue * -1;
-  // }
-
   return (
     <motion.article
       id={`spine-${id}`}
       className={[css.bookSpine, className || ''].join(' ')}
       animate={{
-        // opacity: inView ? 1 : 0,
-        // rotate: -5,
+        y: isHidden ? '100%' : 0,
         rotate,
       }}
       transition={{
         delay: index * 0.05,
-        duration: 0.5,
         type: 'spring',
-        damping: isScrolling ? 10 : 7,
-        stiffness: 150,
+        damping: 7,
+        stiffness: 50,
       }}
       style={{
         originX,

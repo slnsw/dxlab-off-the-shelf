@@ -20,6 +20,7 @@ type Props = {
   index?: number;
   id?: string;
   className?: string;
+  isHidden?: boolean;
   onClick?: Function;
 };
 
@@ -29,6 +30,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
   // index,
   id,
   className,
+  isHidden = false,
   onClick,
 }) => {
   const [booksInView, setBooksInView] = React.useState([]);
@@ -142,6 +144,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 imageWidth={imageWidth}
                 imageHeight={imageHeight}
                 isScrolling={isScrolling}
+                isHidden={isHidden}
                 scrollDirection={scrollDirection}
                 scrollDelta={scrollDeltaRef.current}
                 onClick={onClick}
@@ -151,6 +154,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
               <BookSpines
                 spines={book.spines}
                 isScrolling={isScrolling}
+                isHidden={isHidden}
                 scrollDirection={scrollDirection}
                 scrollDelta={scrollDeltaRef.current}
               />

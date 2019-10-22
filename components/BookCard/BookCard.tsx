@@ -14,6 +14,7 @@ type Props = {
   imageWidth: number;
   imageHeight: number;
   isScrolling?: boolean;
+  isHidden?: boolean;
   scrollDirection?: 'left' | 'right';
   scrollDelta?: number;
   className?: string;
@@ -28,6 +29,7 @@ const BookCard: React.FunctionComponent<Props> = ({
   imageWidth = 0,
   imageHeight = 0,
   isScrolling = false,
+  isHidden = false,
   scrollDirection = null,
   scrollDelta = 0,
   className,
@@ -52,15 +54,10 @@ const BookCard: React.FunctionComponent<Props> = ({
   }
 
   let rotate;
-  // let x = 0;
 
   if (inView && isScrolling === false) {
-    // rotate = [0, -2, 0, -1, 0, -0.5, 0, -0.25, 0, -0.125];
     rotate = 0;
   } else if (isScrolling) {
-    // const deltaLog = Math.log10(Math.abs(scrollDelta));
-    // console.log(deltaLog);
-    // const rotateValue = deltaLog;
     const rotateValue = Math.abs(scrollDelta) > 20 ? 1 : 0.5;
     rotate = scrollDirection === 'right' ? rotateValue : rotateValue * -1;
   } else {
@@ -73,7 +70,9 @@ const BookCard: React.FunctionComponent<Props> = ({
       className={[css.bookCard, className || ''].join(' ')}
       animate={{
         rotate,
-        y: isScrolling ? -0.5 : 0,
+        opacity: isHidden ? 0 : 1,
+        // y: isHidden ? 10 : 0,
+        // y: isScrolling ? -0.5 : 0,
       }}
       transition={{
         delay: Math.random() * 0.2,
@@ -81,7 +80,6 @@ const BookCard: React.FunctionComponent<Props> = ({
         type: 'spring',
         damping: isScrolling ? 10 : 4,
         stiffness: 300,
-        // ease: 'easeIn',
       }}
       style={{
         originX,
