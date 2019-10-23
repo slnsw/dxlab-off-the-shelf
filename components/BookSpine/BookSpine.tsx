@@ -45,9 +45,9 @@ const BookSpine: React.FunctionComponent<Props> = ({
   let rotate = 0;
 
   if (originX === 1) {
-    rotate = 5.3767;
+    rotate = appConfig.spineRotateAngle;
   } else if (originX === 0) {
-    rotate = -5.3767;
+    rotate = -1 * appConfig.spineRotateAngle;
   }
 
   const nonEdgeHeight = [
