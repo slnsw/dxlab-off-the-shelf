@@ -67,7 +67,12 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       )}
 
       <div className={css.info}>
-        <OffTheShelfLogoBorders orientation="topRight" />
+        <OffTheShelfLogoBorders
+          orientation="topRight"
+          strokeWidth={8}
+          isActive={true}
+          className={css.topBorders}
+        />
 
         <div className={css.content}>
           {loading
@@ -212,6 +217,14 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                 </>
               )}
         </div>
+
+        <OffTheShelfLogoBorders
+          orientation="bottomLeft"
+          strokeWidth={8}
+          isActive={true}
+          hasStartCorners={false}
+          className={css.bottomBorders}
+        />
       </div>
 
       <CTAButton className={css.backButton} onClick={onClose}>

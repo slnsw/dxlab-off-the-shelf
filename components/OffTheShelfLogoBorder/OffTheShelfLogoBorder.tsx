@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 
 import useDimensions from '../../lib/hooks/use-dimensions';
 
@@ -13,6 +13,8 @@ type Props = {
   orientation?: 'bottomLeft' | 'topRight';
   colour?: 'white' | 'yellow' | 'teal';
   isActive?: boolean;
+  hasStartCorner?: boolean;
+  hasEndCorner?: boolean;
   className?: string;
 };
 
@@ -22,6 +24,8 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
   orientation = 'bottomLeft',
   colour = 'white',
   isActive = false,
+  hasStartCorner = true,
+  hasEndCorner = true,
   className,
 }) => {
   const [ref, dimensions] = useDimensions();
@@ -29,16 +33,24 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
   const { width, height } = dimensions;
   const baseline = strokeWidth * 1.5;
 
+  const divControls = useAnimation();
+  // const svgControls = useAnimation();
+
+  React.useEffect(() => {
+    divControls.start(isActive ? 'end' : 'start');
+    // console.log(width, height);
+  }, [isActive, divControls, width, height, baseline]);
+
   const paths = {
     bottomLeft: `
-      M ${baseline} 0 
+      M ${hasStartCorner ? baseline : 0} 0 
       L 0 0
       L 0 ${height} 
       L ${width - baseline * 2} ${height} 
       L ${width - baseline * 2} ${height - baseline}
     `,
     topRight: `
-      M 0 ${baseline}
+      M 0 ${hasStartCorner ? baseline : 0}
       L 0 0
       L ${width - baseline * 2} 0
       L ${width - baseline * 2} ${height}      
@@ -61,7 +73,8 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
         },
       }}
       initial="start"
-      animate={isActive ? 'end' : 'start'}
+      // animate={isActive ? 'end' : 'start'}
+      animate={divControls}
       transition={{
         type: 'spring',
         delay: 1,

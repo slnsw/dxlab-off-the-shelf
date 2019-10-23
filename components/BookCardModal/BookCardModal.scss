@@ -7,17 +7,17 @@
   h1 {
     margin-top: 0;
     margin-bottom: $baseline-2;
-    font-weight: 600;
+    font-weight: 500;
     font-size: $font-size-xxxlg;
-    line-height: $baseline-7;
+    line-height: $baseline-6;
   }
 
   h2 {
     margin-top: 0;
     margin-bottom: $baseline-4;
     color: $colour-yellow;
-    font-weight: 500;
-    font-size: $font-size-xxlg;
+    font-weight: 300;
+    font-size: $font-size-lg;
   }
 }
 
@@ -31,41 +31,48 @@
   height: 100%;
 }
 
-.info {
+.topBorders {
+  height: 140px;
+}
+
+.bottomBorders {
+  position: absolute;
+  top: auto;
+  bottom: $baseline * 4;
   width: 100%;
-  max-width: 82ch;
+  height: 100px;
+}
+
+.info {
+  position: relative;
+  width: 100%;
+  max-width: 86ch;
   margin-left: $baseline-5;
 
   ul {
     padding: 0;
     list-style: none;
   }
+
+  li {
+    line-height: $baseline-3 + $baseline-half;
+  }
 }
 
 .content {
   position: relative;
-  height: calc(100% - #{$baseline * 14});
+  width: calc(100% - #{$baseline * 8});
+  height: calc(100% - #{$baseline * 20});
   margin-top: -$baseline * 8;
-  padding-right: $baseline * 10;
-  padding-left: $baseline * 6;
+  padding-right: $baseline * 3;
+  padding-left: $baseline * 8;
   overflow: auto;
-
-  // &:after {
-  //   content: '';
-  //   position: fixed;
-  //   // left: 0;
-  //   bottom: 0;
-  //   display: block;
-  //   width: calc(60% - #{$baseline * 8});
-  //   height: $baseline-3;
-  //   border-left: 5px solid $colour-teal;
-  //   border-bottom: 5px solid $colour-teal;
-  // }
 }
 
 .description {
   margin-bottom: $baseline-6;
   font-size: $font-size-xlg;
+  line-height: $baseline-4;
 }
 
 .table {
@@ -76,7 +83,7 @@
   p {
     margin-top: 0;
     margin-bottom: $baseline-2;
-    line-height: $baseline-3;
+    line-height: $baseline-3 + $baseline-half;
   }
 
   .row {

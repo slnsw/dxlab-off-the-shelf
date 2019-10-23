@@ -1,6 +1,6 @@
 export const appConfig = {
   isIntervalDisabled: false,
-  idleTimeout: 5000,
+  idleTimeout: 600000, // ms
   logoTimeout: 25000, // ms
   numberOfBooksToDisplay: 200,
   numberOfSpines: 96,
