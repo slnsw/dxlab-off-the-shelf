@@ -3,12 +3,13 @@ import Router from 'next/router';
 
 import BookCardModal from '../components/BookCardModal';
 import BookShelves from '../components/BookShelves';
+import OffTheShelfLogoText from '../components/OffTheShelfLogoText';
 
 import { withApollo } from '../lib/apollo';
 import { createIdleTimer } from '../lib/idle-timer';
 import { appConfig } from '../configs';
 
-// import css from './index.scss';
+import css from './index.scss';
 
 const Home = ({ query }) => {
   // --------------------------------------------------------------------------
@@ -106,7 +107,10 @@ const Home = ({ query }) => {
         }}
       />
 
+      <OffTheShelfLogoText isHidden={true} className={css.logo} />
+
       <BookShelves
+        isHidden={false}
         isIntervalActive={
           isIntervalDisabled === false ? isIntervalActive : false
         }

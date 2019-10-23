@@ -10,23 +10,23 @@ import knuthShuffle from '../../lib/knuthShuffle';
 import css from './BookShelves.scss';
 
 type Props = {
+  isHidden?: boolean;
   isIntervalActive?: boolean;
   className?: string;
   onBookClick?: Function;
-  // onShelfScroll?: Function;
 };
 
 const BookShelves: React.FunctionComponent<Props> = ({
+  isHidden = false,
   isIntervalActive = false,
   className,
   onBookClick,
-  // onShelfScroll,
 }) => {
   const [books, setBooks] = React.useState([]);
   const [currentBooks, setCurrentBooks] = React.useState([0, 0, 0]);
   const [currentShelf, setCurrentShelf] = React.useState(1);
   const [shelves, setShelves] = React.useState([[], [], []]);
-  // pull in the books
+  // Fetch books data
   const { books: booksOnly, loading } = useBooksData();
 
   React.useEffect(() => {
@@ -113,6 +113,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             index={0}
             id="bookShelf-0"
             className={css.bookShelf}
+            isHidden={isHidden}
             onClick={onBookClick}
             // onScroll={onShelfScroll}
           ></BookShelf>
@@ -122,6 +123,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             index={1}
             id="bookShelf-1"
             className={css.bookShelf}
+            isHidden={isHidden}
             onClick={onBookClick}
             // onScroll={onShelfScroll}
           ></BookShelf>
@@ -131,6 +133,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             index={2}
             id="bookShelf-2"
             className={css.bookShelf}
+            isHidden={isHidden}
             onClick={onBookClick}
             // onScroll={onShelfScroll}
           ></BookShelf>
