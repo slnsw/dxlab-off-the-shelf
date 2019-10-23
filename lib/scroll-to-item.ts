@@ -49,7 +49,7 @@ export const createScrollToItem = (
         );
 
         if (currentTime >= duration) {
-          clearTimeout(interval);
+          clearInterval(interval);
 
           if (typeof callback === 'function') {
             callback();
@@ -58,7 +58,7 @@ export const createScrollToItem = (
       }, increment);
     },
     stop: () => {
-      clearTimeout(interval);
+      clearInterval(interval);
 
       if (typeof callback === 'function') {
         callback();

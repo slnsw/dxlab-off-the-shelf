@@ -38,7 +38,7 @@ export const createIdleTimer = (
         }
 
         timeout = setTimeout(onUserIdle, duration);
-
+        window.addEventListener('wheel', reset);
         window.addEventListener('mousemove', reset);
         window.addEventListener('touchmove', reset);
         window.addEventListener('keydown', reset);
@@ -50,7 +50,7 @@ export const createIdleTimer = (
         if (hasLogs) {
           console.log('idleTimer.stop()', timeout);
         }
-
+        window.removeEventListener('wheel', reset);
         window.removeEventListener('mousemove', reset);
         window.removeEventListener('touchmove', reset);
         window.removeEventListener('keydown', reset);

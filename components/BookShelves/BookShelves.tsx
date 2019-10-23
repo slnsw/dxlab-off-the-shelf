@@ -97,7 +97,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
         currentShelf === 2 ? newCurrentBook : currentBooks[2],
       ]);
     },
-    10000,
+    15000,
     isIntervalActive,
   );
 
