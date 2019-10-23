@@ -125,6 +125,7 @@ const OffTheShelfLogoText: React.FunctionComponent<Props> = ({
           transform="translate(-8.3 -8.78)"
         />
       </motion.svg>
+      <p>LOGO</p>
     </div>
   );
 };

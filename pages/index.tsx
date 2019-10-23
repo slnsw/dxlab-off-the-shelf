@@ -19,6 +19,8 @@ const Home = ({ query }) => {
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
+  const [isLogoHidden, setIsLogoHidden] = React.useState(true);
+  const [areShelvesHidden, setAreShelvesHidden] = React.useState(false);
   // Prevent interval from being triggered
   const [
     isIntervalDisabled,
@@ -48,14 +50,33 @@ const Home = ({ query }) => {
 
     idleTimer.start();
 
+    // const logoTimer = createIdleTimer(
+    //   () => {
+    //     setIsLogoHidden(false);
+    //     setAreShelvesHidden(true);
+    //   },
+    //   appConfig.logoTimeout,
+    //   {
+    //     hasLogs: false,
+    //     onReset: () => {
+    //       setIsLogoHidden(true);
+    //       setAreShelvesHidden(false);
+    //     },
+    //   },
+    // );
+
+    // setTimeout(() => {
+    //   setIsLogoHidden(true);
+    //   setAreShelvesHidden(false);
+    // }, 5000);
+
+    // logoTimer.start();
+
     return () => {
       idleTimer.stop();
+      // logoTimer.stop();
     };
   }, []);
-
-  /*
-   * Set idle timer for delaying scroll
-   */
 
   /*
    * Ensure intervals don't run while page is off screen
@@ -117,10 +138,10 @@ const Home = ({ query }) => {
         }}
       />
 
-      <OffTheShelfLogoText isHidden={true} className={css.logo} />
+      <OffTheShelfLogoText isHidden={isLogoHidden} className={css.logo} />
 
       <BookShelves
-        isHidden={false}
+        isHidden={areShelvesHidden}
         isIntervalActive={
           isIntervalDisabled === false ? isIntervalActive : false
         }
