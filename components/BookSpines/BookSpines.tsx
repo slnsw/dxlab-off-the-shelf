@@ -35,6 +35,7 @@ const BookSpines: React.FunctionComponent<Props> = ({
         return (
           <BookSpine
             key={`${spine}-${i}`}
+            isEdge={i === 0 || i === spines.length - 1}
             id={spine}
             index={index}
             isScrolling={isScrolling}
