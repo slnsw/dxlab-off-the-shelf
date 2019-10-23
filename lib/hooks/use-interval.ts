@@ -24,7 +24,7 @@ function useInterval(callback, delay, isActive = true) {
       }
 
       return () => {
-        // console.log('clear', id);
+        console.log('clear', id);
 
         clearInterval(id);
       };

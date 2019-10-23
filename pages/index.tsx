@@ -86,7 +86,7 @@ const Home = ({ query }) => {
     document.addEventListener('visibilitychange', (e) => {
       const document = e.target as HTMLDocument;
 
-      // console.log(document.hidden, document.visibilityState);
+      console.log(document.hidden, document.visibilityState);
 
       if (isIntervalDisabled === false) {
         if (document.hidden || document.visibilityState === 'hidden') {
