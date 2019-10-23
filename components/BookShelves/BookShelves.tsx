@@ -109,9 +109,9 @@ const BookShelves: React.FunctionComponent<Props> = ({
       console.log(
         'Scroll shelf',
         currentShelfIndex,
-        ' Moving from book ',
+        '- moving from book',
         currentBookIndex,
-        ' to ',
+        'to',
         newCurrentBook,
       );
 
