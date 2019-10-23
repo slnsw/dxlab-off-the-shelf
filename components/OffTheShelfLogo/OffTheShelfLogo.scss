@@ -1,0 +1,19 @@
+@import '../../styles/global.scss';
+
+.offTheShelfLogo {
+  position: relative;
+  display: block;
+  width: 500px;
+  height: 310px;
+}
+
+.text {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  width: 68%;
+}
+
+.borders {
+  top: 0;
+}

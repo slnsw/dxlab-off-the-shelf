@@ -7,7 +7,13 @@
 export const createIdleTimer = (
   callback,
   duration = 15000,
-  { hasLogs, onReset } = { hasLogs: false, onReset: null },
+  {
+    hasLogs,
+    onReset,
+  }: {
+    hasLogs?: Boolean;
+    onReset?: Function;
+  } = { hasLogs: false, onReset: null },
 ) => {
   let timeout;
 
