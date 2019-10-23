@@ -3,19 +3,29 @@ import React from 'react';
 import OffTheShelfLogo from '../components/OffTheShelfLogo';
 
 const LogoPage = () => {
-  const [isHidden, setIsHidden] = React.useState(false);
+  const [isActive, setIsActive] = React.useState(true);
 
   return (
     <div
-      onClick={() => {
-        setIsHidden(!isHidden);
-      }}
       style={{
         padding: '10rem',
         height: '100vh',
       }}
     >
-      <OffTheShelfLogo isHidden={isHidden} />
+      <OffTheShelfLogo isActive={isActive} />
+
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <button
+        onClick={() => {
+          setIsActive(!isActive);
+        }}
+      >
+        Show/Hide
+      </button>
     </div>
   );
 };

@@ -11,14 +11,14 @@ import { appConfig } from '../../configs';
 import css from './BookShelves.scss';
 
 type Props = {
-  isHidden?: boolean;
+  isActive?: boolean;
   isIntervalActive?: boolean;
   className?: string;
   onBookClick?: Function;
 };
 
 const BookShelves: React.FunctionComponent<Props> = ({
-  isHidden = false,
+  isActive = false,
   isIntervalActive = false,
   className,
   onBookClick,
@@ -46,7 +46,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
     // shuffle them up
     setBooks(knuthShuffle(unshuffledBooks));
     /* eslint-disable */
-  }, [isHidden]);
+  }, [isActive]);
   /* eslint-enable */
 
   React.useEffect(() => {
@@ -114,7 +114,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             index={0}
             id="bookShelf-0"
             className={css.bookShelf}
-            isHidden={isHidden}
+            isActive={isActive}
             onClick={onBookClick}
             // onScroll={onShelfScroll}
           ></BookShelf>
@@ -124,7 +124,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             index={1}
             id="bookShelf-1"
             className={css.bookShelf}
-            isHidden={isHidden}
+            isActive={isActive}
             onClick={onBookClick}
             // onScroll={onShelfScroll}
           ></BookShelf>
@@ -134,7 +134,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             index={2}
             id="bookShelf-2"
             className={css.bookShelf}
-            isHidden={isHidden}
+            isActive={isActive}
             onClick={onBookClick}
             // onScroll={onShelfScroll}
           ></BookShelf>

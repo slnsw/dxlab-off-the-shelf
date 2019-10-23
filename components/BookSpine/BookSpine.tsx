@@ -14,7 +14,7 @@ type Props = {
   index: number;
   isEdge: boolean;
   isScrolling?: boolean;
-  isHidden?: boolean;
+  isActive?: boolean;
   scrollDirection?: 'left' | 'right';
   scrollDelta?: number;
 };
@@ -25,7 +25,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
   index,
   isEdge,
   isScrolling = false,
-  isHidden = false,
+  isActive = false,
   scrollDirection = null,
   scrollDelta = 0,
 }) => {
@@ -50,7 +50,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
     rotate = -5.3767;
   }
 
-  let nonEdgeHeight = [
+  const nonEdgeHeight = [
     h === 0 ? css.height0 : '',
     h === 1 ? css.height1 : '',
     h === 2 ? css.height2 : '',
@@ -63,7 +63,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
       id={`spine-${id}`}
       className={[css.bookSpine, className || ''].join(' ')}
       animate={{
-        y: isHidden ? '100%' : 0,
+        y: isActive ? 0 : '100%',
         rotate,
       }}
       transition={{

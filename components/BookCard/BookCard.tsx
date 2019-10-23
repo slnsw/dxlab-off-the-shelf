@@ -14,7 +14,7 @@ type Props = {
   imageWidth: number;
   imageHeight: number;
   isScrolling?: boolean;
-  isHidden?: boolean;
+  isActive?: boolean;
   scrollDirection?: 'left' | 'right';
   scrollDelta?: number;
   className?: string;
@@ -29,7 +29,7 @@ const BookCard: React.FunctionComponent<Props> = ({
   imageWidth = 0,
   imageHeight = 0,
   isScrolling = false,
-  isHidden = false,
+  isActive = false,
   scrollDirection = null,
   scrollDelta = 0,
   className,
@@ -45,7 +45,7 @@ const BookCard: React.FunctionComponent<Props> = ({
     }
   }, [scrollDirection]);
 
-  if (!imageWidth) {
+  if (!imageWidth || isActive === false) {
     return null;
   }
 
@@ -70,8 +70,8 @@ const BookCard: React.FunctionComponent<Props> = ({
       className={[css.bookCard, className || ''].join(' ')}
       animate={{
         rotate,
-        opacity: isHidden ? 0 : 1,
-        // y: isHidden ? 10 : 0,
+        // opacity: isActive ? 1 : 0,
+        // y: isActive ? 10 : 0,
         // y: isScrolling ? -0.5 : 0,
       }}
       transition={{

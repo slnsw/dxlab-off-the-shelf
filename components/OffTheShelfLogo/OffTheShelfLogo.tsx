@@ -6,12 +6,12 @@ import OffTheShelfLogoBorders from '../OffTheShelfLogoBorders';
 import css from './OffTheShelfLogo.scss';
 
 type Props = {
-  isHidden?: boolean;
+  isActive?: boolean;
   className?: string;
 };
 
 const OffTheShelfLogo: React.FunctionComponent<Props> = ({
-  isHidden = false,
+  isActive = true,
   className,
 }) => {
   return (
@@ -27,13 +27,13 @@ const OffTheShelfLogo: React.FunctionComponent<Props> = ({
       /> */}
 
       <OffTheShelfLogoText
-        isHidden={isHidden}
+        isActive={isActive}
         delay={1.5}
         className={css.text}
       />
       <OffTheShelfLogoBorders
         strokeWidth={16}
-        isHidden={isHidden}
+        isActive={isActive}
         className={css.borders}
       />
     </div>

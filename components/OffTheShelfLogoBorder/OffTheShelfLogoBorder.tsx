@@ -12,7 +12,7 @@ type Props = {
   strokeWidth?: number;
   orientation?: 'bottomLeft' | 'topRight';
   colour?: 'white' | 'yellow' | 'teal';
-  isHidden?: boolean;
+  isActive?: boolean;
   className?: string;
 };
 
@@ -21,7 +21,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
   strokeWidth = 16,
   orientation = 'bottomLeft',
   colour = 'white',
-  isHidden = false,
+  isActive = false,
   className,
 }) => {
   const [ref, dimensions] = useDimensions();
@@ -61,7 +61,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
         },
       }}
       initial="start"
-      animate={isHidden ? 'start' : 'end'}
+      animate={isActive ? 'end' : 'start'}
       transition={{
         type: 'spring',
         delay: 1,
@@ -85,9 +85,9 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
               },
             }}
             initial="hidden"
-            animate={isHidden ? 'hidden' : 'visible'}
+            animate={isActive ? 'visible' : 'hidden'}
             transition={{ delay: index * 0.2, duration: 1 }}
-          ></motion.path>
+          />
         )}
       </motion.svg>
     </motion.div>

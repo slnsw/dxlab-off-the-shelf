@@ -3,14 +3,14 @@ import Router from 'next/router';
 
 import BookCardModal from '../components/BookCardModal';
 import BookShelves from '../components/BookShelves';
-import OffTheShelfLogoText from '../components/OffTheShelfLogoText';
+// import OffTheShelfLogo from '../components/OffTheShelfLogo';
 
 import { withApollo } from '../lib/apollo';
 import { createIdleTimer } from '../lib/idle-timer';
 import { appConfig } from '../configs';
-import { useInterval } from '../lib/hooks';
+// import { useInterval } from '../lib/hooks';
 
-import css from './index.scss';
+// import css from './index.scss';
 
 const Home = ({ query }) => {
   // --------------------------------------------------------------------------
@@ -20,56 +20,60 @@ const Home = ({ query }) => {
   const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
-  const [isLogoHidden, setIsLogoHidden] = React.useState(true);
-  const [areShelvesHidden, setAreShelvesHidden] = React.useState(false);
-  const [isLogoIntervalActive, setIsLogoIntervalActive] = React.useState(true);
-  // Prevent interval from being triggered
+  // const [
+  //   isLogoActive,
+  //   // setIsLogoActive
+  // ] = React.useState(true);
   const [
-    isIntervalDisabled,
-    // setIsIntervalDisabled
-  ] = React.useState(appConfig.isIntervalDisabled);
+    areShelvesActive,
+    // setAreShelvesActive
+  ] = React.useState(true);
+  // const [
+  //   // isLogoIntervalActive,
+  //   // setIsLogoIntervalActive,
+  // ] = React.useState(true);
+  const [isIntervalDisabled] = React.useState(appConfig.isIntervalDisabled);
   const [isIntervalActive, setIsIntervalActive] = React.useState(true);
 
   const bookId = query && query.id ? query.id : null;
 
   /*
-   * Set idle timer for closing Modal
+   * Set idle timer to disable intervals while user is interacting.
    */
   React.useEffect(() => {
     const idleTimer = createIdleTimer(
       () => {
         Router.push('/');
         setIsIntervalActive(true);
-        setIsLogoIntervalActive(true);
+        // setIsLogoIntervalActive(true);
       },
       appConfig.idleTimeout,
       {
         hasLogs: false,
         onReset: () => {
           setIsIntervalActive(false);
-          setIsLogoIntervalActive(false);
+          // setIsLogoIntervalActive(false);
         },
       },
     );
 
     idleTimer.start();
 
-    setIsLogoHidden(true);
-    setAreShelvesHidden(false);
-
     return () => {
       idleTimer.stop();
-      // logoTimer.stop();
     };
   }, []);
 
-  useInterval(
-    () => {
-      console.log('logoTimer');
-    },
-    appConfig.logoTimeout,
-    isLogoIntervalActive,
-  );
+  // useInterval(
+  //   () => {
+  //     console.log('logoTimer');
+
+  //     setIsLogoActive(true);
+  //     setAreShelvesActive(false);
+  //   },
+  //   appConfig.logoTimeout,
+  //   isLogoIntervalActive,
+  // );
 
   /*
    * Ensure intervals don't run while page is off screen
@@ -79,7 +83,7 @@ const Home = ({ query }) => {
     document.addEventListener('visibilitychange', (e) => {
       const document = e.target as HTMLDocument;
 
-      console.log(document.hidden, document.visibilityState);
+      // console.log(document.hidden, document.visibilityState);
 
       if (isIntervalDisabled === false) {
         if (document.hidden || document.visibilityState === 'hidden') {
@@ -131,15 +135,15 @@ const Home = ({ query }) => {
         }}
       />
 
-      <OffTheShelfLogoText isHidden={isLogoHidden} className={css.logo} />
+      {/* <OffTheShelfLogo isActive={isLogoActive} className={css.logo} /> */}
 
       <BookShelves
-        isHidden={areShelvesHidden}
+        isActive={areShelvesActive}
         isIntervalActive={
           isIntervalDisabled === false ? isIntervalActive : false
         }
         onBookClick={handleBookCardClick}
-      ></BookShelves>
+      />
     </>
   );
 };

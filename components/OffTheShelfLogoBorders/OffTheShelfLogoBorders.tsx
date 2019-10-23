@@ -7,14 +7,14 @@ import css from './OffTheShelfLogoBorders.scss';
 type Props = {
   strokeWidth?: number;
   orientation?: 'bottomLeft' | 'topRight';
-  isHidden?: boolean;
+  isActive?: boolean;
   className?: string;
 };
 
 const OffTheShelfLogoBorders: React.FunctionComponent<Props> = ({
   strokeWidth = 10,
   orientation = 'bottomLeft',
-  isHidden = false,
+  isActive = false,
   className,
 }) => {
   const indexes = {
@@ -35,21 +35,21 @@ const OffTheShelfLogoBorders: React.FunctionComponent<Props> = ({
         strokeWidth={strokeWidth}
         orientation={orientation}
         colour="white"
-        isHidden={isHidden}
+        isActive={isActive}
       />
       <OffTheShelfLogoBorder
         index={indexes[orientation][1]}
         strokeWidth={strokeWidth}
         orientation={orientation}
         colour="yellow"
-        isHidden={isHidden}
+        isActive={isActive}
       />
       <OffTheShelfLogoBorder
         index={indexes[orientation][2]}
         strokeWidth={strokeWidth}
         orientation={orientation}
         colour="teal"
-        isHidden={isHidden}
+        isActive={isActive}
       />
     </div>
   );
