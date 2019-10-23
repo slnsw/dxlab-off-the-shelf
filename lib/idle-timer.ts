@@ -7,7 +7,7 @@
 export const createIdleTimer = (
   callback,
   duration = 15000,
-  { hasLogs } = { hasLogs: false },
+  { hasLogs, onReset } = { hasLogs: false, onReset: null },
 ) => {
   let timeout;
 
@@ -24,6 +24,10 @@ export const createIdleTimer = (
   const reset = () => {
     clearTimeout(timeout);
     timeout = setTimeout(onUserIdle, duration);
+
+    if (typeof onReset === 'function') {
+      onReset();
+    }
 
     if (hasLogs) {
       console.log(`idleTimer.reset()`, timeout);

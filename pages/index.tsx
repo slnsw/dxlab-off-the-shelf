@@ -29,15 +29,21 @@ const Home = ({ query }) => {
   const bookId = query && query.id ? query.id : null;
 
   /*
-   * Set idle timer
+   * Set idle timer for closing Modal
    */
   React.useEffect(() => {
     const idleTimer = createIdleTimer(
       () => {
         Router.push('/');
+        setIsIntervalActive(true);
       },
       appConfig.idleTimeout,
-      { hasLogs: false },
+      {
+        hasLogs: false,
+        onReset: () => {
+          setIsIntervalActive(false);
+        },
+      },
     );
 
     idleTimer.start();
@@ -46,6 +52,10 @@ const Home = ({ query }) => {
       idleTimer.stop();
     };
   }, []);
+
+  /*
+   * Set idle timer for delaying scroll
+   */
 
   /*
    * Ensure intervals don't run while page is off screen

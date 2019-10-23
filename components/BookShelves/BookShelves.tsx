@@ -6,6 +6,7 @@ import BookShelf from '../BookShelf';
 import useInterval from '../../lib/hooks/use-interval';
 import useBooksData from '../../lib/hooks/use-books-data';
 import knuthShuffle from '../../lib/knuthShuffle';
+import { appConfig } from '../../configs';
 
 import css from './BookShelves.scss';
 
@@ -30,14 +31,14 @@ const BookShelves: React.FunctionComponent<Props> = ({
   const { books: booksOnly, loading } = useBooksData();
 
   React.useEffect(() => {
-    const subset = 200;
+    const subset = appConfig.numberOfBooksToDisplay;
 
     // randomly add spines
     const unshuffledBooks = booksOnly.slice(0, subset).map((book) => {
       const hasSpines = Math.random() < 0.5;
       const numSpines = hasSpines ? Math.floor(Math.random() * 4) + 1 : 0;
       const spines = [...Array(numSpines)].map(() => {
-        return Math.floor(Math.random() * 96) + 1;
+        return Math.floor(Math.random() * appConfig.numberOfSpines) + 1;
       });
       return { ...book, spines };
     });
@@ -45,7 +46,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
     // shuffle them up
     setBooks(knuthShuffle(unshuffledBooks));
     /* eslint-disable */
-  }, []);
+  }, [isHidden]);
   /* eslint-enable */
 
   React.useEffect(() => {
@@ -97,7 +98,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
         currentShelf === 2 ? newCurrentBook : currentBooks[2],
       ]);
     },
-    15000,
+    appConfig.timeBetweenScrolls,
     isIntervalActive,
   );
 
