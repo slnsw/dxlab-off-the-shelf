@@ -4,5 +4,5 @@ export const appConfig = {
   numberOfBooksToDisplay: 200,
   numberOfSpines: 96,
   timeBetweenScrolls: 15000, // ms
-  logoTimeout: 25000, //ms
+  logoTimeout: 25000, // ms
 };

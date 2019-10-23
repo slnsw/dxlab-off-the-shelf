@@ -8,6 +8,7 @@ import OffTheShelfLogoText from '../components/OffTheShelfLogoText';
 import { withApollo } from '../lib/apollo';
 import { createIdleTimer } from '../lib/idle-timer';
 import { appConfig } from '../configs';
+import { useInterval } from '../lib/hooks';
 
 import css from './index.scss';
 
@@ -21,6 +22,7 @@ const Home = ({ query }) => {
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
   const [isLogoHidden, setIsLogoHidden] = React.useState(true);
   const [areShelvesHidden, setAreShelvesHidden] = React.useState(false);
+  const [isLogoIntervalActive, setIsLogoIntervalActive] = React.useState(true);
   // Prevent interval from being triggered
   const [
     isIntervalDisabled,
@@ -38,45 +40,36 @@ const Home = ({ query }) => {
       () => {
         Router.push('/');
         setIsIntervalActive(true);
+        setIsLogoIntervalActive(true);
       },
       appConfig.idleTimeout,
       {
         hasLogs: false,
         onReset: () => {
           setIsIntervalActive(false);
+          setIsLogoIntervalActive(false);
         },
       },
     );
 
     idleTimer.start();
 
-    // const logoTimer = createIdleTimer(
-    //   () => {
-    //     setIsLogoHidden(false);
-    //     setAreShelvesHidden(true);
-    //   },
-    //   appConfig.logoTimeout,
-    //   {
-    //     hasLogs: false,
-    //     onReset: () => {
-    //       setIsLogoHidden(true);
-    //       setAreShelvesHidden(false);
-    //     },
-    //   },
-    // );
-
-    // setTimeout(() => {
-    //   setIsLogoHidden(true);
-    //   setAreShelvesHidden(false);
-    // }, 5000);
-
-    // logoTimer.start();
+    setIsLogoHidden(true);
+    setAreShelvesHidden(false);
 
     return () => {
       idleTimer.stop();
       // logoTimer.stop();
     };
   }, []);
+
+  useInterval(
+    () => {
+      console.log('logoTimer');
+    },
+    appConfig.logoTimeout,
+    isLogoIntervalActive,
+  );
 
   /*
    * Ensure intervals don't run while page is off screen
