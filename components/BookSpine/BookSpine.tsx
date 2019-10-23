@@ -4,6 +4,7 @@ import {
   motion,
   // useAnimation
 } from 'framer-motion';
+import { appConfig } from '../../configs';
 
 import css from './BookSpine.scss';
 
@@ -11,6 +12,7 @@ type Props = {
   className?: string;
   id: number;
   index: number;
+  isEdge: boolean;
   isScrolling?: boolean;
   isHidden?: boolean;
   scrollDirection?: 'left' | 'right';
@@ -21,6 +23,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
   className,
   id,
   index,
+  isEdge,
   isScrolling = false,
   isHidden = false,
   scrollDirection = null,
@@ -35,17 +38,25 @@ const BookSpine: React.FunctionComponent<Props> = ({
     }
   }, [scrollDirection]);
 
-  if (id < 1 || id > 96) {
+  if (id < 1 || id > appConfig.numberOfSpines) {
     return null;
   }
 
   let rotate = 0;
 
   if (originX === 1) {
-    rotate = 5.3;
+    rotate = 5.3767;
   } else if (originX === 0) {
-    rotate = -5.3;
+    rotate = -5.3767;
   }
+
+  let nonEdgeHeight = [
+    h === 0 ? css.height0 : '',
+    h === 1 ? css.height1 : '',
+    h === 2 ? css.height2 : '',
+    h === 3 ? css.height3 : '',
+    h === 4 ? css.height4 : '',
+  ].join(' ');
 
   return (
     <motion.article
@@ -69,15 +80,9 @@ const BookSpine: React.FunctionComponent<Props> = ({
       <img
         // src={`/images/spines/${id}.png`}
         src={`https://dxlab-off-the-shelf.s3-ap-southeast-2.amazonaws.com/spines/${id}.png`}
-        className={[
-          css.image,
-          // css[`height${h}`],
-          h === 0 ? css.height0 : '',
-          h === 1 ? css.height1 : '',
-          h === 2 ? css.height2 : '',
-          h === 3 ? css.height3 : '',
-          h === 4 ? css.height4 : '',
-        ].join(' ')}
+        className={[css.image, isEdge ? css.edgeHeight : nonEdgeHeight].join(
+          ' ',
+        )}
         // lazy="true"
         alt="spine"
       />
