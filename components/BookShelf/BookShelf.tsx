@@ -22,6 +22,7 @@ type Props = {
   className?: string;
   isActive?: boolean;
   onClick?: Function;
+  onRender?: Function;
 };
 
 const BookShelf: React.FunctionComponent<Props> = ({
@@ -32,6 +33,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
   className,
   isActive = false,
   onClick,
+  onRender,
 }) => {
   const [booksInView, setBooksInView] = React.useState([]);
   const [ref, dimensions, node] = useDimensions();
@@ -59,10 +61,16 @@ const BookShelf: React.FunctionComponent<Props> = ({
     }
   }, [scrollToBook, node, books]);
 
+  React.useEffect(() => {
+    if (typeof onRender === 'function') {
+      onRender(booksInView);
+    }
+  }, [booksInView, onRender]);
+
   const handleBookCardRender = (inView, entry, bookId) => {
     // Check if already added to local state array `booksInView`
     const inBooksInView = booksInView.includes(bookId);
-
+    // console.log(booksInView);
     if (inView && inBooksInView === false) {
       // Append if not already in
       setBooksInView([...booksInView, bookId]);

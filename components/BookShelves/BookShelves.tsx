@@ -25,8 +25,10 @@ const BookShelves: React.FunctionComponent<Props> = ({
 }) => {
   const [books, setBooks] = React.useState([]);
   const [currentBooks, setCurrentBooks] = React.useState([0, 0, 0]);
-  const [currentShelf, setCurrentShelf] = React.useState(1);
+  const [currentShelfIndex, setCurrentShelfIndex] = React.useState(1);
   const [shelves, setShelves] = React.useState([[], [], []]);
+  const allBooksInViewRef = React.useRef([[], [], []]);
+  const allBooksInView = allBooksInViewRef.current;
   // Fetch books data
   const { books: booksOnly, loading } = useBooksData();
 
@@ -63,45 +65,58 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
   useInterval(
     () => {
-      console.log('Scroll shelf', currentShelf);
+      let currentBookIndex = currentBooks[currentShelfIndex];
+      const currentShelf = shelves[currentShelfIndex];
+      const currentBooksInView = allBooksInView[currentShelfIndex];
 
-      const newShelf = Math.floor(Math.random() * 3);
-      setCurrentShelf(newShelf);
+      if (!currentBooksInView.includes(currentShelf[currentBookIndex])) {
+        currentBookIndex = currentShelf.findIndex((value) => {
+          return value.id === currentBooksInView[0];
+        });
+      }
 
       const amountToChange =
         Math.floor(
           Math.random() * (appConfig.scrollRangeMax - appConfig.scrollRangeMin),
         ) + appConfig.scrollRangeMin;
       let directionToChange = Math.random() < 0.5 ? -1 : 1;
-      // console.log(currentBooks[currentShelf]);
 
-      if (currentBooks[currentShelf] - amountToChange < 0) {
+      if (currentBookIndex - amountToChange < 0) {
         directionToChange = 1;
       }
 
-      if (
-        currentBooks[currentShelf] + amountToChange >=
-        shelves[currentShelf].length
-      ) {
+      if (currentBookIndex + amountToChange >= currentShelf.length) {
         directionToChange = -1;
       }
 
       let newCurrentBook =
-        currentBooks[currentShelf] + directionToChange * amountToChange;
+        currentBookIndex + directionToChange * amountToChange;
 
       if (newCurrentBook < 0) {
         newCurrentBook = 0;
       }
 
-      if (newCurrentBook >= shelves[currentShelf].length) {
-        newCurrentBook = shelves[currentShelf].length - 1;
+      if (newCurrentBook >= currentShelf.length) {
+        newCurrentBook = currentShelf.length - 1;
       }
 
       setCurrentBooks([
-        currentShelf === 0 ? newCurrentBook : currentBooks[0],
-        currentShelf === 1 ? newCurrentBook : currentBooks[1],
-        currentShelf === 2 ? newCurrentBook : currentBooks[2],
+        currentShelfIndex === 0 ? newCurrentBook : currentBooks[0],
+        currentShelfIndex === 1 ? newCurrentBook : currentBooks[1],
+        currentShelfIndex === 2 ? newCurrentBook : currentBooks[2],
       ]);
+
+      console.log(
+        'Scroll shelf',
+        currentShelfIndex,
+        ' Moving from book ',
+        currentBookIndex,
+        ' to ',
+        newCurrentBook,
+      );
+
+      const newShelf = Math.floor(Math.random() * 3);
+      setCurrentShelfIndex(newShelf);
     },
     appConfig.timeBetweenScrolls,
     isIntervalActive,
@@ -121,6 +136,9 @@ const BookShelves: React.FunctionComponent<Props> = ({
             className={css.bookShelf}
             isActive={isActive}
             onClick={onBookClick}
+            onRender={(booksInView) => {
+              allBooksInView[0] = booksInView;
+            }}
             // onScroll={onShelfScroll}
           ></BookShelf>
           <BookShelf
@@ -131,6 +149,9 @@ const BookShelves: React.FunctionComponent<Props> = ({
             className={css.bookShelf}
             isActive={isActive}
             onClick={onBookClick}
+            onRender={(booksInView) => {
+              allBooksInView[1] = booksInView;
+            }}
             // onScroll={onShelfScroll}
           ></BookShelf>
           <BookShelf
@@ -141,6 +162,9 @@ const BookShelves: React.FunctionComponent<Props> = ({
             className={css.bookShelf}
             isActive={isActive}
             onClick={onBookClick}
+            onRender={(booksInView) => {
+              allBooksInView[2] = booksInView;
+            }}
             // onScroll={onShelfScroll}
           ></BookShelf>
         </>
