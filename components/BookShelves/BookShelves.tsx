@@ -35,8 +35,10 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
     // randomly add spines
     const unshuffledBooks = booksOnly.slice(0, subset).map((book) => {
-      const hasSpines = Math.random() < 0.5;
-      const numSpines = hasSpines ? Math.floor(Math.random() * 4) + 1 : 0;
+      const hasSpines = Math.random() < appConfig.hasSpinesProbability;
+      const numSpines = hasSpines
+        ? Math.floor(Math.random() * appConfig.maxNumberOfSpines) + 1
+        : 0;
       const spines = [...Array(numSpines)].map(() => {
         return Math.floor(Math.random() * appConfig.numberOfSpines) + 1;
       });
@@ -66,7 +68,10 @@ const BookShelves: React.FunctionComponent<Props> = ({
       const newShelf = Math.floor(Math.random() * 3);
       setCurrentShelf(newShelf);
 
-      const amountToChange = Math.floor(Math.random() * 6) + 3;
+      const amountToChange =
+        Math.floor(
+          Math.random() * (appConfig.scrollRangeMax - appConfig.scrollRangeMin),
+        ) + appConfig.scrollRangeMin;
       let directionToChange = Math.random() < 0.5 ? -1 : 1;
       // console.log(currentBooks[currentShelf]);
 

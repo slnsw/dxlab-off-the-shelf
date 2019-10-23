@@ -2,6 +2,7 @@ import React from 'react';
 import Router from 'next/router';
 
 import BookCardModal from '../components/BookCardModal';
+import AboutModal from '../components/AboutModal';
 import BookShelves from '../components/BookShelves';
 import OffTheShelfLogoText from '../components/OffTheShelfLogoText';
 
@@ -18,6 +19,7 @@ const Home = ({ query }) => {
   // --------------------------------------------------------------------------
 
   const [isModalActive, setIsModalActive] = React.useState(false);
+  const [isAboutModalActive, setIsAboutModalActive] = React.useState(true);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
   const [isLogoHidden, setIsLogoHidden] = React.useState(true);
@@ -130,6 +132,13 @@ const Home = ({ query }) => {
           Router.push('/');
         }}
       />
+      <AboutModal
+        isActive={isAboutModalActive}
+        onClose={() => {
+          setIsAboutModalActive(false);
+          Router.push('/');
+        }}
+      ></AboutModal>
 
       <OffTheShelfLogoText isHidden={isLogoHidden} className={css.logo} />
 
