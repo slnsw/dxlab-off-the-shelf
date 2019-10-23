@@ -12,6 +12,7 @@ type Props = {
   strokeWidth?: number;
   orientation?: 'bottomLeft' | 'topRight';
   colour?: 'white' | 'yellow' | 'teal';
+  isHidden?: boolean;
   className?: string;
 };
 
@@ -20,14 +21,13 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
   strokeWidth = 16,
   orientation = 'bottomLeft',
   colour = 'white',
+  isHidden = false,
   className,
 }) => {
   const [ref, dimensions] = useDimensions();
 
   const { width, height } = dimensions;
   const baseline = strokeWidth * 1.5;
-
-  // console.log(width, height);
 
   const paths = {
     bottomLeft: `
@@ -61,11 +61,12 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
         },
       }}
       initial="start"
-      animate="end"
+      animate={isHidden ? 'start' : 'end'}
       transition={{
-        delay: 1.3,
+        type: 'spring',
+        delay: 1,
         transition: 1,
-        damping: 0,
+        damping: 8,
       }}
     >
       <motion.svg width={width - baseline * 2} height={height}>
@@ -84,8 +85,8 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
               },
             }}
             initial="hidden"
-            animate="visible"
-            transition={{ duration: 1 }}
+            animate={isHidden ? 'hidden' : 'visible'}
+            transition={{ delay: index * 0.2, duration: 1 }}
           ></motion.path>
         )}
       </motion.svg>

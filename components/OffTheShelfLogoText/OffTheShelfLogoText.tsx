@@ -6,17 +6,19 @@ import variables from '../../styles/variables.scss';
 
 type Props = {
   isHidden?: boolean;
+  delay?: number;
   className?: string;
 };
 
 const OffTheShelfLogoText: React.FunctionComponent<Props> = ({
   isHidden,
+  delay = 0,
   className,
 }) => {
   const pathVariants = {
     hidden: {
       pathLength: 0,
-      stroke: 'transparent',
+      stroke: variables['colour-white'],
       fill: variables['colour-black'],
     },
     end: {
@@ -26,7 +28,7 @@ const OffTheShelfLogoText: React.FunctionComponent<Props> = ({
     },
   };
 
-  const pathTransition = { duration: 4 };
+  const pathTransition = { delay, duration: 2 };
 
   return (
     <div className={[css.offTheShelfLogoText, className || ''].join(' ')}>
@@ -125,7 +127,6 @@ const OffTheShelfLogoText: React.FunctionComponent<Props> = ({
           transform="translate(-8.3 -8.78)"
         />
       </motion.svg>
-      <p>LOGO</p>
     </div>
   );
 };
