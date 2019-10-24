@@ -70,7 +70,8 @@
     "stylelint-scss": "^3.11.1",
     "stylelint-webpack-plugin": "^1.0.1",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "webpack-filter-warnings-plugin": "^1.2.1"
   },
   "jest": {
     "moduleNameMapper": {

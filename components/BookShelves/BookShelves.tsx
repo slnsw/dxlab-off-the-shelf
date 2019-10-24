@@ -6,7 +6,7 @@ import BookShelf from '../BookShelf';
 import useInterval from '../../lib/hooks/use-interval';
 import useBooksData from '../../lib/hooks/use-books-data';
 import knuthShuffle from '../../lib/knuthShuffle';
-import { appConfig } from '../../configs';
+import * as configs from '../../configs';
 
 import css from './BookShelves.scss';
 
@@ -23,6 +23,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
   className,
   onBookClick,
 }) => {
+  // console.log(configs);
+
   const [books, setBooks] = React.useState([]);
   const [currentBooks, setCurrentBooks] = React.useState([0, 0, 0]);
   const [currentShelfIndex, setCurrentShelfIndex] = React.useState(1);
@@ -33,16 +35,16 @@ const BookShelves: React.FunctionComponent<Props> = ({
   const { books: booksOnly, loading } = useBooksData();
 
   React.useEffect(() => {
-    const subset = appConfig.numberOfBooksToDisplay;
+    const subset = configs.NUMBER_OF_BOOKS_TO_DISPLAY;
 
     // randomly add spines
     const unshuffledBooks = booksOnly.slice(0, subset).map((book) => {
-      const hasSpines = Math.random() < appConfig.hasSpinesProbability;
+      const hasSpines = Math.random() < configs.HAS_SPINES_PROBABILITY;
       const numSpines = hasSpines
-        ? Math.floor(Math.random() * appConfig.maxNumberOfSpines) + 1
+        ? Math.floor(Math.random() * configs.MAX_NUMBER_OF_SPINES) + 1
         : 0;
       const spines = [...Array(numSpines)].map(() => {
-        return Math.floor(Math.random() * appConfig.numberOfSpines) + 1;
+        return Math.floor(Math.random() * configs.NUMBER_OF_SPINES) + 1;
       });
       return { ...book, spines };
     });
@@ -77,8 +79,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
       const amountToChange =
         Math.floor(
-          Math.random() * (appConfig.scrollRangeMax - appConfig.scrollRangeMin),
-        ) + appConfig.scrollRangeMin;
+          Math.random() * (configs.SCROLL_RANGE_MAX - configs.SCROLL_RANGE_MIN),
+        ) + configs.SCROLL_RANGE_MIN;
       let directionToChange = Math.random() < 0.5 ? -1 : 1;
 
       if (currentBookIndex - amountToChange < 0) {
@@ -118,7 +120,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
       const newShelf = Math.floor(Math.random() * 3);
       setCurrentShelfIndex(newShelf);
     },
-    appConfig.timeBetweenScrolls,
+    configs.TIME_BETWEEN_SCROLLS,
     isIntervalActive,
   );
 
@@ -139,7 +141,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
             onRender={(booksInView) => {
               allBooksInView[0] = booksInView;
             }}
-            // onScroll={onShelfScroll}
           ></BookShelf>
           <BookShelf
             books={shelves[1]}
@@ -152,7 +153,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
             onRender={(booksInView) => {
               allBooksInView[1] = booksInView;
             }}
-            // onScroll={onShelfScroll}
           ></BookShelf>
           <BookShelf
             books={shelves[2]}
@@ -165,7 +165,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
             onRender={(booksInView) => {
               allBooksInView[2] = booksInView;
             }}
-            // onScroll={onShelfScroll}
           ></BookShelf>
         </>
       )}

@@ -4,7 +4,7 @@ import {
   motion,
   // useAnimation
 } from 'framer-motion';
-import { appConfig } from '../../configs';
+import * as configs from '../../configs';
 
 import css from './BookSpine.scss';
 
@@ -40,13 +40,13 @@ const BookSpine: React.FunctionComponent<Props> = ({
     }
   }, [scrollDirection]);
 
-  if (id < 1 || id > appConfig.numberOfSpines) {
+  if (id < 1 || id > configs.NUMBER_OF_SPINES) {
     return null;
   }
 
   // Work out rotate angle based on % of height (opposite) and gutter width
   // (adjacent) using trigonetry
-  const theta = (Math.atan2(height * 0.8, appConfig.gutter) * 180) / Math.PI;
+  const theta = (Math.atan2(height * 0.8, configs.GUTTER) * 180) / Math.PI;
   const angle = 90 - theta;
 
   let rotate = 0;

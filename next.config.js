@@ -5,7 +5,7 @@ const webpack = require('webpack');
 /* eslint-enable import/no-extraneous-dependencies */
 const withSass = require('@zeit/next-sass');
 const withCSS = require('@zeit/next-css');
-// const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
 const globalConfig = withCSS(
   withSass({
@@ -21,11 +21,11 @@ const globalConfig = withCSS(
       // order. This shouldn't matter for us because we are using CSS Modules.
       // Please remove if the issue gets resolved in future.
       // https://github.com/zeit/next-plugins/pull/315#issuecomment-457715973
-      // customConfig.plugins.push(
-      //   new FilterWarningsPlugin({
-      //     exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
-      //   })
-      // );
+      customConfig.plugins.push(
+        new FilterWarningsPlugin({
+          exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
+        }),
+      );
 
       // Next 9 introduced some pretty strict type checking
       // that breaks dev builds. It is now more relaxed,

@@ -8,7 +8,7 @@ import BookShelves from '../components/BookShelves';
 
 import { withApollo } from '../lib/apollo';
 import { createIdleTimer } from '../lib/idle-timer';
-import { appConfig } from '../configs';
+import * as configs from '../configs';
 // import { useInterval } from '../lib/hooks';
 
 // import css from './index.scss';
@@ -34,7 +34,7 @@ const Home = ({ query }) => {
   //   // isLogoIntervalActive,
   //   // setIsLogoIntervalActive,
   // ] = React.useState(true);
-  const [isIntervalDisabled] = React.useState(appConfig.isIntervalDisabled);
+  const [isIntervalDisabled] = React.useState(configs.IS_INTERVAL_DISABLED);
   const [isIntervalActive, setIsIntervalActive] = React.useState(true);
 
   const bookId = query && query.id ? query.id : null;
@@ -49,7 +49,7 @@ const Home = ({ query }) => {
         setIsIntervalActive(true);
         // setIsLogoIntervalActive(true);
       },
-      appConfig.idleTimeout,
+      configs.IDLE_TIMEOUT,
       {
         hasLogs: false,
         onReset: () => {
