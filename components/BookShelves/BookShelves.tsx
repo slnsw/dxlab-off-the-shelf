@@ -31,26 +31,35 @@ const BookShelves: React.FunctionComponent<Props> = ({
   const [shelves, setShelves] = React.useState([[], [], []]);
   const allBooksInViewRef = React.useRef([[], [], []]);
   const allBooksInView = allBooksInViewRef.current;
+
   // Fetch books data
   const { books: booksOnly, loading } = useBooksData();
 
   React.useEffect(() => {
     const subset = configs.NUMBER_OF_BOOKS_TO_DISPLAY;
+    // const side = 'left'; // replace these later with URL parameter XXXXXXX TO DO
+    const side = 'right';
+    const halfWay = Math.floor(booksOnly.length / 2);
 
     // randomly add spines
-    const unshuffledBooks = booksOnly.slice(0, subset).map((book) => {
-      const hasSpines = Math.random() < configs.HAS_SPINES_PROBABILITY;
-      const numSpines = hasSpines
-        ? Math.floor(Math.random() * configs.MAX_NUMBER_OF_SPINES) + 1
-        : 0;
-      const spines = [...Array(numSpines)].map(() => {
-        return Math.floor(Math.random() * configs.NUMBER_OF_SPINES) + 1;
+    const unshuffledBooks = booksOnly
+      .slice(
+        side === 'left' ? 0 : halfWay + 1,
+        side === 'left' ? halfWay : booksOnly.length,
+      )
+      .map((book) => {
+        const hasSpines = Math.random() < configs.HAS_SPINES_PROBABILITY;
+        const numSpines = hasSpines
+          ? Math.floor(Math.random() * configs.MAX_NUMBER_OF_SPINES) + 1
+          : 0;
+        const spines = [...Array(numSpines)].map(() => {
+          return Math.floor(Math.random() * configs.NUMBER_OF_SPINES) + 1;
+        });
+        return { ...book, spines };
       });
-      return { ...book, spines };
-    });
 
     // shuffle them up
-    setBooks(knuthShuffle(unshuffledBooks));
+    setBooks(knuthShuffle(unshuffledBooks.slice(0, subset)));
     /* eslint-disable */
   }, [isActive]);
   /* eslint-enable */
@@ -81,6 +90,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
         Math.floor(
           Math.random() * (configs.SCROLL_RANGE_MAX - configs.SCROLL_RANGE_MIN),
         ) + configs.SCROLL_RANGE_MIN;
+
       let directionToChange = Math.random() < 0.5 ? -1 : 1;
 
       if (currentBookIndex - amountToChange < 0) {
@@ -98,8 +108,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
         newCurrentBook = 0;
       }
 
-      if (newCurrentBook >= currentShelf.length) {
-        newCurrentBook = currentShelf.length - 1;
+      if (newCurrentBook >= currentShelf.length - 5) {
+        newCurrentBook = currentShelf.length - 5;
       }
 
       setCurrentBooks([

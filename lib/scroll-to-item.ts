@@ -64,5 +64,8 @@ export const createScrollToItem = (
         callback();
       }
     },
+    // status: () => {
+    //   return interval;
+    // },
   };
 };

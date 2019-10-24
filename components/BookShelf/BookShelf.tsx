@@ -57,8 +57,10 @@ const BookShelf: React.FunctionComponent<Props> = ({
       const bookNode = document.getElementById(`bookCard-${bookId}`);
 
       if (bookNode) {
+        // if (!scrollToItem.current) {
         scrollToItem.current = createScrollToItem(node, bookNode, null, 8000);
         scrollToItem.current.start();
+        // }
       }
     }
   }, [scrollToBook, node, books]);
