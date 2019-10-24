@@ -58,7 +58,7 @@ const BookCard: React.FunctionComponent<Props> = ({
   if (inView && isScrolling === false) {
     rotate = 0;
   } else if (isScrolling) {
-    const rotateValue = Math.abs(scrollDelta) > 20 ? 1 : 0.5;
+    const rotateValue = Math.abs(scrollDelta) > 20 ? 1.5 : 0.5;
     rotate = scrollDirection === 'right' ? rotateValue : rotateValue * -1;
   } else {
     rotate = 0;

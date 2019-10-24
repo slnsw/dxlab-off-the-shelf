@@ -52,9 +52,9 @@ const BookSpine: React.FunctionComponent<Props> = ({
   let rotate = 0;
 
   if (originX === 1) {
-    rotate = angle;
+    rotate = angle + (isScrolling ? 0.7 : 0);
   } else if (originX === 0) {
-    rotate = -1 * angle;
+    rotate = -1 * (angle + (isScrolling ? 0.7 : 0));
   }
 
   const nonEdgeHeight = [
