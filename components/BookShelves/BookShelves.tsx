@@ -41,7 +41,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
     const side = 'right';
     const halfWay = Math.floor(booksOnly.length / 2);
 
-    // randomly add spines
+    // pick a half depedning on kiosk and randomly add spines
     const unshuffledBooks = booksOnly
       .slice(
         side === 'left' ? 0 : halfWay + 1,
@@ -58,8 +58,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
         return { ...book, spines };
       });
 
-    // shuffle them up
-    setBooks(knuthShuffle(unshuffledBooks.slice(0, subset)));
+    // shuffle them up and display a subset
+    setBooks(knuthShuffle(unshuffledBooks).slice(0, subset));
     /* eslint-disable */
   }, [isActive]);
   /* eslint-enable */
