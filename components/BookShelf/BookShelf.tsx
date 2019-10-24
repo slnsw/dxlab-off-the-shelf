@@ -3,6 +3,8 @@ import * as React from 'react';
 import BookCard from '../BookCard';
 import BookSpines from '../BookSpines';
 
+import * as configs from '../../configs';
+
 import {
   useDimensions,
   // usePrevious,
@@ -140,7 +142,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
         .map((book) => {
           const randomVariation = book.id % 22;
           const ratio = book.sizes.medium.width / book.sizes.medium.height;
-          const imageHeight = height - 24 - randomVariation;
+          const imageHeight = height - configs.GUTTER - randomVariation;
           const imageWidth = ratio * imageHeight;
 
           return (
