@@ -161,6 +161,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
 
               <BookSpines
                 spines={book.spines}
+                height={height}
                 isScrolling={isScrolling}
                 isActive={isActive}
                 scrollDirection={scrollDirection}

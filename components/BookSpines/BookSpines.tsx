@@ -7,6 +7,7 @@ import css from './BookSpines.scss';
 type Props = {
   className?: string;
   spines: number[];
+  height: number;
   isScrolling?: boolean;
   isActive?: boolean;
   scrollDirection?: 'left' | 'right';
@@ -16,6 +17,7 @@ type Props = {
 const BookSpines: React.FunctionComponent<Props> = ({
   className,
   spines = [],
+  height,
   isScrolling = false,
   isActive = false,
   scrollDirection = null,
@@ -35,9 +37,10 @@ const BookSpines: React.FunctionComponent<Props> = ({
         return (
           <BookSpine
             key={`${spine}-${i}`}
-            isEdge={i === 0 || i === spines.length - 1}
             id={spine}
             index={index}
+            height={height}
+            isEdge={i === 0 || i === spines.length - 1}
             isScrolling={isScrolling}
             isActive={isActive}
             scrollDirection={scrollDirection}

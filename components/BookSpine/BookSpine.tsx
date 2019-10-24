@@ -12,6 +12,7 @@ type Props = {
   className?: string;
   id: number;
   index: number;
+  height: number;
   isEdge: boolean;
   isScrolling?: boolean;
   isActive?: boolean;
@@ -23,6 +24,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
   className,
   id,
   index,
+  height,
   isEdge,
   isScrolling = false,
   isActive = false,
@@ -42,12 +44,17 @@ const BookSpine: React.FunctionComponent<Props> = ({
     return null;
   }
 
+  // Work out rotate angle based on % of height (opposite) and gutter width
+  // (adjacent) using trigonetry
+  const theta = (Math.atan2(height * 0.8, appConfig.gutter) * 180) / Math.PI;
+  const angle = 90 - theta;
+
   let rotate = 0;
 
   if (originX === 1) {
-    rotate = appConfig.spineRotateAngle;
+    rotate = angle;
   } else if (originX === 0) {
-    rotate = -1 * appConfig.spineRotateAngle;
+    rotate = -1 * angle;
   }
 
   const nonEdgeHeight = [
@@ -78,13 +85,11 @@ const BookSpine: React.FunctionComponent<Props> = ({
       }}
     >
       <img
-        // src={`/images/spines/${id}.png`}
         src={`https://dxlab-off-the-shelf.s3-ap-southeast-2.amazonaws.com/spines/${id}.png`}
         className={[css.image, isEdge ? css.edgeHeight : nonEdgeHeight].join(
           ' ',
         )}
-        // lazy="true"
-        alt="spine"
+        alt="Book spine"
       />
     </motion.article>
   );
