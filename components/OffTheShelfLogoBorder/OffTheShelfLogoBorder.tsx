@@ -66,8 +66,10 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
       ref={ref}
       variants={{
         start: {
-          x: 0,
-          y: 0,
+          // x: 0,
+          // y: 0,
+          x: baseline * index * 0.5,
+          y: -baseline * index * 0.5,
         },
         end: {
           x: baseline * index,
@@ -88,7 +90,8 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
         <motion.svg width={width - baseline * 2} height={height}>
           <motion.path
             d={paths[orientation]}
-            fill="transparent"
+            // fill="transparent"
+            fill={variables['colour-black']}
             strokeWidth={strokeWidth}
             stroke={variables[`colour-${colour}`]}
             variants={{
@@ -101,7 +104,11 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
             }}
             initial="hidden"
             animate={isActive ? 'visible' : 'hidden'}
-            transition={{ delay: index * 0.2 + delay, duration: 1 }}
+            transition={{
+              delay: index * 0.4 + delay,
+              duration: 1,
+              ease: 'easeInOut',
+            }}
           />
         </motion.svg>
       )}

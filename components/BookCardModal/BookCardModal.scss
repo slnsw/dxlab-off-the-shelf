@@ -29,6 +29,7 @@
 
 .topBorders {
   position: absolute;
+  z-index: 1;
   width: 100%;
   height: 140px;
   pointer-events: none;
@@ -71,6 +72,7 @@
 .content {
   @include scrollbar();
 
+  z-index: 2;
   width: calc(100% - #{$baseline * 8});
   height: calc(100% - #{$baseline * 17});
   margin-top: $baseline * 8;

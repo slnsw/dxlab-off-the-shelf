@@ -238,6 +238,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
           <p>
             <span>#OffTheShelf #shelfie</span>
           </p>
+          <br />
 
           <CTAButton>About this exhibition</CTAButton>
         </div>
