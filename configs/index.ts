@@ -1,5 +1,5 @@
 // Durations
-export const IS_INTERVAL_ENABLED = false;
+export const IS_INTERVAL_ENABLED = true;
 export const IDLE_TIMEOUT = 30000;
 export const LOGO_TIMEOUT = 25000;
 export const TIME_BETWEEN_SCROLLS = 11000;

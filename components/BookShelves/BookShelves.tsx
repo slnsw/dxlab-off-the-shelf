@@ -132,6 +132,10 @@ const BookShelves: React.FunctionComponent<Props> = ({
     isIntervalActive,
   );
 
+  React.useEffect(() => {
+    console.log('BookShelves - isIntervalActive', isIntervalActive);
+  }, [isIntervalActive]);
+
   return (
     <div className={[css.bookShelves, className || ''].join(' ')}>
       {loading && 'Loading...'}

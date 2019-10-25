@@ -82,8 +82,8 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
         damping: 8,
       }}
     >
-      <motion.svg width={width - baseline * 2} height={height}>
-        {width && height && (
+      {width && height && (
+        <motion.svg width={width - baseline * 2} height={height}>
           <motion.path
             d={paths[orientation]}
             fill="transparent"
@@ -101,8 +101,8 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
             animate={isActive ? 'visible' : 'hidden'}
             transition={{ delay: index * 0.2, duration: 1 }}
           />
-        )}
-      </motion.svg>
+        </motion.svg>
+      )}
     </motion.div>
   );
 };

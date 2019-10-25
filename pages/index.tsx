@@ -49,14 +49,14 @@ const Home = ({ query }) => {
     const idleTimer = createIdleTimer(
       () => {
         Router.push('/');
-        setIsIntervalActive(true);
+        // setIsIntervalActive(true);
         // setIsLogoIntervalActive(true);
       },
       configs.IDLE_TIMEOUT,
       {
         hasLogs: false,
         onReset: () => {
-          setIsIntervalActive(false);
+          // setIsIntervalActive(false);
           // setIsLogoIntervalActive(false);
         },
       },
@@ -111,10 +111,7 @@ const Home = ({ query }) => {
     const isActive = Boolean(bookId);
 
     setIsModalActive(isActive);
-
-    if (isIntervalEnabled) {
-      setIsIntervalActive(!isActive);
-    }
+    setIsIntervalActive(!isActive);
   }, [bookId, isIntervalEnabled]);
 
   // --------------------------------------------------------------------------
