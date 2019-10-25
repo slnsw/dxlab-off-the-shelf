@@ -4,17 +4,10 @@ import BookCard from '../BookCard';
 import BookSpines from '../BookSpines';
 
 import * as configs from '../../configs';
-
-import {
-  useDimensions,
-  // usePrevious,
-  // useDebounce
-} from '../../lib/hooks';
-
+import { useDimensions } from '../../lib/hooks';
 import { createScrollToItem } from '../../lib/scroll-to-item';
 
 import css from './BookShelf.scss';
-// import { createScrollToItem } from '../../lib/scroll-to-item';
 
 type Props = {
   books: any[];
@@ -57,10 +50,13 @@ const BookShelf: React.FunctionComponent<Props> = ({
       const bookNode = document.getElementById(`bookCard-${bookId}`);
 
       if (bookNode) {
-        // if (!scrollToItem.current) {
-        scrollToItem.current = createScrollToItem(node, bookNode, null, 8000);
+        scrollToItem.current = createScrollToItem(
+          node,
+          bookNode,
+          null,
+          configs.SCROLL_TIME,
+        );
         scrollToItem.current.start();
-        // }
       }
     }
   }, [scrollToBook, node, books]);

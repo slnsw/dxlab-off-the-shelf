@@ -1,8 +1,9 @@
 // Durations
 export const IS_INTERVAL_ENABLED = true;
-export const IDLE_TIMEOUT = 30000;
+export const IDLE_TIMEOUT = 5000;
 export const LOGO_TIMEOUT = 25000;
 export const TIME_BETWEEN_SCROLLS = 11000;
+export const SCROLL_TIME = 8000;
 
 // Design
 export const GUTTER = 24;

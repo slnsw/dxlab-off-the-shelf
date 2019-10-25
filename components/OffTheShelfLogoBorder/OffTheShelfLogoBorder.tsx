@@ -53,7 +53,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
       M 0 ${hasStartCorner ? baseline : 0}
       L 0 0
       L ${width - baseline * 2} 0
-      L ${width - baseline * 2} ${height}      
+      L ${width - baseline * 2} ${height}
       L ${width - baseline * 3} ${height}
     `,
   };

@@ -13,6 +13,12 @@ import * as configs from '../configs';
 
 // import css from './index.scss';
 
+declare global {
+  interface Window {
+    OFF_THE_SHELF: any;
+  }
+}
+
 const Home = ({ query }) => {
   // --------------------------------------------------------------------------
   // Hooks
@@ -43,30 +49,29 @@ const Home = ({ query }) => {
   const bookId = query && query.id ? query.id : null;
 
   /*
-   * Set idle timer to disable intervals while user is interacting.
+   * Set idle timer to return to home after timeout.
    */
   React.useEffect(() => {
-    const idleTimer = createIdleTimer(
-      () => {
-        Router.push('/');
-        // setIsIntervalActive(true);
-        // setIsLogoIntervalActive(true);
-      },
-      configs.IDLE_TIMEOUT,
-      {
-        hasLogs: false,
-        onReset: () => {
-          // setIsIntervalActive(false);
-          // setIsLogoIntervalActive(false);
-        },
-      },
-    );
+    const idleTimer = createIdleTimer(() => {
+      console.log('Home Page - idleTimer - return home');
+
+      Router.push('/');
+    }, configs.IDLE_TIMEOUT);
 
     idleTimer.start();
 
     return () => {
       idleTimer.stop();
     };
+  }, []);
+
+  // Set initial logs
+  React.useEffect(() => {
+    if (!window.OFF_THE_SHELF) {
+      window.OFF_THE_SHELF = Object.keys(configs).map((key) => {
+        return `${key}: ${configs[key]}`;
+      });
+    }
   }, []);
 
   // useInterval(
