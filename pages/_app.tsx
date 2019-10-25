@@ -41,10 +41,10 @@ class MyApp extends App {
       <>
         <Head>
           <title>Off the Shelf</title>
-          <link
+          {/* <link
             href="https://fonts.googleapis.com/css?family=Barlow:400,500,500i,700"
             rel="stylesheet"
-          />
+          /> */}
           <link
             rel="stylesheet"
             type="text/css"

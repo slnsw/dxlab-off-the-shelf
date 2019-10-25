@@ -104,6 +104,20 @@ const useBooksData = () => {
     loading6 ||
     loading7;
 
-  return { books, loading };
+  return { books: processBooks(books), loading };
 };
+
+// Filter out books that don't have an image
+function processBooks(books) {
+  return books.filter((book) => {
+    return (
+      book &&
+      book.sizes &&
+      book.sizes.medium &&
+      book.sizes.medium.sourceUrl &&
+      book.sizes.medium.sourceUrl !== 'Hello World'
+    );
+  });
+}
+
 export default useBooksData;

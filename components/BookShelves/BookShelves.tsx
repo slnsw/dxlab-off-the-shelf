@@ -23,8 +23,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
   className,
   onBookClick,
 }) => {
-  // console.log(configs);
-
   const [books, setBooks] = React.useState([]);
   const [currentBooks, setCurrentBooks] = React.useState([0, 0, 0]);
   const [currentShelfIndex, setCurrentShelfIndex] = React.useState(1);
