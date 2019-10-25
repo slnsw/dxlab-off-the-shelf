@@ -19,7 +19,7 @@ declare global {
   }
 }
 
-const Home = ({ query }) => {
+const Home = ({ query, pathname }) => {
   // --------------------------------------------------------------------------
   // Hooks
   // --------------------------------------------------------------------------
@@ -53,9 +53,11 @@ const Home = ({ query }) => {
    */
   React.useEffect(() => {
     const idleTimer = createIdleTimer(() => {
-      console.log('Home Page - idleTimer - return home');
+      if (bookId) {
+        console.log('Home Page - idleTimer - return home');
 
-      Router.push('/');
+        Router.push('/');
+      }
     }, configs.IDLE_TIMEOUT);
 
     idleTimer.start();
@@ -63,14 +65,18 @@ const Home = ({ query }) => {
     return () => {
       idleTimer.stop();
     };
-  }, []);
+  }, [bookId]);
 
   // Set initial logs
   React.useEffect(() => {
     if (!window.OFF_THE_SHELF) {
+      console.log('----------------------------------------');
       window.OFF_THE_SHELF = Object.keys(configs).map((key) => {
+        console.log(key, configs[key]);
+
         return `${key}: ${configs[key]}`;
       });
+      console.log('----------------------------------------');
     }
   }, []);
 
@@ -160,9 +166,10 @@ const Home = ({ query }) => {
   );
 };
 
-Home.getInitialProps = ({ query }) => {
+Home.getInitialProps = ({ query, pathname }) => {
   return {
     query,
+    pathname,
   };
 };
 

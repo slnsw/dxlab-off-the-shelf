@@ -67,180 +67,181 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       )}
 
       <div className={css.info}>
-        <OffTheShelfLogoBorders
-          orientation="topRight"
-          strokeWidth={8}
-          isActive={true}
-          className={css.topBorders}
-        />
+        <div className={css.contentWrapper}>
+          <OffTheShelfLogoBorders
+            orientation="topRight"
+            strokeWidth={8}
+            isActive={true}
+            className={css.topBorders}
+          />
 
-        <div className={css.content}>
-          {loading
-            ? 'Loading...'
-            : primoRecord && (
-                <>
-                  <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
-                  {creator && <h2>{creator}</h2>}
+          <div className={css.content}>
+            {loading
+              ? 'Loading...'
+              : primoRecord && (
+                  <>
+                    <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
+                    {creator && <h2>{creator}</h2>}
 
-                  {description && (
-                    <p className={css.description}>{description}</p>
-                  )}
+                    {description && (
+                      <p className={css.description}>{description}</p>
+                    )}
 
-                  <div className={css.table}>
-                    {[
-                      {
-                        field: 'callNumber',
-                        label: 'Call number',
-                      },
-                      {
-                        field: 'dewey',
-                        label: 'Dewey',
-                      },
-                      {
-                        field: 'publisher',
-                        label: 'Publisher',
-                      },
-                      {
-                        field: 'access',
-                        label: 'Access',
-                      },
-                      {
-                        field: 'accessConditions',
-                        label: 'Access conditions',
-                      },
-                      {
-                        field: 'copyright',
-                        label: 'Copyright',
-                      },
-                      // TODO: Add this back in and dedupe
-                      // {
-                      //   field: 'creationDate',
-                      //   label: 'Date',
-                      // },
-                      {
-                        field: 'date',
-                        label: 'Date',
-                      },
-                      {
-                        field: 'language',
-                        label: 'Language',
-                      },
-                      {
-                        field: 'format',
-                        label: 'Format',
-                      },
-                      {
-                        field: 'history',
-                        label: 'History',
-                      },
-                      {
-                        field: 'isbn',
-                        label: 'ISBN',
-                      },
-                      {
-                        field: 'referenceCode',
-                        label: 'Reference code',
-                      },
-                      {
-                        field: 'holdings',
-                        label: 'Holdings',
-                      },
-                      {
-                        field: 'subjects',
-                        label: 'Subjects',
-                      },
-                    ]
-                      .filter((row) => primoRecord[row.field])
-                      .map((row) => {
-                        return (
-                          <div className={css.row}>
-                            <div className={css.label}>
-                              <p>{row.label}</p>
+                    <div className={css.table}>
+                      {[
+                        {
+                          field: 'callNumber',
+                          label: 'Call number',
+                        },
+                        {
+                          field: 'dewey',
+                          label: 'Dewey',
+                        },
+                        {
+                          field: 'publisher',
+                          label: 'Publisher',
+                        },
+                        {
+                          field: 'access',
+                          label: 'Access',
+                        },
+                        {
+                          field: 'accessConditions',
+                          label: 'Access conditions',
+                        },
+                        {
+                          field: 'copyright',
+                          label: 'Copyright',
+                        },
+                        // TODO: Add this back in and dedupe
+                        // {
+                        //   field: 'creationDate',
+                        //   label: 'Date',
+                        // },
+                        {
+                          field: 'date',
+                          label: 'Date',
+                        },
+                        {
+                          field: 'language',
+                          label: 'Language',
+                        },
+                        {
+                          field: 'format',
+                          label: 'Format',
+                        },
+                        {
+                          field: 'history',
+                          label: 'History',
+                        },
+                        {
+                          field: 'isbn',
+                          label: 'ISBN',
+                        },
+                        {
+                          field: 'referenceCode',
+                          label: 'Reference code',
+                        },
+                        {
+                          field: 'holdings',
+                          label: 'Holdings',
+                        },
+                        {
+                          field: 'subjects',
+                          label: 'Subjects',
+                        },
+                      ]
+                        .filter((row) => primoRecord[row.field])
+                        .map((row) => {
+                          return (
+                            <div className={css.row}>
+                              <div className={css.label}>
+                                <p>{row.label}</p>
+                              </div>
+                              <div className={css.value}>
+                                {(() => {
+                                  switch (row.field) {
+                                    case 'holdings':
+                                      return primoRecord[row.field].map(
+                                        (holding, i) => {
+                                          return (
+                                            <p
+                                              key={`${holding.subLocation}-${i}`}
+                                            >
+                                              {holding.subLocation},{' '}
+                                              {holding.status},{' '}
+                                              {holding.mainLocation}
+                                            </p>
+                                          );
+                                        },
+                                      );
+                                    case 'subjects':
+                                      return (
+                                        <ul>
+                                          {book.primoRecord.subjects.map(
+                                            (subject) => {
+                                              return (
+                                                <li key={subject}>{subject}</li>
+                                              );
+                                            },
+                                          )}
+                                        </ul>
+                                      );
+                                    default:
+                                      return <p>{primoRecord[row.field]}</p>;
+                                  }
+                                })()}
+                              </div>
                             </div>
-                            <div className={css.value}>
-                              {(() => {
-                                switch (row.field) {
-                                  case 'holdings':
-                                    return primoRecord[row.field].map(
-                                      (holding, i) => {
-                                        return (
-                                          <p
-                                            key={`${holding.subLocation}-${i}`}
-                                          >
-                                            {holding.subLocation},{' '}
-                                            {holding.status},{' '}
-                                            {holding.mainLocation}
-                                          </p>
-                                        );
-                                      },
-                                    );
-                                  case 'subjects':
-                                    return (
-                                      <ul>
-                                        {book.primoRecord.subjects.map(
-                                          (subject) => {
-                                            return (
-                                              <li key={subject}>{subject}</li>
-                                            );
-                                          },
-                                        )}
-                                      </ul>
-                                    );
-                                  default:
-                                    return <p>{primoRecord[row.field]}</p>;
-                                }
-                              })()}
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
+                          );
+                        })}
+                    </div>
 
-                  {book.primoRecord.exhibitions && (
-                    <p>{book.primoRecord.exhibitions}</p>
-                  )}
-                  {book.primoRecord.notes && (
-                    <p>Notes: {book.primoRecord.notes}</p>
-                  )}
-                  {book.primoRecord.personNames && (
-                    <p>Names: {book.primoRecord.personNames}</p>
-                  )}
-                  {book.primoRecord.physicalDescription && (
-                    <p>{book.primoRecord.physicalDescription}</p>
-                  )}
-                  {book.primoRecord.source && (
-                    <p>Source: {book.primoRecord.source}</p>
-                  )}
-                  {book.primoRecord.topics && (
-                    <p>Topics: {book.primoRecord.topics}</p>
-                  )}
-                </>
-              )}
+                    {book.primoRecord.exhibitions && (
+                      <p>{book.primoRecord.exhibitions}</p>
+                    )}
+                    {book.primoRecord.notes && (
+                      <p>Notes: {book.primoRecord.notes}</p>
+                    )}
+                    {book.primoRecord.personNames && (
+                      <p>Names: {book.primoRecord.personNames}</p>
+                    )}
+                    {book.primoRecord.physicalDescription && (
+                      <p>{book.primoRecord.physicalDescription}</p>
+                    )}
+                    {book.primoRecord.source && (
+                      <p>Source: {book.primoRecord.source}</p>
+                    )}
+                    {book.primoRecord.topics && (
+                      <p>Topics: {book.primoRecord.topics}</p>
+                    )}
+                  </>
+                )}
+          </div>
+
+          {/* <OffTheShelfLogoBorders
+            orientation="bottomLeft"
+            strokeWidth={8}
+            isActive={true}
+            hasStartCorners={false}
+            hasEndCorners={false}
+            delay={1.8}
+            className={css.bottomBorders}
+          /> */}
         </div>
 
-        <OffTheShelfLogoBorders
-          orientation="bottomLeft"
-          strokeWidth={8}
-          isActive={true}
-          hasStartCorners={false}
-          className={css.bottomBorders}
-        />
-      </div>
+        <div className={css.extraContent}>
+          <p>
+            If this book piques your interest, you can ask for it in the reading
+            rooms downstairs.
+          </p>
+          <p>
+            <span>#OffTheShelf #shelfie</span>
+          </p>
 
-      {/* <div>
-        <p>
-          Did you know the State Library of NSW has five floors underneath the
-          reading rooms where the collection is kept. This is called the Stacks.
-          The book covers that you are seeing are kept on these floors. All
-          books published in New South Wales and many from beyond, live in your
-          State Library. Off the Shelf brings you snapshots of the intriguing,
-          perplexing and playful volumes waiting to be read. From bodice rippers
-          to banksia trees, cats to catafalques, turnips to teleology — whatever
-          you're into, we have a book for it. If you would like to read any of
-          these books, you can ask for them in the reading rooms downstairs.
-          #OffTheShelf #shelfie
-        </p>
-      </div> */}
+          <CTAButton>About this exhibition</CTAButton>
+        </div>
+      </div>
 
       <CTAButton className={css.backButton} onClick={onClose}>
         Close

@@ -2,6 +2,7 @@
 
 .bookCardModal {
   display: flex;
+  align-items: flex-start;
   justify-content: center;
 
   h1 {
@@ -21,32 +22,33 @@
   }
 }
 
-.backButton {
-  margin-top: $baseline * 4;
-  margin-left: $baseline-6;
-}
-
 .image {
   width: auto;
   height: 100%;
 }
 
 .topBorders {
+  position: absolute;
+  width: 100%;
   height: 140px;
+  pointer-events: none;
 }
 
-.bottomBorders {
-  position: absolute;
-  top: auto;
-  bottom: $baseline * 4;
-  width: 100%;
-  height: 100px;
-}
+// .bottomBorders {
+//   position: absolute;
+//   top: auto;
+//   bottom: $baseline * 4;
+//   width: 140px;
+//   height: 100px;
+// }
 
 .info {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 86ch;
+  height: 100%;
   margin-left: $baseline-5;
 
   ul {
@@ -59,11 +61,19 @@
   }
 }
 
-.content {
+.contentWrapper {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+}
+
+.content {
+  @include scrollbar();
+
   width: calc(100% - #{$baseline * 8});
-  height: calc(100% - #{$baseline * 20});
-  margin-top: -$baseline * 8;
+  height: calc(100% - #{$baseline * 17});
+  margin-top: $baseline * 8;
   padding-right: $baseline * 3;
   padding-left: $baseline * 8;
   overflow: auto;
@@ -100,4 +110,29 @@
   .value {
     flex: 1;
   }
+}
+
+.extraContent {
+  width: calc(100% - #{$baseline * 16});
+  margin-top: auto;
+  margin-left: $baseline-8;
+  // margin-bottom: $baseline-4;
+  padding: $baseline-4;
+  border: $baseline/2 solid $colour-teal;
+  border-right: none;
+  border-bottom: none;
+  // font-size: $font-size-lg;
+
+  // p {
+  //   line-height: $baseline-3 + $baseline-half;
+  // }
+
+  span {
+    color: $colour-yellow;
+  }
+}
+
+.backButton {
+  margin-top: $baseline * 3;
+  margin-left: $baseline-4;
 }

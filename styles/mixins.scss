@@ -41,3 +41,49 @@
     @content;
   }
 }
+
+/*
+ * Custom Scrollbars
+ * ------------------------------------------------------------------------ */
+
+// Mixin to customize scrollbars
+// Beware, this does not work in all browsers
+// @author Hugo Giraudel
+// @param {Length} $size - Horizontal scrollbar's height and vertical scrollbar's width
+// @param {Color} $foreground-color - Scrollbar's color
+// @param {Color} $background-color [mix($foreground-color, white, 50%)] - Scrollbar's color
+// @example scss - Scrollbar styling
+// @include scrollbar(.5em, slategray);
+@mixin scrollbar(
+  $size: $baseline/2,
+  $foreground-color: $colour-teal,
+  $background-color: $colour-grey-900,
+  $border-radius: 0
+) {
+  // For Firefox
+  scrollbar-width: thin;
+  scrollbar-color: $foreground-color $background-color;
+
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+    border-radius: $border-radius;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+    border-radius: $border-radius;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+    border-radius: $border-radius;
+  }
+
+  // For Internet Explorer
+  body {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}

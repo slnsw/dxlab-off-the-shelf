@@ -9,6 +9,7 @@ type Props = {
   orientation?: 'bottomLeft' | 'topRight';
   isActive?: boolean;
   hasStartCorners?: boolean;
+  delay?: number;
   className?: string;
 };
 
@@ -17,6 +18,8 @@ const OffTheShelfLogoBorders: React.FunctionComponent<Props> = ({
   orientation = 'bottomLeft',
   isActive = false,
   hasStartCorners = true,
+  hasEndCorners = true,
+  delay = 0,
   className,
 }) => {
   const indexes = {
@@ -40,6 +43,8 @@ const OffTheShelfLogoBorders: React.FunctionComponent<Props> = ({
           colour="white"
           isActive={isActive}
           hasStartCorner={hasStartCorners}
+          hasEndCorner={hasEndCorners}
+          delay={delay}
         />
         <OffTheShelfLogoBorder
           index={indexes[orientation][1]}
@@ -48,6 +53,8 @@ const OffTheShelfLogoBorders: React.FunctionComponent<Props> = ({
           colour="yellow"
           isActive={isActive}
           hasStartCorner={hasStartCorners}
+          hasEndCorner={hasEndCorners}
+          delay={delay}
         />
         <OffTheShelfLogoBorder
           index={indexes[orientation][2]}
@@ -56,6 +63,8 @@ const OffTheShelfLogoBorders: React.FunctionComponent<Props> = ({
           colour="teal"
           isActive={isActive}
           hasStartCorner={hasStartCorners}
+          hasEndCorner={hasEndCorners}
+          delay={delay}
         />
       </div>
     </div>

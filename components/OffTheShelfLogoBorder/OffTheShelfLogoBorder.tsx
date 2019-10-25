@@ -15,6 +15,7 @@ type Props = {
   isActive?: boolean;
   hasStartCorner?: boolean;
   hasEndCorner?: boolean;
+  delay?: number;
   className?: string;
 };
 
@@ -26,6 +27,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
   isActive = false,
   hasStartCorner = true,
   hasEndCorner = true,
+  delay = 0,
   className,
 }) => {
   const [ref, dimensions] = useDimensions();
@@ -47,14 +49,14 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
       L 0 0
       L 0 ${height} 
       L ${width - baseline * 2} ${height} 
-      L ${width - baseline * 2} ${height - baseline}
+      ${hasEndCorner ? `L ${width - baseline * 2} ${height - baseline}` : null}
     `,
     topRight: `
       M 0 ${hasStartCorner ? baseline : 0}
       L 0 0
       L ${width - baseline * 2} 0
       L ${width - baseline * 2} ${height}
-      L ${width - baseline * 3} ${height}
+      ${hasEndCorner ? `L ${width - baseline * 3} ${height}` : null} 
     `,
   };
 
@@ -77,7 +79,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
       animate={divControls}
       transition={{
         type: 'spring',
-        delay: 1,
+        delay: 1 + delay,
         transition: 1,
         damping: 8,
       }}
@@ -99,7 +101,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
             }}
             initial="hidden"
             animate={isActive ? 'visible' : 'hidden'}
-            transition={{ delay: index * 0.2, duration: 1 }}
+            transition={{ delay: index * 0.2 + delay, duration: 1 }}
           />
         </motion.svg>
       )}

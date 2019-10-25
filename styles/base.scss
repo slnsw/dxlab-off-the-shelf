@@ -28,6 +28,11 @@ body {
 ul,
 p {
   margin-top: 0;
+  line-height: $baseline-3;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 li {
