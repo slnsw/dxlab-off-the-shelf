@@ -18,10 +18,13 @@ const Home = ({ query }) => {
   // Hooks
   // --------------------------------------------------------------------------
 
+  // Book Modal
   const [isModalActive, setIsModalActive] = React.useState(false);
-  const [isAboutModalActive, setIsAboutModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
+
+  // About Modal
+  const [isAboutModalActive, setIsAboutModalActive] = React.useState(false);
   // const [
   //   isLogoActive,
   //   // setIsLogoActive
@@ -34,8 +37,8 @@ const Home = ({ query }) => {
   //   // isLogoIntervalActive,
   //   // setIsLogoIntervalActive,
   // ] = React.useState(true);
-  const [isIntervalDisabled] = React.useState(configs.IS_INTERVAL_DISABLED);
   const [isIntervalActive, setIsIntervalActive] = React.useState(true);
+  const [isIntervalEnabled] = React.useState(configs.IS_INTERVAL_ENABLED);
 
   const bookId = query && query.id ? query.id : null;
 
@@ -87,7 +90,7 @@ const Home = ({ query }) => {
 
       // console.log(document.hidden, document.visibilityState);
 
-      if (isIntervalDisabled === false) {
+      if (isIntervalEnabled) {
         if (document.hidden || document.visibilityState === 'hidden') {
           if (isIntervalActive) {
             setIsIntervalActive(false);
@@ -98,7 +101,7 @@ const Home = ({ query }) => {
       }
     });
     /* eslint-disable */
-  }, [isIntervalDisabled]);
+  }, [isIntervalEnabled]);
   /* eslint-enable */
 
   /*
@@ -109,10 +112,10 @@ const Home = ({ query }) => {
 
     setIsModalActive(isActive);
 
-    if (isIntervalDisabled === false) {
+    if (isIntervalEnabled) {
       setIsIntervalActive(!isActive);
     }
-  }, [bookId, isIntervalDisabled]);
+  }, [bookId, isIntervalEnabled]);
 
   // --------------------------------------------------------------------------
   // Handlers
@@ -148,9 +151,7 @@ const Home = ({ query }) => {
 
       <BookShelves
         isActive={areShelvesActive}
-        isIntervalActive={
-          isIntervalDisabled === false ? isIntervalActive : false
-        }
+        isIntervalActive={isIntervalEnabled && isIntervalActive}
         onBookClick={handleBookCardClick}
       />
     </>

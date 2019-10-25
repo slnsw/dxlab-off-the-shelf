@@ -89,6 +89,14 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                   <div className={css.table}>
                     {[
                       {
+                        field: 'callNumber',
+                        label: 'Call number',
+                      },
+                      {
+                        field: 'dewey',
+                        label: 'Dewey',
+                      },
+                      {
                         field: 'publisher',
                         label: 'Publisher',
                       },
@@ -99,10 +107,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                       {
                         field: 'accessConditions',
                         label: 'Access conditions',
-                      },
-                      {
-                        field: 'callNumber',
-                        label: 'Call number',
                       },
                       {
                         field: 'copyright',
@@ -116,10 +120,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                       {
                         field: 'date',
                         label: 'Date',
-                      },
-                      {
-                        field: 'dewey',
-                        label: 'Dewey',
                       },
                       {
                         field: 'language',
@@ -226,6 +226,21 @@ const BookCardModal: React.FunctionComponent<Props> = ({
           className={css.bottomBorders}
         />
       </div>
+
+      {/* <div>
+        <p>
+          Did you know the State Library of NSW has five floors underneath the
+          reading rooms where the collection is kept. This is called the Stacks.
+          The book covers that you are seeing are kept on these floors. All
+          books published in New South Wales and many from beyond, live in your
+          State Library. Off the Shelf brings you snapshots of the intriguing,
+          perplexing and playful volumes waiting to be read. From bodice rippers
+          to banksia trees, cats to catafalques, turnips to teleology — whatever
+          you're into, we have a book for it. If you would like to read any of
+          these books, you can ask for them in the reading rooms downstairs.
+          #OffTheShelf #shelfie
+        </p>
+      </div> */}
 
       <CTAButton className={css.backButton} onClick={onClose}>
         Close

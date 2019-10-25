@@ -4,10 +4,11 @@ import Button from '../Button';
 
 import css from './CTAButton.scss';
 
-type Props = {
+interface Props {
   children?: string | React.ReactNode;
   className?: string;
-};
+  onClick?: Function;
+}
 
 const CTAButton: React.FunctionComponent<Props> = ({
   children,
