@@ -5,6 +5,7 @@ import BookShelf from '../BookShelf';
 
 import useInterval from '../../lib/hooks/use-interval';
 import useBooksData from '../../lib/hooks/use-books-data';
+import { usePrevious } from '../../lib/hooks';
 import knuthShuffle from '../../lib/knuthShuffle';
 import * as configs from '../../configs';
 
@@ -13,6 +14,7 @@ import css from './BookShelves.scss';
 type Props = {
   isActive?: boolean;
   isIntervalActive?: boolean;
+  // shouldShuffle?: boolean;
   className?: string;
   onBookClick?: Function;
 };
@@ -20,6 +22,7 @@ type Props = {
 const BookShelves: React.FunctionComponent<Props> = ({
   isActive = false,
   isIntervalActive = false,
+  // shouldShuffle = false,
   className,
   onBookClick,
 }) => {
@@ -29,11 +32,14 @@ const BookShelves: React.FunctionComponent<Props> = ({
   const [shelves, setShelves] = React.useState([[], [], []]);
   const allBooksInViewRef = React.useRef([[], [], []]);
   const allBooksInView = allBooksInViewRef.current;
+  const prevIsActive = usePrevious(isActive);
 
   // Fetch books data
   const { books: booksOnly, loading } = useBooksData();
 
-  React.useEffect(() => {
+  const shuffleBooks = () => {
+    console.log('Shuffle books');
+
     const subset = configs.NUMBER_OF_BOOKS_TO_DISPLAY;
     // const side = 'left'; // replace these later with URL parameter XXXXXXX TO DO
     const side = 'right';
@@ -58,9 +64,26 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
     // shuffle them up and display a subset
     setBooks(knuthShuffle(unshuffledBooks).slice(0, subset));
+  };
+
+  React.useEffect(() => {
+    shuffleBooks();
+
     /* eslint-disable */
-  }, [isActive]);
+  }, []);
   /* eslint-enable */
+
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (prevIsActive && !isActive) {
+        shuffleBooks();
+      }
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }, 2000);
+  }, [isActive]);
 
   React.useEffect(() => {
     // now split them across 3 shelves...
@@ -153,7 +176,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             onRender={(booksInView) => {
               allBooksInView[0] = booksInView;
             }}
-          ></BookShelf>
+          />
           <BookShelf
             books={shelves[1]}
             scrollToBook={currentBooks[1]}
@@ -165,7 +188,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             onRender={(booksInView) => {
               allBooksInView[1] = booksInView;
             }}
-          ></BookShelf>
+          />
           <BookShelf
             books={shelves[2]}
             scrollToBook={currentBooks[2]}
@@ -177,7 +200,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             onRender={(booksInView) => {
               allBooksInView[2] = booksInView;
             }}
-          ></BookShelf>
+          />
         </>
       )}
     </div>

@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
-import {
-  motion,
-  // useAnimation
-} from 'framer-motion';
+import { motion } from 'framer-motion';
+
+import * as appConfig from '../../configs';
 
 import css from './BookCard.scss';
 
@@ -45,7 +44,7 @@ const BookCard: React.FunctionComponent<Props> = ({
     }
   }, [scrollDirection]);
 
-  if (!imageWidth || isActive === false) {
+  if (!imageWidth) {
     return null;
   }
 
@@ -70,7 +69,6 @@ const BookCard: React.FunctionComponent<Props> = ({
       className={[css.bookCard, className || ''].join(' ')}
       animate={{
         rotate,
-        // opacity: isActive ? 1 : 0,
         // y: isActive ? 10 : 0,
         // y: isScrolling ? -0.5 : 0,
       }}
@@ -92,11 +90,20 @@ const BookCard: React.FunctionComponent<Props> = ({
       }}
       ref={ref}
     >
-      <img
+      <motion.img
         src={imageUrl}
         alt={title}
         className={css.image}
-        // lazy="true"
+        animate={{
+          y: isActive ? 0 : imageHeight + appConfig.GUTTER,
+        }}
+        transition={{
+          delay: Math.random() * 0.4,
+          type: 'spring',
+          damping: 12,
+          stiffness: 100,
+          mass: 2,
+        }}
         style={{
           width: imageWidth,
           height: imageHeight,

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { motion } from 'framer-motion';
 
 import BookCard from '../BookCard';
 import BookSpines from '../BookSpines';
@@ -45,7 +46,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
   React.useEffect(() => {
     const book = books[scrollToBook];
 
-    if (book) {
+    if (book && isActive) {
       const bookId = books[scrollToBook].id;
       const bookNode = document.getElementById(`bookCard-${bookId}`);
 
@@ -59,7 +60,13 @@ const BookShelf: React.FunctionComponent<Props> = ({
         scrollToItem.current.start();
       }
     }
-  }, [scrollToBook, node, books]);
+  }, [scrollToBook, node, books, isActive]);
+
+  React.useEffect(() => {
+    if (scrollToItem.current && isActive === false) {
+      scrollToItem.current.stop();
+    }
+  }, [isActive]);
 
   React.useEffect(() => {
     if (typeof onRender === 'function') {
@@ -123,10 +130,19 @@ const BookShelf: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <div
+    <motion.div
       id={id}
       className={[css.bookShelf, className || ''].join(' ')}
       ref={ref}
+      animate={{
+        visibility: isActive ? 'visible' : 'hidden',
+      }}
+      transition={{
+        // In BookShelves, whenever isActive is toggled off, the books shuffle
+        // after 2s to allow time for BookCards to hide
+        delay: isActive ? 0 : 1.9,
+        duration: 0,
+      }}
       onScroll={handleScroll}
       onTouchStart={cancelScrollToItem}
       onMouseDown={cancelScrollToItem}
@@ -143,6 +159,8 @@ const BookShelf: React.FunctionComponent<Props> = ({
           const imageHeight = height - configs.GUTTER - randomVariation;
           const imageWidth = ratio * imageHeight;
 
+          const inView = booksInView.includes(book.id);
+
           return (
             <React.Fragment key={book.id}>
               <BookCard
@@ -152,6 +170,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 imageWidth={imageWidth}
                 imageHeight={imageHeight}
                 isScrolling={isScrolling}
+                // isActive={isScrolling ? true : isActive && inView}
                 isActive={isActive}
                 scrollDirection={scrollDirection}
                 scrollDelta={scrollDeltaRef.current}
@@ -170,7 +189,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
             </React.Fragment>
           );
         })}
-    </div>
+    </motion.div>
   );
 };
 

@@ -8,8 +8,8 @@ import BookShelves from '../components/BookShelves';
 
 import { withApollo } from '../lib/apollo';
 import { createIdleTimer } from '../lib/idle-timer';
+import { useInterval } from '../lib/hooks';
 import * as configs from '../configs';
-// import { useInterval } from '../lib/hooks';
 
 // import css from './index.scss';
 
@@ -35,10 +35,7 @@ const Home = ({ query, pathname }) => {
   //   isLogoActive,
   //   // setIsLogoActive
   // ] = React.useState(true);
-  const [
-    areShelvesActive,
-    // setAreShelvesActive
-  ] = React.useState(true);
+  const [areShelvesActive, setAreShelvesActive] = React.useState(true);
   // const [
   //   // isLogoIntervalActive,
   //   // setIsLogoIntervalActive,
@@ -46,28 +43,49 @@ const Home = ({ query, pathname }) => {
   const [isIntervalActive, setIsIntervalActive] = React.useState(true);
   const [isIntervalEnabled] = React.useState(configs.IS_INTERVAL_ENABLED);
 
+  const [idleLoopCommandIndex, setIdleLoopCommandIndex] = React.useState(0);
+  const [idleLoopActive, setIdleLoopActive] = React.useState(true);
+
   const bookId = query && query.id ? query.id : null;
 
   /*
    * Set idle timer to return to home after timeout.
    */
   React.useEffect(() => {
-    const idleTimer = createIdleTimer(() => {
-      if (bookId) {
-        console.log('Home Page - idleTimer - return home');
+    const idleTimer = createIdleTimer(
+      () => {
+        if (bookId) {
+          console.log('Home Page - idleTimer - return home');
 
-        Router.push('/');
-      }
-    }, configs.IDLE_TIMEOUT);
+          Router.push('/');
+        }
+
+        setIdleLoopActive(true);
+      },
+      configs.IDLE_TIMEOUT,
+      {
+        onReset: () => {
+          if (idleLoopActive) {
+            console.log('Reset');
+
+            setIdleLoopActive(false);
+          }
+        },
+      },
+    );
 
     idleTimer.start();
 
     return () => {
       idleTimer.stop();
     };
-  }, [bookId]);
+    /* eslint-disable */
+  }, []);
+  /* eslint-enable */
 
-  // Set initial logs
+  /*
+   * Set initial logs
+   */
   React.useEffect(() => {
     if (!window.OFF_THE_SHELF) {
       console.log('----------------------------------------');
@@ -80,16 +98,36 @@ const Home = ({ query, pathname }) => {
     }
   }, []);
 
-  // useInterval(
-  //   () => {
-  //     console.log('logoTimer');
+  /*
+   * Idle Loop
+   */
+  const idleLoopCommands = [
+    () => {
+      setIsIntervalActive(false);
+      setAreShelvesActive(false);
+    },
+    () => {
+      setIsIntervalActive(true);
+      setAreShelvesActive(true);
+    },
+  ];
 
-  //     setIsLogoActive(true);
-  //     setAreShelvesActive(false);
-  //   },
-  //   appConfig.logoTimeout,
-  //   isLogoIntervalActive,
-  // );
+  useInterval(
+    () => {
+      console.log('idleLoopCommandIndex', idleLoopCommandIndex);
+
+      idleLoopCommands[idleLoopCommandIndex]();
+
+      if (idleLoopCommandIndex === idleLoopCommands.length - 1) {
+        setIdleLoopCommandIndex(0);
+      } else {
+        setIdleLoopCommandIndex(idleLoopCommandIndex + 1);
+      }
+    },
+    // appConfig.logoTimeout,
+    20000, // idleLoopInterval
+    idleLoopActive,
+  );
 
   /*
    * Ensure intervals don't run while page is off screen
@@ -147,6 +185,7 @@ const Home = ({ query, pathname }) => {
           Router.push('/');
         }}
       />
+
       <AboutModal
         isActive={isAboutModalActive}
         onClose={() => {
