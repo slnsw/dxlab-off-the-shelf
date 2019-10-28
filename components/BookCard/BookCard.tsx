@@ -17,6 +17,7 @@ type Props = {
   animationDelay?: number;
   scrollDirection?: 'left' | 'right';
   scrollDelta?: number;
+  containerElement?: HTMLElement;
   className?: string;
   onClick?: Function;
   onRender?: Function;
@@ -33,14 +34,18 @@ const BookCard: React.FunctionComponent<Props> = ({
   animationDelay = 0,
   scrollDirection = null,
   scrollDelta = 0,
+  containerElement,
   className,
   onClick,
   onRender,
 }) => {
   const [ref, inView, entry] = useInView({
-    // rootMargin: '0px 300px 0px 300px',
+    rootMargin: '0px 2000px',
+    root: containerElement,
   });
   const [originX, setOriginX] = React.useState();
+
+  // console.log(containerElement);
 
   React.useEffect(() => {
     if (scrollDirection) {
@@ -60,7 +65,7 @@ const BookCard: React.FunctionComponent<Props> = ({
 
   if (inView && isScrolling === false) {
     rotate = 0;
-  } else if (isScrolling) {
+  } else if (inView && isScrolling) {
     const rotateValue = Math.abs(scrollDelta) > 20 ? 1.5 : 0.5;
     rotate = scrollDirection === 'right' ? rotateValue : rotateValue * -1;
   } else {
@@ -107,7 +112,7 @@ const BookCard: React.FunctionComponent<Props> = ({
             type: 'spring',
             damping: 12,
             stiffness: 100,
-            mass: 2,
+            mass: 3,
           }}
           style={{
             width: imageWidth,
