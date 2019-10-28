@@ -17,21 +17,23 @@ const OffTheShelfLogoText: React.FunctionComponent<Props> = ({
 }) => {
   const pathVariants = {
     hidden: {
-      pathLength: 0,
-      stroke: variables['colour-white'],
+      // pathLength: 0,
+      // stroke: variables['colour-white'],
       fill: variables['colour-black'],
+      // rotate: -1,
     },
     end: {
-      pathLength: 1,
-      stroke: variables['colour-white'],
+      // pathLength: 1,
+      // stroke: variables['colour-white'],
       fill: variables['colour-white'],
+      // rotate: 0,
     },
   };
 
   const getPathTransition = (index) => {
     return {
       delay: delay + index * 0.1,
-      duration: 2,
+      duration: 1,
     };
   };
 

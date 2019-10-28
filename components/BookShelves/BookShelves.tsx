@@ -82,7 +82,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
       return () => {
         clearTimeout(timeout);
       };
-    }, 2000);
+    }, 3000);
   }, [isActive]);
 
   React.useEffect(() => {

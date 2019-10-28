@@ -14,6 +14,7 @@ type Props = {
   imageHeight: number;
   isScrolling?: boolean;
   isActive?: boolean;
+  animationDelay?: number;
   scrollDirection?: 'left' | 'right';
   scrollDelta?: number;
   className?: string;
@@ -29,13 +30,16 @@ const BookCard: React.FunctionComponent<Props> = ({
   imageHeight = 0,
   isScrolling = false,
   isActive = false,
+  animationDelay = 0,
   scrollDirection = null,
   scrollDelta = 0,
   className,
   onClick,
   onRender,
 }) => {
-  const [ref, inView, entry] = useInView();
+  const [ref, inView, entry] = useInView({
+    // rootMargin: '0px 300px 0px 300px',
+  });
   const [originX, setOriginX] = React.useState();
 
   React.useEffect(() => {
@@ -90,25 +94,34 @@ const BookCard: React.FunctionComponent<Props> = ({
       }}
       ref={ref}
     >
-      <motion.img
-        src={imageUrl}
-        alt={title}
-        className={css.image}
-        animate={{
-          y: isActive ? 0 : imageHeight + appConfig.GUTTER,
-        }}
-        transition={{
-          delay: Math.random() * 0.4,
-          type: 'spring',
-          damping: 12,
-          stiffness: 100,
-          mass: 2,
-        }}
-        style={{
-          width: imageWidth,
-          height: imageHeight,
-        }}
-      />
+      {inView ? (
+        <motion.img
+          src={imageUrl}
+          alt={title}
+          className={css.image}
+          animate={{
+            y: isActive ? 0 : imageHeight + appConfig.GUTTER,
+          }}
+          transition={{
+            delay: Math.random() * 0.4 + animationDelay,
+            type: 'spring',
+            damping: 12,
+            stiffness: 100,
+            mass: 2,
+          }}
+          style={{
+            width: imageWidth,
+            height: imageHeight,
+          }}
+        />
+      ) : (
+        <div
+          style={{
+            width: imageWidth,
+            height: imageHeight,
+          }}
+        ></div>
+      )}
     </motion.article>
   );
 };

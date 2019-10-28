@@ -18,6 +18,7 @@ type Props = {
   isActive?: boolean;
   scrollDirection?: 'left' | 'right';
   scrollDelta?: number;
+  animationDelay?: number;
 };
 
 const BookSpine: React.FunctionComponent<Props> = ({
@@ -30,6 +31,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
   isActive = false,
   scrollDirection = null,
   scrollDelta = 0,
+  animationDelay = 0,
 }) => {
   const [originX, setOriginX] = React.useState();
   const h = id % 5; // Math.floor(Math.random() * 5);
@@ -65,6 +67,8 @@ const BookSpine: React.FunctionComponent<Props> = ({
     h === 4 ? css.height4 : '',
   ].join(' ');
 
+  const activeDelay = isActive ? animationDelay : 0;
+
   return (
     <motion.article
       id={`spine-${id}`}
@@ -74,7 +78,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
         rotate,
       }}
       transition={{
-        delay: index * 0.05,
+        delay: index * 0.05 + activeDelay,
         type: 'spring',
         damping: 7,
         stiffness: 50,

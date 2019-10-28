@@ -12,6 +12,7 @@ type Props = {
   isActive?: boolean;
   scrollDirection?: 'left' | 'right';
   scrollDelta?: number;
+  animationDelay?: number;
 };
 
 const BookSpines: React.FunctionComponent<Props> = ({
@@ -22,6 +23,7 @@ const BookSpines: React.FunctionComponent<Props> = ({
   isActive = false,
   scrollDirection = null,
   scrollDelta = 0,
+  animationDelay = 0,
 }) => {
   if (spines.length === 0) {
     return null;
@@ -45,6 +47,7 @@ const BookSpines: React.FunctionComponent<Props> = ({
             isActive={isActive}
             scrollDirection={scrollDirection}
             scrollDelta={scrollDelta}
+            animationDelay={animationDelay}
           />
         );
       })}

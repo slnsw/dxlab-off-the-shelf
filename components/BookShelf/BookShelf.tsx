@@ -24,7 +24,7 @@ type Props = {
 const BookShelf: React.FunctionComponent<Props> = ({
   books = [],
   scrollToBook,
-  // index,
+  index,
   id,
   className,
   isActive = false,
@@ -63,7 +63,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
   }, [scrollToBook, node, books, isActive]);
 
   React.useEffect(() => {
-    if (scrollToItem.current && isActive === false) {
+    if (scrollToItem.current) {
       scrollToItem.current.stop();
     }
   }, [isActive]);
@@ -139,8 +139,8 @@ const BookShelf: React.FunctionComponent<Props> = ({
       }}
       transition={{
         // In BookShelves, whenever isActive is toggled off, the books shuffle
-        // after 2s to allow time for BookCards to hide
-        delay: isActive ? 0 : 1.9,
+        // after 3s to allow time for BookCards to hide
+        delay: isActive ? 0 : 2.9,
         duration: 0,
       }}
       onScroll={handleScroll}
@@ -159,7 +159,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
           const imageHeight = height - configs.GUTTER - randomVariation;
           const imageWidth = ratio * imageHeight;
 
-          const inView = booksInView.includes(book.id);
+          // const inView = booksInView.includes(book.id);
 
           return (
             <React.Fragment key={book.id}>
@@ -174,6 +174,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 isActive={isActive}
                 scrollDirection={scrollDirection}
                 scrollDelta={scrollDeltaRef.current}
+                animationDelay={index * 0.6}
                 onClick={onClick}
                 onRender={handleBookCardRender}
               />
@@ -183,6 +184,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 height={height}
                 isScrolling={isScrolling}
                 isActive={isActive}
+                animationDelay={index * 0.6}
                 scrollDirection={scrollDirection}
                 scrollDelta={scrollDeltaRef.current}
               />
