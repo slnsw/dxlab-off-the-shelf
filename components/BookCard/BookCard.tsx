@@ -99,34 +99,34 @@ const BookCard: React.FunctionComponent<Props> = ({
       }}
       ref={ref}
     >
-      {inView ? (
-        <motion.img
-          src={imageUrl}
-          alt={title}
-          className={css.image}
-          animate={{
-            y: isActive ? 0 : imageHeight + appConfig.GUTTER,
-          }}
-          transition={{
-            delay: Math.random() * 0.4 + animationDelay,
-            type: 'spring',
-            damping: 12,
-            stiffness: 50,
-            mass: 3,
-          }}
-          style={{
-            width: imageWidth,
-            height: imageHeight,
-          }}
-        />
-      ) : (
+      {/* {inView ? ( */}
+      <motion.img
+        src={imageUrl}
+        alt={title}
+        className={css.image}
+        animate={{
+          y: isActive ? 0 : imageHeight + appConfig.GUTTER,
+        }}
+        transition={{
+          delay: Math.random() * 0.4 + animationDelay,
+          type: 'spring',
+          damping: 20,
+          stiffness: 50,
+          mass: 2,
+        }}
+        style={{
+          width: imageWidth,
+          height: imageHeight,
+        }}
+      />
+      {/* ) : (
         <div
           style={{
             width: imageWidth,
             height: imageHeight,
           }}
         ></div>
-      )}
+      )} */}
     </motion.article>
   );
 };

@@ -64,8 +64,6 @@ const Home = ({ query, pathname }) => {
       {
         onReset: () => {
           if (isIdleLoopActive) {
-            console.log('Reset');
-
             setIsIdleLoopActive(false);
           }
         },
@@ -121,7 +119,7 @@ const Home = ({ query, pathname }) => {
       }
     },
     // appConfig.logoTimeout,
-    11000, // idleLoopInterval
+    10000, // idleLoopInterval
     isIdleLoopActive,
   );
 
