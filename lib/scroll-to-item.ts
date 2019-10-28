@@ -36,29 +36,55 @@ export const createScrollToItem = (
   const to = item.offsetLeft - (container as HTMLElement).offsetLeft;
   const change = to - start;
 
-  let currentTime = 0;
-  let interval;
+  // let currentTime = 0;
+  // let interval;
+
+  let startTime = null;
+  let requestId = null;
+
+  const step = (time) => {
+    if (!startTime) {
+      startTime = time;
+    }
+
+    const progress = time - startTime;
+
+    // console.log(time, startTime, progress);
+    // console.log(easeInOutQuad(progress, start, change, duration));
+
+    container.scrollTo(easeInOutQuad(progress, start, change, duration), 0);
+
+    if (progress < duration) {
+      requestAnimationFrame(step);
+    }
+  };
 
   return {
     start: () => {
-      interval = setInterval(() => {
-        currentTime += increment;
-        container.scrollTo(
-          easeInOutQuad(currentTime, start, change, duration),
-          0,
-        );
+      // console.log('start');
 
-        if (currentTime >= duration) {
-          clearInterval(interval);
+      requestId = requestAnimationFrame(step);
 
-          if (typeof callback === 'function') {
-            callback();
-          }
-        }
-      }, increment);
+      // interval = setInterval(() => {
+      //   currentTime += increment;
+      //   container.scrollTo(
+      //     easeInOutQuad(currentTime, start, change, duration),
+      //     0,
+      //   );
+
+      //   if (currentTime >= duration) {
+      //     clearInterval(interval);
+
+      //     if (typeof callback === 'function') {
+      //       callback();
+      //     }
+      //   }
+      // }, increment);
     },
     stop: () => {
-      clearInterval(interval);
+      cancelAnimationFrame(requestId);
+
+      // clearInterval(interval);
 
       if (typeof callback === 'function') {
         callback();

@@ -185,7 +185,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 height={height}
                 isScrolling={isScrolling}
                 isActive={isActive}
-                animationDelay={index * 0.6}
+                animationDelay={isActive ? 0 : index * 0.6}
                 scrollDirection={scrollDirection}
                 scrollDelta={scrollDeltaRef.current}
               />

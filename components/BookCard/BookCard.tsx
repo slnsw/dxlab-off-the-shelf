@@ -111,7 +111,7 @@ const BookCard: React.FunctionComponent<Props> = ({
             delay: Math.random() * 0.4 + animationDelay,
             type: 'spring',
             damping: 12,
-            stiffness: 100,
+            stiffness: 50,
             mass: 3,
           }}
           style={{

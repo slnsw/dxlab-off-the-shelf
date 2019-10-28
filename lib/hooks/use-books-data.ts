@@ -7,6 +7,11 @@ const BOOKS = /* GraphQL */ `
         id
         title
         sizes {
+          thumbnail {
+            sourceUrl
+            width
+            height
+          }
           medium {
             sourceUrl
             width
