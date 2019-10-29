@@ -1,4 +1,6 @@
 import * as React from 'react';
+// import Router from 'next/router';
+import Link from 'next/link';
 
 import Modal from '../Modal';
 import CTAButton from '../CTAButton';
@@ -240,7 +242,9 @@ const BookCardModal: React.FunctionComponent<Props> = ({
           </p>
           <br />
 
-          <CTAButton>About this exhibition</CTAButton>
+          <Link href={`/?id=${id}&page=about`}>
+            <CTAButton>About this exhibition</CTAButton>
+          </Link>
         </div>
       </div>
 

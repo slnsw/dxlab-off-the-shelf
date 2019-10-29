@@ -30,7 +30,7 @@ const Home = ({ query, pathname }) => {
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
 
   // About Modal
-  const [isAboutModalActive, setIsAboutModalActive] = React.useState(false);
+  // const [isAboutModalActive, setIsAboutModalActive] = React.useState(false);
 
   // Logo
   const [isLogoActive, setIsLogoActive] = React.useState(false);
@@ -45,6 +45,8 @@ const Home = ({ query, pathname }) => {
   const [isIdleLoopActive, setIsIdleLoopActive] = React.useState(true);
 
   const bookId = query && query.id ? query.id : null;
+  const isAboutModalActive =
+    query && query.page && query.page === 'about' ? query.page : null;
 
   /*
    * Set idle timer to return to home after timeout.
@@ -228,8 +230,7 @@ const Home = ({ query, pathname }) => {
       <AboutModal
         isActive={isAboutModalActive}
         onClose={() => {
-          setIsAboutModalActive(false);
-          Router.push('/');
+          Router.push(`/?id=${bookId}`);
         }}
       />
 
