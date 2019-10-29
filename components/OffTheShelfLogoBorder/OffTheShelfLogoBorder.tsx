@@ -109,6 +109,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
               duration: 1,
               ease: 'easeInOut',
             }}
+            strokeDasharray="0 1"
           />
         </motion.svg>
       )}

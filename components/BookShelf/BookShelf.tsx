@@ -57,6 +57,8 @@ const BookShelf: React.FunctionComponent<Props> = ({
           null,
           configs.SCROLL_TIME,
         );
+
+        scrollToItem.current.stop();
         scrollToItem.current.start();
       }
     }

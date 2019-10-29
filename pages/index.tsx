@@ -29,15 +29,14 @@ const Home = ({ query, pathname }) => {
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
 
-  // About Modal
-  // const [isAboutModalActive, setIsAboutModalActive] = React.useState(false);
-
   // Logo
   const [isLogoActive, setIsLogoActive] = React.useState(false);
 
   // Book Shelves
   const [areShelvesActive, setAreShelvesActive] = React.useState(false);
-  const [isIntervalActive, setIsIntervalActive] = React.useState(false);
+  const [isShelfIntervalActive, setIsShelfIntervalActive] = React.useState(
+    false,
+  );
   const [isIntervalEnabled] = React.useState(configs.IS_INTERVAL_ENABLED);
 
   // Idle Loop
@@ -84,7 +83,7 @@ const Home = ({ query, pathname }) => {
   }, []);
 
   /*
-   * Idle Loop
+   * Idle loop with commands that run in a sequence
    */
   const idleLoopCommands = [
     () => {
@@ -103,9 +102,19 @@ const Home = ({ query, pathname }) => {
     () => {
       console.log('idleLoopCommand', 'show books');
 
-      setIsIntervalActive(true);
+      setIsShelfIntervalActive(true);
       setAreShelvesActive(true);
     },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
     null,
     null,
     null,
@@ -130,7 +139,7 @@ const Home = ({ query, pathname }) => {
     () => {
       console.log('idleLoopCommand', 'hide books');
 
-      setIsIntervalActive(false);
+      setIsShelfIntervalActive(false);
       setAreShelvesActive(false);
     },
     null,
@@ -138,7 +147,7 @@ const Home = ({ query, pathname }) => {
 
   useInterval(
     () => {
-      // console.log('idleLoopCommandIndex', idleLoopCommandIndex);
+      console.log('idleLoopCommandIndex', idleLoopCommandIndex);
 
       const command = idleLoopCommands[idleLoopCommandIndex];
 
@@ -152,8 +161,7 @@ const Home = ({ query, pathname }) => {
         setIdleLoopCommandIndex(idleLoopCommandIndex + 1);
       }
     },
-    // appConfig.logoTimeout,
-    2000, // idleLoopInterval
+    2000,
     isIdleLoopActive,
   );
 
@@ -164,7 +172,7 @@ const Home = ({ query, pathname }) => {
     const isActive = Boolean(bookId);
 
     setIsModalActive(isActive);
-    setIsIntervalActive(!isActive);
+    setIsShelfIntervalActive(!isActive);
   }, [bookId, isIntervalEnabled]);
 
   /*
@@ -179,11 +187,13 @@ const Home = ({ query, pathname }) => {
 
       if (isIntervalEnabled) {
         if (document.hidden || document.visibilityState === 'hidden') {
-          if (isIntervalActive) {
-            setIsIntervalActive(false);
+          if (isShelfIntervalActive) {
+            setIsShelfIntervalActive(false);
+            setIsIdleLoopActive(false);
           }
         } else if (isModalActive === false) {
-          setIsIntervalActive(true);
+          setIsShelfIntervalActive(true);
+          setIsIdleLoopActive(true);
         }
       }
     });
@@ -238,7 +248,7 @@ const Home = ({ query, pathname }) => {
 
       <BookShelves
         isActive={areShelvesActive}
-        isIntervalActive={isIntervalEnabled && isIntervalActive}
+        isIntervalActive={isIntervalEnabled && isShelfIntervalActive}
         onBookClick={handleBookCardClick}
       />
     </>

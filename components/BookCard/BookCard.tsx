@@ -89,11 +89,6 @@ const BookCard: React.FunctionComponent<Props> = ({
         originX,
         originY: 1,
       }}
-      onClick={(e) => {
-        if (typeof onClick === 'function') {
-          onClick(e, { id, title, imageUrl });
-        }
-      }}
       ref={ref}
     >
       {/* {inView ? ( */}
@@ -114,6 +109,11 @@ const BookCard: React.FunctionComponent<Props> = ({
         style={{
           width: imageWidth,
           height: imageHeight,
+        }}
+        onClick={(e) => {
+          if (typeof onClick === 'function') {
+            onClick(e, { id, title, imageUrl });
+          }
         }}
       />
       {/* ) : (
