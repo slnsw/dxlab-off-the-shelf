@@ -68,10 +68,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
   React.useEffect(() => {
     shuffleBooks();
-
-    /* eslint-disable */
   }, []);
-  /* eslint-enable */
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -82,7 +79,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
       return () => {
         clearTimeout(timeout);
       };
-    }, 3000);
+      // TODO: Add this to appConfig
+    }, 6000);
   }, [isActive]);
 
   React.useEffect(() => {

@@ -34,15 +34,12 @@ const BookCard: React.FunctionComponent<Props> = ({
   animationDelay = 0,
   scrollDirection = null,
   scrollDelta = 0,
-  containerElement,
+  // containerElement,
   className,
   onClick,
   onRender,
 }) => {
-  const [ref, inView, entry] = useInView({
-    rootMargin: '0px 2000px',
-    root: containerElement,
-  });
+  const [ref, inView, entry] = useInView();
   const [originX, setOriginX] = React.useState();
 
   // console.log(containerElement);

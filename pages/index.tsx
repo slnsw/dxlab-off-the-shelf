@@ -36,8 +36,8 @@ const Home = ({ query, pathname }) => {
   const [isLogoActive, setIsLogoActive] = React.useState(false);
 
   // Book Shelves
-  const [areShelvesActive, setAreShelvesActive] = React.useState(true);
-  const [isIntervalActive, setIsIntervalActive] = React.useState(true);
+  const [areShelvesActive, setAreShelvesActive] = React.useState(false);
+  const [isIntervalActive, setIsIntervalActive] = React.useState(false);
   const [isIntervalEnabled] = React.useState(configs.IS_INTERVAL_ENABLED);
 
   // Idle Loop
@@ -52,6 +52,7 @@ const Home = ({ query, pathname }) => {
   React.useEffect(() => {
     const idleTimer = createIdleTimer(
       () => {
+        // Callback to run after user hasn't used screen for a while
         if (bookId) {
           console.log('Home Page - idleTimer - return home');
 
@@ -63,6 +64,9 @@ const Home = ({ query, pathname }) => {
       configs.IDLE_TIMEOUT,
       {
         onReset: () => {
+          setIsLogoActive(false);
+          setAreShelvesActive(true);
+
           if (isIdleLoopActive) {
             setIsIdleLoopActive(false);
           }
@@ -82,29 +86,57 @@ const Home = ({ query, pathname }) => {
    */
   const idleLoopCommands = [
     () => {
-      console.log('idleLoopCommand', 'Hide books, show logo');
+      console.log('idleLoopCommand', 'show logo');
 
-      setIsIntervalActive(false);
-      setAreShelvesActive(false);
       setIsLogoActive(true);
     },
+    null,
+    null,
     () => {
-      console.log('idleLoopCommand', 'Show books, hide logo');
+      console.log('idleLoopCommand', 'hide logo');
 
-      setIsIntervalActive(true);
-      setAreShelvesActive(true);
       setIsLogoActive(false);
     },
     null,
+    () => {
+      console.log('idleLoopCommand', 'show books');
+
+      setIsIntervalActive(true);
+      setAreShelvesActive(true);
+    },
     null,
     null,
     null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    () => {
+      console.log('idleLoopCommand', 'hide books');
+
+      setIsIntervalActive(false);
+      setAreShelvesActive(false);
+    },
     null,
   ];
 
   useInterval(
     () => {
-      console.log('idleLoopCommandIndex', idleLoopCommandIndex);
+      // console.log('idleLoopCommandIndex', idleLoopCommandIndex);
 
       const command = idleLoopCommands[idleLoopCommandIndex];
 
@@ -119,7 +151,7 @@ const Home = ({ query, pathname }) => {
       }
     },
     // appConfig.logoTimeout,
-    10000, // idleLoopInterval
+    2000, // idleLoopInterval
     isIdleLoopActive,
   );
 

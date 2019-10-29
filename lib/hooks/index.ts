@@ -4,6 +4,7 @@ export { default as useBookData } from './use-book-data';
 export { default as useBooksData } from './use-books-data';
 export { default as useDimensions } from './use-dimensions';
 export { default as useInterval } from './use-interval';
+export { default as useTimeout } from './use-timeout';
 export { default as useQuery } from './use-query';
 
 /**

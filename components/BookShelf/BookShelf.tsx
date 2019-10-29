@@ -74,6 +74,11 @@ const BookShelf: React.FunctionComponent<Props> = ({
     }
   }, [booksInView, onRender]);
 
+  // Reset booksInView if books prop changes
+  React.useEffect(() => {
+    setBooksInView([]);
+  }, [books]);
+
   const handleBookCardRender = (inView, entry, bookId) => {
     // Check if already added to local state array `booksInView`
     const inBooksInView = booksInView.includes(bookId);
@@ -140,7 +145,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
       transition={{
         // In BookShelves, whenever isActive is toggled off, the books shuffle
         // after 3s to allow time for BookCards to hide
-        delay: isActive ? 0 : 2.9,
+        delay: isActive ? 0 : 5.9,
         duration: 0,
       }}
       onScroll={handleScroll}

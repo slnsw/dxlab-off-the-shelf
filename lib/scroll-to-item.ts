@@ -36,62 +36,63 @@ export const createScrollToItem = (
   const to = item.offsetLeft - (container as HTMLElement).offsetLeft;
   const change = to - start;
 
-  // let currentTime = 0;
-  // let interval;
+  let currentTime = 0;
+  let interval;
 
-  let startTime = null;
-  let requestId = null;
+  // WIP RAF
+  // let startTime = null;
+  // let requestId = null;
 
-  const step = (time) => {
-    if (!startTime) {
-      startTime = time;
-    }
+  // const step = (time) => {
+  //   if (!startTime) {
+  //     startTime = time;
+  //   }
 
-    const progress = time - startTime;
+  //   const progress = time - startTime;
 
-    // console.log(time, startTime, progress);
-    // console.log(easeInOutQuad(progress, start, change, duration));
+  //   // console.log(time, startTime, progress);
+  //   // console.log(easeInOutQuad(progress, start, change, duration));
 
-    container.scrollTo(easeInOutQuad(progress, start, change, duration), 0);
+  //   container.scrollTo(easeInOutQuad(progress, start, change, duration), 0);
 
-    if (progress < duration) {
-      requestAnimationFrame(step);
-    }
-  };
+  //   if (progress < duration) {
+  //     requestAnimationFrame(step);
+  //   }
+  // };
 
   return {
     start: () => {
       // console.log('start');
 
-      requestId = requestAnimationFrame(step);
+      // requestId = requestAnimationFrame(step);
 
-      // interval = setInterval(() => {
-      //   currentTime += increment;
-      //   container.scrollTo(
-      //     easeInOutQuad(currentTime, start, change, duration),
-      //     0,
-      //   );
+      interval = setInterval(() => {
+        currentTime += increment;
+        container.scrollTo(
+          easeInOutQuad(currentTime, start, change, duration),
+          0,
+        );
 
-      //   if (currentTime >= duration) {
-      //     clearInterval(interval);
+        if (currentTime >= duration) {
+          clearInterval(interval);
 
-      //     if (typeof callback === 'function') {
-      //       callback();
-      //     }
-      //   }
-      // }, increment);
+          if (typeof callback === 'function') {
+            callback();
+          }
+        }
+      }, increment);
     },
     stop: () => {
-      cancelAnimationFrame(requestId);
+      // cancelAnimationFrame(requestId);
 
-      // clearInterval(interval);
+      clearInterval(interval);
 
       if (typeof callback === 'function') {
         callback();
       }
     },
-    // status: () => {
-    //   return interval;
-    // },
+    status: () => {
+      return interval;
+    },
   };
 };
