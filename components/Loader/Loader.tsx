@@ -1,4 +1,4 @@
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import * as React from 'react';
 
 import useDimensions from '../../lib/hooks/use-dimensions';
@@ -22,9 +22,9 @@ const Loader: React.FunctionComponent<Props> = ({
 }) => {
   const [ref, dimensions] = useDimensions();
 
-  // const { width, height } = dimensions;
-  const width = 400;
-  const height = 200;
+  let { width, height } = dimensions;
+  width = 400;
+  height = 200;
 
   console.log('dims:', width, height);
   const baseline = strokeWidth * 1.5;
@@ -77,7 +77,7 @@ const Loader: React.FunctionComponent<Props> = ({
         <motion.svg width={width} height={height} ref={ref}>
           <>
             <motion.path
-              d={paths['blue']}
+              d={paths.blue}
               fill={'transparent'}
               strokeWidth={strokeWidth}
               stroke={variables['colour-teal']}
@@ -91,7 +91,7 @@ const Loader: React.FunctionComponent<Props> = ({
               }}
             />
             <motion.path
-              d={paths['yellow']}
+              d={paths.yellow}
               fill={'transparent'}
               strokeWidth={strokeWidth}
               stroke={variables['colour-yellow']}
@@ -99,13 +99,13 @@ const Loader: React.FunctionComponent<Props> = ({
               animate={{ pathLength: [0, 1, 1], pathOffset: [0, 0, 1] }}
               transition={{
                 loop: Infinity,
-                delay: 0,
+                delay: 0.5,
                 duration: 4,
                 ease: 'linear',
               }}
             />
             <motion.path
-              d={paths['white']}
+              d={paths.white}
               fill={'transparent'}
               strokeWidth={strokeWidth}
               stroke={variables['colour-white']}
@@ -113,7 +113,7 @@ const Loader: React.FunctionComponent<Props> = ({
               animate={{ pathLength: [0, 1, 1], pathOffset: [0, 0, 1] }}
               transition={{
                 loop: Infinity,
-                delay: 0,
+                delay: 1,
                 duration: 4,
                 ease: 'linear',
               }}
