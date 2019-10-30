@@ -3,10 +3,21 @@
 .bookCard {
   display: block;
   margin-right: $baseline-3;
+  position: relative;
 }
 
 .image {
   display: block;
   width: auto;
   // height: calc(100% - #{$baseline-2});
+}
+
+.debugNumber {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  color: #333333;
+  font-size: 80px;
+  font-weight: 900;
+  text-shadow: 3px 3px #cccccc;
 }

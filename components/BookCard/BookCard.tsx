@@ -8,6 +8,7 @@ import css from './BookCard.scss';
 
 type Props = {
   id: number;
+  index: number;
   title: string;
   imageUrl: string;
   imageWidth: number;
@@ -25,6 +26,7 @@ type Props = {
 
 const BookCard: React.FunctionComponent<Props> = ({
   id,
+  index,
   title,
   imageUrl,
   imageWidth = 0,
@@ -41,6 +43,8 @@ const BookCard: React.FunctionComponent<Props> = ({
 }) => {
   const [ref, inView, entry] = useInView();
   const [originX, setOriginX] = React.useState();
+
+  const debug = true;
 
   React.useEffect(() => {
     if (scrollDirection) {
@@ -68,54 +72,56 @@ const BookCard: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <motion.article
-      id={`bookCard-${id}`}
-      className={[css.bookCard, className || ''].join(' ')}
-      animate={{
-        rotate,
-        // y: isActive ? 10 : 0,
-        // y: isScrolling ? -0.5 : 0,
-      }}
-      transition={{
-        delay: Math.random() * 0.2,
-        duration: 0.4,
-        type: 'spring',
-        damping: isScrolling ? 10 : 4,
-        stiffness: 300,
-      }}
-      style={{
-        originX,
-        originY: 1,
-      }}
-      ref={ref}
-    >
-      {/* {inView ? ( */}
-      <motion.img
-        src={imageUrl}
-        alt={title}
-        className={css.image}
+    <>
+      <motion.article
+        id={`bookCard-${id}`}
+        className={[css.bookCard, className || ''].join(' ')}
         animate={{
-          y: isActive ? 0 : imageHeight + appConfig.GUTTER,
+          rotate,
+          // y: isActive ? 10 : 0,
+          // y: isScrolling ? -0.5 : 0,
         }}
         transition={{
-          delay: Math.random() * 0.4 + animationDelay,
+          delay: Math.random() * 0.2,
+          duration: 0.4,
           type: 'spring',
-          damping: 20,
-          stiffness: 50,
-          mass: 2,
+          damping: isScrolling ? 10 : 4,
+          stiffness: 300,
         }}
-        initial={false}
         style={{
-          width: imageWidth,
-          height: imageHeight,
+          originX,
+          originY: 1,
         }}
-        onClick={(e) => {
-          if (typeof onClick === 'function') {
-            onClick(e, { id, title, imageUrl });
-          }
-        }}
-      />
-      {/* ) : (
+        ref={ref}
+      >
+        {/* {inView ? ( */}
+        {debug && <p className={css.debugNumber}>{index}</p>}
+        <motion.img
+          src={imageUrl}
+          alt={title}
+          className={css.image}
+          animate={{
+            y: isActive ? 0 : imageHeight + appConfig.GUTTER,
+          }}
+          transition={{
+            delay: Math.random() * 0.4 + animationDelay,
+            type: 'spring',
+            damping: 20,
+            stiffness: 50,
+            mass: 2,
+          }}
+          initial={false}
+          style={{
+            width: imageWidth,
+            height: imageHeight,
+          }}
+          onClick={(e) => {
+            if (typeof onClick === 'function') {
+              onClick(e, { id, title, imageUrl });
+            }
+          }}
+        />
+        {/* ) : (
         <div
           style={{
             width: imageWidth,
@@ -123,7 +129,8 @@ const BookCard: React.FunctionComponent<Props> = ({
           }}
         ></div>
       )} */}
-    </motion.article>
+      </motion.article>
+    </>
   );
 };
 
