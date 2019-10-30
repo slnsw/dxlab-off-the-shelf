@@ -78,8 +78,6 @@ const BookCard: React.FunctionComponent<Props> = ({
         className={[css.bookCard, className || ''].join(' ')}
         animate={{
           rotate,
-          // y: isActive ? 10 : 0,
-          // y: isScrolling ? -0.5 : 0,
         }}
         transition={{
           delay: Math.random() * 0.2,

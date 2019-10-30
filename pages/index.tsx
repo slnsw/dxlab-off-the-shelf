@@ -149,7 +149,7 @@ const Home = ({ query, pathname }) => {
 
   useInterval(
     () => {
-      console.log('idleLoopCommandIndex', idleLoopCommandIndex);
+      // console.log('idleLoopCommandIndex', idleLoopCommandIndex);
 
       const command = idleLoopCommands[idleLoopCommandIndex];
 

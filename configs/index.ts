@@ -11,7 +11,7 @@ export const GUTTER = 24;
 
 // Amounts
 export const NUMBER_OF_BOOKS_TO_DISPLAY = 200;
-export const NUMBER_OF_SPINES = 96;
+export const NUMBER_OF_SPINES = 96; // 96;
 export const MAX_NUMBER_OF_SPINES = 4; // per gap
 export const HAS_SPINES_PROBABILITY = 0.5; // 1 = always, 0 = never
 

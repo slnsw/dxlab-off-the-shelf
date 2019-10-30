@@ -53,6 +53,10 @@ const BookShelf: React.FunctionComponent<Props> = ({
       const bookNode = document.getElementById(`bookCard-${bookId}`);
 
       if (bookNode) {
+        if (scrollToItem.current) {
+          scrollToItem.current.stop();
+        }
+
         scrollToItem.current = createScrollToItem(
           node,
           bookNode,
@@ -60,7 +64,6 @@ const BookShelf: React.FunctionComponent<Props> = ({
           configs.SCROLL_TIME,
         );
 
-        scrollToItem.current.stop();
         scrollToItem.current.start();
       }
     }
@@ -148,7 +151,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
       }}
       transition={{
         // In BookShelves, whenever isActive is toggled off, the books shuffle
-        // after 3s to allow time for BookCards to hide
+        // after 5.9s to allow time for BookCards to hide
         delay: isActive ? 0 : 5.9,
         duration: 0,
       }}
