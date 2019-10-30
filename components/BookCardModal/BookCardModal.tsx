@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Modal from '../Modal';
 import CTAButton from '../CTAButton';
 import OffTheShelfLogoBorders from '../OffTheShelfLogoBorders';
-import Loader from '../Loader';
+// import Loader from '../Loader';
 
 import useBookData from '../../lib/hooks/use-book-data';
 
@@ -79,150 +79,148 @@ const BookCardModal: React.FunctionComponent<Props> = ({
           />
 
           <div className={css.content}>
-            {loading ? (
-              // ? 'Loading...'
-              <Loader isActive={true} strokeWidth={16} delay={100} />
-            ) : (
-              primoRecord && (
-                <>
-                  <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
-                  {creator && <h2>{creator}</h2>}
+            {loading
+              ? 'Loading...'
+              : // <Loader isActive={true} strokeWidth={16} delay={100} />
+                primoRecord && (
+                  <>
+                    <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
+                    {creator && <h2>{creator}</h2>}
 
-                  {description && (
-                    <p className={css.description}>{description}</p>
-                  )}
+                    {description && (
+                      <p className={css.description}>{description}</p>
+                    )}
 
-                  <div className={css.table}>
-                    {[
-                      {
-                        field: 'callNumber',
-                        label: 'Call number',
-                      },
-                      {
-                        field: 'dewey',
-                        label: 'Dewey',
-                      },
-                      {
-                        field: 'publisher',
-                        label: 'Publisher',
-                      },
-                      {
-                        field: 'access',
-                        label: 'Access',
-                      },
-                      {
-                        field: 'accessConditions',
-                        label: 'Access conditions',
-                      },
-                      {
-                        field: 'copyright',
-                        label: 'Copyright',
-                      },
-                      // TODO: Add this back in and dedupe
-                      // {
-                      //   field: 'creationDate',
-                      //   label: 'Date',
-                      // },
-                      {
-                        field: 'date',
-                        label: 'Date',
-                      },
-                      {
-                        field: 'language',
-                        label: 'Language',
-                      },
-                      {
-                        field: 'format',
-                        label: 'Format',
-                      },
-                      {
-                        field: 'history',
-                        label: 'History',
-                      },
-                      {
-                        field: 'isbn',
-                        label: 'ISBN',
-                      },
-                      {
-                        field: 'referenceCode',
-                        label: 'Reference code',
-                      },
-                      {
-                        field: 'holdings',
-                        label: 'Holdings',
-                      },
-                      {
-                        field: 'subjects',
-                        label: 'Subjects',
-                      },
-                    ]
-                      .filter((row) => primoRecord[row.field])
-                      .map((row) => {
-                        return (
-                          <div className={css.row}>
-                            <div className={css.label}>
-                              <p>{row.label}</p>
+                    <div className={css.table}>
+                      {[
+                        {
+                          field: 'callNumber',
+                          label: 'Call number',
+                        },
+                        {
+                          field: 'dewey',
+                          label: 'Dewey',
+                        },
+                        {
+                          field: 'publisher',
+                          label: 'Publisher',
+                        },
+                        {
+                          field: 'access',
+                          label: 'Access',
+                        },
+                        {
+                          field: 'accessConditions',
+                          label: 'Access conditions',
+                        },
+                        {
+                          field: 'copyright',
+                          label: 'Copyright',
+                        },
+                        // TODO: Add this back in and dedupe
+                        // {
+                        //   field: 'creationDate',
+                        //   label: 'Date',
+                        // },
+                        {
+                          field: 'date',
+                          label: 'Date',
+                        },
+                        {
+                          field: 'language',
+                          label: 'Language',
+                        },
+                        {
+                          field: 'format',
+                          label: 'Format',
+                        },
+                        {
+                          field: 'history',
+                          label: 'History',
+                        },
+                        {
+                          field: 'isbn',
+                          label: 'ISBN',
+                        },
+                        {
+                          field: 'referenceCode',
+                          label: 'Reference code',
+                        },
+                        {
+                          field: 'holdings',
+                          label: 'Holdings',
+                        },
+                        {
+                          field: 'subjects',
+                          label: 'Subjects',
+                        },
+                      ]
+                        .filter((row) => primoRecord[row.field])
+                        .map((row) => {
+                          return (
+                            <div className={css.row}>
+                              <div className={css.label}>
+                                <p>{row.label}</p>
+                              </div>
+                              <div className={css.value}>
+                                {(() => {
+                                  switch (row.field) {
+                                    case 'holdings':
+                                      return primoRecord[row.field].map(
+                                        (holding, i) => {
+                                          return (
+                                            <p
+                                              key={`${holding.subLocation}-${i}`}
+                                            >
+                                              {holding.subLocation},{' '}
+                                              {holding.status},{' '}
+                                              {holding.mainLocation}
+                                            </p>
+                                          );
+                                        },
+                                      );
+                                    case 'subjects':
+                                      return (
+                                        <ul>
+                                          {book.primoRecord.subjects.map(
+                                            (subject) => {
+                                              return (
+                                                <li key={subject}>{subject}</li>
+                                              );
+                                            },
+                                          )}
+                                        </ul>
+                                      );
+                                    default:
+                                      return <p>{primoRecord[row.field]}</p>;
+                                  }
+                                })()}
+                              </div>
                             </div>
-                            <div className={css.value}>
-                              {(() => {
-                                switch (row.field) {
-                                  case 'holdings':
-                                    return primoRecord[row.field].map(
-                                      (holding, i) => {
-                                        return (
-                                          <p
-                                            key={`${holding.subLocation}-${i}`}
-                                          >
-                                            {holding.subLocation},{' '}
-                                            {holding.status},{' '}
-                                            {holding.mainLocation}
-                                          </p>
-                                        );
-                                      },
-                                    );
-                                  case 'subjects':
-                                    return (
-                                      <ul>
-                                        {book.primoRecord.subjects.map(
-                                          (subject) => {
-                                            return (
-                                              <li key={subject}>{subject}</li>
-                                            );
-                                          },
-                                        )}
-                                      </ul>
-                                    );
-                                  default:
-                                    return <p>{primoRecord[row.field]}</p>;
-                                }
-                              })()}
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
+                          );
+                        })}
+                    </div>
 
-                  {book.primoRecord.exhibitions && (
-                    <p>{book.primoRecord.exhibitions}</p>
-                  )}
-                  {book.primoRecord.notes && (
-                    <p>Notes: {book.primoRecord.notes}</p>
-                  )}
-                  {book.primoRecord.personNames && (
-                    <p>Names: {book.primoRecord.personNames}</p>
-                  )}
-                  {book.primoRecord.physicalDescription && (
-                    <p>{book.primoRecord.physicalDescription}</p>
-                  )}
-                  {book.primoRecord.source && (
-                    <p>Source: {book.primoRecord.source}</p>
-                  )}
-                  {book.primoRecord.topics && (
-                    <p>Topics: {book.primoRecord.topics}</p>
-                  )}
-                </>
-              )
-            )}
+                    {book.primoRecord.exhibitions && (
+                      <p>{book.primoRecord.exhibitions}</p>
+                    )}
+                    {book.primoRecord.notes && (
+                      <p>Notes: {book.primoRecord.notes}</p>
+                    )}
+                    {book.primoRecord.personNames && (
+                      <p>Names: {book.primoRecord.personNames}</p>
+                    )}
+                    {book.primoRecord.physicalDescription && (
+                      <p>{book.primoRecord.physicalDescription}</p>
+                    )}
+                    {book.primoRecord.source && (
+                      <p>Source: {book.primoRecord.source}</p>
+                    )}
+                    {book.primoRecord.topics && (
+                      <p>Topics: {book.primoRecord.topics}</p>
+                    )}
+                  </>
+                )}
           </div>
 
           {/* <OffTheShelfLogoBorders
@@ -255,6 +253,20 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       <CTAButton className={css.backButton} onClick={onClose}>
         Close
       </CTAButton>
+
+      {/* <OffTheShelfLogoBorders
+        orientation="topRight"
+        strokeWidth={16}
+        isActive={true}
+        style={{
+          position: 'fixed',
+          zIndex: 0,
+          bottom: -16,
+          left: -56,
+          width: '20%',
+          height: '33%',
+        }}
+      /> */}
     </Modal>
   );
 };

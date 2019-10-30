@@ -45,7 +45,9 @@ const BookShelf: React.FunctionComponent<Props> = ({
 
   React.useEffect(() => {
     const book = books[scrollToBook];
-    console.log(scrollToItem.current && scrollToItem.current.stop());
+
+    // console.log(scrollToItem.current && scrollToItem.current.stop());
+
     if (book && isActive) {
       const bookId = books[scrollToBook].id;
       const bookNode = document.getElementById(`bookCard-${bookId}`);

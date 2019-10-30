@@ -56,7 +56,7 @@
 // @include scrollbar(.5em, slategray);
 @mixin scrollbar(
   $size: $baseline * 2,
-  $foreground-color: $colour-teal,
+  $foreground-color: $colour-grey-700,
   $background-color: $colour-grey-900,
   $border-radius: 0
 ) {

@@ -44,7 +44,7 @@ const BookCard: React.FunctionComponent<Props> = ({
   const [ref, inView, entry] = useInView();
   const [originX, setOriginX] = React.useState();
 
-  const debug = true;
+  const debug = false;
 
   React.useEffect(() => {
     if (scrollDirection) {

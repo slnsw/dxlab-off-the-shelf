@@ -9,8 +9,10 @@ type Props = {
   orientation?: 'bottomLeft' | 'topRight';
   isActive?: boolean;
   hasStartCorners?: boolean;
+  hasEndCorners?: boolean;
   delay?: number;
   className?: string;
+  style?: React.CSSProperties;
 };
 
 const OffTheShelfLogoBorders: React.FunctionComponent<Props> = ({
@@ -21,6 +23,7 @@ const OffTheShelfLogoBorders: React.FunctionComponent<Props> = ({
   hasEndCorners = true,
   delay = 0,
   className,
+  style,
 }) => {
   const indexes = {
     bottomLeft: [0, 1, 2],
@@ -28,7 +31,10 @@ const OffTheShelfLogoBorders: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <div className={[css.offTheShelfLogoBorders, className || ''].join(' ')}>
+    <div
+      className={[css.offTheShelfLogoBorders, className || ''].join(' ')}
+      style={style}
+    >
       <div
         style={{
           // position: 'relative',

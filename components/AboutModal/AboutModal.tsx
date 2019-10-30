@@ -26,10 +26,10 @@ const AboutModal: React.FunctionComponent<Props> = ({
     >
       <div className={css.info}>
         <div className={css.content}>
-          <>
-            {/* <h1>About Off The Shelf</h1> */}
-            <OffTheShelfLogo className={css.logo} />
+          {/* <h1>About Off The Shelf</h1> */}
+          <OffTheShelfLogo className={css.logo} />
 
+          <div className={css.contentInner}>
             <p>
               Did you know the State Library of NSW has five floors underneath
               the reading rooms where the collection is kept? This is called the
@@ -84,7 +84,7 @@ const AboutModal: React.FunctionComponent<Props> = ({
             <p>
               Please email <span>media@sl.nsw.gov.au</span> for enquiries.
             </p>
-          </>
+          </div>
         </div>
         <img
           src={'/images/SLNSW-stack.jpg'}
