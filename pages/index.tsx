@@ -45,7 +45,7 @@ const Home = ({ query, pathname }) => {
 
   const bookId = query && query.id ? query.id : null;
   const isAboutModalActive =
-    query && query.page && query.page === 'about' ? query.page : null;
+    query && query.page && query.page === 'about' ? true : null;
 
   /*
    * Set idle timer to return to home after timeout.
@@ -54,7 +54,7 @@ const Home = ({ query, pathname }) => {
     const idleTimer = createIdleTimer(
       () => {
         // Callback to run after user hasn't used screen for a while
-        if (bookId) {
+        if (bookId || isAboutModalActive) {
           console.log('Home Page - idleTimer - return home');
 
           Router.push('/');
@@ -80,7 +80,7 @@ const Home = ({ query, pathname }) => {
     return () => {
       idleTimer.stop();
     };
-  }, []);
+  }, [bookId, isAboutModalActive]);
 
   /*
    * Idle loop with commands that run in a sequence
@@ -89,6 +89,7 @@ const Home = ({ query, pathname }) => {
     () => {
       console.log('idleLoopCommand', 'show logo');
 
+      setIsShelfIntervalActive(false);
       setIsLogoActive(true);
     },
     null,
@@ -96,6 +97,7 @@ const Home = ({ query, pathname }) => {
     () => {
       console.log('idleLoopCommand', 'hide logo');
 
+      setIsShelfIntervalActive(false);
       setIsLogoActive(false);
     },
     null,
