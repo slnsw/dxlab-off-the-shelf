@@ -70,7 +70,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
   const activeDelay = isActive ? animationDelay : 0;
 
   return (
-    <motion.article
+    <motion.div
       id={`spine-${id}`}
       className={[css.bookSpine, className || ''].join(' ')}
       animate={{
@@ -80,9 +80,11 @@ const BookSpine: React.FunctionComponent<Props> = ({
       transition={{
         delay: index * 0.05 + activeDelay,
         type: 'spring',
-        damping: 7,
+        damping: 20,
         stiffness: 50,
+        mass: 2,
       }}
+      initial={false}
       style={{
         originX,
         originY: 1,
@@ -95,7 +97,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
         )}
         alt="Book spine"
       />
-    </motion.article>
+    </motion.div>
   );
 };
 
