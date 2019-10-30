@@ -42,8 +42,6 @@ const BookCard: React.FunctionComponent<Props> = ({
   const [ref, inView, entry] = useInView();
   const [originX, setOriginX] = React.useState();
 
-  // console.log(containerElement);
-
   React.useEffect(() => {
     if (scrollDirection) {
       setOriginX(scrollDirection === 'right' ? 1 : 0);
@@ -106,6 +104,7 @@ const BookCard: React.FunctionComponent<Props> = ({
           stiffness: 50,
           mass: 2,
         }}
+        initial={false}
         style={{
           width: imageWidth,
           height: imageHeight,

@@ -15,25 +15,27 @@ const OffTheShelfLogoText: React.FunctionComponent<Props> = ({
   delay = 0,
   className,
 }) => {
-  const pathVariants = {
-    hidden: {
-      // pathLength: 0,
-      // stroke: variables['colour-white'],
-      fill: variables['colour-black'],
-      // rotate: -1,
-    },
-    end: {
-      // pathLength: 1,
-      // stroke: variables['colour-white'],
-      fill: variables['colour-white'],
-      // rotate: 0,
-    },
+  const getPathVariants = (index) => {
+    return {
+      hidden: {
+        pathLength: 0,
+        stroke: variables['colour-white'],
+        strokeWidth: 4,
+        fill: variables['colour-black'],
+      },
+      end: {
+        pathLength: 1,
+        stroke: variables['colour-black'],
+        strokeWidth: 0,
+        fill: variables['colour-white'],
+      },
+    };
   };
 
   const getPathTransition = (index) => {
     return {
-      delay: delay + index * 0.1,
-      duration: 1,
+      delay: delay + index * 0.07 + (isActive ? 0 : -0.4),
+      duration: isActive ? 4 : 0.5,
     };
   };
 
@@ -93,23 +95,26 @@ const OffTheShelfLogoText: React.FunctionComponent<Props> = ({
   return (
     <div className={[css.offTheShelfLogoText, className || ''].join(' ')}>
       <AnimatePresence>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 419.73 267.42">
+        <motion.svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 8 419.73 300.42"
+        >
           {textPaths.map((path, i) => {
             return (
               <motion.path
                 key={i}
-                variants={pathVariants}
+                variants={getPathVariants(i)}
                 initial="hidden"
-                // animate="end"
                 animate={isActive ? 'end' : 'hidden'}
                 exit="hidden"
                 transition={getPathTransition(i)}
                 d={path.d}
-                transform="translate(-8.3 -8.78)"
+                strokeDasharray="0 1"
+                // transform="translate(-8.3 -8.78)"
               />
             );
           })}
-        </svg>
+        </motion.svg>
       </AnimatePresence>
     </div>
   );
