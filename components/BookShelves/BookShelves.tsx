@@ -99,14 +99,14 @@ const BookShelves: React.FunctionComponent<Props> = ({
       const currentShelf = shelves[currentShelfIndex];
       const currentBooksInView = allBooksInView[currentShelfIndex];
 
-      console.log(currentBookIndex);
+      console.log('Current book: ', currentBookIndex);
 
       if (!currentBooksInView.includes(currentShelf[currentBookIndex])) {
         currentBookIndex = currentShelf.findIndex((value) => {
           return value.id === currentBooksInView[0];
         });
       }
-      console.log(currentBookIndex);
+      console.log('Current book after in-view check: ', currentBookIndex);
       console.log(currentBooksInView);
       const amountToChange =
         Math.floor(
@@ -130,8 +130,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
         newCurrentBook = 0;
       }
 
-      if (newCurrentBook >= currentShelf.length - 5) {
-        newCurrentBook = currentShelf.length - 5;
+      if (newCurrentBook >= currentShelf.length - 8) {
+        newCurrentBook = currentShelf.length - 8;
       }
 
       console.log(
