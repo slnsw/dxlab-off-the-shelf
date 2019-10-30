@@ -11,7 +11,8 @@
     "start": "next start",
     "test": "node -r dotenv/config ./node_modules/.bin/jest",
     "test:watch": "npm test -- --watch",
-    "deploy:prod": "now --prod"
+    "deploy:prod": "now --prod",
+    "deploy:staging": "now"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.2",
