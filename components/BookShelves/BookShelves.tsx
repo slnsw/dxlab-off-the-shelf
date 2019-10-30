@@ -99,12 +99,15 @@ const BookShelves: React.FunctionComponent<Props> = ({
       const currentShelf = shelves[currentShelfIndex];
       const currentBooksInView = allBooksInView[currentShelfIndex];
 
+      console.log(currentBookIndex);
+
       if (!currentBooksInView.includes(currentShelf[currentBookIndex])) {
         currentBookIndex = currentShelf.findIndex((value) => {
           return value.id === currentBooksInView[0];
         });
       }
-
+      console.log(currentBookIndex);
+      console.log(currentBooksInView);
       const amountToChange =
         Math.floor(
           Math.random() * (configs.SCROLL_RANGE_MAX - configs.SCROLL_RANGE_MIN),
@@ -131,12 +134,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
         newCurrentBook = currentShelf.length - 5;
       }
 
-      setCurrentBooks([
-        currentShelfIndex === 0 ? newCurrentBook : currentBooks[0],
-        currentShelfIndex === 1 ? newCurrentBook : currentBooks[1],
-        currentShelfIndex === 2 ? newCurrentBook : currentBooks[2],
-      ]);
-
       console.log(
         'Scroll shelf',
         currentShelfIndex,
@@ -145,6 +142,12 @@ const BookShelves: React.FunctionComponent<Props> = ({
         'to',
         newCurrentBook,
       );
+
+      setCurrentBooks([
+        currentShelfIndex === 0 ? newCurrentBook : currentBooks[0],
+        currentShelfIndex === 1 ? newCurrentBook : currentBooks[1],
+        currentShelfIndex === 2 ? newCurrentBook : currentBooks[2],
+      ]);
 
       const newShelf = Math.floor(Math.random() * 3);
       setCurrentShelfIndex(newShelf);

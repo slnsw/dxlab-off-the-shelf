@@ -96,6 +96,7 @@ const BookCard: React.FunctionComponent<Props> = ({
       >
         {/* {inView ? ( */}
         {debug && <p className={css.debugNumber}>{index}</p>}
+        {debug && <p className={css.debugNumber2}>{id}</p>}
         <motion.img
           src={imageUrl}
           alt={title}
