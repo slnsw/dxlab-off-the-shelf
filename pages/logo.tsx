@@ -8,24 +8,24 @@ const LogoPage = () => {
   return (
     <div
       style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: '10rem',
         height: '100vh',
       }}
+      onClick={() => {
+        setIsActive(!isActive);
+      }}
     >
-      <OffTheShelfLogo isActive={isActive} />
+      <div>
+        <OffTheShelfLogo isActive={isActive} />
 
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <button
-        onClick={() => {
-          setIsActive(!isActive);
-        }}
-      >
-        Show/Hide
-      </button>
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
     </div>
   );
 };
