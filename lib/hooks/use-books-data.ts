@@ -123,6 +123,26 @@ function processBooks(books) {
       book.sizes.medium.sourceUrl !== 'Hello World'
     );
   });
+  // WIP Experiment
+  // .map((book) => {
+  //   const urlArray = book.sizes.medium.sourceUrl.split('/');
+  //   const filename = urlArray[urlArray.length - 1];
+  //   const newFilename = `https://dxlab-off-the-shelf.s3.ap-southeast-2.amazonaws.com/covers-1024/${filename.replace(
+  //     '.png',
+  //     '.jpg',
+  //   )}`;
+
+  //   return {
+  //     ...book,
+  //     sizes: {
+  //       ...book.sizes,
+  //       medium: {
+  //         ...book.sizes.medium,
+  //         sourceUrl: newFilename,
+  //       },
+  //     },
+  //   };
+  // });
 }
 
 export default useBooksData;
