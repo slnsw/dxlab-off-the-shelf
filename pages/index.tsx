@@ -233,6 +233,7 @@ const Home = ({ query, pathname }) => {
     <>
       <BookCardModal
         id={bookId}
+        side={bookShelvesId}
         isActive={isModalActive}
         initialSize={initialModalSize}
         initialImageUrl={initialModalImageUrl}

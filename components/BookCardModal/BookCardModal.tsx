@@ -14,6 +14,7 @@ import css from './BookCardModal.scss';
 
 type Props = {
   id: number;
+  side?: 'left' | 'right';
   isActive?: boolean;
   initialSize?: {
     x: number;
@@ -28,6 +29,8 @@ type Props = {
 
 const BookCardModal: React.FunctionComponent<Props> = ({
   id,
+  // TODO: Make this nicer
+  side = 'left',
   isActive,
   initialSize,
   initialImageUrl,
@@ -224,7 +227,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
           </p>
           <br />
 
-          <Link href={`/?id=${id}&page=about`}>
+          <Link href={`/?side=${side}&id=${id}&page=about`}>
             <CTAButton>About this exhibition</CTAButton>
           </Link>
         </div>
