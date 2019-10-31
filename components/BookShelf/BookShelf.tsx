@@ -43,6 +43,8 @@ const BookShelf: React.FunctionComponent<Props> = ({
   const scrollDeltaRef = React.useRef(0);
   const scrollToItem = React.useRef(null);
 
+  const shuffleTimeout = (configs.SHUFFLE_TIMEOUT - 100) / 1000;
+
   React.useEffect(() => {
     const book = books[scrollToBook];
 
@@ -148,11 +150,12 @@ const BookShelf: React.FunctionComponent<Props> = ({
       ref={ref}
       animate={{
         visibility: isActive ? 'visible' : 'hidden',
+        // display: isActive ? 'flex' : 'none',
       }}
       transition={{
         // In BookShelves, whenever isActive is toggled off, the books shuffle
-        // after 5.9s to allow time for BookCards to hide
-        delay: isActive ? 0 : 5.9,
+        // We need to allow time for BookCards to hide while shuffle happens
+        delay: isActive ? 0 : shuffleTimeout,
         duration: 0,
       }}
       onScroll={handleScroll}

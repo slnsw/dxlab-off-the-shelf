@@ -10,19 +10,18 @@ interface Props {
   onClick?: Function;
 }
 
-const CTAButton: React.FunctionComponent<Props> = ({
-  children,
-  className,
-  ...restProps
-}) => {
-  return (
-    <Button
-      className={[css.ctaButton, className || ''].join(' ')}
-      {...restProps}
-    >
-      {children}
-    </Button>
-  );
-};
+const CTAButton: React.FunctionComponent<Props> = React.forwardRef(
+  ({ children, className, ...restProps }, ref) => {
+    return (
+      <Button
+        className={[css.ctaButton, className || ''].join(' ')}
+        {...restProps}
+        ref={ref}
+      >
+        {children}
+      </Button>
+    );
+  },
+);
 
 export default CTAButton;

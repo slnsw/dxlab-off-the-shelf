@@ -31,56 +31,41 @@ const AboutModal: React.FunctionComponent<Props> = ({
 
           <div className={css.contentInner}>
             <p>
-              Did you know the State Library of NSW has five floors underneath
-              the reading rooms where the collection is kept? This is called the
-              Stacks. The book covers that you are seeing are kept on these
-              floors.
+              All books published in New South Wales, and many from beyond, live
+              in your State Library. Millions of them, in a maze of shelves
+              beneath your feet.
             </p>
 
             <p>
               Off the Shelf brings you snapshots of the intriguing, perplexing
-              and playful volumes waiting to be read. From bodice rippers to
-              banksia trees, cats to catafalques, turnips to teleology —
-              whatever you're into, we have a book for it.
-            </p>
-            <p>
-              If you would like to read any of these books, you can ask for them
-              in the reading room downstairs.
+              and playful volumes in the underground book stacks waiting to be
+              read. From bodice rippers to banksia trees, cats to catafalques,
+              turnips to teleology — whatever you're into, we have a book for
+              it.
             </p>
 
-            <h2>FAQ’s</h2>
-
-            <h3>How do I request my book?</h3>
             <p>
-              You can take a photo of the screen showing the book that you want
-              to read or write down the call number and take that to the
-              Governor Marie Bashir Reading Room.
+              If any of these books pique your interest, you can ask for them in
+              the reading rooms downstairs. Take a photo of a book cover, or
+              write down the call number, and ask a librarian to see it off the
+              shelf in:
             </p>
 
-            <h3>Where is the Reading room?</h3>
-            <p>
-              The Governor Marie Bashir Reading Room is located in the Macquarie
-              Street building. Go to the lower ground level and the staff at the
-              information desk will guide you on how to request your book
-            </p>
-            <h3>How long will it take to get my book?</h3>
-            <p>
-              There are a lot of floors and many books in the stacks so it can
-              take our staff up to 30 minutes to get your book. Browse in the
-              Critics Picks area of interest for you while you wait (there are
-              six to choose from).
-            </p>
-
-            <h3>Can I borrow this book?</h3>
-            <p>
-              You will be able to read this book in the Library as we are not a
-              lending Library, however, you can ask your local library if an
-              interlibrary loan is possible.
-            </p>
+            <ul>
+              <li>
+                <strong>Bashir Reading Room</strong>, Lower Ground 1, Macquarie
+                Building
+              </li>
+              <li>
+                <strong>Mitchell Reading Room</strong>, Ground Floor, Mitchell
+                Building
+              </li>
+            </ul>
 
             <p>
               <span>#OffTheShelf #shelfie</span>
             </p>
+
             <p>
               Please email <span>media@sl.nsw.gov.au</span> for enquiries.
             </p>

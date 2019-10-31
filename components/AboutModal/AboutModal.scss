@@ -36,18 +36,15 @@
 }
 
 .content {
-  @include scrollbar();
-
   position: relative;
+  display: flex;
+  flex-direction: column;
   max-width: 80ch;
   height: 100%;
-  margin-right: $baseline * 6;
-  padding-right: $baseline * 6;
-  overflow: auto;
-  // padding-left: $baseline * 6;
   font-size: $font-size-lg;
 
-  p {
+  p,
+  ul {
     margin-top: 0;
     margin-bottom: $baseline-2;
     line-height: $baseline-3 + $baseline-half;
@@ -59,7 +56,13 @@
 }
 
 .contentInner {
+  @include scrollbar();
+
+  height: 100%;
+  margin-right: $baseline * 6;
   margin-left: $baseline-6;
+  padding-right: $baseline * 6;
+  overflow: auto;
 }
 
 .backButton {

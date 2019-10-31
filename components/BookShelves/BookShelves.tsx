@@ -1,12 +1,12 @@
 import * as React from 'react';
-// import { useMotionValue, useSpring } from 'framer-motion';
+import shuffle from 'lodash.shuffle';
 
 import BookShelf from '../BookShelf';
 
 import useInterval from '../../lib/hooks/use-interval';
 import useBooksData from '../../lib/hooks/use-books-data';
 import { usePrevious } from '../../lib/hooks';
-import knuthShuffle from '../../lib/knuthShuffle';
+// import knuthShuffle from '../../lib/knuthShuffle';
 import * as configs from '../../configs';
 
 import css from './BookShelves.scss';
@@ -14,7 +14,6 @@ import css from './BookShelves.scss';
 type Props = {
   isActive?: boolean;
   isIntervalActive?: boolean;
-  // shouldShuffle?: boolean;
   className?: string;
   onBookClick?: Function;
 };
@@ -22,7 +21,6 @@ type Props = {
 const BookShelves: React.FunctionComponent<Props> = ({
   isActive = false,
   isIntervalActive = false,
-  // shouldShuffle = false,
   className,
   onBookClick,
 }) => {
@@ -63,7 +61,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
       });
 
     // shuffle them up and display a subset
-    setBooks(knuthShuffle(unshuffledBooks).slice(0, subset));
+    // setBooks(knuthShuffle(unshuffledBooks).slice(0, subset));
+    setBooks(shuffle(unshuffledBooks).slice(0, subset));
   };
 
   React.useEffect(() => {
@@ -79,8 +78,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
       return () => {
         clearTimeout(timeout);
       };
-      // TODO: Add this to appConfig
-    }, 6000);
+    }, configs.SHUFFLE_TIMEOUT);
   }, [isActive]);
 
   React.useEffect(() => {
@@ -99,15 +97,17 @@ const BookShelves: React.FunctionComponent<Props> = ({
       const currentShelf = shelves[currentShelfIndex];
       const currentBooksInView = allBooksInView[currentShelfIndex];
 
-      console.log('Current book: ', currentBookIndex);
+      // console.log('Current book: ', currentBookIndex);
 
       if (!currentBooksInView.includes(currentShelf[currentBookIndex])) {
         currentBookIndex = currentShelf.findIndex((value) => {
           return value.id === currentBooksInView[0];
         });
       }
-      console.log('Current book after in-view check: ', currentBookIndex);
-      console.log(currentBooksInView);
+
+      // console.log('Current book after in-view check: ', currentBookIndex);
+      // console.log(currentBooksInView);
+
       const amountToChange =
         Math.floor(
           Math.random() * (configs.SCROLL_RANGE_MAX - configs.SCROLL_RANGE_MIN),

@@ -5,6 +5,7 @@ export const IDLE_TIMEOUT =
 export const LOGO_TIMEOUT = 25000;
 export const TIME_BETWEEN_SCROLLS = 11000;
 export const SCROLL_TIME = 8000;
+export const SHUFFLE_TIMEOUT = 6000;
 
 // Design
 export const GUTTER = 24;
