@@ -77,3 +77,10 @@
   height: 50%;
   transform: rotateZ(-90deg);
 }
+
+.version {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: $baseline-2;
+}

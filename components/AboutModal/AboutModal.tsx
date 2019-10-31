@@ -6,6 +6,8 @@ import CTAButton from '../CTAButton';
 import OffTheShelfLogo from '../OffTheShelfLogo';
 import OffTheShelfLogoBorders from '../OffTheShelfLogoBorders';
 
+import pkg from '../../package.json';
+
 import css from './AboutModal.scss';
 
 type Props = {
@@ -19,6 +21,8 @@ const AboutModal: React.FunctionComponent<Props> = ({
   isActive,
   onClose,
 }) => {
+  const [isVersionActive, setIsVersionActive] = React.useState(false);
+
   return (
     <>
       <Head>
@@ -93,6 +97,20 @@ const AboutModal: React.FunctionComponent<Props> = ({
             delay={1}
             isActive={true}
           />
+        </div>
+
+        <div
+          className={css.version}
+          style={{
+            opacity: isVersionActive ? 1 : 0,
+          }}
+          onClick={() => {
+            console.log(isVersionActive);
+
+            setIsVersionActive(!isVersionActive);
+          }}
+        >
+          {pkg.version}
         </div>
       </Modal>
     </>
