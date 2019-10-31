@@ -67,7 +67,15 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       onClose={onClose}
     >
       {imageUrl && (
-        <img src={imageUrl} alt={book.title} className={css.image} />
+        <div className={css.imageWrapper}>
+          <motion.img
+            src={imageUrl}
+            alt={book.title}
+            className={css.image}
+            animate={{ x: 0 }}
+            transition={{ from: '100%', type: 'spring', damping: 15 }}
+          />
+        </div>
       )}
 
       <div className={css.info}>

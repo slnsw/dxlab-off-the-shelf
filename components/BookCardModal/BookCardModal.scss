@@ -22,11 +22,18 @@
   }
 }
 
+.imageWrapper {
+  height: 100%;
+  margin-left: -$baseline-4;
+  padding-left: $baseline-4;
+  overflow: hidden;
+}
+
 .image {
   position: relative;
   z-index: 1;
   width: auto;
-  height: 96%;
+  height: 100%;
 }
 
 .topBorders {
