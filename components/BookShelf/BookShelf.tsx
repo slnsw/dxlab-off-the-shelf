@@ -5,7 +5,7 @@ import BookCard from '../BookCard';
 import BookSpines from '../BookSpines';
 
 import * as configs from '../../configs';
-import { useDimensions } from '../../lib/hooks';
+import { useDimensions, usePrevious } from '../../lib/hooks';
 import { createScrollToItem } from '../../lib/scroll-to-item';
 
 import css from './BookShelf.scss';
@@ -34,6 +34,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
   const [booksInView, setBooksInView] = React.useState([]);
   const [ref, dimensions, node] = useDimensions();
   const { height } = dimensions;
+  const prevIsActive = usePrevious(isActive);
 
   const scrollId = React.useRef(null);
   const [isScrolling, setIsScrolling] = React.useState(false);
@@ -176,6 +177,8 @@ const BookShelf: React.FunctionComponent<Props> = ({
 
           // const inView = booksInView.includes(book.id);
 
+          const animationDelay = prevIsActive && isActive ? 0 : index * 0.6;
+
           return (
             <React.Fragment key={book.id}>
               <BookCard
@@ -188,7 +191,8 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 isScrolling={isScrolling}
                 // isActive={isScrolling ? true : isActive && inView}
                 isActive={isActive}
-                animationDelay={index * 0.6}
+                // animationDelay={index * 0.6}
+                animationDelay={animationDelay}
                 scrollDirection={scrollDirection}
                 scrollDelta={scrollDeltaRef.current}
                 containerElement={node}
@@ -201,7 +205,8 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 height={height}
                 isScrolling={isScrolling}
                 isActive={isActive}
-                animationDelay={index * 0.6}
+                // animationDelay={index * 0.6}
+                animationDelay={animationDelay}
                 scrollDirection={scrollDirection}
                 scrollDelta={scrollDeltaRef.current}
               />

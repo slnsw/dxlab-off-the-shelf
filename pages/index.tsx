@@ -43,6 +43,7 @@ const Home = ({ query, pathname }) => {
   const [idleLoopCommandIndex, setIdleLoopCommandIndex] = React.useState(0);
   const [isIdleLoopActive, setIsIdleLoopActive] = React.useState(true);
 
+  const bookShelvesId = query && query.side ? query.side : 'left';
   const bookId = query && query.id ? query.id : null;
   const isAboutModalActive =
     query && query.page && query.page === 'about' ? true : null;
@@ -57,7 +58,7 @@ const Home = ({ query, pathname }) => {
         if (bookId || isAboutModalActive) {
           console.log('Home Page - idleTimer - return home');
 
-          Router.push('/');
+          Router.push(`/?side=${bookShelvesId}`);
         }
 
         setIsIdleLoopActive(true);
@@ -221,7 +222,8 @@ const Home = ({ query, pathname }) => {
   // --------------------------------------------------------------------------
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
-    Router.push(`/?id=${id}`);
+    // Router.push(`/?id=${id}`);
+    Router.push(`/?side=${bookShelvesId}&id=${id}`);
 
     setInitialModalSize(e.target.getBoundingClientRect());
     setInitialModalImageUrl(imageUrl);
@@ -235,20 +237,23 @@ const Home = ({ query, pathname }) => {
         initialSize={initialModalSize}
         initialImageUrl={initialModalImageUrl}
         onClose={() => {
-          Router.push('/');
+          // Router.push('/');
+          Router.push(`/?side=${bookShelvesId}`);
         }}
       />
 
       <AboutModal
         isActive={isAboutModalActive}
         onClose={() => {
-          Router.push(`/?id=${bookId}`);
+          // Router.push(`/?id=${bookId}`);
+          Router.push(`/?side=${bookShelvesId}&id=${bookId}`);
         }}
       />
 
       <OffTheShelfLogo isActive={isLogoActive} className={css.logo} />
 
       <BookShelves
+        id={bookShelvesId}
         isActive={areShelvesActive}
         isIntervalActive={isIntervalEnabled && isShelfIntervalActive}
         onBookClick={handleBookCardClick}

@@ -1,9 +1,11 @@
 import * as React from 'react';
-
 import {
   motion,
   // useAnimation
 } from 'framer-motion';
+
+// import { usePrevious } from '../../lib/hooks';
+
 import * as configs from '../../configs';
 
 import css from './BookSpine.scss';
@@ -35,6 +37,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
 }) => {
   const [originX, setOriginX] = React.useState();
   const h = id % 5; // Math.floor(Math.random() * 5);
+  // const prevIsActive = usePrevious(isActive);
 
   React.useEffect(() => {
     if (scrollDirection) {

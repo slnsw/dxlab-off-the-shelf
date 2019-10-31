@@ -35,7 +35,7 @@ const OffTheShelfLogoText: React.FunctionComponent<Props> = ({
   const getPathTransition = (index) => {
     return {
       delay: delay + index * 0.07 + (isActive ? 0 : -0.4),
-      duration: isActive ? 4 : 0.5,
+      duration: isActive ? 4 : 1,
     };
   };
 

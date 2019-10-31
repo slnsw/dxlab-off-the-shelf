@@ -14,6 +14,7 @@ import css from './BookShelves.scss';
 type Props = {
   isActive?: boolean;
   isIntervalActive?: boolean;
+  id?: 'left' | 'right';
   className?: string;
   onBookClick?: Function;
 };
@@ -21,6 +22,7 @@ type Props = {
 const BookShelves: React.FunctionComponent<Props> = ({
   isActive = false,
   isIntervalActive = false,
+  id = 'left',
   className,
   onBookClick,
 }) => {
@@ -35,15 +37,13 @@ const BookShelves: React.FunctionComponent<Props> = ({
   // Fetch books data
   const { books: booksOnly, loading } = useBooksData();
 
-  const shuffleBooks = () => {
-    console.log('Shuffle books');
+  const shuffleBooks = (side) => {
+    console.log('Shuffle books', side);
 
     const subset = configs.NUMBER_OF_BOOKS_TO_DISPLAY;
-    // const side = 'left'; // replace these later with URL parameter XXXXXXX TO DO
-    const side = 'right';
     const halfWay = Math.floor(booksOnly.length / 2);
 
-    // pick a half depedning on kiosk and randomly add spines
+    // Pick a half depending on kiosk and randomly add spines
     const unshuffledBooks = booksOnly
       .slice(
         side === 'left' ? 0 : halfWay + 1,
@@ -60,19 +60,21 @@ const BookShelves: React.FunctionComponent<Props> = ({
         return { ...book, spines };
       });
 
-    // shuffle them up and display a subset
+    // Shuffle them up and display a subset
     // setBooks(knuthShuffle(unshuffledBooks).slice(0, subset));
     setBooks(shuffle(unshuffledBooks).slice(0, subset));
   };
 
   React.useEffect(() => {
-    shuffleBooks();
+    console.log('BookShelves - id', id);
+
+    shuffleBooks(id);
   }, []);
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       if (prevIsActive && !isActive) {
-        shuffleBooks();
+        shuffleBooks(id);
       }
 
       return () => {
