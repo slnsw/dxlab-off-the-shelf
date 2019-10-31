@@ -1,51 +1,30 @@
-import { motion } from 'framer-motion';
 import * as React from 'react';
-
-import useDimensions from '../../lib/hooks/use-dimensions';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import css from './Loader.scss';
 
 import variables from '../../styles/variables.scss';
 
 type Props = {
-  strokeWidth: number;
-  isActive: boolean;
-  delay: number;
+  strokeWidth?: number;
+  isActive?: boolean;
+  delay?: number;
   className?: string;
 };
 
 const Loader: React.FunctionComponent<Props> = ({
-  strokeWidth = 16,
-  isActive = false,
+  strokeWidth = 4,
+  isActive = true,
   delay = 0,
   className,
 }) => {
-  const [ref, dimensions] = useDimensions();
+  const width = 100;
+  const height = 100;
 
-  let { width, height } = dimensions;
-  width = 400;
-  height = 200;
-
-  console.log('dims:', width, height);
+  const duration = 6;
   const baseline = strokeWidth * 1.5;
 
   const paths = {
-    // white: `
-    //   M ${width - baseline * 2} ${height - baseline * 2}
-    //   L ${baseline * 2} ${height - baseline * 2}
-    //   L ${baseline * 2} ${baseline * 2}
-    //   L ${width - baseline * 2} ${baseline * 2}
-    //   L ${width - baseline * 2} ${height - baseline * 2}
-    // `,
-
-    //   yellow: `
-    //   M ${width - baseline * 4} ${baseline * 4}
-    //   L ${width - baseline * 4} ${height - baseline * 4}
-    //   L ${baseline * 4} ${height - baseline * 4}
-    //   L ${baseline * 4} ${baseline * 4}
-    //   L ${width - baseline * 4} ${baseline * 4}
-    // `,
-
     white: `
   M ${baseline * 2} ${baseline * 2} 
   L ${width - baseline * 2} ${baseline * 2}
@@ -73,9 +52,20 @@ const Loader: React.FunctionComponent<Props> = ({
 
   return (
     <div className={[css.loader, className || ''].join(' ')}>
-      {width && height && (
-        <motion.svg width={width} height={height} ref={ref}>
-          <>
+      <AnimatePresence>
+        {isActive && width && height && (
+          <motion.svg
+            width={width}
+            height={height}
+            // ref={ref}
+            initial={false}
+            animate={{
+              opacity: isActive ? 1 : 0,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+          >
             <motion.path
               d={paths.blue}
               fill={'transparent'}
@@ -85,11 +75,13 @@ const Loader: React.FunctionComponent<Props> = ({
               animate={{ pathLength: [0, 1, 1], pathOffset: [0, 0, 1] }}
               transition={{
                 loop: Infinity,
-                delay: 0,
-                duration: 4,
-                ease: 'linear',
+                delay,
+                duration,
+                ease: 'easeInOut',
               }}
+              strokeDasharray="0 1"
             />
+
             <motion.path
               d={paths.yellow}
               fill={'transparent'}
@@ -99,11 +91,13 @@ const Loader: React.FunctionComponent<Props> = ({
               animate={{ pathLength: [0, 1, 1], pathOffset: [0, 0, 1] }}
               transition={{
                 loop: Infinity,
-                delay: 0.5,
-                duration: 4,
-                ease: 'linear',
+                delay: delay + 0.7,
+                duration,
+                ease: 'easeInOut',
               }}
+              strokeDasharray="0 1"
             />
+
             <motion.path
               d={paths.white}
               fill={'transparent'}
@@ -113,15 +107,16 @@ const Loader: React.FunctionComponent<Props> = ({
               animate={{ pathLength: [0, 1, 1], pathOffset: [0, 0, 1] }}
               transition={{
                 loop: Infinity,
-                delay: 1,
-                duration: 4,
-                ease: 'linear',
+                delay: delay + 1.4,
+                duration,
+                ease: 'easeInOut',
               }}
+              strokeDasharray="0 1"
             />
-          </>
-        </motion.svg>
-      )}
-      <p>LOADING</p>
+          </motion.svg>
+        )}
+      </AnimatePresence>
+      {/* <p>LOADING</p> */}
     </div>
   );
 };

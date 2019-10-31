@@ -83,6 +83,13 @@
   overflow: auto;
 }
 
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .description {
   margin-bottom: $baseline-6;
   font-size: $font-size-xlg;
@@ -105,7 +112,7 @@
   }
 
   .label {
-    flex-basis: 15ch;
+    flex-basis: 16ch;
     padding-right: $baseline-3;
     font-size: $font-size-md;
     opacity: 0.6;
@@ -113,6 +120,7 @@
 
   .value {
     flex: 1;
+    text-transform: capitalize;
   }
 }
 
