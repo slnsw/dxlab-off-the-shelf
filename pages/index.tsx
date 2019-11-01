@@ -9,7 +9,7 @@ import OffTheShelfLogo from '../components/OffTheShelfLogo';
 import { withApollo } from '../lib/apollo';
 import { createIdleTimer } from '../lib/idle-timer';
 import { useInterval } from '../lib/hooks';
-// import { createHealthCheck } from '../lib/health-check';
+import { createHealthCheck } from '../lib/health-check';
 import * as configs from '../configs';
 
 import css from './index.scss';
@@ -215,6 +215,25 @@ const Home = ({ query, pathname }) => {
         return `${key}: ${configs[key]}`;
       });
       console.log('----------------------------------------');
+    }
+
+    if (position === 'left' && process.env.OFF_THE_SHELF_LEFT_HEALTHCHECK_URL) {
+      const healthCheck = createHealthCheck(
+        process.env.OFF_THE_SHELF_LEFT_HEALTHCHECK_URL,
+        120000,
+      );
+
+      healthCheck.start();
+    } else if (
+      position === 'right' &&
+      process.env.OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL
+    ) {
+      const healthCheck = createHealthCheck(
+        process.env.OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL,
+        120000,
+      );
+
+      healthCheck.start();
     }
   }, []);
 

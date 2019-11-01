@@ -1,4 +1,6 @@
 {
-  "alias": "dxlab-staging-off-the-shelf",
-  "scope": "dxlab"
+  "name": "dxlab-off-the-shelf",
+  "version": 2,
+  "scope": "dxlab",
+  "alias": "dxlab-staging-off-the-shelf"
 }

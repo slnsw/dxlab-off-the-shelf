@@ -1,0 +1,15 @@
+{
+  "name": "dxlab-off-the-shelf",
+  "scope": "dxlab",
+  "version": 2,
+  "env": {
+    "OFF_THE_SHELF_LEFT_HEALTHCHECK_URL": "@off_the_shelf_left_healthcheck_url",
+    "OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL": "@off_the_shelf_right_healthcheck_url"
+  },
+  "build": {
+    "env": {
+      "OFF_THE_SHELF_LEFT_HEALTHCHECK_URL": "@off_the_shelf_left_healthcheck_url",
+      "OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL": "@off_the_shelf_right_healthcheck_url"
+    }
+  }
+}
