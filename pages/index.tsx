@@ -9,6 +9,7 @@ import OffTheShelfLogo from '../components/OffTheShelfLogo';
 import { withApollo } from '../lib/apollo';
 import { createIdleTimer } from '../lib/idle-timer';
 import { useInterval } from '../lib/hooks';
+// import { createHealthCheck } from '../lib/health-check';
 import * as configs from '../configs';
 
 import css from './index.scss';
@@ -43,7 +44,7 @@ const Home = ({ query, pathname }) => {
   const [idleLoopCommandIndex, setIdleLoopCommandIndex] = React.useState(0);
   const [isIdleLoopActive, setIsIdleLoopActive] = React.useState(true);
 
-  const bookShelvesId = query && query.side ? query.side : 'left';
+  const position = query && query.position ? query.position : 'left';
   const bookId = query && query.id ? query.id : null;
   const isAboutModalActive =
     query && query.page && query.page === 'about' ? true : null;
@@ -58,7 +59,7 @@ const Home = ({ query, pathname }) => {
         if (bookId || isAboutModalActive) {
           console.log('Home Page - idleTimer - return home');
 
-          Router.push(`/?side=${bookShelvesId}`);
+          Router.push(`/?position=${position}`);
         }
 
         setIsIdleLoopActive(true);
@@ -101,7 +102,7 @@ const Home = ({ query, pathname }) => {
       setIsShelfIntervalActive(false);
       setIsLogoActive(false);
     },
-    // null,
+    null,
     () => {
       console.log('idleLoopCommand', 'show books');
 
@@ -203,7 +204,7 @@ const Home = ({ query, pathname }) => {
   }, [isIntervalEnabled]);
 
   /*
-   * Set initial logs
+   * Set initial logs and health checks
    */
   React.useEffect(() => {
     if (!window.OFF_THE_SHELF) {
@@ -223,7 +224,7 @@ const Home = ({ query, pathname }) => {
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
     // Router.push(`/?id=${id}`);
-    Router.push(`/?side=${bookShelvesId}&id=${id}`);
+    Router.push(`/?position=${position}&id=${id}`);
 
     setInitialModalSize(e.target.getBoundingClientRect());
     setInitialModalImageUrl(imageUrl);
@@ -233,13 +234,13 @@ const Home = ({ query, pathname }) => {
     <>
       <BookCardModal
         id={bookId}
-        side={bookShelvesId}
+        position={position}
         isActive={isModalActive}
         initialSize={initialModalSize}
         initialImageUrl={initialModalImageUrl}
         onClose={() => {
           // Router.push('/');
-          Router.push(`/?side=${bookShelvesId}`);
+          Router.push(`/?position=${position}`);
         }}
       />
 
@@ -247,14 +248,14 @@ const Home = ({ query, pathname }) => {
         isActive={isAboutModalActive}
         onClose={() => {
           // Router.push(`/?id=${bookId}`);
-          Router.push(`/?side=${bookShelvesId}&id=${bookId}`);
+          Router.push(`/?position=${position}&id=${bookId}`);
         }}
       />
 
       <OffTheShelfLogo isActive={isLogoActive} className={css.logo} />
 
       <BookShelves
-        id={bookShelvesId}
+        position={position}
         isActive={areShelvesActive}
         isIntervalActive={isIntervalEnabled && isShelfIntervalActive}
         onBookClick={handleBookCardClick}
