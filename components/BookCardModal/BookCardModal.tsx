@@ -164,13 +164,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                                     );
                                   case 'callNumber':
                                     return (
-                                      <p
-                                        style={{
-                                          textDecoration: 'underline',
-                                        }}
-                                      >
-                                        {value}
-                                      </p>
+                                      <p className={css.highlight}>{value}</p>
                                     );
 
                                   default:

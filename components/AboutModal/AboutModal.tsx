@@ -72,13 +72,13 @@ const AboutModal: React.FunctionComponent<Props> = ({
                 </li>
               </ul>
 
-              <p>
+              {/* <p>
                 <span>#OffTheShelf #shelfie</span>
               </p>
 
               <p>
                 Please email <span>media@sl.nsw.gov.au</span> for enquiries.
-              </p>
+              </p> */}
             </div>
           </div>
           <img
@@ -97,6 +97,15 @@ const AboutModal: React.FunctionComponent<Props> = ({
             delay={1}
             isActive={true}
           />
+
+          <div className={css.extraContent}>
+            <p className={css.large}>
+              <span>#OffTheShelf #shelfie</span>
+            </p>
+            <p>
+              Please email <span>media@sl.nsw.gov.au</span> for enquiries.
+            </p>
+          </div>
         </div>
 
         <div

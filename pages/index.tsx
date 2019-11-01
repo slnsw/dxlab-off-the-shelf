@@ -101,7 +101,7 @@ const Home = ({ query, pathname }) => {
       setIsShelfIntervalActive(false);
       setIsLogoActive(false);
     },
-    null,
+    // null,
     () => {
       console.log('idleLoopCommand', 'show books');
 

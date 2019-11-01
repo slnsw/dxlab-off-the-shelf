@@ -12,6 +12,21 @@
     font-size: $font-size-xxxlg;
     line-height: $baseline-7;
   }
+
+  p,
+  ul {
+    margin-top: 0;
+    margin-bottom: $baseline-2;
+    line-height: $baseline-3 + $baseline-half;
+
+    &.large {
+      font-size: $font-size-lg;
+    }
+  }
+
+  span {
+    color: $colour-yellow;
+  }
 }
 
 .image {
@@ -42,17 +57,6 @@
   max-width: 80ch;
   height: 100%;
   font-size: $font-size-lg;
-
-  p,
-  ul {
-    margin-top: 0;
-    margin-bottom: $baseline-2;
-    line-height: $baseline-3 + $baseline-half;
-  }
-
-  span {
-    color: $colour-yellow;
-  }
 }
 
 .contentInner {
@@ -65,13 +69,19 @@
   overflow: auto;
 }
 
+.extraContent {
+  position: absolute;
+  right: $baseline * 17;
+  bottom: $baseline * 11;
+}
+
 .backButton {
   margin-left: $baseline-6;
 }
 
 .borders {
   position: absolute;
-  right: -9%;
+  right: -4%;
   bottom: 0;
   width: 50%;
   height: 50%;

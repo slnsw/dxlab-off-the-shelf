@@ -20,6 +20,12 @@
     font-weight: 300;
     font-size: $font-size-lg;
   }
+
+  p {
+    &.highlight {
+      color: $colour-yellow;
+    }
+  }
 }
 
 .imageWrapper {
