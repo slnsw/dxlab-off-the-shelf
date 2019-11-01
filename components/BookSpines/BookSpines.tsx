@@ -25,12 +25,25 @@ const BookSpines: React.FunctionComponent<Props> = ({
   scrollDelta = 0,
   animationDelay = 0,
 }) => {
+  const [localScrollDirection, setLocalScrollDirection] = React.useState(null);
+
+  React.useEffect(() => {
+    setLocalScrollDirection(scrollDirection);
+  }, [scrollDirection]);
+
   if (spines.length === 0) {
     return null;
   }
 
   return (
-    <div className={[css.bookSpines, className || ''].join(' ')}>
+    <div
+      className={[css.bookSpines, className || ''].join(' ')}
+      onClick={() => {
+        setLocalScrollDirection(
+          localScrollDirection === 'left' ? 'right' : 'left',
+        );
+      }}
+    >
       {spines.map((spine, i) => {
         const rIndex = isScrolling ? spines.length - 1 - i : i;
         const lIndex = isScrolling ? i : spines.length - 1 - i;
@@ -45,7 +58,7 @@ const BookSpines: React.FunctionComponent<Props> = ({
             isEdge={i === 0 || i === spines.length - 1}
             isScrolling={isScrolling}
             isActive={isActive}
-            scrollDirection={scrollDirection}
+            scrollDirection={localScrollDirection}
             scrollDelta={scrollDelta}
             animationDelay={animationDelay}
           />
