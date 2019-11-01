@@ -94,6 +94,7 @@
   padding-right: $baseline * 3;
   padding-left: $baseline * 8;
   overflow: auto;
+  word-wrap: break-word;
 }
 
 .loader {
