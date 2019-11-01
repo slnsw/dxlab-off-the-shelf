@@ -2,5 +2,13 @@
   "name": "dxlab-off-the-shelf",
   "version": 2,
   "scope": "dxlab",
-  "alias": "dxlab-staging-off-the-shelf"
+  "alias": "dxlab-staging-off-the-shelf",
+  "env": {
+    "OFF_THE_SHELF_GTM_ID": "@off_the_shelf_gtm_id"
+  },
+  "build": {
+    "env": {
+      "OFF_THE_SHELF_GTM_ID": "@off_the_shelf_gtm_id"
+    }
+  }
 }

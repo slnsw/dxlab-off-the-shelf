@@ -5,18 +5,19 @@
 ```
 # .env
 GRAPHQL_URL=XXXXX
-GTM_ID=XXXXX
-
-# .env.production
-GRAPHQL_URL=XXXXX
-GTM_ID=XXXXX
+OFF_THE_SHELF_GTM_ID=XXXXX
 ```
 
 ## Deployment
 
 ```
+# Production
 $ npm run deploy:prod
-$ now alias dxlab-off-the-shelf-[new-id].now.sh dxlab-off-the-shelf
+
+# Staging
+$ npm run deploy:staging
+$ now alias dxlab-off-the-shelf-[new-id].now.sh dxlab-staging-off-the-shelf
+# Still working out auto alias
 ```
 
 # Notes
