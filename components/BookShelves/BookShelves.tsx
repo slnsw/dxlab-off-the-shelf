@@ -101,7 +101,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
       // console.log('Current book: ', currentBookIndex);
 
-      if (!currentBooksInView.includes(currentShelf[currentBookIndex])) {
+      if (!currentBooksInView.includes(currentShelf[currentBookIndex].id)) {
         currentBookIndex = currentShelf.findIndex((value) => {
           return value.id === currentBooksInView[0];
         });
