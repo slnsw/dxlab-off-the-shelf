@@ -20,7 +20,7 @@ declare global {
   }
 }
 
-const Home = ({ query, pathname }) => {
+const GalleryPage = ({ query, pathname }) => {
   // --------------------------------------------------------------------------
   // Hooks
   // --------------------------------------------------------------------------
@@ -44,7 +44,9 @@ const Home = ({ query, pathname }) => {
   const [idleLoopCommandIndex, setIdleLoopCommandIndex] = React.useState(0);
   const [isIdleLoopActive, setIsIdleLoopActive] = React.useState(true);
 
-  const position = query && query.position ? query.position : 'left';
+  const position = query && query.position ? query.position : null;
+  const basePathname = `/gallery${position ? `/${position}` : ''}`;
+
   const bookId = query && query.id ? query.id : null;
   const isAboutModalActive =
     query && query.page && query.page === 'about' ? true : null;
@@ -57,9 +59,9 @@ const Home = ({ query, pathname }) => {
       () => {
         // Callback to run after user hasn't used screen for a while
         if (bookId || isAboutModalActive) {
-          console.log('Home Page - idleTimer - return home');
+          console.log('Gallery Page - idleTimer - return home');
 
-          Router.push(`/?position=${position}`);
+          Router.push('/gallery/[position]', basePathname);
         }
 
         setIsIdleLoopActive(true);
@@ -242,8 +244,9 @@ const Home = ({ query, pathname }) => {
   // --------------------------------------------------------------------------
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
-    // Router.push(`/?id=${id}`);
-    Router.push(`/?position=${position}&id=${id}`);
+    console.log(`/gallery/[position]?id=${id}`, `${basePathname}?id=${id}`);
+
+    Router.push(`/gallery/[position]?id=${id}`, `${basePathname}?id=${id}`);
 
     setInitialModalSize(e.target.getBoundingClientRect());
     setInitialModalImageUrl(imageUrl);
@@ -258,16 +261,18 @@ const Home = ({ query, pathname }) => {
         initialSize={initialModalSize}
         initialImageUrl={initialModalImageUrl}
         onClose={() => {
-          // Router.push('/');
-          Router.push(`/?position=${position}`);
+          Router.push('/gallery/[position]', basePathname);
+          // Router.push(`/?position=${position}`);
         }}
       />
 
       <AboutModal
         isActive={isAboutModalActive}
         onClose={() => {
-          // Router.push(`/?id=${bookId}`);
-          Router.push(`/?position=${position}&id=${bookId}`);
+          Router.push(
+            `/gallery/[position]?id=${bookId}`,
+            `${basePathname}?id=${bookId}`,
+          );
         }}
       />
 
@@ -283,11 +288,11 @@ const Home = ({ query, pathname }) => {
   );
 };
 
-Home.getInitialProps = ({ query, pathname }) => {
+GalleryPage.getInitialProps = ({ query, pathname }) => {
   return {
     query,
     pathname,
   };
 };
 
-export default withApollo(Home);
+export default withApollo(GalleryPage);

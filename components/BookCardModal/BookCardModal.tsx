@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import Router from 'next/router';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -48,6 +48,10 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       },
     },
   } = useBookData(id);
+
+  const { pathname, asPath } = useRouter();
+
+  console.log(pathname, asPath);
 
   if (error) {
     console.log(error);
@@ -221,7 +225,11 @@ const BookCardModal: React.FunctionComponent<Props> = ({
           </p>
           <br />
 
-          <Link href={`/?position=${position}&id=${id}&page=about`}>
+          <Link
+            href={`/gallery/[position]?id=${id}&page=about`}
+            as={`${asPath}&page=about`}
+          >
+            {/* <Link href={`/?position=${position}&id=${id}&page=about`}> */}
             <CTAButton>About this exhibition</CTAButton>
           </Link>
         </div>
