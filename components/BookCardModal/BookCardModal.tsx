@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
@@ -16,7 +16,7 @@ import css from './BookCardModal.scss';
 
 type Props = {
   id: number;
-  // position?: 'left' | 'right';
+  position?: 'left' | 'right' | 'test';
   isActive?: boolean;
   initialSize?: {
     x: number;
@@ -31,8 +31,7 @@ type Props = {
 
 const BookCardModal: React.FunctionComponent<Props> = ({
   id,
-  // TODO: Make this nicer
-  // position = 'left',
+  position = 'test',
   isActive,
   initialSize,
   initialImageUrl,
@@ -50,10 +49,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       },
     },
   } = useBookData(id);
-
-  const { pathname, asPath } = useRouter();
-
-  // console.log(pathname, asPath);
 
   if (error) {
     console.log(error);
@@ -184,25 +179,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                         );
                       })}
                 </div>
-
-                {/* {book.primoRecord.exhibitions && (
-                  <p>{book.primoRecord.exhibitions}</p>
-                )}
-                {book.primoRecord.notes && (
-                  <p>Notes: {book.primoRecord.notes}</p>
-                )}
-                {book.primoRecord.personNames && (
-                  <p>Names: {book.primoRecord.personNames}</p>
-                )}
-                {book.primoRecord.physicalDescription && (
-                  <p>{book.primoRecord.physicalDescription}</p>
-                )}
-                {book.primoRecord.source && (
-                  <p>Source: {book.primoRecord.source}</p>
-                )}
-                {book.primoRecord.topics && (
-                  <p>Topics: {book.primoRecord.topics}</p>
-                )} */}
               </>
             </motion.div>
           </div>
@@ -220,8 +196,10 @@ const BookCardModal: React.FunctionComponent<Props> = ({
           <br />
 
           <Link
-            href={`${pathname}?id=${id}&page=about`}
-            as={`${asPath}&page=about`}
+            // href={'/gallery/[position]/book/[id]/[page]'}
+            // as={`/gallery/${position}/book/${id}/about`}
+            href="/gallery/[position]/[page]"
+            as={`/gallery/${position}/about`}
           >
             <CTAButton>About this exhibition</CTAButton>
           </Link>

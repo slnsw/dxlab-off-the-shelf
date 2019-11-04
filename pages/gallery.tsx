@@ -48,6 +48,8 @@ const GalleryPage = ({ query, pathname }) => {
   const basePathname = `/gallery${position ? `/${position}` : ''}`;
 
   const bookId = query && query.id ? query.id : null;
+  const prevBookId = React.useRef(bookId);
+
   const isAboutModalActive =
     query && query.page && query.page === 'about' ? true : null;
 
@@ -179,6 +181,11 @@ const GalleryPage = ({ query, pathname }) => {
 
     setIsModalActive(isActive);
     setIsShelfIntervalActive(!isActive);
+
+    if (isActive) {
+      // Store book id so AboutModal can remember to go back to it
+      prevBookId.current = bookId;
+    }
   }, [bookId, isIntervalEnabled]);
 
   /*
@@ -244,7 +251,8 @@ const GalleryPage = ({ query, pathname }) => {
   // --------------------------------------------------------------------------
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
-    Router.push(`${pathname}?id=${id}`, `${basePathname}?id=${id}`);
+    // Router.push(`${pathname}?id=${id}`, `${basePathname}?id=${id}`);
+    Router.push(`/gallery/[position]/book/[id]`, `${basePathname}/book/${id}`);
 
     setInitialModalSize(e.target.getBoundingClientRect());
     setInitialModalImageUrl(imageUrl);
@@ -254,12 +262,12 @@ const GalleryPage = ({ query, pathname }) => {
     <>
       <BookCardModal
         id={bookId}
-        // position={position}
+        position={position}
         isActive={isModalActive}
         initialSize={initialModalSize}
         initialImageUrl={initialModalImageUrl}
         onClose={() => {
-          Router.push(pathname, basePathname);
+          Router.push('/gallery/[position]', basePathname);
         }}
       />
 
@@ -267,8 +275,8 @@ const GalleryPage = ({ query, pathname }) => {
         isActive={isAboutModalActive}
         onClose={() => {
           Router.push(
-            `${pathname}?id=${bookId}`,
-            `${basePathname}?id=${bookId}`,
+            '/gallery/[position]/book/[id]',
+            `${basePathname}/book/${prevBookId.current}`,
           );
         }}
       />
@@ -285,7 +293,18 @@ const GalleryPage = ({ query, pathname }) => {
   );
 };
 
-GalleryPage.getInitialProps = ({ query, pathname }) => {
+GalleryPage.getInitialProps = ({ query, pathname, res }) => {
+  if (pathname === '/gallery') {
+    if (res) {
+      res.writeHead(302, {
+        Location: '/gallery/test',
+      });
+      res.end();
+    } else {
+      Router.push('/gallery/test');
+    }
+  }
+
   return {
     query,
     pathname,
