@@ -1,6 +1,7 @@
 import * as React from 'react';
-// import Router from 'next/router';
+// import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Head from 'next/head';
 import { motion } from 'framer-motion';
 
 import Modal from '../Modal';
@@ -8,13 +9,14 @@ import CTAButton from '../CTAButton';
 import OffTheShelfLogoBorders from '../OffTheShelfLogoBorders';
 import Loader from '../Loader';
 
+import { buildHeadTitle } from '../../lib';
 import useBookData from '../../lib/hooks/use-book-data';
 
 import css from './BookCardModal.scss';
 
 type Props = {
   id: number;
-  position?: 'left' | 'right';
+  position?: 'left' | 'right' | 'test';
   isActive?: boolean;
   initialSize?: {
     x: number;
@@ -29,8 +31,7 @@ type Props = {
 
 const BookCardModal: React.FunctionComponent<Props> = ({
   id,
-  // TODO: Make this nicer
-  position = 'left',
+  position = 'test',
   isActive,
   initialSize,
   initialImageUrl,
@@ -69,6 +70,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       className={[css.bookCardModal, className || ''].join(' ')}
       onClose={onClose}
     >
+      <Head>{book.title && <title>{buildHeadTitle(book.title)}</title>}</Head>
+
       {imageUrl && (
         <div className={css.imageWrapper}>
           <motion.img
@@ -120,7 +123,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                         const value = primoRecord[row.field];
 
                         return (
-                          <div className={css.row}>
+                          <div className={css.row} key={row.field}>
                             <div className={css.label}>
                               {(() => {
                                 switch (row.field) {
@@ -176,38 +179,9 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                         );
                       })}
                 </div>
-
-                {/* {book.primoRecord.exhibitions && (
-                  <p>{book.primoRecord.exhibitions}</p>
-                )}
-                {book.primoRecord.notes && (
-                  <p>Notes: {book.primoRecord.notes}</p>
-                )}
-                {book.primoRecord.personNames && (
-                  <p>Names: {book.primoRecord.personNames}</p>
-                )}
-                {book.primoRecord.physicalDescription && (
-                  <p>{book.primoRecord.physicalDescription}</p>
-                )}
-                {book.primoRecord.source && (
-                  <p>Source: {book.primoRecord.source}</p>
-                )}
-                {book.primoRecord.topics && (
-                  <p>Topics: {book.primoRecord.topics}</p>
-                )} */}
               </>
             </motion.div>
           </div>
-
-          {/* <OffTheShelfLogoBorders
-            orientation="bottomLeft"
-            strokeWidth={8}
-            isActive={true}
-            hasStartCorners={false}
-            hasEndCorners={false}
-            delay={1.8}
-            className={css.bottomBorders}
-          /> */}
         </div>
 
         <div className={css.extraContent}>
@@ -221,7 +195,12 @@ const BookCardModal: React.FunctionComponent<Props> = ({
           </p>
           <br />
 
-          <Link href={`/?position=${position}&id=${id}&page=about`}>
+          <Link
+            // href={'/gallery/[position]/book/[id]/[page]'}
+            // as={`/gallery/${position}/book/${id}/about`}
+            href="/gallery/[position]/[page]"
+            as={`/gallery/${position}/about`}
+          >
             <CTAButton>About this exhibition</CTAButton>
           </Link>
         </div>
@@ -230,20 +209,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       <CTAButton className={css.backButton} onClick={onClose}>
         Close
       </CTAButton>
-
-      {/* <OffTheShelfLogoBorders
-        orientation="topRight"
-        strokeWidth={16}
-        isActive={true}
-        style={{
-          position: 'fixed',
-          zIndex: 0,
-          bottom: -16,
-          left: -56,
-          width: '20%',
-          height: '33%',
-        }}
-      /> */}
     </Modal>
   );
 };

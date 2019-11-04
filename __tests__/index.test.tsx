@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-import HomePage from '../pages/index';
+import GalleryPage from '../pages/gallery';
 
 describe('Home Page', () => {
   it('Home Page rendered', () => {
-    render(<HomePage />);
+    render(<GalleryPage />);
   });
 });

@@ -6,6 +6,7 @@ import CTAButton from '../CTAButton';
 import OffTheShelfLogo from '../OffTheShelfLogo';
 import OffTheShelfLogoBorders from '../OffTheShelfLogoBorders';
 
+import { buildHeadTitle } from '../../lib';
 import pkg from '../../package.json';
 
 import css from './AboutModal.scss';
@@ -27,6 +28,7 @@ const AboutModal: React.FunctionComponent<Props> = ({
     <>
       <Head>
         <link rel="preload" href="/images/SLNSW-stack.jpg" as="image" />
+        {isActive && <title>{buildHeadTitle('About')}</title>}
       </Head>
 
       <Modal

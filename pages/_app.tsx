@@ -2,6 +2,7 @@ import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
 
+import { buildHeadTitle } from '../lib';
 import { initGA } from '../lib/analytics';
 
 import '../node_modules/normalize.css/normalize.css';
@@ -40,7 +41,7 @@ class MyApp extends App {
     return (
       <>
         <Head>
-          <title>Off the Shelf</title>
+          <title>{buildHeadTitle()}</title>
           {/* <link
             href="https://fonts.googleapis.com/css?family=Barlow:400,500,500i,700"
             rel="stylesheet"
