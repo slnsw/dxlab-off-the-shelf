@@ -61,7 +61,7 @@ const GalleryPage = ({ query, pathname }) => {
         if (bookId || isAboutModalActive) {
           console.log('Gallery Page - idleTimer - return home');
 
-          Router.push('/gallery/[position]', basePathname);
+          Router.push(pathname, basePathname);
         }
 
         setIsIdleLoopActive(true);
@@ -244,9 +244,7 @@ const GalleryPage = ({ query, pathname }) => {
   // --------------------------------------------------------------------------
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
-    console.log(`/gallery/[position]?id=${id}`, `${basePathname}?id=${id}`);
-
-    Router.push(`/gallery/[position]?id=${id}`, `${basePathname}?id=${id}`);
+    Router.push(`${pathname}?id=${id}`, `${basePathname}?id=${id}`);
 
     setInitialModalSize(e.target.getBoundingClientRect());
     setInitialModalImageUrl(imageUrl);
@@ -256,13 +254,12 @@ const GalleryPage = ({ query, pathname }) => {
     <>
       <BookCardModal
         id={bookId}
-        position={position}
+        // position={position}
         isActive={isModalActive}
         initialSize={initialModalSize}
         initialImageUrl={initialModalImageUrl}
         onClose={() => {
-          Router.push('/gallery/[position]', basePathname);
-          // Router.push(`/?position=${position}`);
+          Router.push(pathname, basePathname);
         }}
       />
 
@@ -270,7 +267,7 @@ const GalleryPage = ({ query, pathname }) => {
         isActive={isAboutModalActive}
         onClose={() => {
           Router.push(
-            `/gallery/[position]?id=${bookId}`,
+            `${pathname}?id=${bookId}`,
             `${basePathname}?id=${bookId}`,
           );
         }}
