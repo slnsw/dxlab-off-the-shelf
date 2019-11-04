@@ -45,7 +45,7 @@ const GalleryPage = ({ query, pathname }) => {
   const [isIdleLoopActive, setIsIdleLoopActive] = React.useState(true);
 
   const position = query && query.position ? query.position : null;
-  const basePathname = `/gallery${position ? `/${position}` : ''}`;
+  const basePathname = `/gallery/${position}`;
 
   const bookId = query && query.id ? query.id : null;
   const prevBookId = React.useRef(bookId);
@@ -63,7 +63,7 @@ const GalleryPage = ({ query, pathname }) => {
         if (bookId || isAboutModalActive) {
           console.log('Gallery Page - idleTimer - return home');
 
-          Router.push(pathname, basePathname);
+          Router.push('/gallery/[position]', basePathname);
         }
 
         setIsIdleLoopActive(true);
