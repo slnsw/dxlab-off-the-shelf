@@ -1,12 +1,32 @@
 # DX Lab - Off the Shelf
 
-### ENV Variables
+All books published in NSW, and many from beyond, live in your State Library — millions of them in a maze of shelves underground. A digital experience in the galleries, Off the Shelf encourages the reader to virtually browse the Library’s book collection and uncover the many intriguing, perplexing and playful volumes waiting to be read. From bodice rippers to banksia trees, cats to catafalques, turnips to teleology — whatever you’re into, we’ve got a book for it.
+
+## Getting Started
 
 ```
-# .env
-GRAPHQL_URL=XXXXX
-OFF_THE_SHELF_GTM_ID=XXXXX
+# Make sure Node 10.16.3 or greater is installed and local .env file is set up
+$ npm install
+$ npm run dev
 ```
+
+## Environment Variables
+
+### Local
+
+```
+# .env file
+GRAPHQL_URL=XXXXX
+
+# These are optional for local testing
+OFF_THE_SHELF_GTM_ID=GTM-XXXXXXX
+OFF_THE_SHELF_LEFT_HEALTHCHECK_URL=https://hc-ping.com/XXXXXXXXXXXXXXXXXXXXX
+OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL=https://hc-ping.com/XXXXXXXXXXXXXXXXXXXXX
+```
+
+### Staging and Production
+
+No `.env` files are required for staging and production deployments. This app uses `now.json` and `now.staging.json` files to point to Zeit Now's **secrets** during build and runtime.
 
 ## Deployment
 
@@ -17,7 +37,7 @@ $ npm run deploy:prod
 # Staging
 $ npm run deploy:staging
 $ now alias dxlab-off-the-shelf-[new-id].now.sh dxlab-staging-off-the-shelf
-# Still working out auto alias
+# NOTE: Still working out how to auto alias
 ```
 
 # Notes
