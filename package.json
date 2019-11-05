@@ -6,9 +6,9 @@
     "node": ">=10.16.3"
   },
   "scripts": {
-    "dev": "PORT=5040 node server.ts",
+    "dev": "PORT=5040 node server.js",
     "build": "next build",
-    "start": "node server.ts",
+    "start": "next start",
     "test": "node -r dotenv/config ./node_modules/.bin/jest",
     "test:watch": "npm test -- --watch",
     "deploy:prod": "now --prod",
