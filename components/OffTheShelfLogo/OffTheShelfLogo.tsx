@@ -17,7 +17,7 @@ const OffTheShelfLogo: React.FunctionComponent<Props> = ({
   return (
     <div className={[css.offTheShelfLogo, className || ''].join(' ')}>
       {/* <img
-        src="/images/off-the-shelf-logo.jpg"
+        src="/off-the-shelf/images/off-the-shelf-logo.jpg"
         alt="Off The Shelf"
         style={{
           position: 'absolute',

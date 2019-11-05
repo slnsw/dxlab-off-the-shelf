@@ -84,7 +84,7 @@ const AboutModal: React.FunctionComponent<Props> = ({
             </div>
           </div>
           <img
-            src={'/images/SLNSW-stack.jpg'}
+            src={'/off-the-shelf/images/SLNSW-stack.jpg'}
             alt={'SLNSW Stack'}
             className={css.image}
           />

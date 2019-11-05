@@ -51,7 +51,12 @@ class MyApp extends App {
             type="text/css"
             href="https://cloud.typography.com/6321554/7275212/css/fonts.css"
           />
-          <link rel="icon" href="/favicon.ico" importance="low" />
+
+          <link
+            rel="shortcut icon"
+            href="https://www.sl.nsw.gov.au/sites/all/themes/slnsw_frontend/favicon.ico"
+            type="image/vnd.microsoft.icon"
+          />
         </Head>
 
         <Component {...pageProps} />
