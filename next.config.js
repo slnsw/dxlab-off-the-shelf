@@ -9,6 +9,7 @@ const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
 const globalConfig = withCSS(
   withSass({
+    assetPrefix: '/off-the-shelf/assets',
     webpack(config, { dev }) {
       const customConfig = {
         ...config,

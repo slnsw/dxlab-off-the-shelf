@@ -6,9 +6,9 @@
     "node": ">=10.16.3"
   },
   "scripts": {
-    "dev": "next dev -p 5040",
+    "dev": "PORT=5040 node server.ts",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.ts",
     "test": "node -r dotenv/config ./node_modules/.bin/jest",
     "test:watch": "npm test -- --watch",
     "deploy:prod": "now --prod",
@@ -23,6 +23,7 @@
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
     "apollo-link-http": "^1.5.16",
+    "express": "^4.17.1",
     "framer-motion": "^1.6.8",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
