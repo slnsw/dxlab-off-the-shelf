@@ -27,7 +27,11 @@ const AboutModal: React.FunctionComponent<Props> = ({
   return (
     <>
       <Head>
-        <link rel="preload" href="/images/SLNSW-stack.jpg" as="image" />
+        <link
+          rel="preload"
+          href="/off-the-shelf/images/SLNSW-stack.jpg"
+          as="image"
+        />
         {isActive && <title>{buildHeadTitle('About')}</title>}
       </Head>
 

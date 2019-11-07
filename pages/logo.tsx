@@ -5,6 +5,16 @@ import OffTheShelfLogo from '../components/OffTheShelfLogo';
 const LogoPage = () => {
   const [isActive, setIsActive] = React.useState(true);
 
+  const test1 = {
+    test2: {
+      test3: 'hello',
+    },
+  };
+
+  const test = test1?.test2?.test3;
+
+  console.log(test);
+
   return (
     <div
       style={{
