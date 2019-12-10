@@ -46,6 +46,16 @@ const BookCard: React.FunctionComponent<Props> = ({
 
   const debug = false;
 
+  // To do magic Cloudinary stuff (resize image to 512 tall, convert to MUCH smaller 60% JPG with same background colour as site):
+  // https://newselfwales.dxlab.sl.nsw.gov.au/app/uploads/sites/3/2019/10/IMG_20190812_141549-final-677x1024.png
+  // becomes
+  // https://res.cloudinary.com/dxlab/image/upload/h_512,f_jpg,q_60,b_rgb:060606/off-the-shelf/2019/10/IMG_20190812_141549-final-677x1024.png
+
+  const cloudImgUrl =
+    'https://res.cloudinary.com/dxlab/image/upload/h_512,f_jpg,q_60,b_rgb:060606/off-the-shelf/' +
+    imageUrl.slice(61);
+  // console.log(cloudImgUrl);
+
   React.useEffect(() => {
     if (scrollDirection) {
       setOriginX(scrollDirection === 'right' ? 1 : 0);
@@ -96,7 +106,7 @@ const BookCard: React.FunctionComponent<Props> = ({
         {debug && <p className={css.debugNumber}>{index}</p>}
         {debug && <p className={css.debugNumber2}>{id}</p>}
         <motion.img
-          src={imageUrl}
+          src={cloudImgUrl}
           alt={title}
           className={css.image}
           animate={{
