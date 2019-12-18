@@ -60,6 +60,8 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
     `,
   };
 
+  const viewBox = '0 0 ' + (width - baseline * 2) + ' ' + height;
+
   return (
     <motion.div
       className={[css.offTheShelfLogoBorder, className || ''].join(' ')}
@@ -87,7 +89,7 @@ const OffTheShelfLogoBorder: React.FunctionComponent<Props> = ({
       }}
     >
       {width && height && (
-        <motion.svg width={width - baseline * 2} height={height}>
+        <motion.svg viewBox={viewBox}>
           <motion.path
             d={paths[orientation]}
             // fill="transparent"
