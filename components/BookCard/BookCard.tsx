@@ -51,9 +51,9 @@ const BookCard: React.FunctionComponent<Props> = ({
   // becomes
   // https://res.cloudinary.com/dxlab/image/upload/h_512,f_jpg,q_60,b_rgb:060606/off-the-shelf/2019/10/IMG_20190812_141549-final-677x1024.png
 
-  const cloudImgUrl =
-    'https://res.cloudinary.com/dxlab/image/upload/h_512,f_jpg,q_60,b_rgb:060606/off-the-shelf/' +
-    imageUrl.slice(61);
+  const cloudImgUrl = `https://res.cloudinary.com/dxlab/image/upload/h_512,f_jpg,q_60,b_rgb:060606/off-the-shelf/${imageUrl.slice(
+    61,
+  )}`;
   // console.log(cloudImgUrl);
 
   React.useEffect(() => {
