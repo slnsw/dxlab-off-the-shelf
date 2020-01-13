@@ -1,18 +1,17 @@
 import React from 'react';
 import Router from 'next/router';
 
-import BookCardModal from '../components/BookCardModal';
-import AboutModal from '../components/AboutModal';
-import BookShelves from '../components/BookShelves';
-import OffTheShelfLogo from '../components/OffTheShelfLogo';
+import BookCardModal from '../BookCardModal';
+import AboutModal from '../AboutModal';
+import BookShelves from '../BookShelves';
+import OffTheShelfLogo from '../OffTheShelfLogo';
 
-import { withApollo } from '../lib/apollo';
-import { createIdleTimer } from '../lib/idle-timer';
-import { useInterval } from '../lib/hooks';
-import { createHealthCheck } from '../lib/health-check';
-import * as configs from '../configs';
+import { createIdleTimer } from '../../lib/idle-timer';
+import { useInterval } from '../../lib/hooks';
+import { createHealthCheck } from '../../lib/health-check';
+import * as configs from '../../configs';
 
-import css from './index.scss';
+import css from './OffTheShelfApp.scss';
 
 declare global {
   interface Window {
@@ -20,7 +19,7 @@ declare global {
   }
 }
 
-const GalleryPage = ({ query, pathname }) => {
+const OffTheShelfApp = ({ query, pathname }) => {
   // --------------------------------------------------------------------------
   // Hooks
   // --------------------------------------------------------------------------
@@ -290,22 +289,4 @@ const GalleryPage = ({ query, pathname }) => {
   );
 };
 
-GalleryPage.getInitialProps = ({ query, pathname, res }) => {
-  if (pathname === '/gallery') {
-    if (res) {
-      res.writeHead(302, {
-        Location: '/gallery/test',
-      });
-      res.end();
-    } else {
-      Router.push('/gallery/test');
-    }
-  }
-
-  return {
-    query,
-    pathname,
-  };
-};
-
-export default withApollo(GalleryPage);
+export default OffTheShelfApp;

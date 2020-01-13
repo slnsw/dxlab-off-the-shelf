@@ -1,0 +1,15 @@
+@import '../../styles/global.scss';
+
+// .offTheShelfApp {
+//   display: block;
+// }
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  // display: none;
+  width: 30rem;
+  transform: translate(-50%, -50%);
+}
