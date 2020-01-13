@@ -1,4 +1,4 @@
-import { useState, useCallback, useLayoutEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 // import { DimensionObject, UseDimensionsArgs, UseDimensionsHook } from "./types";
 
 function getDimensionObject(node: HTMLElement) {
@@ -27,8 +27,9 @@ function useDimensions({ liveMeasure = true } = {}) {
     setNode(refNode);
   }, []);
 
+  // Was previously useLayoutEffect, but this was causing SSR issues.
   /* eslint-disable consistent-return */
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (node) {
       const measure = () =>
         window.requestAnimationFrame(() =>

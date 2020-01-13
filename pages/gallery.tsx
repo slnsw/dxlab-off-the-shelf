@@ -26,7 +26,7 @@ const GalleryPage = ({ query, pathname }) => {
   // --------------------------------------------------------------------------
 
   // Book Modal
-  const [isModalActive, setIsModalActive] = React.useState(false);
+  // const [isModalActive, setIsModalActive] = React.useState(false);
   const [initialModalSize, setInitialModalSize] = React.useState();
   const [initialModalImageUrl, setInitialModalImageUrl] = React.useState(null);
 
@@ -52,6 +52,7 @@ const GalleryPage = ({ query, pathname }) => {
 
   const isAboutModalActive =
     query && query.page && query.page === 'about' ? true : null;
+  const isModalActive = Boolean(bookId);
 
   /*
    * Set idle timer to return to home after timeout.
@@ -174,19 +175,19 @@ const GalleryPage = ({ query, pathname }) => {
   );
 
   /*
-   * Hide and show book modal
+   * Take care of book modal
    */
   React.useEffect(() => {
-    const isActive = Boolean(bookId);
+    // const isActive = Boolean(bookId);
 
-    setIsModalActive(isActive);
-    setIsShelfIntervalActive(!isActive);
+    // setIsModalActive(isActive);
+    setIsShelfIntervalActive(!isModalActive);
 
-    if (isActive) {
+    if (isModalActive) {
       // Store book id so AboutModal can remember to go back to it
       prevBookId.current = bookId;
     }
-  }, [bookId, isIntervalEnabled]);
+  }, [isModalActive, isIntervalEnabled]);
 
   /*
    * Ensure intervals don't run while page is off screen
