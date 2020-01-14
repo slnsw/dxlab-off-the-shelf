@@ -4,8 +4,14 @@ import OffTheShelfApp from '../components/OffTheShelfApp';
 
 import { withApollo } from '../lib/apollo';
 
-const OffTheShelfPage = ({ query, pathname }) => {
-  return <OffTheShelfApp query={query} basePathname={pathname} />;
+const OffTheShelfPage = ({ query }) => {
+  return (
+    <OffTheShelfApp
+      query={query}
+      basePathnameHref={'/off-the-shelf'}
+      basePathnameAs={'/off-the-shelf'}
+    />
+  );
 };
 
 OffTheShelfPage.getInitialProps = ({ query, pathname }) => {

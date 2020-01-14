@@ -19,7 +19,12 @@ declare global {
   }
 }
 
-const OffTheShelfApp = ({ query, position = null, basePathname }) => {
+const OffTheShelfApp = ({
+  query,
+  position = null,
+  basePathnameAs,
+  basePathnameHref = '/gallery/[position]',
+}) => {
   // --------------------------------------------------------------------------
   // Hooks
   // --------------------------------------------------------------------------
@@ -62,7 +67,7 @@ const OffTheShelfApp = ({ query, position = null, basePathname }) => {
         if (bookId || isAboutModalActive) {
           console.log('Gallery Page - idleTimer - return home');
 
-          Router.push('/gallery/[position]', basePathname);
+          Router.push(basePathnameHref, basePathnameAs);
         }
 
         setIsIdleLoopActive(true);
@@ -214,7 +219,10 @@ const OffTheShelfApp = ({ query, position = null, basePathname }) => {
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
     // Router.push(`${pathname}?id=${id}`, `${basePathname}?id=${id}`);
-    Router.push(`/gallery/[position]/book/[id]`, `${basePathname}/book/${id}`);
+    Router.push(
+      `${basePathnameHref}/book/[id]`,
+      `${basePathnameAs}/book/${id}`,
+    );
 
     setInitialModalSize(e.target.getBoundingClientRect());
     setInitialModalImageUrl(imageUrl);
@@ -229,7 +237,9 @@ const OffTheShelfApp = ({ query, position = null, basePathname }) => {
         initialSize={initialModalSize}
         initialImageUrl={initialModalImageUrl}
         onClose={() => {
-          Router.push('/gallery/[position]', basePathname);
+          console.log(basePathnameHref, basePathnameAs);
+
+          Router.push(basePathnameHref, basePathnameAs);
         }}
       />
 
@@ -237,8 +247,8 @@ const OffTheShelfApp = ({ query, position = null, basePathname }) => {
         isActive={isAboutModalActive}
         onClose={() => {
           Router.push(
-            '/gallery/[position]/book/[id]',
-            `${basePathname}/book/${prevBookId.current}`,
+            `${basePathnameHref}/book/[id]`,
+            `${basePathnameAs}/book/${prevBookId.current}`,
           );
         }}
       />

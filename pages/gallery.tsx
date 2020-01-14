@@ -9,7 +9,7 @@ import * as configs from '../configs';
 
 const GalleryPage = ({ query }) => {
   const position = query && query.position ? query.position : null;
-  const basePathname = `/gallery/${position}`;
+
   /*
    * Set initial logs and health checks
    */
@@ -48,7 +48,8 @@ const GalleryPage = ({ query }) => {
     <OffTheShelfApp
       query={query}
       position={position}
-      basePathname={basePathname}
+      basePathnameHref={'/gallery/[position]'}
+      basePathnameAs={`/gallery/${position}`}
     />
   );
 };
