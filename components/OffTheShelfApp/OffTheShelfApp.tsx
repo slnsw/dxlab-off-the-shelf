@@ -18,11 +18,24 @@ declare global {
   }
 }
 
-const OffTheShelfApp = ({
+type Props = {
+  query: {
+    position: string;
+    id: string;
+    page: string;
+  };
+  position?: 'left' | 'right' | 'test';
+  basePathnameAs: string;
+  basePathnameHref: string;
+  booksTotal: number;
+};
+
+const OffTheShelfApp: React.FunctionComponent<Props> = ({
   query,
   position = null,
   basePathnameAs,
   basePathnameHref = '/gallery/[position]',
+  booksTotal,
 }) => {
   // --------------------------------------------------------------------------
   // Hooks
@@ -256,6 +269,7 @@ const OffTheShelfApp = ({
         position={position}
         isActive={areShelvesActive}
         isIntervalActive={isIntervalEnabled && isShelfIntervalActive}
+        booksTotal={booksTotal}
         onBookClick={handleBookCardClick}
       />
     </>

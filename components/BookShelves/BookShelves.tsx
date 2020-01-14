@@ -14,7 +14,8 @@ import css from './BookShelves.scss';
 type Props = {
   isActive?: boolean;
   isIntervalActive?: boolean;
-  position?: 'left' | 'right';
+  position?: 'left' | 'right' | 'test';
+  booksTotal?: number;
   className?: string;
   onBookClick?: Function;
 };
@@ -23,6 +24,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
   isActive = false,
   isIntervalActive = false,
   position = 'left',
+  booksTotal = configs.NUMBER_OF_BOOKS_TO_DISPLAY,
   className,
   onBookClick,
 }) => {
@@ -40,7 +42,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
   const shuffleBooks = () => {
     console.log('Shuffle books', position);
 
-    const subset = configs.NUMBER_OF_BOOKS_TO_DISPLAY;
+    const subset = booksTotal;
     const halfWay = Math.floor(booksOnly.length / 2);
 
     // Pick a half depending on kiosk and randomly add spines
