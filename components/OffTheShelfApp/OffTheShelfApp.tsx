@@ -8,7 +8,6 @@ import OffTheShelfLogo from '../OffTheShelfLogo';
 
 import { createIdleTimer } from '../../lib/idle-timer';
 import { useInterval } from '../../lib/hooks';
-// import { createHealthCheck } from '../../lib/health-check';
 import * as configs from '../../configs';
 
 import css from './OffTheShelfApp.scss';
@@ -237,8 +236,6 @@ const OffTheShelfApp = ({
         initialSize={initialModalSize}
         initialImageUrl={initialModalImageUrl}
         onClose={() => {
-          console.log(basePathnameHref, basePathnameAs);
-
           Router.push(basePathnameHref, basePathnameAs);
         }}
       />

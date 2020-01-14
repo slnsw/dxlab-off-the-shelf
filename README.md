@@ -2,6 +2,13 @@
 
 All books published in NSW, and many from beyond, live in your State Library — millions of them in a maze of shelves underground. A digital experience in the galleries, Off the Shelf encourages the reader to virtually browse the Library’s book collection and uncover the many intriguing, perplexing and playful volumes waiting to be read. From bodice rippers to banksia trees, cats to catafalques, turnips to teleology — whatever you’re into, we’ve got a book for it.
 
+## Routes
+
+This application has two main routes:
+
+1. `/gallery/[position]` - starting point for in-gallery exhibition. `position` can be `left`, `right` or `test`.
+1. `/off-the-shelf` - web version for mobile and desktop devices
+
 ## Getting Started
 
 ```
