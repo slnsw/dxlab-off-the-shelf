@@ -1,17 +1,18 @@
 import React from 'react';
 import Router from 'next/router';
 
-import BookCardModal from '../BookCardModal';
-import AboutModal from '../AboutModal';
-import BookShelves from '../BookShelves';
-import OffTheShelfLogo from '../OffTheShelfLogo';
+import BookCardModal from '../components/BookCardModal';
+import AboutModal from '../components/AboutModal';
+import BookShelves from '../components/BookShelves';
+import OffTheShelfLogo from '../components/OffTheShelfLogo';
 
-import { createIdleTimer } from '../../lib/idle-timer';
-import { useInterval } from '../../lib/hooks';
-// import { createHealthCheck } from '../../lib/health-check';
-import * as configs from '../../configs';
+import { withApollo } from '../lib/apollo';
+import { createIdleTimer } from '../lib/idle-timer';
+import { useInterval } from '../lib/hooks';
+import { createHealthCheck } from '../lib/health-check';
+import * as configs from '../configs';
 
-import css from './OffTheShelfApp.scss';
+import css from './index.scss';
 
 declare global {
   interface Window {
@@ -19,7 +20,7 @@ declare global {
   }
 }
 
-const OffTheShelfApp = ({ query, position = null, basePathname }) => {
+const GalleryPage = ({ query, pathname }) => {
   // --------------------------------------------------------------------------
   // Hooks
   // --------------------------------------------------------------------------
@@ -42,8 +43,8 @@ const OffTheShelfApp = ({ query, position = null, basePathname }) => {
   const [idleLoopCommandIndex, setIdleLoopCommandIndex] = React.useState(0);
   const [isIdleLoopActive, setIsIdleLoopActive] = React.useState(true);
 
-  // const position = query && query.position ? query.position : null;
-  // const basePathname = `/gallery/${position}`;
+  const position = query && query.position ? query.position : null;
+  const basePathname = `/gallery/${position}`;
 
   const bookId = query && query.id ? query.id : null;
   const prevBookId = React.useRef(bookId);
@@ -208,6 +209,40 @@ const OffTheShelfApp = ({ query, position = null, basePathname }) => {
     });
   }, [isIntervalEnabled]);
 
+  /*
+   * Set initial logs and health checks
+   */
+  React.useEffect(() => {
+    if (!window.OFF_THE_SHELF) {
+      console.log('----------------------------------------');
+      window.OFF_THE_SHELF = Object.keys(configs).map((key) => {
+        console.log(key, configs[key]);
+
+        return `${key}: ${configs[key]}`;
+      });
+      console.log('----------------------------------------');
+    }
+
+    if (position === 'left' && process.env.OFF_THE_SHELF_LEFT_HEALTHCHECK_URL) {
+      const healthCheck = createHealthCheck(
+        process.env.OFF_THE_SHELF_LEFT_HEALTHCHECK_URL,
+        120000,
+      );
+
+      healthCheck.start();
+    } else if (
+      position === 'right' &&
+      process.env.OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL
+    ) {
+      const healthCheck = createHealthCheck(
+        process.env.OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL,
+        120000,
+      );
+
+      healthCheck.start();
+    }
+  }, []);
+
   // --------------------------------------------------------------------------
   // Handlers
   // --------------------------------------------------------------------------
@@ -255,4 +290,22 @@ const OffTheShelfApp = ({ query, position = null, basePathname }) => {
   );
 };
 
-export default OffTheShelfApp;
+GalleryPage.getInitialProps = ({ query, pathname, res }) => {
+  if (pathname === '/gallery') {
+    if (res) {
+      res.writeHead(302, {
+        Location: '/gallery/test',
+      });
+      res.end();
+    } else {
+      Router.push('/gallery/test');
+    }
+  }
+
+  return {
+    query,
+    pathname,
+  };
+};
+
+export default withApollo(GalleryPage);
