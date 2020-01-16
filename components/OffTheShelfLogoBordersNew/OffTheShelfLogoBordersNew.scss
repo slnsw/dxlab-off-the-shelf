@@ -3,8 +3,20 @@
 .offTheShelfLogoBordersNew {
   position: relative;
   display: block;
+  width: 30%;
+  height: 300px;
+  // border: 1px solid white;
 }
 
 .border {
-  position: relative;
+  position: absolute;
+  background-color: $colour-teal;
+}
+
+.yellow {
+  background-color: $colour-yellow;
+}
+
+.white {
+  background-color: $colour-white;
 }

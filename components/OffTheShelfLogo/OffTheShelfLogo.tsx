@@ -7,11 +7,13 @@ import css from './OffTheShelfLogo.scss';
 
 type Props = {
   isActive?: boolean;
+  size?: 'sm' | 'md';
   className?: string;
 };
 
 const OffTheShelfLogo: React.FunctionComponent<Props> = ({
   isActive = true,
+  size = 'md',
   className,
 }) => {
   return (
@@ -32,7 +34,7 @@ const OffTheShelfLogo: React.FunctionComponent<Props> = ({
         className={css.text}
       />
       <OffTheShelfLogoBorders
-        strokeWidth={16}
+        strokeWidth={size === 'sm' ? 8 : 16}
         isActive={isActive}
         className={css.borders}
       />
