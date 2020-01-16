@@ -4,7 +4,7 @@ import {
   // useAnimation
 } from 'framer-motion';
 
-// import { usePrevious } from '../../lib/hooks';
+import { useMediaQuery } from '../../lib/hooks';
 
 import * as configs from '../../configs';
 
@@ -37,7 +37,11 @@ const BookSpine: React.FunctionComponent<Props> = ({
 }) => {
   const [originX, setOriginX] = React.useState();
   const h = id % 5; // Math.floor(Math.random() * 5);
-  // const prevIsActive = usePrevious(isActive);
+
+  const mediaQuery = useMediaQuery();
+  const gutter = ['xs', 'sm'].includes(mediaQuery)
+    ? configs.MOBILE_GUTTER
+    : configs.DESKTOP_GUTTER;
 
   React.useEffect(() => {
     if (scrollDirection) {
@@ -51,7 +55,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
 
   // Work out rotate angle based on % of height (opposite) and gutter width
   // (adjacent) using trigonetry
-  const theta = (Math.atan2(height * 0.8, configs.GUTTER) * 180) / Math.PI;
+  const theta = (Math.atan2(height * 0.8, gutter) * 180) / Math.PI;
   const angle = 90 - theta;
 
   let rotate = 0;

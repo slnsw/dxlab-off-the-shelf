@@ -3,7 +3,11 @@
 .bookCard {
   position: relative;
   display: block;
-  margin-right: $baseline-3;
+  margin-right: $baseline-2;
+
+  @include media-sm {
+    margin-right: $baseline-3;
+  }
 }
 
 .image {

@@ -9,6 +9,8 @@ export const SHUFFLE_TIMEOUT = 5000;
 
 // Design
 export const GUTTER = 24;
+export const MOBILE_GUTTER = 16;
+export const DESKTOP_GUTTER = 24;
 
 // Amounts
 export const NUMBER_OF_BOOKS_TO_DISPLAY = 200;

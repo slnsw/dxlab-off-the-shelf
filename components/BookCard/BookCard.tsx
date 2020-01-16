@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 
-import * as appConfig from '../../configs';
+import * as configs from '../../configs';
+import { useMediaQuery } from '../../lib/hooks';
 
 import css from './BookCard.scss';
 
@@ -43,6 +44,11 @@ const BookCard: React.FunctionComponent<Props> = ({
 }) => {
   const [ref, inView, entry] = useInView();
   const [originX, setOriginX] = React.useState();
+
+  const mediaQuery = useMediaQuery();
+  const gutter = ['xs', 'sm'].includes(mediaQuery)
+    ? configs.MOBILE_GUTTER
+    : configs.DESKTOP_GUTTER;
 
   const debug = false;
 
@@ -110,7 +116,7 @@ const BookCard: React.FunctionComponent<Props> = ({
           alt={title}
           className={css.image}
           animate={{
-            y: isActive ? 0 : imageHeight + appConfig.GUTTER,
+            y: isActive ? 0 : imageHeight + gutter,
           }}
           transition={{
             delay: Math.random() * 0.4 + animationDelay,
