@@ -1,7 +1,7 @@
 import React from 'react';
 
 import OffTheShelfLogo from '../components/OffTheShelfLogo';
-import OffTheShelfLogoBordersNew from '../components/OffTheShelfLogoBordersNew';
+import OffTheShelfLogoDivBorders from '../components/OffTheShelfLogoDivBorders';
 
 const LogoPage = () => {
   const [isActive, setIsActive] = React.useState(true);
@@ -20,7 +20,7 @@ const LogoPage = () => {
       }}
     >
       <OffTheShelfLogo isActive={isActive} />
-      <OffTheShelfLogoBordersNew orientation="topRight"></OffTheShelfLogoBordersNew>
+      <OffTheShelfLogoDivBorders orientation="topRight"></OffTheShelfLogoDivBorders>
 
       <br />
       <br />

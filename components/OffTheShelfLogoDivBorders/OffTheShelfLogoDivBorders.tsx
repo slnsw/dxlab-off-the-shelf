@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { motion } from 'framer-motion';
 
-import css from './OffTheShelfLogoBordersNew.scss';
+import css from './OffTheShelfLogoDivBorders.scss';
 
 type Props = {
   strokeWidth?: number;
@@ -10,7 +10,7 @@ type Props = {
   className?: string;
 };
 
-const OffTheShelfLogoBordersNew: React.FunctionComponent<Props> = ({
+const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
   strokeWidth = 8,
   notchLength = 24,
   orientation = 'bottomLeft',
@@ -182,15 +182,18 @@ const OffTheShelfLogoBordersNew: React.FunctionComponent<Props> = ({
           cssBorderColour = css.white;
         }
 
+        const lines = borderGroups[orientation](index);
+
         return (
           <Fragment key={index}>
-            {borderGroups[orientation](index).map((line) => {
+            {lines.map((line, lineIndex) => {
               return (
                 <motion.div
                   className={[css.border, cssBorderColour].join(' ')}
                   initial={line.initial}
                   animate={line.animate}
                   transition={line.transition}
+                  key={lineIndex}
                 />
               );
             })}
@@ -201,4 +204,4 @@ const OffTheShelfLogoBordersNew: React.FunctionComponent<Props> = ({
   );
 };
 
-export default OffTheShelfLogoBordersNew;
+export default OffTheShelfLogoDivBorders;
