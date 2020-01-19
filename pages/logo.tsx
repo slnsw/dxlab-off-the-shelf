@@ -20,7 +20,7 @@ const LogoPage = () => {
       }}
     >
       <OffTheShelfLogo isActive={isActive} />
-      <OffTheShelfLogoDivBorders orientation="topRight"></OffTheShelfLogoDivBorders>
+      <OffTheShelfLogoDivBorders orientation="bottomLeft"></OffTheShelfLogoDivBorders>
 
       <br />
       <br />

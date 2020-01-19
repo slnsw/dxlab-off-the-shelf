@@ -16,6 +16,9 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
   orientation = 'bottomLeft',
   className,
 }) => {
+  const notchDuration = 0.2;
+  const lineDuration = 0.8;
+
   const borderGroups = {
     bottomLeft: (index) => {
       const topBorderMargin = `${notchLength * index}px`;
@@ -23,7 +26,7 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
       const leftBorderMargin = `${notchLength * (2 - index)}px`;
       const bottomBorderMargin = `${notchLength * (2 - index)}px`;
 
-      const borderDelay = index * 0.4;
+      const borderDelay = index * 0.3;
 
       return [
         {
@@ -37,7 +40,7 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
             width: notchLength,
           },
           transition: {
-            duration: 0.3,
+            duration: notchDuration,
             delay: borderDelay,
           },
         },
@@ -52,8 +55,8 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
             height: `calc(100% - ${bottomBorderMargin} - ${topBorderMargin})`,
           },
           transition: {
-            duration: 1,
-            delay: 0.3 + borderDelay,
+            duration: lineDuration,
+            delay: notchDuration + borderDelay,
           },
         },
         {
@@ -67,8 +70,8 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
             width: `calc(100% - ${leftBorderMargin} - ${rightBorderMargin})`,
           },
           transition: {
-            duration: 1,
-            delay: 1.3 + borderDelay,
+            duration: lineDuration,
+            delay: lineDuration + notchDuration + borderDelay,
           },
         },
         {
@@ -82,8 +85,8 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
             height: notchLength,
           },
           transition: {
-            duration: 0.3,
-            delay: 2.3 + borderDelay,
+            duration: notchDuration,
+            delay: notchDuration + lineDuration * 2 + borderDelay,
           },
         },
       ];
@@ -94,7 +97,7 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
       const leftBorderMargin = `${notchLength * index}px`;
       const bottomBorderMargin = `${notchLength * index}px`;
 
-      const borderDelay = index * 0.4;
+      const borderDelay = index * 0.3;
 
       return [
         {
@@ -108,7 +111,7 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
             height: notchLength,
           },
           transition: {
-            duration: 0.3,
+            duration: notchDuration,
             delay: borderDelay,
           },
         },
@@ -123,8 +126,8 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
             width: `calc(100% - ${bottomBorderMargin} - ${topBorderMargin})`,
           },
           transition: {
-            duration: 1,
-            delay: 0.3 + borderDelay,
+            duration: lineDuration,
+            delay: notchDuration + borderDelay,
           },
         },
         {
@@ -138,8 +141,8 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
             height: `calc(100% - ${leftBorderMargin} - ${rightBorderMargin})`,
           },
           transition: {
-            duration: 1,
-            delay: 1.3 + borderDelay,
+            duration: lineDuration,
+            delay: notchDuration + lineDuration + borderDelay,
           },
         },
         {
@@ -153,8 +156,8 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
             width: notchLength,
           },
           transition: {
-            duration: 0.3,
-            delay: 2.3 + borderDelay,
+            duration: notchDuration,
+            delay: notchDuration + lineDuration * 2 + borderDelay,
           },
         },
       ];
