@@ -7,6 +7,7 @@ type Props = {
   strokeWidth?: number;
   notchLength?: number;
   orientation?: 'bottomLeft' | 'topRight';
+  isActive?: boolean;
   className?: string;
 };
 
@@ -14,10 +15,11 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
   strokeWidth = 8,
   notchLength = 24,
   orientation = 'bottomLeft',
+  isActive,
   className,
 }) => {
   const notchDuration = 0.2;
-  const lineDuration = 0.8;
+  const lineDuration = 0.5;
 
   const borderGroups = {
     bottomLeft: (index) => {
@@ -26,7 +28,7 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
       const leftBorderMargin = `${notchLength * (2 - index)}px`;
       const bottomBorderMargin = `${notchLength * (2 - index)}px`;
 
-      const borderDelay = index * 0.3;
+      const borderDelay = index * 0.2;
 
       return [
         {
@@ -41,7 +43,10 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
           },
           transition: {
             duration: notchDuration,
-            delay: borderDelay,
+            // delay: borderDelay,
+            delay: isActive
+              ? borderDelay
+              : notchDuration + lineDuration * 2 + borderDelay,
           },
         },
         {
@@ -56,7 +61,10 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
           },
           transition: {
             duration: lineDuration,
-            delay: notchDuration + borderDelay,
+            // delay: notchDuration + borderDelay,
+            delay: isActive
+              ? notchDuration + borderDelay
+              : lineDuration + notchDuration + borderDelay,
           },
         },
         {
@@ -71,7 +79,9 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
           },
           transition: {
             duration: lineDuration,
-            delay: lineDuration + notchDuration + borderDelay,
+            delay: isActive
+              ? lineDuration + notchDuration + borderDelay
+              : notchDuration + borderDelay,
           },
         },
         {
@@ -86,7 +96,9 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
           },
           transition: {
             duration: notchDuration,
-            delay: notchDuration + lineDuration * 2 + borderDelay,
+            delay: isActive
+              ? notchDuration + lineDuration * 2 + borderDelay
+              : borderDelay,
           },
         },
       ];
@@ -194,7 +206,7 @@ const OffTheShelfLogoDivBorders: React.FunctionComponent<Props> = ({
                 <motion.div
                   className={[css.border, cssBorderColour].join(' ')}
                   initial={line.initial}
-                  animate={line.animate}
+                  animate={isActive ? line.animate : line.initial}
                   transition={line.transition}
                   key={lineIndex}
                 />

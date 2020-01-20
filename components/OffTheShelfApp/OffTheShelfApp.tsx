@@ -1,6 +1,7 @@
 import React from 'react';
 import Router from 'next/router';
 
+import Header from '../Header';
 import BookCardModal from '../BookCardModal';
 import AboutModal from '../AboutModal';
 import BookShelves from '../BookShelves';
@@ -28,6 +29,7 @@ type Props = {
   basePathnameAs: string;
   basePathnameHref: string;
   booksTotal: number;
+  hasHeader?: boolean;
 };
 
 const OffTheShelfApp: React.FunctionComponent<Props> = ({
@@ -36,6 +38,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   basePathnameAs,
   basePathnameHref = '/gallery/[position]',
   booksTotal,
+  hasHeader = false,
 }) => {
   // --------------------------------------------------------------------------
   // Hooks
@@ -242,6 +245,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
   return (
     <>
+      <Header basePathnameHref={basePathnameHref}>test</Header>
+
       <BookCardModal
         id={bookId}
         position={position}
@@ -271,6 +276,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         isIntervalActive={isIntervalEnabled && isShelfIntervalActive}
         booksTotal={booksTotal}
         onBookClick={handleBookCardClick}
+        hasHeader={hasHeader}
       />
     </>
   );

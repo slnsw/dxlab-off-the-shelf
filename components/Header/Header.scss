@@ -1,0 +1,31 @@
+@import '../../styles/global.scss';
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  // justify-content: center;
+  justify-content: space-between;
+  height: $baseline * 7;
+  margin-bottom: -$baseline;
+  padding: $baseline-2 $baseline-2 0 $baseline-2;
+}
+
+.link:link {
+  color: $colour-white;
+  font-weight: 500;
+  font-size: $font-size-sm;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.logo {
+  height: 100%;
+  margin-right: $baseline-2;
+  padding-right: $baseline-2;
+  // border-right: 2px solid $colour-teal;
+
+  svg {
+    height: 100%;
+  }
+}

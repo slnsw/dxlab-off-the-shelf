@@ -16,6 +16,7 @@ type Props = {
   isIntervalActive?: boolean;
   position?: 'left' | 'right' | 'test';
   booksTotal?: number;
+  hasHeader?: boolean;
   className?: string;
   onBookClick?: Function;
 };
@@ -25,6 +26,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
   isIntervalActive = false,
   position = 'left',
   booksTotal = configs.NUMBER_OF_BOOKS_TO_DISPLAY,
+  hasHeader = false,
   className,
   onBookClick,
 }) => {
@@ -165,7 +167,13 @@ const BookShelves: React.FunctionComponent<Props> = ({
   }, [isIntervalActive]);
 
   return (
-    <div className={[css.bookShelves, className || ''].join(' ')}>
+    <div
+      className={[
+        css.bookShelves,
+        hasHeader ? css.hasHeader : '',
+        className || '',
+      ].join(' ')}
+    >
       {loading && 'Loading...'}
 
       {!loading && books && books.length > 0 && (

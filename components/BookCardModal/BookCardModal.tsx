@@ -80,7 +80,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
             orientation="topRight"
             strokeWidth={2}
             notchLength={6}
-            // isActive={true}
+            isActive={true}
             className={css.imageBorders}
           />
 
@@ -100,7 +100,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
             orientation="topRight"
             strokeWidth={4}
             notchLength={12}
-            // isActive={true}
+            isActive={true}
             className={css.topBorders}
           />
 
