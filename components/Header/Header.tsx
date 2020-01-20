@@ -25,7 +25,7 @@ const Header: React.FunctionComponent<Props> = ({
       ></OffTheShelfLogoText>
 
       <Link href={`${basePathnameHref}/[page]`} as={`${basePathnameAs}/about`}>
-        <CTAButton>About</CTAButton>
+        <CTAButton className={css.link}>About</CTAButton>
         {/* <a className={css.link}>About</a> */}
       </Link>
     </div>

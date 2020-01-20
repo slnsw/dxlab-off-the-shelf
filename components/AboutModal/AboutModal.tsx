@@ -14,12 +14,14 @@ import css from './AboutModal.scss';
 type Props = {
   className?: string;
   isActive?: boolean;
+  showLogo?: boolean;
   onClose?: Function;
 };
 
 const AboutModal: React.FunctionComponent<Props> = ({
   className,
   isActive,
+  showLogo = true,
   onClose,
 }) => {
   const [isVersionActive, setIsVersionActive] = React.useState(false);

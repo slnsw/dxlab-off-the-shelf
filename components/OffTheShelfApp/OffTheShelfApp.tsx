@@ -28,8 +28,8 @@ type Props = {
   position?: 'left' | 'right' | 'test';
   basePathnameAs: string;
   basePathnameHref: string;
-  booksTotal: number;
   hasHeader?: boolean;
+  booksTotal?: number;
 };
 
 const OffTheShelfApp: React.FunctionComponent<Props> = ({
@@ -37,8 +37,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   position = null,
   basePathnameAs,
   basePathnameHref = '/gallery/[position]',
-  booksTotal,
   hasHeader = false,
+  booksTotal = 200,
 }) => {
   // --------------------------------------------------------------------------
   // Hooks
