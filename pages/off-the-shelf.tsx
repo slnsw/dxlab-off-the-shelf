@@ -13,6 +13,7 @@ const OffTheShelfPage = ({ query }) => {
       booksTotal={80}
       hasHeader={true}
       showAboutPageLogo={false}
+      enablePrevBookId={false}
     />
   );
 };

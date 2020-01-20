@@ -10,9 +10,5 @@
   left: 50%;
   z-index: 0;
   width: 30rem;
-  transform: translate(-50%, -50%) scale(0.5);
-
-  @include media-sm {
-    transform: translate(-50%, -50%);
-  }
+  transform: translate(-50%, -50%);
 }

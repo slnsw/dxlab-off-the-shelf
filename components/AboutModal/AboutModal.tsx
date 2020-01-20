@@ -46,7 +46,7 @@ const AboutModal: React.FunctionComponent<Props> = ({
           <div className={css.content}>
             {showLogo && <OffTheShelfLogo className={css.logo} />}
 
-            {!showLogo && <h1>About Off The Shelf</h1>}
+            {!showLogo && <h1>About</h1>}
 
             <div className={css.contentInner}>
               <p>
@@ -56,11 +56,11 @@ const AboutModal: React.FunctionComponent<Props> = ({
               </p>
 
               <p>
-                Off the Shelf brings you snapshots of the intriguing, perplexing
-                and playful volumes in the underground book stacks waiting to be
-                read. From bodice rippers to banksia trees, cats to catafalques,
-                turnips to teleology — whatever you're into, we have a book for
-                it.
+                <strong>Off the Shelf</strong> brings you snapshots of the
+                intriguing, perplexing and playful volumes in the underground
+                book stacks waiting to be read. From bodice rippers to banksia
+                trees, cats to catafalques, turnips to teleology — whatever
+                you're into, we have a book for it.
               </p>
 
               <p>

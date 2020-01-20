@@ -8,7 +8,7 @@ import BookShelves from '../BookShelves';
 import OffTheShelfLogo from '../OffTheShelfLogo';
 
 import { createIdleTimer } from '../../lib/idle-timer';
-import { useInterval } from '../../lib/hooks';
+import { useInterval, useMediaQuery } from '../../lib/hooks';
 import * as configs from '../../configs';
 
 import css from './OffTheShelfApp.scss';
@@ -30,6 +30,7 @@ type Props = {
   basePathnameHref: string;
   hasHeader?: boolean;
   showAboutPageLogo?: boolean;
+  enablePrevBookId?: boolean;
   booksTotal?: number;
 };
 
@@ -40,11 +41,14 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   basePathnameHref = '/gallery/[position]',
   hasHeader = false,
   showAboutPageLogo = true,
+  enablePrevBookId = true,
   booksTotal = 200,
 }) => {
   // --------------------------------------------------------------------------
   // Hooks
   // --------------------------------------------------------------------------
+
+  const mediaQuery = useMediaQuery();
 
   // Book Modal
   const [initialModalSize, setInitialModalSize] = React.useState();
@@ -267,7 +271,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         isActive={isAboutModalActive}
         showLogo={showAboutPageLogo}
         onClose={() => {
-          if (prevBookId.current) {
+          if (prevBookId.current && enablePrevBookId) {
             Router.push(
               `${basePathnameHref}/book/[id]`,
               `${basePathnameAs}/book/${prevBookId.current}`,
@@ -278,7 +282,11 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         }}
       />
 
-      <OffTheShelfLogo isActive={isLogoActive} className={css.logo} />
+      <OffTheShelfLogo
+        isActive={isLogoActive}
+        className={css.logo}
+        size={mediaQuery === 'xs' || mediaQuery === 'sm' ? 'sm' : undefined}
+      />
 
       <BookShelves
         position={position}

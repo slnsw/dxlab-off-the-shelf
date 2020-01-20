@@ -1,25 +1,42 @@
 @import '../../styles/global.scss';
 
+$logoWidth: 450px;
+$textWidth: 310px;
+$textTop: 48px;
+$textLeft: 90px;
+$divBordersHeight: 340px;
+
 .offTheShelfLogo {
   position: relative;
   display: block;
-  width: 450px;
+  width: $logoWidth;
+  min-width: $logoWidth;
+
+  &.sm {
+    width: $logoWidth/2;
+    min-width: $logoWidth/2;
+  }
 }
 
 .text {
   position: absolute;
-  top: 48px;
-  left: 90px;
+  top: $textTop;
+  left: $textLeft;
   z-index: 2;
-  width: 310px;
-}
+  width: $textWidth;
 
-// .borders {
-//   top: 0;
-//   z-index: 1;
-// }
+  &.sm {
+    top: $textTop/2;
+    left: $textLeft/2;
+    width: $textWidth/2;
+  }
+}
 
 .divBorders {
   top: 0;
-  height: 340px;
+  height: $divBordersHeight;
+
+  &.sm {
+    height: $divBordersHeight/2;
+  }
 }
