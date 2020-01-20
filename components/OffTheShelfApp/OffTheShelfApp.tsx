@@ -29,6 +29,7 @@ type Props = {
   basePathnameAs: string;
   basePathnameHref: string;
   hasHeader?: boolean;
+  showAboutPageLogo?: boolean;
   booksTotal?: number;
 };
 
@@ -38,6 +39,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   basePathnameAs,
   basePathnameHref = '/gallery/[position]',
   hasHeader = false,
+  showAboutPageLogo = true,
   booksTotal = 200,
 }) => {
   // --------------------------------------------------------------------------
@@ -263,6 +265,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
       <AboutModal
         isActive={isAboutModalActive}
+        showLogo={showAboutPageLogo}
         onClose={() => {
           if (prevBookId.current) {
             Router.push(

@@ -12,6 +12,7 @@ const OffTheShelfPage = ({ query }) => {
       basePathnameAs={'/off-the-shelf'}
       booksTotal={80}
       hasHeader={true}
+      showAboutPageLogo={false}
     />
   );
 };

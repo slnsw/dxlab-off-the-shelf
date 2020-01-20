@@ -44,8 +44,9 @@ const AboutModal: React.FunctionComponent<Props> = ({
       >
         <div className={css.info}>
           <div className={css.content}>
-            {/* <h1>About Off The Shelf</h1> */}
-            <OffTheShelfLogo className={css.logo} />
+            {showLogo && <OffTheShelfLogo className={css.logo} />}
+
+            {!showLogo && <h1>About Off The Shelf</h1>}
 
             <div className={css.contentInner}>
               <p>
