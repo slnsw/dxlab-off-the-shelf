@@ -8,11 +8,13 @@ import css from './Header.scss';
 
 type Props = {
   basePathnameHref?: string;
+  basePathnameAs?: string;
   className?: string;
 };
 
 const Header: React.FunctionComponent<Props> = ({
   basePathnameHref,
+  basePathnameAs,
   className,
 }) => {
   return (
@@ -22,7 +24,7 @@ const Header: React.FunctionComponent<Props> = ({
         className={css.logo}
       ></OffTheShelfLogoText>
 
-      <Link href={`${basePathnameHref}/about`}>
+      <Link href={`${basePathnameHref}/[page]`} as={`${basePathnameAs}/about`}>
         <CTAButton>About</CTAButton>
         {/* <a className={css.link}>About</a> */}
       </Link>

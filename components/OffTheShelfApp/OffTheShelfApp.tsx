@@ -245,7 +245,10 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
   return (
     <>
-      <Header basePathnameHref={basePathnameHref}>test</Header>
+      <Header
+        basePathnameHref={basePathnameHref}
+        basePathnameAs={basePathnameAs}
+      ></Header>
 
       <BookCardModal
         id={bookId}
@@ -261,10 +264,14 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
       <AboutModal
         isActive={isAboutModalActive}
         onClose={() => {
-          Router.push(
-            `${basePathnameHref}/book/[id]`,
-            `${basePathnameAs}/book/${prevBookId.current}`,
-          );
+          if (prevBookId.current) {
+            Router.push(
+              `${basePathnameHref}/book/[id]`,
+              `${basePathnameAs}/book/${prevBookId.current}`,
+            );
+          } else {
+            Router.push(basePathnameHref);
+          }
         }}
       />
 
