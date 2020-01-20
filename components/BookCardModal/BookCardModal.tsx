@@ -122,6 +122,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                 <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
                 {creator && <h2>{creator}</h2>}
 
+                <div className={css.headingDivider}></div>
+
                 {description && (
                   <p className={css.description}>{description}</p>
                 )}

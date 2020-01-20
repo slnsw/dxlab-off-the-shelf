@@ -25,7 +25,7 @@
   h2 {
     margin-top: 0;
     // margin-right: $baseline-6;
-    margin-bottom: $baseline-4;
+    margin-bottom: $baseline-3;
     color: $colour-yellow;
     font-weight: 300;
     font-size: $font-size-md;
@@ -110,6 +110,13 @@
 //   height: 100px;
 // }
 
+.headingDivider {
+  width: $baseline * 8;
+  height: 4px;
+  margin: 0 auto $baseline * 3 auto;
+  background-color: $colour-teal;
+}
+
 .info {
   position: relative;
   display: flex;
@@ -153,11 +160,8 @@
   @include scrollbar();
 
   z-index: 2;
-  // width: calc(100% - #{$baseline * 8});
-  // height: calc(100% - #{$baseline * 17});
-  margin-top: $baseline * 2;
-  // padding-right: $baseline * 3;
-  // overflow: auto;
+  min-height: 200px;
+  margin-top: $baseline * 1;
   word-wrap: break-word;
 
   @include media-sm {
