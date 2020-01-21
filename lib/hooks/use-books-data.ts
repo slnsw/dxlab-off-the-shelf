@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import fetch from 'isomorphic-unfetch';
 
 const useBooksData = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get('/off-the-shelf/data/data.json')
-      .then((result) => {
-        setBooks(processBooks(result.data));
+    fetch('/off-the-shelf/data/data.json')
+      .then((r) => r.json())
+      .then((data) => {
+        setBooks(processBooks(data));
         setLoading(false);
       })
       .catch((error) => {
