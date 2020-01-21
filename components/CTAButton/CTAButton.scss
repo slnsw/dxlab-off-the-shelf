@@ -9,36 +9,39 @@
   font-size: $font-size-xs;
   line-height: 1;
   text-transform: uppercase;
-  border-top: 2px solid $colour-teal;
-  border-right: 2px solid $colour-teal;
+  // border-top: 2px solid $colour-teal;
+  // border-right: 2px solid $colour-teal;
+  border: 2px solid $colour-teal;
 
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: $baseline-half;
-    border-left: 2px solid $colour-teal;
-    content: '';
+  // &::before {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   height: calc(100% - #{$baseline});
+  //   border-left: 2px solid $colour-teal;
+  //   content: '';
 
-    @include media-sm {
-      height: $baseline;
-      border-width: 4px;
-    }
-  }
+  //   @include media-sm {
+  //     height: $baseline;
+  //     border-width: 4px;
+  //   }
+  // }
 
-  &::after {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: $baseline-half;
-    border-bottom: 2px solid $colour-teal;
-    content: '';
+  // &::after {
+  //   position: absolute;
+  //   right: 0;
+  //   bottom: 0;
+  //   width: 100%;
+  //   // width: calc(100% - #{$baseline});
+  //   // width: $baseline-half;
+  //   border-bottom: 2px solid $colour-teal;
+  //   content: '';
 
-    @include media-sm {
-      width: $baseline;
-      border-width: 4px;
-    }
-  }
+  //   @include media-sm {
+  //     width: $baseline;
+  //     border-width: 4px;
+  //   }
+  // }
 
   @include media-sm {
     padding: $baseline-2;

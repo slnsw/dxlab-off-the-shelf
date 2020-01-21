@@ -8,6 +8,7 @@ import Modal from '../Modal';
 import CTAButton from '../CTAButton';
 import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
 import Loader from '../Loader';
+import ShareBox from '../ShareBox';
 
 import { buildHeadTitle } from '../../lib';
 import useBookData from '../../lib/hooks/use-book-data';
@@ -192,6 +193,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                         );
                       })}
                 </div>
+
+                <ShareBox title={book.title}></ShareBox>
               </>
             </motion.div>
           </div>
