@@ -50,6 +50,7 @@ const GalleryPage = ({ query }) => {
       position={position}
       basePathnameHref={'/gallery/[position]'}
       basePathnameAs={`/gallery/${position}`}
+      mode={'gallery'}
     />
   );
 };
