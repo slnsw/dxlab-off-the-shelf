@@ -1,6 +1,7 @@
 import React from 'react';
 
 import OffTheShelfLogo from '../components/OffTheShelfLogo';
+// import OffTheShelfLogoDivBorders from '../components/OffTheShelfLogoDivBorders';
 
 const LogoPage = () => {
   const [isActive, setIsActive] = React.useState(true);
@@ -11,21 +12,20 @@ const LogoPage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: '10rem',
+        // padding: '10rem',
         height: '100vh',
       }}
       onClick={() => {
         setIsActive(!isActive);
       }}
     >
-      <div>
-        <OffTheShelfLogo isActive={isActive} />
+      <OffTheShelfLogo isActive={isActive} />
+      {/* <OffTheShelfLogoDivBorders orientation="bottomLeft"></OffTheShelfLogoDivBorders> */}
 
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 
-import * as appConfig from '../../configs';
+import * as configs from '../../configs';
+import { useMediaQuery } from '../../lib/hooks';
 
 import css from './BookCard.scss';
 
@@ -44,7 +45,22 @@ const BookCard: React.FunctionComponent<Props> = ({
   const [ref, inView, entry] = useInView();
   const [originX, setOriginX] = React.useState();
 
+  const mediaQuery = useMediaQuery();
+  const gutter = ['xs', 'sm'].includes(mediaQuery)
+    ? configs.MOBILE_GUTTER
+    : configs.DESKTOP_GUTTER;
+
   const debug = false;
+
+  // To do magic Cloudinary stuff (resize image to 512 tall, convert to MUCH smaller 60% JPG with same background colour as site):
+  // https://newselfwales.dxlab.sl.nsw.gov.au/app/uploads/sites/3/2019/10/IMG_20190812_141549-final-677x1024.png
+  // becomes
+  // https://res.cloudinary.com/dxlab/image/upload/h_512,f_jpg,q_60,b_rgb:060606/off-the-shelf/2019/10/IMG_20190812_141549-final-677x1024.png
+
+  const cloudImgUrl = `https://res.cloudinary.com/dxlab/image/upload/h_512,f_jpg,q_60,b_rgb:060606/off-the-shelf/${imageUrl.slice(
+    61,
+  )}`;
+  // console.log(cloudImgUrl);
 
   React.useEffect(() => {
     if (scrollDirection) {
@@ -96,11 +112,11 @@ const BookCard: React.FunctionComponent<Props> = ({
         {debug && <p className={css.debugNumber}>{index}</p>}
         {debug && <p className={css.debugNumber2}>{id}</p>}
         <motion.img
-          src={imageUrl}
+          src={cloudImgUrl}
           alt={title}
           className={css.image}
           animate={{
-            y: isActive ? 0 : imageHeight + appConfig.GUTTER,
+            y: isActive ? 0 : imageHeight + gutter,
           }}
           transition={{
             delay: Math.random() * 0.4 + animationDelay,

@@ -14,7 +14,9 @@ import css from './BookShelves.scss';
 type Props = {
   isActive?: boolean;
   isIntervalActive?: boolean;
-  position?: 'left' | 'right';
+  position?: 'left' | 'right' | 'test';
+  booksTotal?: number;
+  hasHeader?: boolean;
   className?: string;
   onBookClick?: Function;
 };
@@ -23,6 +25,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
   isActive = false,
   isIntervalActive = false,
   position = 'left',
+  booksTotal = configs.NUMBER_OF_BOOKS_TO_DISPLAY,
+  hasHeader = false,
   className,
   onBookClick,
 }) => {
@@ -36,29 +40,31 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
   // Fetch books data
   const { books: booksOnly, loading } = useBooksData();
-
   const shuffleBooks = () => {
     console.log('Shuffle books', position);
 
-    const subset = configs.NUMBER_OF_BOOKS_TO_DISPLAY;
+    const subset = booksTotal;
     const halfWay = Math.floor(booksOnly.length / 2);
 
-    // Pick a half depending on kiosk and randomly add spines
-    const unshuffledBooks = booksOnly
-      .slice(
-        position === 'left' ? 0 : halfWay + 1,
-        position === 'left' ? halfWay : booksOnly.length,
-      )
-      .map((book) => {
-        const hasSpines = Math.random() < configs.HAS_SPINES_PROBABILITY;
-        const numSpines = hasSpines
-          ? Math.floor(Math.random() * configs.MAX_NUMBER_OF_SPINES) + 1
-          : 0;
-        const spines = [...Array(numSpines)].map(() => {
-          return Math.floor(Math.random() * configs.NUMBER_OF_SPINES) + 1;
-        });
-        return { ...book, spines };
+    // randomly add spines
+    const allUnshuffledBooks = booksOnly.map((book) => {
+      const hasSpines = Math.random() < configs.HAS_SPINES_PROBABILITY;
+      const numSpines = hasSpines
+        ? Math.floor(Math.random() * configs.MAX_NUMBER_OF_SPINES) + 1
+        : 0;
+      const spines = [...Array(numSpines)].map(() => {
+        return Math.floor(Math.random() * configs.NUMBER_OF_SPINES) + 1;
       });
+      return { ...book, spines };
+    });
+
+    // Pick a half depending on kiosk (left/right) unless we are the website in which case don't.
+    const unshuffledBooks = position
+      ? allUnshuffledBooks.slice(
+          position === 'left' ? 0 : halfWay + 1,
+          position === 'left' ? halfWay : booksOnly.length,
+        )
+      : allUnshuffledBooks;
 
     // Shuffle them up and display a subset
     // setBooks(knuthShuffle(unshuffledBooks).slice(0, subset));
@@ -69,7 +75,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
     console.log('BookShelves - position', position);
 
     shuffleBooks();
-  }, []);
+  }, [JSON.stringify(booksOnly)]);
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -163,7 +169,13 @@ const BookShelves: React.FunctionComponent<Props> = ({
   }, [isIntervalActive]);
 
   return (
-    <div className={[css.bookShelves, className || ''].join(' ')}>
+    <div
+      className={[
+        css.bookShelves,
+        hasHeader ? css.hasHeader : '',
+        className || '',
+      ].join(' ')}
+    >
       {loading && 'Loading...'}
 
       {!loading && books && books.length > 0 && (

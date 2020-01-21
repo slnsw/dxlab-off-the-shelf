@@ -5,7 +5,7 @@ import BookCard from '../BookCard';
 import BookSpines from '../BookSpines';
 
 import * as configs from '../../configs';
-import { useDimensions, usePrevious } from '../../lib/hooks';
+import { useDimensions, usePrevious, useMediaQuery } from '../../lib/hooks';
 import { createScrollToItem } from '../../lib/scroll-to-item';
 
 import css from './BookShelf.scss';
@@ -45,6 +45,11 @@ const BookShelf: React.FunctionComponent<Props> = ({
   const scrollToItem = React.useRef(null);
 
   const shuffleTimeout = (configs.SHUFFLE_TIMEOUT - 100) / 1000;
+
+  const mediaQuery = useMediaQuery();
+  const gutter = ['xs', 'sm'].includes(mediaQuery)
+    ? configs.MOBILE_GUTTER
+    : configs.DESKTOP_GUTTER;
 
   React.useEffect(() => {
     const book = books[scrollToBook];
@@ -172,7 +177,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
         .map((book, i) => {
           const randomVariation = book.id % 22;
           const ratio = book.sizes.medium.width / book.sizes.medium.height;
-          const imageHeight = height - configs.GUTTER - randomVariation;
+          const imageHeight = height - gutter - randomVariation;
           const imageWidth = ratio * imageHeight;
 
           // const inView = booksInView.includes(book.id);

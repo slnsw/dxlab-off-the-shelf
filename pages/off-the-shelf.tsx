@@ -1,33 +1,28 @@
 import React from 'react';
 
-import OffTheShelfLogo from '../components/OffTheShelfLogo';
+import OffTheShelfApp from '../components/OffTheShelfApp';
 
-const LogoPage = () => {
-  const [isActive, setIsActive] = React.useState(true);
+import { withApollo } from '../lib/apollo';
 
+const OffTheShelfPage = ({ query }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '10rem',
-        height: '100vh',
-      }}
-      onClick={() => {
-        setIsActive(!isActive);
-      }}
-    >
-      <div>
-        <OffTheShelfLogo isActive={isActive} />
-
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
-    </div>
+    <OffTheShelfApp
+      query={query}
+      basePathnameHref={'/off-the-shelf'}
+      basePathnameAs={'/off-the-shelf'}
+      booksTotal={80}
+      hasHeader={true}
+      showAboutPageLogo={false}
+      enablePrevBookId={false}
+    />
   );
 };
 
-export default LogoPage;
+OffTheShelfPage.getInitialProps = ({ query, pathname }) => {
+  return {
+    query,
+    pathname,
+  };
+};
+
+export default withApollo(OffTheShelfPage);

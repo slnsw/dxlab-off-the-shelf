@@ -2,23 +2,41 @@
 
 .bookCardModal {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
 
   h1 {
     margin-top: 0;
-    margin-bottom: $baseline-2;
+    // margin-right: $baseline-6;
+    margin-bottom: $baseline-1;
     font-weight: 600;
-    font-size: $font-size-xxxlg;
-    line-height: $baseline-6;
+    font-size: $font-size-xxlg;
+    line-height: $baseline-5;
+    text-align: center;
+
+    @include media-sm {
+      margin-right: 0;
+      font-size: $font-size-xxxlg;
+      line-height: $baseline-6;
+      text-align: left;
+    }
   }
 
   h2 {
     margin-top: 0;
-    margin-bottom: $baseline-4;
+    // margin-right: $baseline-6;
+    margin-bottom: $baseline-3;
     color: $colour-yellow;
     font-weight: 300;
-    font-size: $font-size-lg;
+    font-size: $font-size-md;
+    text-align: center;
+
+    @include media-sm {
+      justify-content: center;
+      margin-right: 0;
+      font-size: $font-size-lg;
+      text-align: left;
+    }
   }
 
   p {
@@ -26,28 +44,62 @@
       color: $colour-yellow;
     }
   }
+
+  @include media-sm {
+    flex-direction: row;
+  }
 }
 
 .imageWrapper {
-  height: 100%;
-  margin-left: -$baseline-4;
-  padding-left: $baseline-4;
-  overflow: hidden;
+  order: 2;
+  width: 100%;
+  max-height: 90%;
+  margin-left: 0;
+  padding-right: 0;
+  padding-bottom: $baseline-2;
+
+  @include media-sm {
+    order: 1;
+    height: 100%;
+    margin-left: -$baseline-4;
+    padding-left: $baseline-4;
+    overflow: hidden;
+  }
 }
 
 .image {
   position: relative;
   z-index: 1;
-  width: auto;
-  height: 100%;
+  width: calc(100% - #{$baseline * 10});
+  height: auto;
+  margin-top: -$baseline * 9;
+  margin-left: $baseline * 5;
+
+  @include media-sm {
+    width: auto;
+    height: 100%;
+  }
+}
+
+.imageBorders {
+  height: $baseline * 14;
+
+  @include media-sm {
+    display: none;
+  }
 }
 
 .topBorders {
   position: absolute;
   z-index: 1;
+  display: none;
   width: 100%;
   height: 140px;
   pointer-events: none;
+
+  @include media-sm {
+    display: block;
+  }
 }
 
 // .bottomBorders {
@@ -58,14 +110,22 @@
 //   height: 100px;
 // }
 
+.headingDivider {
+  width: $baseline * 8;
+  height: 4px;
+  margin: 0 auto $baseline * 3 auto;
+  background-color: $colour-teal;
+}
+
 .info {
   position: relative;
   display: flex;
   flex-direction: column;
+  order: 3;
   width: 100%;
   max-width: 86ch;
   height: 100%;
-  margin-left: $baseline-5;
+  margin-left: 0;
 
   ul {
     padding: 0;
@@ -73,7 +133,16 @@
   }
 
   li {
-    line-height: $baseline-3 + $baseline-half;
+    line-height: $baseline-2 + $baseline-half;
+
+    @include media-sm {
+      line-height: $baseline-3 + $baseline-half;
+    }
+  }
+
+  @include media-sm {
+    order: 2;
+    margin-left: $baseline-5;
   }
 }
 
@@ -81,20 +150,28 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 80%;
+
+  @include media-sm {
+    height: 80%;
+  }
 }
 
 .content {
   @include scrollbar();
 
   z-index: 2;
-  width: calc(100% - #{$baseline * 8});
-  height: calc(100% - #{$baseline * 17});
-  margin-top: $baseline * 8;
-  padding-right: $baseline * 3;
-  padding-left: $baseline * 8;
-  overflow: auto;
+  min-height: 200px;
+  margin-top: $baseline * 1;
   word-wrap: break-word;
+
+  @include media-sm {
+    width: calc(100% - #{$baseline * 8});
+    height: calc(100% - #{$baseline * 17});
+    margin-top: $baseline * 8;
+    padding-right: $baseline * 3;
+    padding-left: $baseline * 8;
+    overflow: auto;
+  }
 }
 
 .loader {
@@ -105,9 +182,14 @@
 }
 
 .description {
-  margin-bottom: $baseline-6;
-  font-size: $font-size-xlg;
-  line-height: $baseline-4;
+  margin-bottom: $baseline-4;
+  font-size: $font-size-md;
+  line-height: $baseline-3;
+
+  @include media-sm {
+    font-size: $font-size-xlg;
+    line-height: $baseline-4;
+  }
 }
 
 .table {
@@ -117,8 +199,13 @@
 
   p {
     margin-top: 0;
-    margin-bottom: $baseline-2;
-    line-height: $baseline-3 + $baseline-half;
+    margin-bottom: $baseline-1;
+    line-height: $baseline-2 + $baseline-half;
+
+    @include media-sm {
+      margin-bottom: $baseline-2;
+      line-height: $baseline-3 + $baseline-half;
+    }
   }
 
   .row {
@@ -127,31 +214,49 @@
 
   .label {
     flex-basis: 16ch;
-    padding-right: $baseline-3;
-    font-size: $font-size-md;
+    padding-right: $baseline-2;
+    font-size: $font-size-sm;
     opacity: 0.6;
+
+    @include media-sm {
+      padding-right: $baseline-3;
+      font-size: $font-size-md;
+    }
   }
 
   .value {
     flex: 1;
+    font-size: $font-size-sm;
     text-transform: capitalize;
+
+    @include media-sm {
+      font-size: $font-size-md;
+    }
   }
 }
 
 .extraContent {
-  width: calc(100% - #{$baseline * 16});
-  margin-top: auto;
-  margin-left: $baseline-8;
-  // margin-bottom: $baseline-4;
-  padding: $baseline-4;
-  border: $baseline/2 solid $colour-teal;
-  border-right: none;
-  border-bottom: none;
-  // font-size: $font-size-lg;
-
   // p {
   //   line-height: $baseline-3 + $baseline-half;
   // }
+  margin-top: $baseline-4;
+  padding: $baseline-2;
+  font-size: $font-size-sm;
+  border: $baseline/2 solid $colour-teal;
+  border-right: none;
+  border-bottom: none;
+
+  @include media-sm {
+    width: calc(100% - #{$baseline * 16});
+    margin-top: auto;
+    margin-left: $baseline-8;
+    // margin-bottom: $baseline-4;
+    padding: $baseline-4;
+    border: $baseline/2 solid $colour-teal;
+    border-right: none;
+    border-bottom: none;
+    // font-size: $font-size-lg;
+  }
 
   span {
     color: $colour-yellow;
@@ -159,6 +264,14 @@
 }
 
 .backButton {
-  margin-top: $baseline * 3;
-  margin-left: $baseline-4;
+  order: 1;
+  margin-top: 0;
+  margin-bottom: $baseline-2;
+  margin-left: auto;
+
+  @include media-sm {
+    order: 3;
+    margin-top: $baseline * 3;
+    margin-left: $baseline-4;
+  }
 }

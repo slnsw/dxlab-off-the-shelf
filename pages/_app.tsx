@@ -57,6 +57,11 @@ class MyApp extends App {
             href="https://www.sl.nsw.gov.au/sites/all/themes/slnsw_frontend/favicon.ico"
             type="image/vnd.microsoft.icon"
           />
+
+          <link
+            href="https://unpkg.com/ionicons@4.2.5/dist/css/ionicons.min.css"
+            rel="stylesheet"
+          />
         </Head>
 
         <Component {...pageProps} />

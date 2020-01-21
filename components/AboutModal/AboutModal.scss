@@ -2,22 +2,25 @@
 
 .aboutModal {
   display: flex;
-  align-items: center;
-  justify-content: center;
 
   h1 {
     margin-top: 0;
-    margin-bottom: $baseline-2;
+    margin-bottom: $baseline-1;
     font-weight: 600;
-    font-size: $font-size-xxxlg;
+    font-size: $font-size-xxlg;
     line-height: $baseline-7;
+
+    @include media-sm {
+      margin-bottom: $baseline-2;
+      font-size: $font-size-xxxlg;
+    }
   }
 
   p,
   ul {
     margin-top: 0;
     margin-bottom: $baseline-2;
-    line-height: $baseline-3 + $baseline-half;
+    line-height: $baseline-3;
 
     &.large {
       font-size: $font-size-lg;
@@ -27,65 +30,123 @@
   span {
     color: $colour-yellow;
   }
+
+  @include media-sm {
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
 }
 
 .image {
-  position: relative;
   z-index: 1;
-  width: 50%;
+  order: 2;
+  width: 100%;
   height: auto;
+  margin-top: $baseline-2;
+
+  @include media-sm {
+    position: relative;
+    order: 2;
+    width: 50%;
+    height: auto;
+  }
 }
 
 .info {
-  // position: relative;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  // height: fit-content;
-  height: 100%;
-  margin: 0 $baseline * 5;
+  flex-direction: column;
+
+  @include media-sm {
+    // position: relative;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    // height: fit-content;
+    height: 100%;
+    margin: 0 $baseline * 5;
+  }
 }
 
 .logo {
-  margin-bottom: $baseline * 12;
+  width: 100%;
+  margin-top: $baseline-2;
+
+  @include media-sm {
+    width: 480px;
+    margin-top: 0;
+    margin-bottom: $baseline * 12;
+  }
 }
 
 .content {
   position: relative;
   display: flex;
   flex-direction: column;
+  order: 3;
   max-width: 80ch;
-  height: 100%;
-  font-size: $font-size-lg;
+  padding-top: $baseline * 4;
+
+  @include media-sm {
+    order: 1;
+    height: 100%;
+    font-size: $font-size-lg;
+  }
 }
 
 .contentInner {
   @include scrollbar();
 
-  height: 100%;
-  margin-right: $baseline * 6;
-  margin-left: $baseline-6;
-  padding-right: $baseline * 6;
-  overflow: auto;
+  // padding-top: $baseline-8;
+
+  @include media-sm {
+    height: 100%;
+    margin-right: $baseline * 6;
+    margin-left: $baseline-6;
+    padding-top: 0;
+    padding-right: $baseline * 6;
+    overflow: auto;
+  }
 }
 
 .extraContent {
-  position: absolute;
-  right: $baseline * 17;
-  bottom: $baseline * 11;
+  order: 4;
+  margin-top: $baseline-4;
+
+  @include media-sm {
+    position: absolute;
+    right: $baseline * 17;
+    bottom: $baseline * 11;
+    margin-top: 0;
+  }
 }
 
 .backButton {
-  margin-left: $baseline-6;
+  order: 1;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: auto;
+
+  @include media-sm {
+    order: 3;
+    margin-top: $baseline-2;
+    margin-bottom: $baseline-2;
+    margin-left: $baseline-6;
+  }
 }
 
 .borders {
-  position: absolute;
-  right: -4%;
-  bottom: 0;
-  width: 50%;
-  height: 50%;
-  transform: rotateZ(-90deg);
+  display: none;
+
+  @include media-sm {
+    position: absolute;
+    right: -4%;
+    bottom: 0;
+    display: block;
+    width: 50%;
+    height: 50%;
+    transform: rotateZ(-90deg);
+  }
 }
 
 .version {

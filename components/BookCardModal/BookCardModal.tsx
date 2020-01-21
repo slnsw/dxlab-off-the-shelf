@@ -6,8 +6,9 @@ import { motion } from 'framer-motion';
 
 import Modal from '../Modal';
 import CTAButton from '../CTAButton';
-import OffTheShelfLogoBorders from '../OffTheShelfLogoBorders';
+import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
 import Loader from '../Loader';
+import ShareBox from '../ShareBox';
 
 import { buildHeadTitle } from '../../lib';
 import useBookData from '../../lib/hooks/use-book-data';
@@ -25,6 +26,7 @@ type Props = {
     height: number;
   };
   initialImageUrl?: string;
+  showExtraContent?: boolean;
   className?: string;
   onClose?: Function;
 };
@@ -35,6 +37,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   isActive,
   initialSize,
   initialImageUrl,
+  showExtraContent = false,
   className,
   onClose,
 }) => {
@@ -74,6 +77,14 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
       {imageUrl && (
         <div className={css.imageWrapper}>
+          <OffTheShelfLogoDivBorders
+            orientation="topRight"
+            strokeWidth={2}
+            notchLength={6}
+            isActive={true}
+            className={css.imageBorders}
+          />
+
           <motion.img
             src={imageUrl}
             alt={book.title}
@@ -86,9 +97,10 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
       <div className={css.info}>
         <div className={css.contentWrapper}>
-          <OffTheShelfLogoBorders
+          <OffTheShelfLogoDivBorders
             orientation="topRight"
-            strokeWidth={8}
+            strokeWidth={4}
+            notchLength={12}
             isActive={true}
             className={css.topBorders}
           />
@@ -110,6 +122,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
               <>
                 <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
                 {creator && <h2>{creator}</h2>}
+
+                <div className={css.headingDivider}></div>
 
                 {description && (
                   <p className={css.description}>{description}</p>
@@ -179,31 +193,35 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                         );
                       })}
                 </div>
+
+                <ShareBox title={book.title}></ShareBox>
               </>
             </motion.div>
           </div>
         </div>
 
-        <div className={css.extraContent}>
-          <p>
-            If this book piques your interest, write down the{' '}
-            <strong>Call number</strong> or take a photo and ask for it in the
-            reading rooms downstairs.
-          </p>
-          <p>
-            <span>#OffTheShelf #shelfie</span>
-          </p>
-          <br />
+        {showExtraContent && (
+          <div className={css.extraContent}>
+            <p>
+              If this book piques your interest, write down the{' '}
+              <strong>Call number</strong> or take a photo and ask for it in the
+              reading rooms downstairs.
+            </p>
+            <p>
+              <span>#OffTheShelf #shelfie</span>
+            </p>
+            <br />
 
-          <Link
-            // href={'/gallery/[position]/book/[id]/[page]'}
-            // as={`/gallery/${position}/book/${id}/about`}
-            href="/gallery/[position]/[page]"
-            as={`/gallery/${position}/about`}
-          >
-            <CTAButton>About this exhibition</CTAButton>
-          </Link>
-        </div>
+            <Link
+              // href={'/gallery/[position]/book/[id]/[page]'}
+              // as={`/gallery/${position}/book/${id}/about`}
+              href="/gallery/[position]/[page]"
+              as={`/gallery/${position}/about`}
+            >
+              <CTAButton>About this exhibition</CTAButton>
+            </Link>
+          </div>
+        )}
       </div>
 
       <CTAButton className={css.backButton} onClick={onClose}>

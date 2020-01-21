@@ -9,6 +9,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-unfetch';
 
+// require('dotenv').config();
+
 let apolloClient = null;
 
 /**
@@ -132,8 +134,8 @@ function createApolloClient(initialState = {}) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
     link: new HttpLink({
-      uri: 'https://dxlab-graphql.now.sh/graphql',
-      // uri: process.env.GRAPHQL_URL,
+      // uri: 'https://dxlab-graphql.now.sh/graphql',
+      uri: process.env.GRAPHQL_URL,
       credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
       fetch,
     }),

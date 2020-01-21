@@ -14,12 +14,14 @@ import css from './AboutModal.scss';
 type Props = {
   className?: string;
   isActive?: boolean;
+  showLogo?: boolean;
   onClose?: Function;
 };
 
 const AboutModal: React.FunctionComponent<Props> = ({
   className,
   isActive,
+  showLogo = true,
   onClose,
 }) => {
   const [isVersionActive, setIsVersionActive] = React.useState(false);
@@ -42,8 +44,9 @@ const AboutModal: React.FunctionComponent<Props> = ({
       >
         <div className={css.info}>
           <div className={css.content}>
-            {/* <h1>About Off The Shelf</h1> */}
-            <OffTheShelfLogo className={css.logo} />
+            {showLogo && <OffTheShelfLogo className={css.logo} />}
+
+            {!showLogo && <h1>About</h1>}
 
             <div className={css.contentInner}>
               <p>
@@ -53,11 +56,11 @@ const AboutModal: React.FunctionComponent<Props> = ({
               </p>
 
               <p>
-                Off the Shelf brings you snapshots of the intriguing, perplexing
-                and playful volumes in the underground book stacks waiting to be
-                read. From bodice rippers to banksia trees, cats to catafalques,
-                turnips to teleology — whatever you're into, we have a book for
-                it.
+                <strong>Off the Shelf</strong> brings you snapshots of the
+                intriguing, perplexing and playful volumes in the underground
+                book stacks waiting to be read. From bodice rippers to banksia
+                trees, cats to catafalques, turnips to teleology — whatever
+                you're into, we have a book for it.
               </p>
 
               <p>
