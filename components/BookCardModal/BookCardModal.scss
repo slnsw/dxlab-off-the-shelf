@@ -13,7 +13,7 @@
     line-height: $baseline-4 + $baseline-half;
     text-align: center;
 
-    @include media-sm {
+    @include media-lg {
       margin-right: 0;
       font-size: $font-size-xxxlg;
       line-height: $baseline-6;
@@ -30,7 +30,7 @@
     font-size: $font-size-md;
     text-align: center;
 
-    @include media-sm {
+    @include media-lg {
       justify-content: center;
       margin-right: 0;
       font-size: $font-size-lg;
@@ -44,7 +44,7 @@
     }
   }
 
-  @include media-sm {
+  @include media-lg {
     flex-direction: row;
   }
 }
@@ -52,12 +52,14 @@
 .imageWrapper {
   order: 2;
   width: 100%;
+  max-width: 24rem;
   max-height: 90%;
-  margin-left: 0;
+  margin-right: auto;
+  margin-left: auto;
   padding-right: 0;
   padding-bottom: $baseline-2;
 
-  @include media-sm {
+  @include media-lg {
     order: 1;
     height: 100%;
     margin-left: -$baseline-4;
@@ -74,7 +76,7 @@
   margin-top: -$baseline * 9;
   margin-left: $baseline * 5;
 
-  @include media-sm {
+  @include media-lg {
     width: auto;
     height: 100%;
   }
@@ -83,7 +85,7 @@
 .imageBorders {
   height: $baseline * 14;
 
-  @include media-sm {
+  @include media-lg {
     display: none;
   }
 }
@@ -96,7 +98,7 @@
   height: 140px;
   pointer-events: none;
 
-  @include media-sm {
+  @include media-lg {
     display: block;
   }
 }
@@ -124,7 +126,8 @@
   width: 100%;
   max-width: 86ch;
   height: 100%;
-  margin-left: 0;
+  margin-right: auto;
+  margin-left: auto;
 
   ul {
     padding: 0;
@@ -134,12 +137,12 @@
   li {
     line-height: $baseline-2 + $baseline-half;
 
-    @include media-sm {
+    @include media-lg {
       line-height: $baseline-3 + $baseline-half;
     }
   }
 
-  @include media-sm {
+  @include media-lg {
     order: 2;
     margin-left: $baseline-5;
   }
@@ -150,7 +153,7 @@
   display: flex;
   flex-direction: column;
 
-  @include media-sm {
+  @include media-lg {
     height: 80%;
   }
 }
@@ -163,7 +166,7 @@
   margin-top: $baseline * 1;
   word-wrap: break-word;
 
-  @include media-sm {
+  @include media-lg {
     width: calc(100% - #{$baseline * 8});
     height: calc(100% - #{$baseline * 17});
     margin-top: $baseline * 8;
@@ -181,11 +184,14 @@
 }
 
 .description {
+  max-width: 30rem;
+  margin-right: auto;
   margin-bottom: $baseline-4;
+  margin-left: auto;
   font-size: $font-size-md;
   line-height: $baseline-3;
 
-  @include media-sm {
+  @include media-lg {
     font-size: $font-size-xlg;
     line-height: $baseline-4;
   }
@@ -194,6 +200,8 @@
 .table {
   display: flex;
   flex-direction: column;
+  max-width: 30rem;
+  margin: 0 auto;
   font-size: $font-size-lg;
 
   p {
@@ -201,7 +209,7 @@
     margin-bottom: $baseline-1;
     line-height: $baseline-2 + $baseline-half;
 
-    @include media-sm {
+    @include media-lg {
       margin-bottom: $baseline-2;
       line-height: $baseline-3 + $baseline-half;
     }
@@ -217,7 +225,7 @@
     font-size: $font-size-sm;
     opacity: 0.6;
 
-    @include media-sm {
+    @include media-lg {
       padding-right: $baseline-3;
       font-size: $font-size-md;
     }
@@ -228,7 +236,7 @@
     font-size: $font-size-sm;
     text-transform: capitalize;
 
-    @include media-sm {
+    @include media-lg {
       font-size: $font-size-md;
     }
   }
@@ -245,7 +253,7 @@
   border-right: none;
   border-bottom: none;
 
-  @include media-sm {
+  @include media-lg {
     width: calc(100% - #{$baseline * 16});
     margin-top: auto;
     margin-left: $baseline-8;
@@ -268,7 +276,7 @@
   margin-bottom: $baseline-2;
   margin-left: auto;
 
-  @include media-sm {
+  @include media-lg {
     order: 3;
     margin-top: $baseline * 3;
     margin-left: $baseline-4;

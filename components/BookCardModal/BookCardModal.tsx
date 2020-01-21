@@ -213,8 +213,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
             <br />
 
             <Link
-              // href={'/gallery/[position]/book/[id]/[page]'}
-              // as={`/gallery/${position}/book/${id}/about`}
               href="/gallery/[position]/[page]"
               as={`/gallery/${position}/about`}
             >

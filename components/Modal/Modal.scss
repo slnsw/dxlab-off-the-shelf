@@ -13,7 +13,7 @@
   overflow: auto;
   background: $colour-black;
 
-  @include media-sm {
+  @include media-lg {
     padding: $baseline-8;
   }
 }
