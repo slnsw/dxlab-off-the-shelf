@@ -8,6 +8,10 @@
   height: $baseline * 7;
   margin-bottom: -$baseline;
   padding: $baseline-2 $baseline-2 0 $baseline-2;
+
+  @include media-sm {
+    margin-bottom: -$baseline-2;
+  }
 }
 
 .link:link {

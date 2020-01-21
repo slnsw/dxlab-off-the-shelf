@@ -47,5 +47,11 @@
     padding: $baseline-2;
     font-size: $font-size-lg;
     border-width: 4px;
+
+    &.sm {
+      padding: $baseline-1;
+      font-size: $font-size-xs;
+      border-width: 2px;
+    }
   }
 }

@@ -107,9 +107,9 @@ const AboutModal: React.FunctionComponent<Props> = ({
             <p>
               Please email <span>media@sl.nsw.gov.au</span> for enquiries.
             </p>
-          </div>
 
-          <FooterInfo className={css.footerInfo}></FooterInfo>
+            <FooterInfo></FooterInfo>
+          </div>
         </div>
 
         <div

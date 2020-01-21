@@ -5,16 +5,21 @@ import Button from '../Button';
 import css from './CTAButton.scss';
 
 interface Props {
+  size?: 'sm' | 'md';
   children?: string | React.ReactNode;
   className?: string;
   onClick?: Function;
 }
 
 const CTAButton: React.FunctionComponent<Props> = React.forwardRef(
-  ({ children, className, ...restProps }, ref) => {
+  ({ size = 'md', children, className, ...restProps }, ref) => {
     return (
       <Button
-        className={[css.ctaButton, className || ''].join(' ')}
+        className={[
+          css.ctaButton,
+          className || '',
+          size === 'sm' ? css.sm : '',
+        ].join(' ')}
         {...restProps}
         ref={ref}
       >
