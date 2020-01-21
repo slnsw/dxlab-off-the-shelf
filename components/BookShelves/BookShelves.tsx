@@ -150,7 +150,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
         'to',
         newCurrentBook,
       );
-
+      // console.log('isIntervalActive? ', isIntervalActive);
       setCurrentBooks([
         currentShelfIndex === 0 ? newCurrentBook : currentBooks[0],
         currentShelfIndex === 1 ? newCurrentBook : currentBooks[1],

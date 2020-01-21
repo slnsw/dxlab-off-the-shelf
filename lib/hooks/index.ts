@@ -7,6 +7,7 @@ export { default as useInterval } from './use-interval';
 export { default as useTimeout } from './use-timeout';
 export { default as useQuery } from './use-query';
 export { default as useMediaQuery } from './use-media-query';
+export { default as useDocumentVisibility } from './use-document-visibility';
 
 /**
  * Listen for a particular key press

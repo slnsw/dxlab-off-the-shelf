@@ -8,7 +8,11 @@ import BookShelves from '../BookShelves';
 import OffTheShelfLogo from '../OffTheShelfLogo';
 
 import { createIdleTimer } from '../../lib/idle-timer';
-import { useInterval, useMediaQuery } from '../../lib/hooks';
+import {
+  useInterval,
+  useMediaQuery,
+  useDocumentVisibility,
+} from '../../lib/hooks';
 import * as configs from '../../configs';
 
 import css from './OffTheShelfApp.scss';
@@ -213,26 +217,24 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   /*
    * Ensure intervals don't run while page is off screen
    */
-  React.useEffect(() => {
-    // https://mattwest.design/working-with-the-page-visibility-api/
-    document.addEventListener('visibilitychange', (e) => {
-      const document = e.target as HTMLDocument;
+  useDocumentVisibility((e) => {
+    const document = e.target as HTMLDocument;
 
-      // console.log(document.hidden, document.visibilityState);
-
-      if (isIntervalEnabled) {
-        if (document.hidden || document.visibilityState === 'hidden') {
-          if (isShelfIntervalActive) {
-            setIsShelfIntervalActive(false);
-            setIsIdleLoopActive(false);
-          }
-        } else if (isModalActive === false) {
-          setIsShelfIntervalActive(true);
-          setIsIdleLoopActive(true);
+    // console.log(document.hidden, document.visibilityState);
+    // console.log('Is Int Enabled?: ', isIntervalEnabled);
+    // console.log(isShelfIntervalActive);
+    if (isIntervalEnabled) {
+      if (document.hidden || document.visibilityState === 'hidden') {
+        if (isShelfIntervalActive) {
+          setIsShelfIntervalActive(false);
+          setIsIdleLoopActive(false);
         }
+      } else if (isModalActive === false) {
+        setIsShelfIntervalActive(true);
+        setIsIdleLoopActive(true);
       }
-    });
-  }, [isIntervalEnabled]);
+    }
+  });
 
   // --------------------------------------------------------------------------
   // Handlers
