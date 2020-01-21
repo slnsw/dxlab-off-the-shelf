@@ -1,23 +1,38 @@
 @import '../../styles/global.scss';
 
 .shareBox {
+  position: relative;
   display: block;
-  margin-top: $baseline-2;
-  text-align: center;
+  width: fit-content;
+  margin-top: $baseline-4;
+  margin-right: auto;
+  margin-bottom: $baseline-8;
+  margin-left: auto;
 
   .title {
     margin-bottom: $baseline;
+    margin-left: $baseline * 3.5;
+    padding-top: $baseline * 1.5;
     color: $colour-white;
     font-weight: 500;
     font-size: $font-size-sm;
-    // text-align: left;
+    text-align: left;
     text-transform: uppercase;
   }
 }
 
+.icons {
+  margin-left: $baseline * 3.5;
+}
+
 .icon {
-  margin-right: $baseline;
-  margin-left: $baseline;
+  margin-right: $baseline-3;
   color: $colour-white;
   font-size: $font-size-xxlg;
+}
+
+.borders {
+  position: absolute;
+  top: 0;
+  height: $baseline * 11.5;
 }

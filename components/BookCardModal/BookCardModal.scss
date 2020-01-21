@@ -7,11 +7,10 @@
 
   h1 {
     margin-top: 0;
-    // margin-right: $baseline-6;
     margin-bottom: $baseline-1;
     font-weight: 600;
     font-size: $font-size-xxlg;
-    line-height: $baseline-5;
+    line-height: $baseline-4 + $baseline-half;
     text-align: center;
 
     @include media-sm {
