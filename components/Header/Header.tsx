@@ -24,8 +24,16 @@ const Header: React.FunctionComponent<Props> = ({
         className={css.logo}
       ></OffTheShelfLogoText>
 
+      <div className={css.borders}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
       <Link href={`${basePathnameHref}/[page]`} as={`${basePathnameAs}/about`}>
-        <CTAButton className={css.link}>About</CTAButton>
+        <CTAButton className={css.link} size="sm">
+          About
+        </CTAButton>
         {/* <a className={css.link}>About</a> */}
       </Link>
     </div>

@@ -10,6 +10,7 @@ import { buildHeadTitle } from '../../lib';
 import pkg from '../../package.json';
 
 import css from './AboutModal.scss';
+import FooterInfo from '../FooterInfo';
 
 type Props = {
   className?: string;
@@ -80,14 +81,6 @@ const AboutModal: React.FunctionComponent<Props> = ({
                   Building
                 </li>
               </ul>
-
-              {/* <p>
-                <span>#OffTheShelf #shelfie</span>
-              </p>
-
-              <p>
-                Please email <span>media@sl.nsw.gov.au</span> for enquiries.
-              </p> */}
             </div>
           </div>
           <img
@@ -114,6 +107,8 @@ const AboutModal: React.FunctionComponent<Props> = ({
             <p>
               Please email <span>media@sl.nsw.gov.au</span> for enquiries.
             </p>
+
+            <FooterInfo></FooterInfo>
           </div>
         </div>
 

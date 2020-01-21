@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
+
 import css from './ShareBox.scss';
 
 type Props = {
@@ -33,9 +35,16 @@ const ShareBox: React.FunctionComponent<Props> = ({
 
   return (
     <div className={[css.shareBox, className || ''].join(' ')}>
+      <OffTheShelfLogoDivBorders
+        isActive={true}
+        strokeWidth={2}
+        notchLength={6}
+        className={css.borders}
+      ></OffTheShelfLogoDivBorders>
+
       <h2 className={css.title}>Share</h2>
 
-      <div className="share-box__icons">
+      <div className={css.icons}>
         <a
           href={fbLink}
           aria-label="Share this item on Facebook"

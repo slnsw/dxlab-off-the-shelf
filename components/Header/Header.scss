@@ -8,6 +8,10 @@
   height: $baseline * 7;
   margin-bottom: -$baseline;
   padding: $baseline-2 $baseline-2 0 $baseline-2;
+
+  @include media-sm {
+    margin-bottom: -$baseline-2;
+  }
 }
 
 .link:link {
@@ -21,11 +25,40 @@
 
 .logo {
   height: 100%;
-  margin-right: $baseline-2;
-  padding-right: $baseline-2;
-  // border-right: 2px solid $colour-teal;
+  margin-right: $baseline * 1.5;
 
   svg {
     height: 100%;
+  }
+}
+
+.borders {
+  display: flex;
+  align-items: flex-end;
+  height: calc(100% - 4px);
+  margin-right: auto;
+
+  > div:nth-child(1) {
+    width: 6px;
+    height: 100%;
+    margin-right: auto;
+    border-top: 2px solid $colour-teal;
+    border-right: 2px solid $colour-teal;
+  }
+
+  > div:nth-child(2) {
+    width: 6px;
+    height: calc(100% - #{$baseline});
+    margin-right: auto;
+    border-top: 2px solid $colour-yellow;
+    border-right: 2px solid $colour-yellow;
+  }
+
+  > div:nth-child(3) {
+    width: 6px;
+    height: calc(100% - #{$baseline * 2});
+    margin-right: auto;
+    border-top: 2px solid $colour-white;
+    border-right: 2px solid $colour-white;
   }
 }

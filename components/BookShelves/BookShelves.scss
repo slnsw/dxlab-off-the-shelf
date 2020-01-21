@@ -13,6 +13,10 @@
 
   &.hasHeader {
     height: calc(100% - #{$baseline-6});
+
+    @include media-sm {
+      height: calc(100% - #{$baseline-5});
+    }
   }
 }
 
