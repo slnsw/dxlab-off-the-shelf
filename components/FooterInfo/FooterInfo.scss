@@ -1,0 +1,42 @@
+@import '../../styles/global.scss';
+
+.footerInfo {
+  display: block;
+  margin-top: $baseline-4;
+  margin-bottom: $baseline-4;
+}
+
+.logoHolder {
+  display: flex;
+  margin-bottom: $baseline-3;
+}
+
+.logo {
+  display: block;
+  margin-right: $baseline-2;
+}
+
+.logoDxlab {
+  max-width: 6em;
+}
+
+.logoSlnsw {
+  max-width: 8.5em;
+  margin-right: 0;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  font-size: $font-size-sm;
+  list-style-type: none;
+
+  li {
+    margin-right: $baseline-1;
+    margin-bottom: $baseline-2;
+    padding-right: $baseline-1;
+    line-height: 1;
+    border-right: 1px solid $colour-white;
+  }
+}

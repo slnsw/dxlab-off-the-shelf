@@ -48,3 +48,9 @@ p {
 li {
   margin-bottom: $baseline;
 }
+
+a:link,
+a:visited {
+  color: $colour-yellow;
+  text-decoration: none;
+}
