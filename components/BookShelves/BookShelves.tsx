@@ -40,7 +40,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
   // Fetch books data
   const { books: booksOnly, loading } = useBooksData();
-
   const shuffleBooks = () => {
     console.log('Shuffle books', position);
 
@@ -76,7 +75,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
     console.log('BookShelves - position', position);
 
     shuffleBooks();
-  }, []);
+  }, [JSON.stringify(booksOnly)]);
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {

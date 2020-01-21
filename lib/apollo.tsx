@@ -9,6 +9,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-unfetch';
 
+// require('dotenv').config();
+
 let apolloClient = null;
 
 /**
