@@ -61,7 +61,7 @@
 // @example scss - Scrollbar styling
 // @include scrollbar(.5em, slategray);
 @mixin scrollbar(
-  $size: $baseline * 2,
+  $size: $baseline * 1.5,
   // $foreground-color: $colour-grey-700,
     $foreground-color: $colour-teal,
   $background-color: $colour-grey-900,

@@ -86,179 +86,183 @@ const BookCardModal: React.FunctionComponent<Props> = ({
     >
       <Head>{book.title && <title>{buildHeadTitle(book.title)}</title>}</Head>
 
-      {imageUrl && (
-        <div className={css.imageWrapper}>
-          <OffTheShelfLogoDivBorders
-            orientation="topRight"
-            strokeWidth={2}
-            notchLength={6}
-            isActive={true}
-            className={css.imageBorders}
-          />
+      <div className={css.inside}>
+        {imageUrl && (
+          <div className={css.imageWrapper}>
+            <OffTheShelfLogoDivBorders
+              orientation="topRight"
+              strokeWidth={2}
+              notchLength={6}
+              isActive={true}
+              className={css.imageBorders}
+            />
 
-          <motion.img
-            src={imageUrl}
-            alt={book.title}
-            className={css.image}
-            animate={{ x: 0 }}
-            transition={{ from: '100%', type: 'spring', damping: 15 }}
-          />
-        </div>
-      )}
-
-      <div className={css.info}>
-        <div className={css.contentWrapper}>
-          <OffTheShelfLogoDivBorders
-            orientation="topRight"
-            strokeWidth={mediaQuery === 'xxxlg' ? 4 : 2}
-            notchLength={mediaQuery === 'xxxlg' ? 12 : 6}
-            isActive={true}
-            className={css.topBorders}
-          />
-
-          <div className={css.content}>
-            <Loader isActive={loading} className={css.loader} />
-
-            <motion.div
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: loading ? 0 : 1,
-              }}
-              exit={{
-                opacity: 0,
-              }}
-            >
-              <>
-                <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
-                {creator && <h2 className={css.creator}>{creator}</h2>}
-
-                <div className={css.headingDivider}></div>
-
-                {description && (
-                  <p className={css.description}>{description}</p>
-                )}
-
-                <div className={css.table}>
-                  {primoRecord &&
-                    bookFields
-                      .filter((row) => primoRecord[row.field])
-                      .map((row) => {
-                        const value = primoRecord[row.field];
-                        // console.log(value);
-                        return (
-                          <div className={css.row} key={row.field}>
-                            <div className={css.label}>
-                              {(() => {
-                                switch (row.field) {
-                                  case 'callNumber':
-                                    return (
-                                      <p>
-                                        <strong>{row.label}</strong>
-                                      </p>
-                                    );
-                                  default:
-                                    return <p>{row.label}</p>;
-                                }
-                              })()}
-                            </div>
-                            <div className={css.value}>
-                              {(() => {
-                                switch (row.field) {
-                                  case 'holdings':
-                                    return value.map((holding, i) => {
-                                      return (
-                                        <p key={`${holding.subLocation}-${i}`}>
-                                          {holding.subLocation},{' '}
-                                          {holding.status},{' '}
-                                          {holding.mainLocation}
-                                        </p>
-                                      );
-                                    });
-                                  case 'subjects':
-                                    return (
-                                      <ul>
-                                        {book.primoRecord.subjects.map(
-                                          (subject, i) => {
-                                            return (
-                                              <li key={`${subject}-${i}`}>
-                                                {subject}
-                                              </li>
-                                            );
-                                          },
-                                        )}
-                                      </ul>
-                                    );
-                                  case 'callNumber':
-                                    return (
-                                      <p className={css.highlight}>{value}</p>
-                                    );
-
-                                  default:
-                                    return <p>{value}</p>;
-                                }
-                              })()}
-                            </div>
-                          </div>
-                        );
-                      })}
-                  {mode === 'web' && primoLink && (
-                    <div className={css.row} key={'id'}>
-                      <div className={css.label}>
-                        <p>More info</p>
-                      </div>
-                      <div className={css.value}>
-                        <Link as={primoLink}>
-                          <a
-                            href={primoLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            View catalogue record
-                          </a>
-                        </Link>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {mode === 'web' && (
-                  <ShareBox
-                    title={book.title}
-                    className={css.shareBox}
-                  ></ShareBox>
-                )}
-              </>
-            </motion.div>
-          </div>
-        </div>
-
-        {showExtraContent && (
-          <div className={css.extraContent}>
-            <p>
-              If this book piques your interest, write down the{' '}
-              <strong>Call number</strong> or take a photo and ask for it in the
-              reading rooms downstairs.
-            </p>
-            <p>
-              <span>#OffTheShelf #shelfie</span>
-            </p>
-            <br />
-
-            <Link
-              href="/gallery/[position]/[page]"
-              as={`/gallery/${position}/about`}
-            >
-              <CTAButton>About this exhibition</CTAButton>
-            </Link>
+            <motion.img
+              src={imageUrl}
+              alt={book.title}
+              className={css.image}
+              animate={{ x: 0 }}
+              transition={{ from: '100%', type: 'spring', damping: 15 }}
+            />
           </div>
         )}
-      </div>
 
-      <CTAButton className={css.backButton} onClick={onClose}>
-        Close
-      </CTAButton>
+        <div className={css.info}>
+          <div className={css.contentWrapper}>
+            <OffTheShelfLogoDivBorders
+              orientation="topRight"
+              strokeWidth={mediaQuery === 'xxxlg' ? 4 : 2}
+              notchLength={mediaQuery === 'xxxlg' ? 12 : 6}
+              isActive={true}
+              className={css.topBorders}
+            />
+
+            <div className={css.content}>
+              <Loader isActive={loading} className={css.loader} />
+
+              <motion.div
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: loading ? 0 : 1,
+                }}
+                exit={{
+                  opacity: 0,
+                }}
+              >
+                <>
+                  <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
+                  {creator && <h2 className={css.creator}>{creator}</h2>}
+
+                  <div className={css.headingDivider}></div>
+
+                  {description && (
+                    <p className={css.description}>{description}</p>
+                  )}
+
+                  <div className={css.table}>
+                    {primoRecord &&
+                      bookFields
+                        .filter((row) => primoRecord[row.field])
+                        .map((row) => {
+                          const value = primoRecord[row.field];
+
+                          return (
+                            <div className={css.row} key={row.field}>
+                              <div className={css.label}>
+                                {(() => {
+                                  switch (row.field) {
+                                    case 'callNumber':
+                                      return (
+                                        <p>
+                                          <strong>{row.label}</strong>
+                                        </p>
+                                      );
+                                    default:
+                                      return <p>{row.label}</p>;
+                                  }
+                                })()}
+                              </div>
+                              <div className={css.value}>
+                                {(() => {
+                                  switch (row.field) {
+                                    case 'holdings':
+                                      return value.map((holding, i) => {
+                                        return (
+                                          <p
+                                            key={`${holding.subLocation}-${i}`}
+                                          >
+                                            {holding.subLocation},{' '}
+                                            {holding.status},{' '}
+                                            {holding.mainLocation}
+                                          </p>
+                                        );
+                                      });
+                                    case 'subjects':
+                                      return (
+                                        <ul>
+                                          {book.primoRecord.subjects.map(
+                                            (subject, i) => {
+                                              return (
+                                                <li key={`${subject}-${i}`}>
+                                                  {subject}
+                                                </li>
+                                              );
+                                            },
+                                          )}
+                                        </ul>
+                                      );
+                                    case 'callNumber':
+                                      return (
+                                        <p className={css.highlight}>{value}</p>
+                                      );
+
+                                    default:
+                                      return <p>{value}</p>;
+                                  }
+                                })()}
+                              </div>
+                            </div>
+                          );
+                        })}
+                    {mode === 'web' && primoLink && (
+                      <div className={css.row} key={'id'}>
+                        <div className={css.label}>
+                          <p>More info</p>
+                        </div>
+                        <div className={css.value}>
+                          <Link as={primoLink}>
+                            <a
+                              href={primoLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              View catalogue record
+                            </a>
+                          </Link>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {mode === 'web' && (
+                    <ShareBox
+                      title={book.title}
+                      className={css.shareBox}
+                    ></ShareBox>
+                  )}
+                </>
+              </motion.div>
+            </div>
+          </div>
+
+          {showExtraContent && (
+            <div className={css.extraContent}>
+              <p>
+                If this book piques your interest, write down the{' '}
+                <strong>Call number</strong> or take a photo and ask for it in
+                the reading rooms downstairs.
+              </p>
+              <p>
+                <span>#OffTheShelf #shelfie</span>
+              </p>
+              <br />
+
+              <Link
+                href="/gallery/[position]/[page]"
+                as={`/gallery/${position}/about`}
+              >
+                <CTAButton>About this exhibition</CTAButton>
+              </Link>
+            </div>
+          )}
+        </div>
+
+        <CTAButton className={css.backButton} onClick={onClose}>
+          Close
+        </CTAButton>
+      </div>
     </Modal>
   );
 };
