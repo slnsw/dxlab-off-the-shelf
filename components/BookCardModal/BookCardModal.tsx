@@ -14,6 +14,7 @@ import { buildHeadTitle } from '../../lib';
 import useBookData from '../../lib/hooks/use-book-data';
 
 import css from './BookCardModal.scss';
+import { useMediaQuery } from '../../lib/hooks';
 
 type Props = {
   id: number;
@@ -52,6 +53,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       },
     },
   } = useBookData(id);
+
+  const mediaQuery = useMediaQuery();
 
   if (error) {
     console.log(error);
@@ -99,8 +102,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
         <div className={css.contentWrapper}>
           <OffTheShelfLogoDivBorders
             orientation="topRight"
-            strokeWidth={4}
-            notchLength={12}
+            strokeWidth={mediaQuery === 'xxxlg' ? 4 : 2}
+            notchLength={mediaQuery === 'xxxlg' ? 12 : 6}
             isActive={true}
             className={css.topBorders}
           />
@@ -121,7 +124,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
             >
               <>
                 <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
-                {creator && <h2>{creator}</h2>}
+                {creator && <h2 className={css.creator}>{creator}</h2>}
 
                 <div className={css.headingDivider}></div>
 
@@ -194,7 +197,10 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                       })}
                 </div>
 
-                <ShareBox title={book.title}></ShareBox>
+                <ShareBox
+                  title={book.title}
+                  className={css.shareBox}
+                ></ShareBox>
               </>
             </motion.div>
           </div>
