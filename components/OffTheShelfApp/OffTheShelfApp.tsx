@@ -57,6 +57,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   const mediaQuery = useMediaQuery();
 
   const enablePrevBookId = mode === 'gallery';
+  const hasHeader = mode === 'web';
 
   // Book Modal
   const [initialModalSize, setInitialModalSize] = React.useState();
@@ -257,17 +258,19 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
   return (
     <>
-      <Header
-        basePathnameHref={basePathnameHref}
-        basePathnameAs={basePathnameAs}
-      ></Header>
-
+      {hasHeader && (
+        <Header
+          basePathnameHref={basePathnameHref}
+          basePathnameAs={basePathnameAs}
+        ></Header>
+      )}
       <BookCardModal
         id={bookId}
         position={position}
         isActive={isModalActive}
         initialSize={initialModalSize}
         initialImageUrl={initialModalImageUrl}
+        mode={mode}
         onClose={() => {
           Router.push(basePathnameHref, basePathnameAs);
         }}

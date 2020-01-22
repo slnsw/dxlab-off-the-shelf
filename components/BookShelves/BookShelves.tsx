@@ -171,8 +171,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
   }, [isIntervalActive]);
 
   const hasHeader = mode === 'web';
-  console.log('mode', mode);
-  console.log('hasHeader', hasHeader);
+
   return (
     <div
       className={[

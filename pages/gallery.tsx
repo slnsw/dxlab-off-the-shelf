@@ -15,13 +15,13 @@ const GalleryPage = ({ query }) => {
    */
   React.useEffect(() => {
     if (!window.OFF_THE_SHELF) {
-      console.log('----------------------------------------');
+      console.log('--------------(configs)-------------------');
       window.OFF_THE_SHELF = Object.keys(configs).map((key) => {
         console.log(key, configs[key]);
 
         return `${key}: ${configs[key]}`;
       });
-      console.log('----------------------------------------');
+      console.log('-----------------[end]--------------------');
     }
 
     if (position === 'left' && process.env.OFF_THE_SHELF_LEFT_HEALTHCHECK_URL) {

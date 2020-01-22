@@ -29,7 +29,7 @@ const AboutModal: React.FunctionComponent<Props> = ({
 }) => {
   const [isVersionActive, setIsVersionActive] = React.useState(false);
   const showLogo = mode === 'gallery';
-  console.log('showLogo', showLogo);
+
   return (
     <>
       <Head>
@@ -111,7 +111,7 @@ const AboutModal: React.FunctionComponent<Props> = ({
               Please email <span>media@sl.nsw.gov.au</span> for enquiries.
             </p>
 
-            <FooterInfo></FooterInfo>
+            {mode === 'web' && <FooterInfo></FooterInfo>}
           </div>
         </div>
 
