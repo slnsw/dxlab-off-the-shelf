@@ -18,8 +18,8 @@ const Loader: React.FunctionComponent<Props> = ({
   delay = 0,
   className,
 }) => {
-  const width = 100;
-  const height = 100;
+  const width = strokeWidth * 25;
+  const height = strokeWidth * 25;
 
   const duration = 6;
   const baseline = strokeWidth * 1.5;

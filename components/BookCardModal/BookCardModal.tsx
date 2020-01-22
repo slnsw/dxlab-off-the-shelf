@@ -118,7 +118,11 @@ const BookCardModal: React.FunctionComponent<Props> = ({
             />
 
             <div className={css.content}>
-              <Loader isActive={loading} className={css.loader} />
+              <Loader
+                isActive={loading}
+                strokeWidth={mode === 'web' ? 2 : 4}
+                className={css.loader}
+              />
 
               <motion.div
                 initial={{

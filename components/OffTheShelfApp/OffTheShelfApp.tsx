@@ -16,6 +16,7 @@ import {
 import * as configs from '../../configs';
 
 import css from './OffTheShelfApp.scss';
+import Loader from '../Loader';
 
 declare global {
   interface Window {
@@ -78,8 +79,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   const [idleLoopCommandIndex, setIdleLoopCommandIndex] = React.useState(0);
   const [isIdleLoopActive, setIsIdleLoopActive] = React.useState(true);
 
-  // const position = query && query.position ? query.position : null;
-  // const basePathname = `/gallery/${position}`;
+  // Loader
+  const [isLoaderActive, setIsLoaderActive] = React.useState(false);
 
   const bookId = query && query.id ? query.id : null;
   const prevBookId = React.useRef(bookId);
@@ -252,6 +253,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   // --------------------------------------------------------------------------
 
   const reRandomiseBooks = () => {
+    // Show loader
+    setIsLoaderActive(true);
     // Stop books from scrolling
     setIsShelfIntervalActive(false);
     // Hide books
@@ -260,6 +263,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
     setIdleLoopCommandIndex(7);
 
     setTimeout(() => {
+      setIsLoaderActive(false);
       setIsShelfIntervalActive(true);
       setAreShelvesActive(true);
     }, configs.SHUFFLE_TIMEOUT + 500);
@@ -284,8 +288,16 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
           onRandomClick={reRandomiseBooks}
         ></Header>
       )}
+
+      <Loader
+        isActive={isLoaderActive}
+        strokeWidth={2}
+        // strokeWidth={mode === 'web' ? 2 : 4}
+        className={css.loader}
+      />
+
       <BookCardModal
-        id={bookId}
+        id={parseInt(bookId, 10)}
         position={position}
         isActive={isModalActive}
         initialSize={initialModalSize}
@@ -298,7 +310,6 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
       <AboutModal
         isActive={isAboutModalActive}
-        // showLogo={showAboutPageLogo}
         mode={mode}
         onClose={() => {
           if (prevBookId.current && enablePrevBookId) {
@@ -324,7 +335,6 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         isIntervalActive={isIntervalEnabled && isShelfIntervalActive}
         booksTotal={booksTotal}
         onBookClick={handleBookCardClick}
-        // hasHeader={hasHeader}
         mode={mode}
       />
     </>
