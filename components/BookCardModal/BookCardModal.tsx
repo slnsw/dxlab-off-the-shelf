@@ -27,7 +27,8 @@ type Props = {
     height: number;
   };
   initialImageUrl?: string;
-  showExtraContent?: boolean;
+  mode: 'gallery' | 'web';
+  // showExtraContent?: boolean;
   className?: string;
   onClose?: Function;
 };
@@ -38,7 +39,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   isActive,
   initialSize,
   initialImageUrl,
-  showExtraContent = false,
+  mode,
+  // showExtraContent = false,
   className,
   onClose,
 }) => {
@@ -65,6 +67,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   const { primoRecord } = book;
   const record = primoRecord || {};
   const { creator, description } = record;
+
+  const showExtraContent = mode === 'gallery';
 
   const imageUrl =
     (book.sizes.medium && book.sizes.medium.sourceUrl) || initialImageUrl;
@@ -197,10 +201,12 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                       })}
                 </div>
 
-                <ShareBox
-                  title={book.title}
-                  className={css.shareBox}
-                ></ShareBox>
+                {mode === 'web' && (
+                  <ShareBox
+                    title={book.title}
+                    className={css.shareBox}
+                  ></ShareBox>
+                )}
               </>
             </motion.div>
           </div>

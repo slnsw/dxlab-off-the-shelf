@@ -32,9 +32,10 @@ type Props = {
   position?: 'left' | 'right' | 'test';
   basePathnameAs: string;
   basePathnameHref: string;
-  hasHeader?: boolean;
-  showAboutPageLogo?: boolean;
-  enablePrevBookId?: boolean;
+  // hasHeader?: boolean;
+  // showAboutPageLogo?: boolean;
+  // enablePrevBookId?: boolean;
+  mode: 'gallery' | 'web';
   booksTotal?: number;
 };
 
@@ -43,9 +44,10 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   position = null,
   basePathnameAs,
   basePathnameHref = '/gallery/[position]',
-  hasHeader = false,
-  showAboutPageLogo = true,
-  enablePrevBookId = true,
+  // hasHeader = false,
+  // showAboutPageLogo = true,
+  // enablePrevBookId = true,
+  mode = 'gallery',
   booksTotal = 200,
 }) => {
   // --------------------------------------------------------------------------
@@ -53,6 +55,9 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   // --------------------------------------------------------------------------
 
   const mediaQuery = useMediaQuery();
+
+  const enablePrevBookId = mode === 'gallery';
+  const hasHeader = mode === 'web';
 
   // Book Modal
   const [initialModalSize, setInitialModalSize] = React.useState();
@@ -253,17 +258,19 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
   return (
     <>
-      <Header
-        basePathnameHref={basePathnameHref}
-        basePathnameAs={basePathnameAs}
-      ></Header>
-
+      {hasHeader && (
+        <Header
+          basePathnameHref={basePathnameHref}
+          basePathnameAs={basePathnameAs}
+        ></Header>
+      )}
       <BookCardModal
         id={bookId}
         position={position}
         isActive={isModalActive}
         initialSize={initialModalSize}
         initialImageUrl={initialModalImageUrl}
+        mode={mode}
         onClose={() => {
           Router.push(basePathnameHref, basePathnameAs);
         }}
@@ -271,7 +278,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
       <AboutModal
         isActive={isAboutModalActive}
-        showLogo={showAboutPageLogo}
+        // showLogo={showAboutPageLogo}
+        mode={mode}
         onClose={() => {
           if (prevBookId.current && enablePrevBookId) {
             Router.push(
@@ -296,7 +304,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         isIntervalActive={isIntervalEnabled && isShelfIntervalActive}
         booksTotal={booksTotal}
         onBookClick={handleBookCardClick}
-        hasHeader={hasHeader}
+        // hasHeader={hasHeader}
+        mode={mode}
       />
     </>
   );

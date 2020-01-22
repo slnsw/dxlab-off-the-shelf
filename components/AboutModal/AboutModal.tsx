@@ -15,17 +15,20 @@ import FooterInfo from '../FooterInfo';
 type Props = {
   className?: string;
   isActive?: boolean;
-  showLogo?: boolean;
+  // showLogo?: boolean;
+  mode: 'gallery' | 'web';
   onClose?: Function;
 };
 
 const AboutModal: React.FunctionComponent<Props> = ({
   className,
   isActive,
-  showLogo = true,
+  // showLogo = true,
+  mode = 'gallery',
   onClose,
 }) => {
   const [isVersionActive, setIsVersionActive] = React.useState(false);
+  const showLogo = mode === 'gallery';
 
   return (
     <>
@@ -108,7 +111,7 @@ const AboutModal: React.FunctionComponent<Props> = ({
               Please email <span>media@sl.nsw.gov.au</span> for enquiries.
             </p>
 
-            <FooterInfo></FooterInfo>
+            {mode === 'web' && <FooterInfo></FooterInfo>}
           </div>
         </div>
 
