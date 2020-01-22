@@ -73,6 +73,10 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   const imageUrl =
     (book.sizes.medium && book.sizes.medium.sourceUrl) || initialImageUrl;
 
+  const primoLink = primoRecord.id
+    ? `https://search.sl.nsw.gov.au/primo-explore/fulldisplay?docid=${primoRecord.id}&context=L&vid=SLNSW&lang=en_US&search_scope=BJM&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,How%20to%20do%20card%20tricks%20and%20entertain%20people&offset=0`
+    : null;
+
   return (
     <Modal
       isActive={isActive}
@@ -142,7 +146,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                       .filter((row) => primoRecord[row.field])
                       .map((row) => {
                         const value = primoRecord[row.field];
-
+                        // console.log(value);
                         return (
                           <div className={css.row} key={row.field}>
                             <div className={css.label}>
@@ -199,6 +203,24 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                           </div>
                         );
                       })}
+                  {mode === 'web' && primoLink && (
+                    <div className={css.row} key={'id'}>
+                      <div className={css.label}>
+                        <p>More info</p>
+                      </div>
+                      <div className={css.value}>
+                        <Link as={primoLink}>
+                          <a
+                            href={primoLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View catalogue record
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {mode === 'web' && (

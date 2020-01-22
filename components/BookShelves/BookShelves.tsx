@@ -4,6 +4,7 @@ import shuffle from 'lodash.shuffle';
 import BookShelf from '../BookShelf';
 
 import useInterval from '../../lib/hooks/use-interval';
+// import useTimeout from '../../lib/hooks/use-timeout';
 import useBooksData from '../../lib/hooks/use-books-data';
 import { usePrevious } from '../../lib/hooks';
 // import knuthShuffle from '../../lib/knuthShuffle';
@@ -89,6 +90,10 @@ const BookShelves: React.FunctionComponent<Props> = ({
         clearTimeout(timeout);
       };
     }, configs.SHUFFLE_TIMEOUT);
+  }, [isActive]);
+
+  React.useEffect(() => {
+    console.log('isActive changed in BookShelves!!', isActive);
   }, [isActive]);
 
   React.useEffect(() => {

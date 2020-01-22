@@ -245,6 +245,16 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   // Handlers
   // --------------------------------------------------------------------------
 
+  const reRandomiseBooks = () => {
+    console.log('randomise!');
+    setIsShelfIntervalActive(false);
+    setAreShelvesActive(false);
+    setTimeout(() => {
+      setIsShelfIntervalActive(true);
+      setAreShelvesActive(true);
+    }, 5000);
+  };
+
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
     // Router.push(`${pathname}?id=${id}`, `${basePathname}?id=${id}`);
     Router.push(
@@ -262,6 +272,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         <Header
           basePathnameHref={basePathnameHref}
           basePathnameAs={basePathnameAs}
+          onRandomClick={reRandomiseBooks}
         ></Header>
       )}
       <BookCardModal

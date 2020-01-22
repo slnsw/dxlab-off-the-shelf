@@ -9,12 +9,14 @@ import css from './Header.scss';
 type Props = {
   basePathnameHref?: string;
   basePathnameAs?: string;
+  onRandomClick: Function;
   className?: string;
 };
 
 const Header: React.FunctionComponent<Props> = ({
   basePathnameHref,
   basePathnameAs,
+  onRandomClick,
   className,
 }) => {
   return (
@@ -29,13 +31,25 @@ const Header: React.FunctionComponent<Props> = ({
         <div></div>
         <div></div>
       </div>
-
-      <Link href={`${basePathnameHref}/[page]`} as={`${basePathnameAs}/about`}>
-        <CTAButton className={css.link} size="sm">
-          About
+      <>
+        <CTAButton
+          onClick={onRandomClick}
+          className={[css.link, css.randomButton].join(' ')}
+          size="sm"
+        >
+          Re-randomise
         </CTAButton>
-        {/* <a className={css.link}>About</a> */}
-      </Link>
+
+        <Link
+          href={`${basePathnameHref}/[page]`}
+          as={`${basePathnameAs}/about`}
+        >
+          <CTAButton className={css.link} size="sm">
+            About
+          </CTAButton>
+          {/* <a className={css.link}>About</a> */}
+        </Link>
+      </>
     </div>
   );
 };

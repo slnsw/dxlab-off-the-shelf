@@ -84,6 +84,10 @@ const BookShelf: React.FunctionComponent<Props> = ({
   }, [isActive]);
 
   React.useEffect(() => {
+    console.log('isActive changed in Book Shelf #', isActive);
+  }, [isActive]);
+
+  React.useEffect(() => {
     if (typeof onRender === 'function') {
       onRender(booksInView);
     }
