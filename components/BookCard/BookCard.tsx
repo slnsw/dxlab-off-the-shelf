@@ -62,9 +62,9 @@ const BookCard: React.FunctionComponent<Props> = ({
   )}`;
   // console.log(cloudImgUrl);
 
-  React.useEffect(() => {
-    console.log('isActive changed in BookCARD', isActive);
-  }, [isActive]);
+  // React.useEffect(() => {
+  //   console.log('isActive changed in BookCARD', isActive);
+  // }, [isActive]);
 
   React.useEffect(() => {
     if (scrollDirection) {

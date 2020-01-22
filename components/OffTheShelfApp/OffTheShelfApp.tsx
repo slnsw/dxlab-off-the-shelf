@@ -58,6 +58,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
   const enablePrevBookId = mode === 'gallery';
   const hasHeader = mode === 'web';
+  const enableIdleTimer = mode === 'gallery';
 
   // Book Modal
   const [initialModalSize, setInitialModalSize] = React.useState();
@@ -91,36 +92,40 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
    * Set idle timer to return to home after timeout.
    */
   React.useEffect(() => {
-    const idleTimer = createIdleTimer(
-      () => {
-        // Callback to run after user hasn't used screen for a while
-        if (bookId || isAboutModalActive) {
-          console.log('Gallery Page - idleTimer - return home');
+    if (enableIdleTimer) {
+      const idleTimer = createIdleTimer(
+        () => {
+          // Callback to run after user hasn't used screen for a while
+          if (bookId || isAboutModalActive) {
+            console.log('Gallery Page - idleTimer - return home');
 
-          Router.push(basePathnameHref, basePathnameAs);
-        }
-
-        setIsIdleLoopActive(true);
-      },
-      configs.IDLE_TIMEOUT,
-      {
-        onReset: () => {
-          setIsLogoActive(false);
-          setAreShelvesActive(true);
-
-          if (isIdleLoopActive) {
-            setIsIdleLoopActive(false);
+            Router.push(basePathnameHref, basePathnameAs);
           }
+
+          setIsIdleLoopActive(true);
         },
-      },
-    );
+        configs.IDLE_TIMEOUT,
+        {
+          onReset: () => {
+            setIsLogoActive(false);
+            setAreShelvesActive(true);
 
-    idleTimer.start();
+            if (isIdleLoopActive) {
+              setIsIdleLoopActive(false);
+            }
+          },
+        },
+      );
 
-    return () => {
-      idleTimer.stop();
-    };
-  }, [bookId, isAboutModalActive]);
+      idleTimer.start();
+
+      return () => {
+        idleTimer.stop();
+      };
+    }
+
+    return () => {};
+  }, [bookId, isAboutModalActive, enableIdleTimer]);
 
   /*
    * Idle loop with commands that run in a sequence
@@ -228,6 +233,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
     // console.log(document.hidden, document.visibilityState);
     // console.log('Is Int Enabled?: ', isIntervalEnabled);
     // console.log(isShelfIntervalActive);
+
     if (isIntervalEnabled) {
       if (document.hidden || document.visibilityState === 'hidden') {
         if (isShelfIntervalActive) {
@@ -246,17 +252,20 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   // --------------------------------------------------------------------------
 
   const reRandomiseBooks = () => {
-    console.log('randomise!');
+    // Stop books from scrolling
     setIsShelfIntervalActive(false);
+    // Hide books
     setAreShelvesActive(false);
+    // Reset idleLoop
+    setIdleLoopCommandIndex(7);
+
     setTimeout(() => {
       setIsShelfIntervalActive(true);
       setAreShelvesActive(true);
-    }, 5000);
+    }, configs.SHUFFLE_TIMEOUT + 500);
   };
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
-    // Router.push(`${pathname}?id=${id}`, `${basePathname}?id=${id}`);
     Router.push(
       `${basePathnameHref}/book/[id]`,
       `${basePathnameAs}/book/${id}`,
