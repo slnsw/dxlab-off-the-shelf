@@ -13,27 +13,14 @@
     line-height: $baseline-4 + $baseline-half;
     text-align: center;
 
-    @include media-sm {
+    @include media-lg {
+      text-align: left;
+    }
+
+    @include media-xxxlg {
       margin-right: 0;
       font-size: $font-size-xxxlg;
       line-height: $baseline-6;
-      text-align: left;
-    }
-  }
-
-  h2 {
-    margin-top: 0;
-    // margin-right: $baseline-6;
-    margin-bottom: $baseline-3;
-    color: $colour-yellow;
-    font-weight: 300;
-    font-size: $font-size-md;
-    text-align: center;
-
-    @include media-sm {
-      justify-content: center;
-      margin-right: 0;
-      font-size: $font-size-lg;
       text-align: left;
     }
   }
@@ -44,20 +31,44 @@
     }
   }
 
-  @include media-sm {
+  @include media-lg {
     flex-direction: row;
+  }
+}
+
+.creator {
+  margin-top: 0;
+  // margin-right: $baseline-6;
+  margin-bottom: $baseline-3;
+  color: $colour-yellow;
+  font-weight: 300;
+  font-size: $font-size-md;
+  line-height: $baseline-3;
+  text-align: center;
+
+  @include media-lg {
+    text-align: left;
+  }
+
+  @include media-xxxlg {
+    justify-content: center;
+    margin-right: 0;
+    font-size: $font-size-lg;
+    text-align: left;
   }
 }
 
 .imageWrapper {
   order: 2;
   width: 100%;
+  max-width: 24rem;
   max-height: 90%;
-  margin-left: 0;
+  margin-right: auto;
+  margin-left: auto;
   padding-right: 0;
   padding-bottom: $baseline-2;
 
-  @include media-sm {
+  @include media-lg {
     order: 1;
     height: 100%;
     margin-left: -$baseline-4;
@@ -74,7 +85,14 @@
   margin-top: -$baseline * 9;
   margin-left: $baseline * 5;
 
-  @include media-sm {
+  @include media-lg {
+    width: 100%;
+    height: auto;
+    margin-top: initial;
+    margin-left: initial;
+  }
+
+  @include media-xxxlg {
     width: auto;
     height: 100%;
   }
@@ -83,7 +101,7 @@
 .imageBorders {
   height: $baseline * 14;
 
-  @include media-sm {
+  @include media-lg {
     display: none;
   }
 }
@@ -96,7 +114,7 @@
   height: 140px;
   pointer-events: none;
 
-  @include media-sm {
+  @include media-lg {
     display: block;
   }
 }
@@ -114,6 +132,10 @@
   height: 4px;
   margin: 0 auto $baseline * 3 auto;
   background-color: $colour-teal;
+
+  @include media-lg {
+    margin-left: 0;
+  }
 }
 
 .info {
@@ -124,7 +146,8 @@
   width: 100%;
   max-width: 86ch;
   height: 100%;
-  margin-left: 0;
+  margin-right: auto;
+  margin-left: auto;
 
   ul {
     padding: 0;
@@ -134,12 +157,12 @@
   li {
     line-height: $baseline-2 + $baseline-half;
 
-    @include media-sm {
+    @include media-lg {
       line-height: $baseline-3 + $baseline-half;
     }
   }
 
-  @include media-sm {
+  @include media-lg {
     order: 2;
     margin-left: $baseline-5;
   }
@@ -150,7 +173,11 @@
   display: flex;
   flex-direction: column;
 
-  @include media-sm {
+  @include media-lg {
+    height: 100%;
+  }
+
+  @include media-xxxlg {
     height: 80%;
   }
 }
@@ -163,13 +190,23 @@
   margin-top: $baseline * 1;
   word-wrap: break-word;
 
-  @include media-sm {
+  @include media-lg {
+    width: calc(100% - #{$baseline * 5});
+    margin-top: $baseline * 5;
+    padding-right: $baseline * 3;
+    padding-left: $baseline * 4;
+    overflow: auto;
+  }
+
+  @include media-xxxlg {
     width: calc(100% - #{$baseline * 8});
-    height: calc(100% - #{$baseline * 17});
     margin-top: $baseline * 8;
     padding-right: $baseline * 3;
     padding-left: $baseline * 8;
-    overflow: auto;
+  }
+
+  @media media-xxxlg {
+    height: calc(100% - #{$baseline * 17});
   }
 }
 
@@ -181,11 +218,14 @@
 }
 
 .description {
+  max-width: 30rem;
+  margin-right: auto;
   margin-bottom: $baseline-4;
+  margin-left: auto;
   font-size: $font-size-md;
   line-height: $baseline-3;
 
-  @include media-sm {
+  @include media-xxxlg {
     font-size: $font-size-xlg;
     line-height: $baseline-4;
   }
@@ -194,6 +234,8 @@
 .table {
   display: flex;
   flex-direction: column;
+  max-width: 30rem;
+  margin: 0 auto;
   font-size: $font-size-lg;
 
   p {
@@ -201,7 +243,7 @@
     margin-bottom: $baseline-1;
     line-height: $baseline-2 + $baseline-half;
 
-    @include media-sm {
+    @include media-xxxlg {
       margin-bottom: $baseline-2;
       line-height: $baseline-3 + $baseline-half;
     }
@@ -217,7 +259,7 @@
     font-size: $font-size-sm;
     opacity: 0.6;
 
-    @include media-sm {
+    @include media-xxxlg {
       padding-right: $baseline-3;
       font-size: $font-size-md;
     }
@@ -228,7 +270,7 @@
     font-size: $font-size-sm;
     text-transform: capitalize;
 
-    @include media-sm {
+    @include media-xxxlg {
       font-size: $font-size-md;
     }
   }
@@ -245,7 +287,7 @@
   border-right: none;
   border-bottom: none;
 
-  @include media-sm {
+  @include media-lg {
     width: calc(100% - #{$baseline * 16});
     margin-top: auto;
     margin-left: $baseline-8;
@@ -268,9 +310,25 @@
   margin-bottom: $baseline-2;
   margin-left: auto;
 
-  @include media-sm {
+  @include media-lg {
     order: 3;
+    margin-left: $baseline-2;
+  }
+
+  @include media-xxxlg {
     margin-top: $baseline * 3;
     margin-left: $baseline-4;
+  }
+}
+
+.shareBox {
+  margin-top: $baseline-4;
+  margin-right: auto;
+  margin-bottom: $baseline-8;
+  margin-left: auto;
+
+  @include media-lg {
+    margin-top: $baseline-4;
+    margin-left: 0;
   }
 }

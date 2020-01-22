@@ -9,11 +9,15 @@
   // width: calc(100% - #{$baseline * 8});
   // height: calc(100% - #{$baseline * 8});
   padding: $baseline-2;
-  // transform: translate(-50%, -50%);
   overflow: auto;
   background: $colour-black;
+  // transform: translate(-50%, -50%);
 
-  @include media-sm {
+  @include media-lg {
+    padding: $baseline-6;
+  }
+
+  @include media-xxxlg {
     padding: $baseline-8;
   }
 }
