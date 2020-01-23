@@ -274,7 +274,12 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <>
+    <div
+      style={{
+        height: '100%',
+      }}
+      className={mode === 'gallery' ? 'gallery-version' : ''}
+    >
       {hasHeader && (
         <Header
           basePathnameHref={basePathnameHref}
@@ -331,7 +336,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         onBookClick={handleBookCardClick}
         mode={mode}
       />
-    </>
+    </div>
   );
 };
 

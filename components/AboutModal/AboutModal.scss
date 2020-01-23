@@ -10,7 +10,7 @@
     font-size: $font-size-xxlg;
     line-height: $baseline-6;
 
-    @include media-xxxlg {
+    :global(.gallery-version) & {
       margin-bottom: $baseline-2;
       font-size: $font-size-xxxlg;
     }
@@ -22,7 +22,7 @@
     margin-bottom: $baseline-2;
     line-height: $baseline-3;
 
-    @include media-xxxlg {
+    :global(.gallery-version) & {
       line-height: $baseline-3 + $baseline-half;
     }
 
@@ -35,7 +35,7 @@
     color: $colour-yellow;
   }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -50,7 +50,7 @@
   max-width: 80ch;
   margin-top: $baseline-2;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     position: relative;
     order: 2;
     width: 50%;
@@ -66,7 +66,7 @@
   margin: $baseline-4 $baseline-3 0 0;
   vertical-align: middle;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     width: 100%;
     margin: 0;
   }
@@ -84,7 +84,7 @@
   align-items: center;
   width: 100%;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     // position: relative;
     flex-direction: row;
     align-items: flex-start;
@@ -99,7 +99,7 @@
   width: 100%;
   margin-top: $baseline-2;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     width: 480px;
     margin-top: 0;
     margin-bottom: $baseline * 7;
@@ -114,7 +114,7 @@
   max-width: 80ch;
   padding-top: $baseline * 3;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     order: 1;
     max-width: 70ch;
     height: 100%;
@@ -128,7 +128,7 @@
 
   // padding-top: $baseline-8;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     height: 100%;
     margin-right: $baseline * 6;
     margin-left: $baseline-6;
@@ -152,7 +152,7 @@
   max-width: 80ch;
   margin-top: $baseline-1;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     position: absolute;
     right: $baseline * 17;
     bottom: $baseline * 11;
@@ -167,7 +167,7 @@
   margin-bottom: 0;
   margin-left: auto;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     order: 3;
     // margin-top: $baseline-2;
     margin-bottom: $baseline-2;
@@ -178,7 +178,7 @@
 .borders {
   display: none;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     position: absolute;
     right: -4%;
     bottom: 0;

@@ -17,7 +17,7 @@
     padding: $baseline-4;
   }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     padding: $baseline-8;
   }
 }

@@ -19,7 +19,7 @@
       text-align: left;
     }
 
-    @include media-xxxlg {
+    :global(.gallery-version) & {
       margin-right: 0;
       font-size: $font-size-xxxlg;
       line-height: $baseline-6;
@@ -47,7 +47,7 @@
     max-height: 40rem;
   }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     justify-content: center;
     max-width: initial;
     max-height: initial;
@@ -68,7 +68,7 @@
     text-align: left;
   }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     justify-content: center;
     margin-right: 0;
     font-size: $font-size-lg;
@@ -95,7 +95,7 @@
     overflow: hidden;
   }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     width: initial;
     max-width: initial;
     max-height: 100%;
@@ -118,7 +118,7 @@
     margin-left: initial;
   }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     width: auto;
     height: 100%;
   }
@@ -206,7 +206,7 @@
     height: 100%;
   }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     // height: 80%;
     height: calc(100% - #{$baseline * 35});
   }
@@ -229,7 +229,7 @@
     border-bottom: 1px solid $colour-grey-900;
   }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     width: calc(100% - #{$baseline * 8});
     height: calc(100% - #{$baseline * 11});
     margin-top: $baseline * 8;
@@ -253,7 +253,7 @@
   font-size: $font-size-md;
   line-height: $baseline-3;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     margin-left: initial;
     font-size: $font-size-xlg;
     line-height: $baseline-4;
@@ -267,7 +267,7 @@
   margin: 0 auto;
   font-size: $font-size-lg;
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     margin-left: 0;
   }
 
@@ -276,7 +276,7 @@
     margin-bottom: $baseline-1;
     line-height: $baseline-2 + $baseline-half;
 
-    @include media-xxxlg {
+    :global(.gallery-version) & {
       margin-bottom: $baseline-2;
       line-height: $baseline-3 + $baseline-half;
     }
@@ -292,7 +292,7 @@
     font-size: $font-size-sm;
     opacity: 0.6;
 
-    @include media-xxxlg {
+    :global(.gallery-version) & {
       padding-right: $baseline-3;
       font-size: $font-size-md;
     }
@@ -303,7 +303,7 @@
     font-size: $font-size-sm;
     text-transform: capitalize;
 
-    @include media-xxxlg {
+    :global(.gallery-version) & {
       font-size: $font-size-lg;
     }
   }
@@ -331,7 +331,7 @@
     border-bottom: none;
   }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     font-size: $font-size-md;
   }
 
@@ -351,7 +351,7 @@
     margin-left: $baseline-2;
   }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     margin-top: $baseline * 3;
     margin-left: $baseline-4;
   }

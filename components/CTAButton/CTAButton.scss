@@ -43,7 +43,7 @@
   //   }
   // }
 
-  @include media-xxxlg {
+  :global(.gallery-version) & {
     padding: $baseline-2;
     font-size: $font-size-lg;
     border-width: 4px;
