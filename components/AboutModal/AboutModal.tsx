@@ -47,11 +47,16 @@ const AboutModal: React.FunctionComponent<Props> = ({
       >
         <div className={css.info}>
           <div className={css.content}>
-            {showLogo && <OffTheShelfLogo className={css.logo} />}
+            {showLogo && (
+              <OffTheShelfLogo
+                className={css.logo}
+                size={mode === 'gallery' ? 'md' : 'sm'}
+              />
+            )}
 
             {!showLogo && <h1>About</h1>}
 
-            <div className={css.headingDivider}></div>
+            {!showLogo && <div className={css.headingDivider}></div>}
 
             <div className={css.contentInner}>
               <p>
@@ -95,13 +100,15 @@ const AboutModal: React.FunctionComponent<Props> = ({
               className={css.image}
             />
 
-            <OffTheShelfLogoDivBorders
-              orientation="topRight"
-              isActive={true}
-              strokeWidth={2}
-              notchLength={6}
-              className={css.imageBorders}
-            ></OffTheShelfLogoDivBorders>
+            {mode === 'web' && (
+              <OffTheShelfLogoDivBorders
+                orientation="topRight"
+                isActive={true}
+                strokeWidth={2}
+                notchLength={6}
+                className={css.imageBorders}
+              ></OffTheShelfLogoDivBorders>
+            )}
           </div>
 
           <CTAButton className={css.backButton} onClick={onClose}>

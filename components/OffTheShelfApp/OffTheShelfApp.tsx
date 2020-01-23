@@ -8,11 +8,7 @@ import BookShelves from '../BookShelves';
 import OffTheShelfLogo from '../OffTheShelfLogo';
 
 import { createIdleTimer } from '../../lib/idle-timer';
-import {
-  useInterval,
-  useMediaQuery,
-  useDocumentVisibility,
-} from '../../lib/hooks';
+import { useInterval, useDocumentVisibility } from '../../lib/hooks';
 import * as configs from '../../configs';
 
 import css from './OffTheShelfApp.scss';
@@ -54,8 +50,6 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   // --------------------------------------------------------------------------
   // Hooks
   // --------------------------------------------------------------------------
-
-  const mediaQuery = useMediaQuery();
 
   const enablePrevBookId = mode === 'gallery';
   const hasHeader = mode === 'web';
@@ -326,7 +320,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
       <OffTheShelfLogo
         isActive={isLogoActive}
         className={css.logo}
-        size={mediaQuery === 'xs' || mediaQuery === 'sm' ? 'sm' : undefined}
+        size={mode === 'web' ? 'sm' : 'md'}
       />
 
       <BookShelves

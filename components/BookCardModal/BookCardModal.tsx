@@ -14,7 +14,6 @@ import { buildHeadTitle } from '../../lib';
 import useBookData from '../../lib/hooks/use-book-data';
 
 import css from './BookCardModal.scss';
-import { useMediaQuery } from '../../lib/hooks';
 
 type Props = {
   id: number;
@@ -28,7 +27,6 @@ type Props = {
   };
   initialImageUrl?: string;
   mode: 'gallery' | 'web';
-  // showExtraContent?: boolean;
   className?: string;
   onClose?: Function;
 };
@@ -40,7 +38,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   initialSize,
   initialImageUrl,
   mode,
-  // showExtraContent = false,
   className,
   onClose,
 }) => {
@@ -55,8 +52,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       },
     },
   } = useBookData(id);
-
-  const mediaQuery = useMediaQuery();
 
   if (error) {
     console.log(error);
@@ -111,8 +106,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
           <div className={css.contentWrapper}>
             <OffTheShelfLogoDivBorders
               orientation="topRight"
-              strokeWidth={mediaQuery === 'xxxlg' ? 4 : 2}
-              notchLength={mediaQuery === 'xxxlg' ? 12 : 6}
+              strokeWidth={mode === 'gallery' ? 4 : 2}
+              notchLength={mode === 'gallery' ? 12 : 6}
               isActive={true}
               className={css.topBorders}
             />
@@ -139,7 +134,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                   <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
                   {creator && <h2 className={css.creator}>{creator}</h2>}
 
-                  <div className={css.headingDivider}></div>
+                  {mode === 'web' && <div className={css.headingDivider}></div>}
 
                   {description && (
                     <p className={css.description}>{description}</p>
