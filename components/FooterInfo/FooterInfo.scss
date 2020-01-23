@@ -1,14 +1,17 @@
 @import '../../styles/global.scss';
 
 .footerInfo {
-  display: block;
+  position: relative;
+  display: inline-block;
   margin-top: $baseline-4;
   margin-bottom: $baseline-4;
 }
 
 .logoHolder {
   display: flex;
+  margin-top: $baseline-2;
   margin-bottom: $baseline-3;
+  margin-left: $baseline-4;
 }
 
 .logo {
@@ -25,18 +28,31 @@
   margin-right: 0;
 }
 
-.menu {
+ul.menu {
   display: flex;
   flex-wrap: wrap;
+  margin-right: $baseline-2;
+  margin-bottom: $baseline-3;
+  margin-left: $baseline-4;
   padding-left: 0;
   font-size: $font-size-sm;
   list-style-type: none;
 
   li {
     margin-right: $baseline-1;
-    margin-bottom: $baseline-2;
+    margin-bottom: $baseline-1;
     padding-right: $baseline-1;
     line-height: 1;
     border-right: 1px solid $colour-white;
   }
+
+  li:last-child {
+    border-right: none;
+  }
+}
+
+.borders {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
 }

@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
+
 import css from './FooterInfo.scss';
 
 type Props = {
@@ -37,6 +39,13 @@ const FooterInfo: React.FunctionComponent<Props> = ({ className }) => {
           ))}
         </ul>
       </div>
+
+      <OffTheShelfLogoDivBorders
+        strokeWidth={2}
+        notchLength={6}
+        isActive={true}
+        className={css.borders}
+      ></OffTheShelfLogoDivBorders>
     </div>
   );
 };

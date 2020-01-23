@@ -5,6 +5,7 @@ import Modal from '../Modal';
 import CTAButton from '../CTAButton';
 import OffTheShelfLogo from '../OffTheShelfLogo';
 import OffTheShelfLogoBorders from '../OffTheShelfLogoBorders';
+import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
 
 import { buildHeadTitle } from '../../lib';
 import pkg from '../../package.json';
@@ -15,7 +16,6 @@ import FooterInfo from '../FooterInfo';
 type Props = {
   className?: string;
   isActive?: boolean;
-  // showLogo?: boolean;
   mode: 'gallery' | 'web';
   onClose?: Function;
 };
@@ -23,7 +23,6 @@ type Props = {
 const AboutModal: React.FunctionComponent<Props> = ({
   className,
   isActive,
-  // showLogo = true,
   mode = 'gallery',
   onClose,
 }) => {
@@ -51,6 +50,8 @@ const AboutModal: React.FunctionComponent<Props> = ({
             {showLogo && <OffTheShelfLogo className={css.logo} />}
 
             {!showLogo && <h1>About</h1>}
+
+            <div className={css.headingDivider}></div>
 
             <div className={css.contentInner}>
               <p>
@@ -86,11 +87,23 @@ const AboutModal: React.FunctionComponent<Props> = ({
               </ul>
             </div>
           </div>
-          <img
-            src={'/off-the-shelf/images/SLNSW-stack.jpg'}
-            alt={'SLNSW Stack'}
-            className={css.image}
-          />
+
+          <div className={css.imageWrapper}>
+            <img
+              src={'/off-the-shelf/images/SLNSW-stack.jpg'}
+              alt={'SLNSW Stack'}
+              className={css.image}
+            />
+
+            <OffTheShelfLogoDivBorders
+              orientation="topRight"
+              isActive={true}
+              strokeWidth={2}
+              notchLength={6}
+              className={css.imageBorders}
+            ></OffTheShelfLogoDivBorders>
+          </div>
+
           <CTAButton className={css.backButton} onClick={onClose}>
             Close
           </CTAButton>
