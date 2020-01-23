@@ -154,13 +154,14 @@
 // }
 
 .headingDivider {
-  width: $baseline * 8;
-  height: 4px;
+  width: $baseline * 4;
+  height: 6px;
   margin: 0 auto $baseline * 3 auto;
-  background-color: $colour-teal;
+  border-bottom: 2px solid $colour-teal;
+  border-left: 2px solid $colour-teal;
 
   @include media-lg {
-    height: 2px;
+    height: 6px;
     margin-left: 0;
   }
 }
@@ -224,6 +225,7 @@
     padding-right: $baseline * 3;
     padding-left: $baseline * 4;
     overflow: auto;
+    border-bottom: 1px solid $colour-grey-900;
   }
 
   @include media-xxxlg {

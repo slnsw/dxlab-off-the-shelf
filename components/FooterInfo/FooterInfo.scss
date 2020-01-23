@@ -9,6 +9,7 @@
 
 .logoHolder {
   display: flex;
+  align-items: flex-end;
   margin-top: $baseline-2;
   margin-bottom: $baseline-3;
   margin-left: $baseline-4;
@@ -16,7 +17,7 @@
 
 .logo {
   display: block;
-  margin-right: $baseline-2;
+  margin-right: $baseline-3;
 }
 
 .logoDxlab {

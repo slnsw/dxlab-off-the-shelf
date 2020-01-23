@@ -216,15 +216,13 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                           <p>More info</p>
                         </div>
                         <div className={css.value}>
-                          <Link as={primoLink}>
-                            <a
-                              href={primoLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              View catalogue record
-                            </a>
-                          </Link>
+                          <a
+                            href={primoLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View catalogue record
+                          </a>
                         </div>
                       </div>
                     )}
