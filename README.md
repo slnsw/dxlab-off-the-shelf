@@ -23,7 +23,9 @@ $ npm run dev
 
 ```
 # .env file
-GRAPHQL_URL=XXXXX
+OFF_THE_SHELF_GRAPHQL_URL=XXXXX
+OFF_THE_SHELF_BASE_URL=http://localhost:5040
+OFF_THE_SHELF_FB_APP_ID=XXXXXX
 
 # These are optional for local testing
 OFF_THE_SHELF_GTM_ID=GTM-XXXXXXX
@@ -33,7 +35,7 @@ OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL=https://hc-ping.com/XXXXXXXXXXXXXXXXXXXXX
 
 ### Staging and Production
 
-No `.env` files are required for staging and production deployments. This app uses `now.json` and `now.staging.json` files to point to Zeit Now's **secrets** during build and runtime.
+No `.env` files are required for staging and production deployments. This app uses `now.json`, `now.staging.json` and `now.dev.json` files to point to Zeit Now's **secrets** during build and runtime.
 
 ## Deployment
 
@@ -44,6 +46,11 @@ $ npm run deploy:prod
 # Staging
 $ npm run deploy:staging
 $ now alias dxlab-off-the-shelf-[new-id].now.sh dxlab-staging-off-the-shelf
+# NOTE: Still working out how to auto alias
+
+# Dev
+$ npm run deploy:dev
+$ now alias dxlab-off-the-shelf-[new-id].now.sh dxlab-dev-off-the-shelf
 # NOTE: Still working out how to auto alias
 ```
 

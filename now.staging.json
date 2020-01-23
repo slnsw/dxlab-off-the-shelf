@@ -2,7 +2,6 @@
   "name": "dxlab-off-the-shelf",
   "version": 2,
   "scope": "dxlab",
-  "alias": "dxlab-staging-off-the-shelf",
   "routes": [
     { "src": "/off-the-shelf/assets/_next/(.*)", "dest": "/_next/$1" }
   ],

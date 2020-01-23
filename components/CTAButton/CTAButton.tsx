@@ -18,7 +18,9 @@ const CTAButton: React.FunctionComponent<Props> = React.forwardRef(
         className={[
           css.ctaButton,
           className || '',
+          /* eslint-disable */
           size === 'sm' ? css.sm : '',
+          /* eslint-enable */
         ].join(' ')}
         {...restProps}
         ref={ref}

@@ -21,10 +21,12 @@ const ShareBox: React.FunctionComponent<Props> = ({
 }) => {
   // const { title, text, pathname, imageUrl } = this.props;
   const tweetText = encodeURIComponent(`${title} #dxlab @statelibrarynsw`);
-  const fbAppId = process.env.FB_APP_ID;
+  const fbAppId = process.env.OFF_THE_SHELF_FB_APP_ID;
 
   // TODO: Use baseUrl variable
-  const url = encodeURIComponent(`${process.env.BASE_URL}${pathname}`);
+  const url = encodeURIComponent(
+    `${process.env.OFF_THE_SHELF_BASE_URL}${pathname}`,
+  );
   const fbLink = `https://www.facebook.com/dialog/share?app_id=${fbAppId}&href=${url}&redirect_uri=${url}&name=%${encodeURIComponent(
     title,
   )}&description=${encodeURIComponent(text)}${
