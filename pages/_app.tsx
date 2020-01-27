@@ -42,10 +42,6 @@ class MyApp extends App {
       <>
         <Head>
           <title>{buildHeadTitle()}</title>
-          {/* <link
-            href="https://fonts.googleapis.com/css?family=Barlow:400,500,500i,700"
-            rel="stylesheet"
-          /> */}
           <link
             rel="stylesheet"
             type="text/css"
@@ -62,6 +58,8 @@ class MyApp extends App {
             href="https://unpkg.com/ionicons@4.2.5/dist/css/ionicons.min.css"
             rel="stylesheet"
           />
+
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script>
         </Head>
 
         <Component {...pageProps} />
