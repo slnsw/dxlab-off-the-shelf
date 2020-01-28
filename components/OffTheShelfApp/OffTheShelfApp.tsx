@@ -29,9 +29,6 @@ type Props = {
   position?: 'left' | 'right' | 'test';
   basePathnameAs: string;
   basePathnameHref: string;
-  // hasHeader?: boolean;
-  // showAboutPageLogo?: boolean;
-  // enablePrevBookId?: boolean;
   mode: 'gallery' | 'web';
   booksTotal?: number;
 };
@@ -41,9 +38,6 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   position = null,
   basePathnameAs,
   basePathnameHref = '/gallery/[position]',
-  // hasHeader = false,
-  // showAboutPageLogo = true,
-  // enablePrevBookId = true,
   mode = 'gallery',
   booksTotal = 200,
 }) => {
@@ -189,8 +183,6 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
   useInterval(
     () => {
-      // console.log('idleLoopCommandIndex', idleLoopCommandIndex);
-
       const command = idleLoopCommands[idleLoopCommandIndex];
 
       if (typeof command === 'function') {
