@@ -69,7 +69,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
     (book.sizes.medium && book.sizes.medium.sourceUrl) || initialImageUrl;
 
   const primoLink = primoRecord.id
-    ? `https://search.sl.nsw.gov.au/primo-explore/fulldisplay?docid=${primoRecord.id}&context=L&vid=SLNSW&lang=en_US&search_scope=BJM&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,How%20to%20do%20card%20tricks%20and%20entertain%20people&offset=0`
+    ? `https://search.sl.nsw.gov.au/primo-explore/fulldisplay?docid=${primoRecord.id}&vid=SLNSW`
     : null;
 
   return (
@@ -211,13 +211,15 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                           <p>More info</p>
                         </div>
                         <div className={css.value}>
-                          <a
-                            href={primoLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            View catalogue record
-                          </a>
+                          <p>
+                            <a
+                              href={primoLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              View catalogue record
+                            </a>
+                          </p>
                         </div>
                       </div>
                     )}

@@ -128,7 +128,13 @@ const AboutModal: React.FunctionComponent<Props> = ({
               <span>#OffTheShelf #shelfie</span>
             </p>
             <p>
-              Please email <span>media@sl.nsw.gov.au</span> for enquiries.
+              Please email{' '}
+              {mode === 'web' ? (
+                <a href="mailto:media@sl.nsw.gov.au">media@sl.nsw.gov.au</a>
+              ) : (
+                <span>media@sl.nsw.gov.au</span>
+              )}{' '}
+              for enquiries.
             </p>
 
             {mode === 'web' && <FooterInfo></FooterInfo>}

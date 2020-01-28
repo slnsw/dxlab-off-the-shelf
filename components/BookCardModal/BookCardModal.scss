@@ -185,9 +185,9 @@
   li {
     line-height: $baseline-2 + $baseline-half;
 
-    @include media-lg {
-      line-height: $baseline-3 + $baseline-half;
-    }
+    // @include media-lg {
+    //   line-height: $baseline-3 + $baseline-half;
+    // }
   }
 
   @include media-lg {
@@ -207,10 +207,13 @@
   }
 
   :global(.gallery-version) & {
-    // height: 80%;
     height: calc(100% - #{$baseline * 35});
   }
 }
+
+$colour-white-transparent: rgba(255, 255, 255, 0);
+$colour-black-transparent: rgba(0, 0, 0, 0);
+$colour-black-transparent-20: rgba(0, 0, 0, 0.2);
 
 .content {
   @include scrollbar();
@@ -219,6 +222,24 @@
   min-height: 200px;
   margin-top: $baseline * 1;
   word-wrap: break-word;
+  background:
+    /* Shadow covers */ linear-gradient(
+      $colour-black 30%,
+      $colour-black-transparent
+    ),
+    linear-gradient($colour-black-transparent, $colour-black 70%) 0 100%,
+    /* Shadows */
+      linear-gradient(
+        $colour-white-transparent calc(100% - 1px),
+        $colour-grey-900 calc(100%)
+      )
+      0 100%;
+  background-color: $colour-black;
+  background-repeat: no-repeat;
+  background-size: 100% 40px, 100% 40px, 100% 14px;
+
+  /* Opera doesn't support this in the shorthand */
+  background-attachment: local, local, scroll;
 
   @include media-lg {
     width: calc(100% - #{$baseline * 5});
@@ -226,7 +247,7 @@
     padding-right: $baseline * 3;
     padding-left: $baseline * 4;
     overflow: auto;
-    border-bottom: 1px solid $colour-grey-900;
+    // border-bottom: 1px solid $colour-grey-900;
   }
 
   :global(.gallery-version) & {
