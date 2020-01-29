@@ -73,12 +73,21 @@ const AboutModal: React.FunctionComponent<Props> = ({
                 you're into, we have a book for it.
               </p>
 
-              <p>
-                If any of these books pique your interest, you can ask for them
-                in the reading rooms downstairs. Take a photo of a book cover,
-                or write down the call number, and ask a librarian to see it off
-                the shelf in:
-              </p>
+              {mode === 'web' ? (
+                <p>
+                  If any of these books pique your interest, you can ask for
+                  them in the reading rooms. Take a photo of a book cover, or
+                  write down the call number, and ask a librarian to request
+                  this book from the:
+                </p>
+              ) : (
+                <p>
+                  If any of these books pique your interest, you can ask for
+                  them in the reading rooms downstairs. Take a photo of a book
+                  cover, or write down the call number, and ask a librarian to
+                  see it off the shelf in:
+                </p>
+              )}
 
               <ul>
                 <li>
@@ -90,6 +99,16 @@ const AboutModal: React.FunctionComponent<Props> = ({
                   Building
                 </li>
               </ul>
+
+              {mode === 'web' && (
+                <p>
+                  This exhibition is currently on display in the galleries,
+                  until March 22.{' '}
+                  <a href="https://www.sl.nsw.gov.au/exhibitions/shelf">
+                    https://www.sl.nsw.gov.au/exhibitions/shelf
+                  </a>
+                </p>
+              )}
             </div>
           </div>
 
