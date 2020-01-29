@@ -256,10 +256,10 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   };
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
-    Router.push(
-      `${basePathnameHref}/book/[id]`,
-      `${basePathnameAs}/book/${id}`,
-    );
+    // Router.push(
+    //   `${basePathnameHref}/book/[id]`,
+    //   `${basePathnameAs}/book/${id}`,
+    // );
 
     setInitialModalSize(e.target.getBoundingClientRect());
     setInitialModalImageUrl(imageUrl);
@@ -322,6 +322,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
       <BookShelves
         position={position}
+        basePathnameHref={basePathnameHref}
+        basePathnameAs={basePathnameAs}
         isActive={areShelvesActive}
         isIntervalActive={isIntervalEnabled && isShelfIntervalActive}
         booksTotal={booksTotal}

@@ -16,6 +16,8 @@ type Props = {
   isActive?: boolean;
   isIntervalActive?: boolean;
   position?: 'left' | 'right' | 'test';
+  basePathnameAs: string;
+  basePathnameHref: string;
   booksTotal?: number;
   // hasHeader?: boolean;
   mode: 'gallery' | 'web';
@@ -27,6 +29,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
   isActive = false,
   isIntervalActive = false,
   position = 'left',
+  basePathnameAs,
+  basePathnameHref,
   booksTotal = configs.NUMBER_OF_BOOKS_TO_DISPLAY,
   // hasHeader = false,
   mode = 'gallery',
@@ -194,8 +198,10 @@ const BookShelves: React.FunctionComponent<Props> = ({
             scrollToBook={currentBooks[0]}
             index={0}
             id="bookShelf-0"
-            className={css.bookShelf}
+            basePathnameAs={basePathnameAs}
+            basePathnameHref={basePathnameHref}
             isActive={isActive}
+            className={css.bookShelf}
             onClick={onBookClick}
             onRender={(booksInView) => {
               allBooksInView[0] = booksInView;
@@ -206,8 +212,10 @@ const BookShelves: React.FunctionComponent<Props> = ({
             scrollToBook={currentBooks[1]}
             index={1}
             id="bookShelf-1"
-            className={css.bookShelf}
+            basePathnameAs={basePathnameAs}
+            basePathnameHref={basePathnameHref}
             isActive={isActive}
+            className={css.bookShelf}
             onClick={onBookClick}
             onRender={(booksInView) => {
               allBooksInView[1] = booksInView;
@@ -218,8 +226,10 @@ const BookShelves: React.FunctionComponent<Props> = ({
             scrollToBook={currentBooks[2]}
             index={2}
             id="bookShelf-2"
-            className={css.bookShelf}
+            basePathnameAs={basePathnameAs}
+            basePathnameHref={basePathnameHref}
             isActive={isActive}
+            className={css.bookShelf}
             onClick={onBookClick}
             onRender={(booksInView) => {
               allBooksInView[2] = booksInView;

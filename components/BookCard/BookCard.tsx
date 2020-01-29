@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 
@@ -9,7 +10,9 @@ import css from './BookCard.scss';
 
 type Props = {
   id: number;
-  index: number;
+  urlHref: string;
+  urlAs: string;
+  // index: number;
   title: string;
   imageUrl: string;
   imageWidth: number;
@@ -27,8 +30,10 @@ type Props = {
 
 const BookCard: React.FunctionComponent<Props> = ({
   id,
-  index,
+  // index,
   title,
+  urlHref,
+  urlAs,
   imageUrl,
   imageWidth = 0,
   imageHeight = 0,
@@ -50,7 +55,7 @@ const BookCard: React.FunctionComponent<Props> = ({
     ? configs.MOBILE_GUTTER
     : configs.DESKTOP_GUTTER;
 
-  const debug = false;
+  // const debug = false;
 
   // To do magic Cloudinary stuff (resize image to 512 tall, convert to MUCH smaller 60% JPG with same background colour as site):
   // https://newselfwales.dxlab.sl.nsw.gov.au/app/uploads/sites/3/2019/10/IMG_20190812_141549-final-677x1024.png
@@ -60,11 +65,6 @@ const BookCard: React.FunctionComponent<Props> = ({
   const cloudImgUrl = `https://res.cloudinary.com/dxlab/image/upload/h_512,f_jpg,q_60,b_rgb:060606/off-the-shelf/${imageUrl.slice(
     61,
   )}`;
-  // console.log(cloudImgUrl);
-
-  // React.useEffect(() => {
-  //   console.log('isActive changed in BookCARD', isActive);
-  // }, [isActive]);
 
   React.useEffect(() => {
     if (scrollDirection) {
@@ -92,64 +92,55 @@ const BookCard: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <>
-      <motion.article
-        id={`bookCard-${id}`}
-        className={[css.bookCard, className || ''].join(' ')}
-        animate={{
-          rotate,
-        }}
-        transition={{
-          delay: Math.random() * 0.2,
-          duration: 0.4,
-          type: 'spring',
-          damping: isScrolling ? 10 : 4,
-          stiffness: 300,
-        }}
-        style={{
-          originX,
-          originY: 1,
-        }}
-        ref={ref}
-      >
-        {/* {inView ? ( */}
-        {debug && <p className={css.debugNumber}>{index}</p>}
-        {debug && <p className={css.debugNumber2}>{id}</p>}
-        <motion.img
-          src={cloudImgUrl}
-          alt={title}
-          className={css.image}
+    <Link href={urlHref} as={urlAs}>
+      <a>
+        <motion.article
+          id={`bookCard-${id}`}
+          className={[css.bookCard, className || ''].join(' ')}
           animate={{
-            y: isActive ? 0 : imageHeight + gutter,
+            rotate,
           }}
           transition={{
-            delay: Math.random() * 0.4 + animationDelay,
+            delay: Math.random() * 0.2,
+            duration: 0.4,
             type: 'spring',
-            damping: 20,
-            stiffness: 50,
-            mass: 2,
+            damping: isScrolling ? 10 : 4,
+            stiffness: 300,
           }}
-          initial={false}
           style={{
-            width: imageWidth,
-            height: imageHeight,
+            originX,
+            originY: 1,
           }}
-          onClick={(e) => {
-            if (typeof onClick === 'function') {
-              onClick(e, { id, title, imageUrl });
-            }
-          }}
-        />
-        {/* ) : (
-        <div
-          style={{
-            width: imageWidth,
-            height: imageHeight,
-          }}
-        ></div>
-      )} */}
-      </motion.article>
-    </>
+          ref={ref}
+        >
+          <motion.img
+            src={cloudImgUrl}
+            alt={title}
+            className={css.image}
+            animate={{
+              y: isActive ? 0 : imageHeight + gutter,
+            }}
+            transition={{
+              delay: Math.random() * 0.4 + animationDelay,
+              type: 'spring',
+              damping: 20,
+              stiffness: 50,
+              mass: 2,
+            }}
+            initial={false}
+            style={{
+              width: imageWidth,
+              height: imageHeight,
+            }}
+            onClick={(e) => {
+              if (typeof onClick === 'function') {
+                onClick(e, { id, title, imageUrl });
+              }
+            }}
+          />
+        </motion.article>
+      </a>
+    </Link>
   );
 };
 
