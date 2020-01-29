@@ -21,23 +21,30 @@ const Header: React.FunctionComponent<Props> = ({
 }) => {
   return (
     <div className={[css.header, className || ''].join(' ')}>
-      <OffTheShelfLogoText
-        isActive={true}
-        className={css.logo}
-      ></OffTheShelfLogoText>
-
       <div className={css.borders}>
         <div></div>
         <div></div>
         <div></div>
       </div>
+
+      <OffTheShelfLogoText
+        isActive={true}
+        className={css.logo}
+      ></OffTheShelfLogoText>
+
+      {/* <div className={css.borders}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div> */}
+
       <>
         <CTAButton
           onClick={onRandomClick}
           className={[css.link, css.randomButton].join(' ')}
           size="sm"
         >
-          Re-randomise
+          Randomise!
         </CTAButton>
 
         <Link

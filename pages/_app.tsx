@@ -81,8 +81,6 @@ class MyApp extends App {
             href="https://unpkg.com/ionicons@4.2.5/dist/css/ionicons.min.css"
             rel="stylesheet"
           />
-
-          {/* <script src="https://polyfill.io/v3/polyfill.min.js?features=WeakSet%2CWeakMap%2CObject.assign%2CString.prototype.startsWith%2CArray.from%2CArray.prototype.find"></script> */}
         </Head>
 
         <Component {...pageProps} />

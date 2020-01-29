@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import OffTheShelfLogoText from '../OffTheShelfLogoText';
-// import OffTheShelfLogoBorders from '../OffTheShelfLogoBorders';
 import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
 
 import css from './OffTheShelfLogo.scss';
@@ -37,15 +36,9 @@ const OffTheShelfLogo: React.FunctionComponent<Props> = ({
 
       <OffTheShelfLogoText
         isActive={isActive}
-        delay={1.5}
+        delay={1.3}
         className={[css.text, size === 'sm' ? css.sm : ''].join(' ')}
       />
-
-      {/* <OffTheShelfLogoBorders
-        strokeWidth={size === 'sm' ? 8 : 16}
-        isActive={isActive}
-        className={css.borders}
-      /> */}
 
       <OffTheShelfLogoDivBorders
         strokeWidth={size === 'sm' ? 4 : 8}

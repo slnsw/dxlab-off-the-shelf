@@ -22,12 +22,14 @@ const OffTheShelfLogoText: React.FunctionComponent<Props> = ({
         stroke: variables['colour-white'],
         strokeWidth: 4,
         fill: variables['colour-black'],
+        opacity: 0,
       },
       end: {
         pathLength: 1,
         stroke: variables['colour-black'],
         strokeWidth: 0,
         fill: variables['colour-white'],
+        opacity: 1,
       },
     };
   };

@@ -28,8 +28,10 @@
 }
 
 .logo {
+  flex: 0 0 auto;
   height: 100%;
-  margin-right: $baseline * 1.5;
+  margin-right: auto;
+  // margin-right: $baseline * 1.5;
 
   svg {
     height: 100%;
@@ -38,16 +40,18 @@
 
 .borders {
   display: flex;
+  flex: 0 0 auto;
   align-items: flex-end;
   height: calc(100% - 4px);
-  margin-right: auto;
+  margin-right: $baseline * 0.8;
+  // margin-right: auto;
 
   > div:nth-child(1) {
     width: 6px;
-    height: 100%;
+    height: calc(100% - #{$baseline * 2});
     margin-right: auto;
-    border-top: 2px solid $colour-teal;
-    border-right: 2px solid $colour-teal;
+    border-top: 2px solid $colour-white;
+    border-left: 2px solid $colour-white;
   }
 
   > div:nth-child(2) {
@@ -55,14 +59,47 @@
     height: calc(100% - #{$baseline});
     margin-right: auto;
     border-top: 2px solid $colour-yellow;
-    border-right: 2px solid $colour-yellow;
+    border-left: 2px solid $colour-yellow;
   }
 
   > div:nth-child(3) {
     width: 6px;
-    height: calc(100% - #{$baseline * 2});
+    height: 100%;
     margin-right: auto;
-    border-top: 2px solid $colour-white;
-    border-right: 2px solid $colour-white;
+    border-top: 2px solid $colour-teal;
+    border-left: 2px solid $colour-teal;
   }
 }
+
+// Borders right of logo text
+// .borders {
+//   display: flex;
+//   flex: 0 0 auto;
+//   align-items: flex-end;
+//   height: calc(100% - 4px);
+//   margin-right: auto;
+
+//   > div:nth-child(1) {
+//     width: 6px;
+//     height: 100%;
+//     margin-right: auto;
+//     border-top: 2px solid $colour-teal;
+//     border-right: 2px solid $colour-teal;
+//   }
+
+//   > div:nth-child(2) {
+//     width: 6px;
+//     height: calc(100% - #{$baseline});
+//     margin-right: auto;
+//     border-top: 2px solid $colour-yellow;
+//     border-right: 2px solid $colour-yellow;
+//   }
+
+//   > div:nth-child(3) {
+//     width: 6px;
+//     height: calc(100% - #{$baseline * 2});
+//     margin-right: auto;
+//     border-top: 2px solid $colour-white;
+//     border-right: 2px solid $colour-white;
+//   }
+// }

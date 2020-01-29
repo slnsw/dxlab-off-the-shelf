@@ -230,7 +230,7 @@ $colour-black-transparent-20: rgba(0, 0, 0, 0.2);
     linear-gradient($colour-black-transparent, $colour-black 70%) 0 100%,
     /* Shadows */
       linear-gradient(
-        $colour-white-transparent calc(100% - 1px),
+        $colour-white-transparent calc(100% - 2px),
         $colour-grey-900 calc(100%)
       )
       0 100%;
