@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useRouter } from 'next/router';
 
 import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
 
@@ -6,27 +7,30 @@ import css from './ShareBox.scss';
 
 type Props = {
   title: string;
-  text?: string;
-  pathname?: string;
+  text: string;
+  // pathname?: string;
   imageUrl?: string;
+  baseUrl: string;
+  fbAppId: string;
   className?: string;
 };
 
 const ShareBox: React.FunctionComponent<Props> = ({
   title,
   text,
-  pathname,
+  // pathname,
   imageUrl,
+  baseUrl,
+  fbAppId,
   className,
 }) => {
-  // const { title, text, pathname, imageUrl } = this.props;
-  const tweetText = encodeURIComponent(`${title} #dxlab @statelibrarynsw`);
-  const fbAppId = process.env.OFF_THE_SHELF_FB_APP_ID;
+  const router = useRouter();
+  const pathname = router.asPath;
 
-  // TODO: Use baseUrl variable
-  const url = encodeURIComponent(
-    `${process.env.OFF_THE_SHELF_BASE_URL}${pathname}`,
-  );
+  const tweetText = encodeURIComponent(`${title} #dxlab @statelibrarynsw`);
+
+  const url = encodeURIComponent(`${baseUrl}${pathname}`);
+
   const fbLink = `https://www.facebook.com/dialog/share?app_id=${fbAppId}&href=${url}&redirect_uri=${url}&name=%${encodeURIComponent(
     title,
   )}&description=${encodeURIComponent(text)}${
@@ -76,23 +80,3 @@ const ShareBox: React.FunctionComponent<Props> = ({
 };
 
 export default ShareBox;
-
-// import { Component } from 'react';
-// import PropTypes from 'prop-types';
-
-// import './ShareBox.css';
-
-// class ShareBox extends Component {
-// 	static propTypes = {
-// 		pathname: PropTypes.string,
-// 		title: PropTypes.string,
-// 		text: PropTypes.string,
-// 		imageUrl: PropTypes.string,
-// 	};
-
-// 	render() {
-// 		);
-// 	}
-// }
-
-// export default ShareBox;

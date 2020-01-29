@@ -2,6 +2,7 @@
 
 .shareBox {
   position: relative;
+  z-index: 1;
   display: block;
   width: fit-content;
 
@@ -18,6 +19,8 @@
 }
 
 .icons {
+  position: relative;
+  z-index: 1;
   margin-left: $baseline * 3.5;
 }
 
@@ -25,10 +28,16 @@
   margin-right: $baseline-3;
   color: $colour-white;
   font-size: $font-size-xxlg;
+
+  &:hover,
+  &:active {
+    color: $colour-yellow;
+  }
 }
 
 .borders {
   position: absolute;
   top: 0;
+  z-index: 0;
   height: $baseline * 11.5;
 }

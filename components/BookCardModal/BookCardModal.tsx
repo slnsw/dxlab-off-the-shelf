@@ -247,6 +247,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                     <ShareBox
                       title={book.title}
                       text={description}
+                      baseUrl={process.env.OFF_THE_SHELF_BASE_URL}
+                      fbAppId={process.env.OFF_THE_SHELF_FB_APP_ID}
                       className={css.shareBox}
                     ></ShareBox>
                   )}
