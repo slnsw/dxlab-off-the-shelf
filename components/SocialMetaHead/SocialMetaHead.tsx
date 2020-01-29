@@ -7,8 +7,13 @@ type Props = {
   description: string;
   imageUrl: string;
   imageAlt?: string;
+  /** Providing width speeds up shares of new URLs on Facebook */
+  imageWidth?: number;
+  /** Providing height speeds up shares of new URLs on Facebook */
+  imageHeight?: number;
   // baseUrl?: string;
   siteName?: string;
+  type?: string;
   fbAppId?: string;
   twitterUsername?: string;
 };
@@ -23,8 +28,11 @@ const SocialMetaHead: React.FunctionComponent<Props> = ({
   description,
   imageUrl,
   imageAlt,
+  imageWidth,
+  imageHeight,
   // baseUrl,
   siteName,
+  type = 'website',
   fbAppId,
   twitterUsername,
 }) => {
@@ -67,6 +75,22 @@ const SocialMetaHead: React.FunctionComponent<Props> = ({
         />
       )}
 
+      {imageWidth && (
+        <meta
+          property="og:image:width"
+          content={`${imageWidth}`}
+          key="meta-og:image:width"
+        />
+      )}
+
+      {imageHeight && (
+        <meta
+          property="og:image:height"
+          content={`${imageHeight}`}
+          key="meta-og:image:height"
+        />
+      )}
+
       {imageAlt && (
         <meta
           name="twitter:image:alt"
@@ -74,6 +98,8 @@ const SocialMetaHead: React.FunctionComponent<Props> = ({
           key="meta-twitter:image:alt"
         />
       )}
+
+      {type && <meta property="og:type" content={type} />}
 
       {/* ----------------------------------------------------------------- */}
       {/* Non-Essential, But Required for analytics */}
