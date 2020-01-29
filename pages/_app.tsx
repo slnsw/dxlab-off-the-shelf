@@ -1,3 +1,7 @@
+import '@babel/polyfill';
+import 'intersection-observer';
+import smoothscroll from 'smoothscroll-polyfill';
+
 import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
@@ -34,6 +38,8 @@ class MyApp extends App {
         initGA();
         window.GA_INITIALIZED = true;
       }
+
+      smoothscroll.polyfill();
     }
   }
 
@@ -76,7 +82,7 @@ class MyApp extends App {
             rel="stylesheet"
           />
 
-          <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script>
+          {/* <script src="https://polyfill.io/v3/polyfill.min.js?features=WeakSet%2CWeakMap%2CObject.assign%2CString.prototype.startsWith%2CArray.from%2CArray.prototype.find"></script> */}
         </Head>
 
         <Component {...pageProps} />

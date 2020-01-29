@@ -2,6 +2,7 @@ import * as React from 'react';
 import shuffle from 'lodash.shuffle';
 
 import BookShelf from '../BookShelf';
+import Loader from '../Loader';
 
 import useInterval from '../../lib/hooks/use-interval';
 // import useTimeout from '../../lib/hooks/use-timeout';
@@ -19,7 +20,6 @@ type Props = {
   basePathnameAs: string;
   basePathnameHref: string;
   booksTotal?: number;
-  // hasHeader?: boolean;
   mode: 'gallery' | 'web';
   className?: string;
   onBookClick?: Function;
@@ -32,7 +32,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
   basePathnameAs,
   basePathnameHref,
   booksTotal = configs.NUMBER_OF_BOOKS_TO_DISPLAY,
-  // hasHeader = false,
   mode = 'gallery',
   className,
   onBookClick,
@@ -181,6 +180,12 @@ const BookShelves: React.FunctionComponent<Props> = ({
 
   const hasHeader = mode === 'web';
 
+  if (loading) {
+    return (
+      <Loader isActive={true} strokeWidth={2} className={css.loader}></Loader>
+    );
+  }
+
   return (
     <div
       className={[
@@ -189,8 +194,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
         className || '',
       ].join(' ')}
     >
-      {loading && 'Loading...'}
-
       {!loading && books && books.length > 0 && (
         <>
           <BookShelf

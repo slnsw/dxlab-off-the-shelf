@@ -51,9 +51,14 @@ const Loader: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <div className={[css.loader, className || ''].join(' ')}>
-      <AnimatePresence>
-        {isActive && width && height && (
+    <AnimatePresence>
+      {isActive && width && height && (
+        <motion.div
+          className={[css.loader, className || ''].join(' ')}
+          exit={{
+            opacity: 0,
+          }}
+        >
           <motion.svg
             width={width}
             height={height}
@@ -114,10 +119,9 @@ const Loader: React.FunctionComponent<Props> = ({
               strokeDasharray="0 1"
             />
           </motion.svg>
-        )}
-      </AnimatePresence>
-      {/* <p>LOADING</p> */}
-    </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

@@ -283,7 +283,6 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
       <Loader
         isActive={isLoaderActive}
         strokeWidth={2}
-        // strokeWidth={mode === 'web' ? 2 : 4}
         className={css.loader}
       />
 
