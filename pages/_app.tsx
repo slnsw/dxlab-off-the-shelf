@@ -7,6 +7,7 @@ import { initGA } from '../lib/analytics';
 
 import '../node_modules/normalize.css/normalize.css';
 import '../styles/base.scss';
+import SocialMetaHead from '../components/SocialMetaHead';
 
 declare global {
   interface Window {
@@ -40,59 +41,23 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     const title = buildHeadTitle();
-    const metaDescription =
+    const description =
       'Off the Shelf brings you snapshots of the intriguing, perplexing and playful volumes in the underground book stacks waiting to be read';
-    const metaImageUrl = '/off-the-shelf/images/SLNSW-stack.jpg';
-    const metaImageAlt = 'Mitchell library stack, by Merinda Campbell';
+    const imageUrl = '/off-the-shelf/images/SLNSW-stack.jpg';
+    const imageAlt = 'Mitchell library stack, by Merinda Campbell';
 
     return (
       <>
+        <SocialMetaHead
+          title={title}
+          description={description}
+          imageUrl={imageUrl}
+          imageAlt={imageAlt}
+          siteName="Off the Shelf - DX Lab | State Library of NSW"
+        />
+
         <Head>
           <title>{buildHeadTitle()}</title>
-
-          {title && (
-            <meta
-              property="og:title"
-              content={buildHeadTitle()}
-              key="meta-og:title"
-            />
-          )}
-
-          {metaDescription && (
-            <meta
-              property="og:description"
-              content={metaDescription}
-              key="meta-og:description"
-            />
-          )}
-          {metaDescription && (
-            <meta
-              name="description"
-              content={metaDescription}
-              key="meta-description"
-            />
-          )}
-          {metaImageUrl && (
-            <meta
-              property="og:image"
-              content={metaImageUrl}
-              key="meta-og:image"
-            />
-          )}
-          {metaImageAlt && (
-            <meta
-              name="twitter:image:alt"
-              content={metaImageAlt}
-              key="meta-twitter:image:alt"
-            />
-          )}
-          <meta name="twitter:card" content="summary_large_image" />
-          {/* {pageUrl && <meta property="og:url" content={pageUrl} />} */}
-          <meta
-            property="og:site_name"
-            content="Off the Shelf | DX Lab - State Library of NSW"
-          />
-          <meta property="og:type" content="website" />
 
           <link
             rel="stylesheet"
