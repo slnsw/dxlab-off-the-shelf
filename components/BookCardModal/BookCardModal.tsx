@@ -14,6 +14,7 @@ import { buildHeadTitle } from '../../lib';
 import useBookData from '../../lib/hooks/use-book-data';
 
 import css from './BookCardModal.scss';
+// import HeadMeta from '../HeadMeta';
 
 type Props = {
   id: number;
@@ -79,7 +80,47 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       className={[css.bookCardModal, className || ''].join(' ')}
       onClose={onClose}
     >
-      <Head>{book.title && <title>{buildHeadTitle(book.title)}</title>}</Head>
+      <Head>
+        {book.title && (
+          <title>{buildHeadTitle(book.title)}</title>
+
+          // NOTE: Not working for client-side navigation
+          // <title
+          //   dangerouslySetInnerHTML={{ __html: buildHeadTitle(book.title) }}
+          // ></title>
+        )}
+
+        {book.title && (
+          <meta property="og:title" content={book.title} key="meta-og:title" />
+        )}
+
+        {description && (
+          <meta
+            property="og:description"
+            content={description}
+            key="meta-og:description"
+          />
+        )}
+
+        {description && (
+          <meta
+            property="description"
+            content={description}
+            key="meta-description"
+          />
+        )}
+
+        {imageUrl && (
+          <meta property="og:image" content={imageUrl} key="meta-og:image" />
+        )}
+        {book.title && (
+          <meta
+            name="twitter:image:alt"
+            content={book.title}
+            key="meta-twitter:image:alt"
+          />
+        )}
+      </Head>
 
       <div className={css.inside}>
         {imageUrl && (
@@ -228,6 +269,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                   {mode === 'web' && (
                     <ShareBox
                       title={book.title}
+                      text={description}
                       className={css.shareBox}
                     ></ShareBox>
                   )}

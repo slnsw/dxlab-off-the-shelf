@@ -38,10 +38,62 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props;
+
+    const title = buildHeadTitle();
+    const metaDescription =
+      'Off the Shelf brings you snapshots of the intriguing, perplexing and playful volumes in the underground book stacks waiting to be read';
+    const metaImageUrl = '/off-the-shelf/images/SLNSW-stack.jpg';
+    const metaImageAlt = 'Mitchell library stack, by Merinda Campbell';
+
     return (
       <>
         <Head>
           <title>{buildHeadTitle()}</title>
+
+          {title && (
+            <meta
+              property="og:title"
+              content={buildHeadTitle()}
+              key="meta-og:title"
+            />
+          )}
+
+          {metaDescription && (
+            <meta
+              property="og:description"
+              content={metaDescription}
+              key="meta-og:description"
+            />
+          )}
+          {metaDescription && (
+            <meta
+              name="description"
+              content={metaDescription}
+              key="meta-description"
+            />
+          )}
+          {metaImageUrl && (
+            <meta
+              property="og:image"
+              content={metaImageUrl}
+              key="meta-og:image"
+            />
+          )}
+          {metaImageAlt && (
+            <meta
+              name="twitter:image:alt"
+              content={metaImageAlt}
+              key="meta-twitter:image:alt"
+            />
+          )}
+          <meta name="twitter:card" content="summary_large_image" />
+          {/* {pageUrl && <meta property="og:url" content={pageUrl} />} */}
+          <meta
+            property="og:site_name"
+            content="Off the Shelf | DX Lab - State Library of NSW"
+          />
+          <meta property="og:type" content="website" />
+
           <link
             rel="stylesheet"
             type="text/css"

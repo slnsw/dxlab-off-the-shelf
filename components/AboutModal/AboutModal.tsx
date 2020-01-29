@@ -96,7 +96,7 @@ const AboutModal: React.FunctionComponent<Props> = ({
           <div className={css.imageWrapper}>
             <img
               src={'/off-the-shelf/images/SLNSW-stack.jpg'}
-              alt={'SLNSW Stack'}
+              alt="Mitchell library stack, by Merinda Campbell"
               className={css.image}
             />
 
