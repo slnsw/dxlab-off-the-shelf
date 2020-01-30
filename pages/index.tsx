@@ -1,18 +1,19 @@
-// import React from 'react';
 import Router from 'next/router';
 
 const HomePage = () => {
   return null;
 };
 
+const redirectUrl = `${process.env.OFF_THE_SHELF_BASE_URL}/off-the-shelf`;
+
 HomePage.getInitialProps = ({ res }) => {
   if (res) {
     res.writeHead(302, {
-      Location: '/gallery/test',
+      Location: redirectUrl,
     });
     res.end();
   } else {
-    Router.push('/gallery/test');
+    Router.push(redirectUrl);
   }
 
   return {};
