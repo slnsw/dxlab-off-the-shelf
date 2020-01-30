@@ -44,7 +44,7 @@ const Header: React.FunctionComponent<Props> = ({
           className={[css.link, css.randomButton].join(' ')}
           size="sm"
         >
-          Randomise!
+          Randomise
         </CTAButton>
 
         <Link

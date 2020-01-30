@@ -30,15 +30,13 @@ const FooterInfo: React.FunctionComponent<Props> = ({ className }) => {
         </a>
       </div>
 
-      <div>
-        <ul className={css.menu}>
-          {footerItems.map((item, i) => (
-            <li key={item.name}>
-              <a href={item.url}>{item.name}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className={css.menu}>
+        {footerItems.map((item, i) => (
+          <li key={item.name}>
+            <a href={item.url}>{item.name}</a>
+          </li>
+        ))}
+      </ul>
 
       <OffTheShelfLogoDivBorders
         strokeWidth={2}
