@@ -15,7 +15,6 @@ import useBookData from '../../lib/hooks/use-book-data';
 
 import css from './BookCardModal.scss';
 import SocialMetaHead from '../SocialMetaHead';
-// import HeadMeta from '../HeadMeta';
 
 type Props = {
   id: number;
@@ -69,6 +68,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
   const imageUrl =
     (book.sizes.medium && book.sizes.medium.sourceUrl) || initialImageUrl;
+  const imageWidth = book.sizes.medium && book.sizes.medium.width;
+  const imageHeight = book.sizes.medium && book.sizes.medium.height;
 
   const primoLink = primoRecord.id
     ? `https://search.sl.nsw.gov.au/primo-explore/fulldisplay?docid=${primoRecord.id}&vid=SLNSW`
@@ -86,6 +87,9 @@ const BookCardModal: React.FunctionComponent<Props> = ({
         description={description}
         imageUrl={imageUrl}
         imageAlt={book.title}
+        imageWidth={imageWidth}
+        imageHeight={imageHeight}
+        baseUrl={process.env.OFF_THE_SHELF_BASE_URL}
       />
 
       <Head>

@@ -11,7 +11,7 @@ type Props = {
   imageWidth?: number;
   /** Providing height speeds up shares of new URLs on Facebook */
   imageHeight?: number;
-  // baseUrl?: string;
+  baseUrl?: string;
   siteName?: string;
   type?: string;
   fbAppId?: string;
@@ -30,14 +30,14 @@ const SocialMetaHead: React.FunctionComponent<Props> = ({
   imageAlt,
   imageWidth,
   imageHeight,
-  // baseUrl,
+  baseUrl = '',
   siteName,
   type = 'website',
   fbAppId,
   twitterUsername,
 }) => {
   const router = useRouter();
-  const url = router.asPath;
+  const url = `${baseUrl || ''}${router.asPath}`;
 
   return (
     <Head>
