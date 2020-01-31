@@ -94,3 +94,21 @@
     scrollbar-track-color: $background-color;
   }
 }
+
+/*
+ * Hide Scrollbars
+ * ------------------------------------------------------------------------ */
+
+@mixin hide-scrollbar() {
+  // Chrome
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  // Firefox
+  scrollbar-width: none;
+
+  // IE 10 +
+  -ms-overflow-style: none;
+}

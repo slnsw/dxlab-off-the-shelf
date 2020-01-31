@@ -247,6 +247,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
     setAreShelvesActive(false);
     // Reset idleLoop
     setIdleLoopCommandIndex(7);
+    // Hide logo
+    setIsLogoActive(false);
 
     setTimeout(() => {
       setIsLoaderActive(false);
@@ -314,7 +316,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
       />
 
       <OffTheShelfLogo
-        isActive={isLogoActive}
+        // Ensure logo doesn't show if shelves are active
+        isActive={isLogoActive && areShelvesActive === false}
         className={css.logo}
         size={mode === 'web' ? 'sm' : 'md'}
       />
