@@ -68,6 +68,12 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
   const rawImageUrl =
     (book.sizes.medium && book.sizes.medium.sourceUrl) || initialImageUrl;
+
+  // To do magic Cloudinary stuff (resize image to 1024 tall, convert to MUCH smaller 60% JPG with same background colour as site):
+  // https://newselfwales.dxlab.sl.nsw.gov.au/app/uploads/sites/3/2019/10/IMG_20190812_141549-final-677x1024.png
+  // becomes
+  // https://res.cloudinary.com/dxlab/image/upload/h_1024,f_jpg,q_60,b_rgb:060606/off-the-shelf/2019/10/IMG_20190812_141549-final-677x1024.png
+
   const imageUrl =
     rawImageUrl &&
     rawImageUrl.replace(
@@ -79,17 +85,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
   const primoLink = primoRecord.id
     ? `https://search.sl.nsw.gov.au/primo-explore/fulldisplay?docid=${primoRecord.id}&vid=SLNSW`
-    : null;
-
-  // To do magic Cloudinary stuff (resize image to 1024 tall, convert to MUCH smaller 60% JPG with same background colour as site):
-  // https://newselfwales.dxlab.sl.nsw.gov.au/app/uploads/sites/3/2019/10/IMG_20190812_141549-final-677x1024.png
-  // becomes
-  // https://res.cloudinary.com/dxlab/image/upload/h_1024,f_jpg,q_60,b_rgb:060606/off-the-shelf/2019/10/IMG_20190812_141549-final-677x1024.png
-
-  const cloudImgUrl = imageUrl
-    ? `https://res.cloudinary.com/dxlab/image/upload/h_1024,f_jpg,q_60,b_rgb:060606/off-the-shelf/${imageUrl.slice(
-        61,
-      )}`
     : null;
 
   return (
@@ -132,8 +127,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
             />
 
             <motion.img
-              // src={imageUrl}
-              src={cloudImgUrl}
+              src={imageUrl}
               alt={book.title}
               className={css.image}
               animate={{ x: 0 }}
