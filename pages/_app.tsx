@@ -65,6 +65,11 @@ class MyApp extends App {
         <Head>
           <title>{buildHeadTitle()}</title>
 
+          <meta
+            name="viewport"
+            content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1"
+          ></meta>
+
           <link
             rel="stylesheet"
             type="text/css"

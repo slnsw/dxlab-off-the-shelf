@@ -66,8 +66,14 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
   const showExtraContent = mode === 'gallery';
 
-  const imageUrl =
+  const rawImageUrl =
     (book.sizes.medium && book.sizes.medium.sourceUrl) || initialImageUrl;
+  const imageUrl =
+    rawImageUrl &&
+    rawImageUrl.replace(
+      'https://newselfwales.dxlab.sl.nsw.gov.au/app/uploads/sites/3',
+      'https://res.cloudinary.com/dxlab/image/upload/h_1024,f_jpg,q_60,b_rgb:060606/off-the-shelf',
+    );
   const imageWidth = book.sizes.medium && book.sizes.medium.width;
   const imageHeight = book.sizes.medium && book.sizes.medium.height;
 

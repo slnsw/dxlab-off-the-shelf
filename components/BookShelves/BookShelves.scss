@@ -8,7 +8,7 @@
   padding: 0 0 $baseline-2 0;
 
   @include media-sm {
-    padding: 0 0 $baseline-3 0;
+    padding: 0 0 $gutter-desktop 0;
   }
 
   &.hasHeader {

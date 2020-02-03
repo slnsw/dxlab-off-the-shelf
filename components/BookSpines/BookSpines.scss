@@ -6,6 +6,6 @@
   margin-right: $baseline-2;
 
   @include media-sm {
-    margin-right: $baseline-3;
+    margin-right: $gutter-desktop;
   }
 }
