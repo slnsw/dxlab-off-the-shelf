@@ -83,6 +83,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
 
   React.useEffect(() => {
     if (scrollToItem.current) {
+      console.log('stopping scroll');
       scrollToItem.current.stop();
     }
   }, [isActive]);

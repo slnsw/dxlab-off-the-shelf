@@ -1,5 +1,5 @@
 import * as React from 'react';
-import shuffle from 'lodash.shuffle';
+// import shuffle from 'lodash.shuffle';
 
 import BookShelf from '../BookShelf';
 import Loader from '../Loader';
@@ -8,7 +8,7 @@ import useInterval from '../../lib/hooks/use-interval';
 // import useTimeout from '../../lib/hooks/use-timeout';
 import useBooksData from '../../lib/hooks/use-books-data';
 import { usePrevious } from '../../lib/hooks';
-// import knuthShuffle from '../../lib/knuthShuffle';
+import knuthShuffle from '../../lib/knuthShuffle';
 import * as configs from '../../configs';
 
 import css from './BookShelves.scss';
@@ -73,8 +73,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
       : allUnshuffledBooks;
 
     // Shuffle them up and display a subset
-    // setBooks(knuthShuffle(unshuffledBooks).slice(0, subset));
-    setBooks(shuffle(unshuffledBooks).slice(0, subset));
+    setBooks(knuthShuffle(unshuffledBooks).slice(0, subset));
+    // setBooks(shuffle(unshuffledBooks).slice(0, subset));
   };
 
   React.useEffect(() => {
