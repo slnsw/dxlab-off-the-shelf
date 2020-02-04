@@ -112,34 +112,35 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         idleTimer.stop();
       };
     }
-    // } else {
-    //   // web version
-    //   const idleTimer = createIdleTimer(
-    //     () => {
-    //       if (!(bookId || isAboutModalActive)) {
-    //         setIdleLoopCommandIndex(35);
-    //         setIsIdleLoopActive(true);
-    //       }
-    //     },
-    //     configs.WEB_IDLE_TIMEOUT,
-    //     {
-    //       onReset: () => {
-    //         setIsLogoActive(false);
-    //         setAreShelvesActive(true);
 
-    //         if (isIdleLoopActive) {
-    //           setIsIdleLoopActive(false);
-    //         }
-    //       },
-    //     },
-    //   );
+    if (mode === 'web') {
+      // web version
+      const idleTimer = createIdleTimer(
+        () => {
+          if (!(bookId || isAboutModalActive)) {
+            // setIdleLoopCommandIndex(35);
+            setIsIdleLoopActive(true);
+          }
+        },
+        configs.WEB_IDLE_TIMEOUT,
+        {
+          onReset: () => {
+            setIsLogoActive(false);
+            setAreShelvesActive(true);
 
-    //   idleTimer.start();
+            if (isIdleLoopActive) {
+              setIsIdleLoopActive(false);
+            }
+          },
+        },
+      );
 
-    //   return () => {
-    //     idleTimer.stop();
-    //   };
-    // }
+      idleTimer.start();
+
+      return () => {
+        idleTimer.stop();
+      };
+    }
 
     return () => {};
   }, [bookId, isAboutModalActive, mode]);
