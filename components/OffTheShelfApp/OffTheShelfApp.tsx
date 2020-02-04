@@ -333,6 +333,9 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         initialImageUrl={initialModalImageUrl}
         mode={mode}
         onClose={() => {
+          if (mode === 'web') {
+            setIdleLoopCommandIndex(15);
+          }
           Router.push(basePathnameHref, basePathnameAs);
         }}
       />
@@ -342,6 +345,9 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         mode={mode}
         onClose={() => {
           if (prevBookId.current && enablePrevBookId) {
+            if (mode === 'web') {
+              setIdleLoopCommandIndex(15);
+            }
             Router.push(
               `${basePathnameHref}/book/[id]`,
               `${basePathnameAs}/book/${prevBookId.current}`,
