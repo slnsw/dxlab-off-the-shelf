@@ -11,9 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `setIsModalActive` from gallery.tsx, derive it from `bookId` instead
 - Create `OffTheShelfApp` component to share between `web` and `gallery` modes
 - Add responsive versions of `AboutModal` and `BookCardModal`
+- Add header for `web` mode
 - Create `SocialMetaHead` component for social meta tags
 - Add `ShareBox` component
 - Add script to save all book data from API. Use this data on first load to improve performance.
+- Improve `idleTimer` behaviour
+- Use optimised Cloudinary jpgs rather than large pngs
 
 ## [1.0.6] - 2019-11-11
 
