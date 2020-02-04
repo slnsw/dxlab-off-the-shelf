@@ -1,3 +1,5 @@
+import pkg from '../package.json';
+
 // Durations
 export const IS_INTERVAL_ENABLED = true;
 export const IDLE_TIMEOUT =
@@ -21,3 +23,5 @@ export const HAS_SPINES_PROBABILITY = 0.5; // 1 = always, 0 = never
 
 export const SCROLL_RANGE_MIN = 3;
 export const SCROLL_RANGE_MAX = 9;
+
+export const VERSION = pkg.version;

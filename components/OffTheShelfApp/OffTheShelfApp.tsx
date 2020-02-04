@@ -308,6 +308,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         <Header
           basePathnameHref={basePathnameHref}
           basePathnameAs={basePathnameAs}
+          isRandomButtonDisabled={isRandomising}
           onRandomClick={reRandomiseBooks}
         ></Header>
       )}

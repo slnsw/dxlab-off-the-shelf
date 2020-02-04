@@ -9,6 +9,7 @@ import css from './Header.scss';
 type Props = {
   basePathnameHref?: string;
   basePathnameAs?: string;
+  isRandomButtonDisabled?: boolean;
   onRandomClick: Function;
   className?: string;
 };
@@ -16,6 +17,7 @@ type Props = {
 const Header: React.FunctionComponent<Props> = ({
   basePathnameHref,
   basePathnameAs,
+  isRandomButtonDisabled = false,
   onRandomClick,
   className,
 }) => {
@@ -40,9 +42,14 @@ const Header: React.FunctionComponent<Props> = ({
 
       <>
         <CTAButton
-          onClick={onRandomClick}
-          className={[css.link, css.randomButton].join(' ')}
+          className={[
+            css.link,
+            css.randomButton,
+            isRandomButtonDisabled ? css.randomButtonDisabled : '',
+          ].join(' ')}
           size="sm"
+          disabled={isRandomButtonDisabled}
+          onClick={onRandomClick}
         >
           Randomise
         </CTAButton>
