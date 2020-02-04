@@ -27,12 +27,12 @@ export const createIdleTimer = (
     }
   };
 
-  const reset = () => {
+  const reset = (e) => {
     clearTimeout(timeout);
     timeout = setTimeout(onUserIdle, duration);
 
     if (typeof onReset === 'function') {
-      onReset();
+      onReset(e);
     }
 
     if (hasLogs) {

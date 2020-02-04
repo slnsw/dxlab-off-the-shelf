@@ -47,7 +47,6 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
   const enablePrevBookId = mode === 'gallery';
   const hasHeader = mode === 'web';
-  // const enableIdleTimer = mode === 'gallery';
 
   // Book Modal
   const [initialModalSize, setInitialModalSize] = React.useState();
@@ -69,6 +68,9 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
   // Loader
   const [isLoaderActive, setIsLoaderActive] = React.useState(false);
+
+  // Randomising
+  const [isRandomising, setIsRandomising] = React.useState(false);
 
   const bookId = query && query.id ? query.id : null;
   const prevBookId = React.useRef(bookId);
@@ -114,11 +116,9 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
     }
 
     if (mode === 'web') {
-      // web version
       const idleTimer = createIdleTimer(
         () => {
           if (!(bookId || isAboutModalActive)) {
-            // setIdleLoopCommandIndex(35);
             setIsIdleLoopActive(true);
           }
         },
@@ -202,7 +202,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
     null,
     null,
     () => {
-      console.log('idleLoopCommand', 'hide books');
+      console.log('idleLoopCommand', 'hide books', 'outro');
 
       setIsShelfIntervalActive(false);
       setAreShelvesActive(false);
@@ -271,7 +271,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   // Handlers
   // --------------------------------------------------------------------------
 
-  const reRandomiseBooks = () => {
+  const reRandomiseBooks = (e) => {
+    setIsRandomising(true);
     // Show loader
     setIsLoaderActive(true);
     // Stop books from scrolling
@@ -284,18 +285,14 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
     setIsLogoActive(false);
 
     setTimeout(() => {
+      setIsRandomising(false);
       setIsLoaderActive(false);
       setIsShelfIntervalActive(true);
       setAreShelvesActive(true);
-    }, configs.SHUFFLE_TIMEOUT + 1800);
+    }, configs.SHUFFLE_TIMEOUT + 2500);
   };
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
-    // Router.push(
-    //   `${basePathnameHref}/book/[id]`,
-    //   `${basePathnameAs}/book/${id}`,
-    // );
-
     setInitialModalSize(e.target.getBoundingClientRect());
     setInitialModalImageUrl(imageUrl);
   };
@@ -365,7 +362,8 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         position={position}
         basePathnameHref={basePathnameHref}
         basePathnameAs={basePathnameAs}
-        isActive={areShelvesActive}
+        // While randomising, ensure shelves aren't active
+        isActive={isRandomising ? false : areShelvesActive}
         isIntervalActive={isIntervalEnabled && isShelfIntervalActive}
         booksTotal={booksTotal}
         onBookClick={handleBookCardClick}
