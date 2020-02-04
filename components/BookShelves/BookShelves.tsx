@@ -93,9 +93,9 @@ const BookShelves: React.FunctionComponent<Props> = ({
     }, configs.SHUFFLE_TIMEOUT + 1500);
   }, [isActive]);
 
-  React.useEffect(() => {
-    console.log('isActive changed in BookShelves!!', isActive);
-  }, [isActive]);
+  // React.useEffect(() => {
+  //   console.log('isActive changed in BookShelves!!', isActive);
+  // }, [isActive]);
 
   React.useEffect(() => {
     // now split them across 3 shelves...

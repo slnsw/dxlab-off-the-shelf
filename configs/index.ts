@@ -2,6 +2,7 @@
 export const IS_INTERVAL_ENABLED = true;
 export const IDLE_TIMEOUT =
   (process.env.IDLE_TIMEOUT && parseInt(process.env.IDLE_TIMEOUT, 10)) || 45000;
+export const WEB_IDLE_TIMEOUT = 15000;
 export const LOGO_TIMEOUT = 25000;
 export const TIME_BETWEEN_SCROLLS = 11000;
 export const SCROLL_TIME = 8000;

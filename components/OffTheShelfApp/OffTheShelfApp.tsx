@@ -47,7 +47,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
 
   const enablePrevBookId = mode === 'gallery';
   const hasHeader = mode === 'web';
-  const enableIdleTimer = mode === 'gallery';
+  // const enableIdleTimer = mode === 'gallery';
 
   // Book Modal
   const [initialModalSize, setInitialModalSize] = React.useState();
@@ -81,7 +81,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
    * Set idle timer to return to home after timeout.
    */
   React.useEffect(() => {
-    if (enableIdleTimer) {
+    if (mode === 'gallery') {
       const idleTimer = createIdleTimer(
         () => {
           // Callback to run after user hasn't used screen for a while
@@ -112,9 +112,37 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
         idleTimer.stop();
       };
     }
+    // } else {
+    //   // web version
+    //   const idleTimer = createIdleTimer(
+    //     () => {
+    //       if (!(bookId || isAboutModalActive)) {
+    //         setIdleLoopCommandIndex(35);
+    //         setIsIdleLoopActive(true);
+    //       }
+    //     },
+    //     configs.WEB_IDLE_TIMEOUT,
+    //     {
+    //       onReset: () => {
+    //         setIsLogoActive(false);
+    //         setAreShelvesActive(true);
+
+    //         if (isIdleLoopActive) {
+    //           setIsIdleLoopActive(false);
+    //         }
+    //       },
+    //     },
+    //   );
+
+    //   idleTimer.start();
+
+    //   return () => {
+    //     idleTimer.stop();
+    //   };
+    // }
 
     return () => {};
-  }, [bookId, isAboutModalActive, enableIdleTimer]);
+  }, [bookId, isAboutModalActive, mode]);
 
   /*
    * Idle loop with commands that run in a sequence
@@ -184,7 +212,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   useInterval(
     () => {
       const command = idleLoopCommands[idleLoopCommandIndex];
-
+      console.log(`Idle loop: ${idleLoopCommandIndex}`);
       if (typeof command === 'function') {
         command();
       }
@@ -204,12 +232,21 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
    */
   React.useEffect(() => {
     setIsShelfIntervalActive(!isModalActive);
+    setIsIdleLoopActive(!isModalActive);
 
     if (isModalActive) {
       // Store book id so AboutModal can remember to go back to it
       prevBookId.current = bookId;
     }
   }, [isModalActive, isIntervalEnabled]);
+
+  /*
+   * Take care of About modal
+   */
+  React.useEffect(() => {
+    setIsShelfIntervalActive(!isAboutModalActive);
+    setIsIdleLoopActive(!isAboutModalActive);
+  }, [isAboutModalActive]);
 
   /*
    * Ensure intervals don't run while page is off screen
