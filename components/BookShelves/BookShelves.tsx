@@ -47,8 +47,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
   // Fetch books data
   const { books: booksOnly, loading } = useBooksData();
   const shuffleBooks = () => {
-    console.log('Shuffle books', position);
-
     const subset = booksTotal;
     const halfWay = Math.floor(booksOnly.length / 2);
 
@@ -92,7 +90,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
       return () => {
         clearTimeout(timeout);
       };
-    }, configs.SHUFFLE_TIMEOUT);
+    }, configs.SHUFFLE_TIMEOUT + 1500);
   }, [isActive]);
 
   React.useEffect(() => {

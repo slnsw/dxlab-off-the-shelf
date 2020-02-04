@@ -83,14 +83,14 @@ const BookShelf: React.FunctionComponent<Props> = ({
 
   React.useEffect(() => {
     if (scrollToItem.current) {
-      console.log('stopping scroll');
+      // console.log('stopping scroll');
       scrollToItem.current.stop();
     }
   }, [isActive]);
 
-  React.useEffect(() => {
-    console.log('isActive changed in Book Shelf #', isActive);
-  }, [isActive]);
+  // React.useEffect(() => {
+  //   console.log('isActive changed in Book Shelf #', isActive);
+  // }, [isActive]);
 
   React.useEffect(() => {
     if (typeof onRender === 'function') {
@@ -181,7 +181,10 @@ const BookShelf: React.FunctionComponent<Props> = ({
       {books
         .filter(
           (book) =>
-            book.sizes && book.sizes.medium && book.sizes.medium.sourceUrl,
+            height &&
+            book.sizes &&
+            book.sizes.medium &&
+            book.sizes.medium.sourceUrl,
         )
         .map((book, i) => {
           const randomVariation = book.id % 22;

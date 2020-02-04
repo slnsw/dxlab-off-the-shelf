@@ -254,7 +254,7 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
       setIsLoaderActive(false);
       setIsShelfIntervalActive(true);
       setAreShelvesActive(true);
-    }, configs.SHUFFLE_TIMEOUT + 1000);
+    }, configs.SHUFFLE_TIMEOUT + 1800);
   };
 
   const handleBookCardClick = (e, { id, title, imageUrl }) => {
