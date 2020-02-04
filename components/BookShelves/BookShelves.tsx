@@ -93,10 +93,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
     }, configs.SHUFFLE_TIMEOUT + 1500);
   }, [isActive]);
 
-  // React.useEffect(() => {
-  //   console.log('isActive changed in BookShelves!!', isActive);
-  // }, [isActive]);
-
   React.useEffect(() => {
     // now split them across 3 shelves...
     const aThirdOfTheBooks = Math.floor(books.length / 3);
@@ -113,16 +109,11 @@ const BookShelves: React.FunctionComponent<Props> = ({
       const currentShelf = shelves[currentShelfIndex];
       const currentBooksInView = allBooksInView[currentShelfIndex];
 
-      // console.log('Current book: ', currentBookIndex);
-
       if (!currentBooksInView.includes(currentShelf[currentBookIndex].id)) {
         currentBookIndex = currentShelf.findIndex((value) => {
           return value.id === currentBooksInView[0];
         });
       }
-
-      // console.log('Current book after in-view check: ', currentBookIndex);
-      // console.log(currentBooksInView);
 
       const amountToChange =
         Math.floor(
@@ -158,7 +149,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
         'to',
         newCurrentBook,
       );
-      // console.log('isIntervalActive? ', isIntervalActive);
+
       setCurrentBooks([
         currentShelfIndex === 0 ? newCurrentBook : currentBooks[0],
         currentShelfIndex === 1 ? newCurrentBook : currentBooks[1],
@@ -171,10 +162,6 @@ const BookShelves: React.FunctionComponent<Props> = ({
     configs.TIME_BETWEEN_SCROLLS,
     isIntervalActive,
   );
-
-  React.useEffect(() => {
-    console.log('BookShelves - isIntervalActive', isIntervalActive);
-  }, [isIntervalActive]);
 
   const hasHeader = mode === 'web';
 

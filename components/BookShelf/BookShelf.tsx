@@ -58,8 +58,6 @@ const BookShelf: React.FunctionComponent<Props> = ({
   React.useEffect(() => {
     const book = books[scrollToBook];
 
-    // console.log(scrollToItem.current && scrollToItem.current.stop());
-
     if (book && isActive) {
       const bookId = books[scrollToBook].id;
       const bookNode = document.getElementById(`bookCard-${bookId}`);
@@ -83,14 +81,9 @@ const BookShelf: React.FunctionComponent<Props> = ({
 
   React.useEffect(() => {
     if (scrollToItem.current) {
-      // console.log('stopping scroll');
       scrollToItem.current.stop();
     }
   }, [isActive]);
-
-  // React.useEffect(() => {
-  //   console.log('isActive changed in Book Shelf #', isActive);
-  // }, [isActive]);
 
   React.useEffect(() => {
     if (typeof onRender === 'function') {
@@ -106,7 +99,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
   const handleBookCardRender = (inView, entry, bookId) => {
     // Check if already added to local state array `booksInView`
     const inBooksInView = booksInView.includes(bookId);
-    // console.log(booksInView);
+
     if (inView && inBooksInView === false) {
       // Append if not already in
       setBooksInView([...booksInView, bookId]);

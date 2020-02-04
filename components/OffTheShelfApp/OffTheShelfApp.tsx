@@ -213,7 +213,6 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
   useInterval(
     () => {
       const command = idleLoopCommands[idleLoopCommandIndex];
-      console.log(`Idle loop: ${idleLoopCommandIndex}`);
       if (typeof command === 'function') {
         command();
       }
@@ -254,10 +253,6 @@ const OffTheShelfApp: React.FunctionComponent<Props> = ({
    */
   useDocumentVisibility((e) => {
     const document = e.target as HTMLDocument;
-
-    // console.log(document.hidden, document.visibilityState);
-    // console.log('Is Int Enabled?: ', isIntervalEnabled);
-    // console.log(isShelfIntervalActive);
 
     if (isIntervalEnabled) {
       if (document.hidden || document.visibilityState === 'hidden') {

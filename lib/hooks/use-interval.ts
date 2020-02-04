@@ -19,11 +19,9 @@ function useInterval(callback, delay, isActive = true) {
     if (delay !== null) {
       if (isActive) {
         id = setInterval(tick, delay);
-        // console.log('Start interval', id, 'called by ', calledBy);
       }
 
       return () => {
-        // console.log('Clear interval', id, 'called by', calledBy);
         clearInterval(id);
       };
     }

@@ -12,6 +12,7 @@ import ShareBox from '../ShareBox';
 
 import { buildHeadTitle } from '../../lib';
 import useBookData from '../../lib/hooks/use-book-data';
+import { dedupeByField } from '../../lib/dedupe';
 
 import css from './BookCardModal.scss';
 import SocialMetaHead from '../SocialMetaHead';
@@ -201,7 +202,10 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                                 {(() => {
                                   switch (row.field) {
                                     case 'holdings':
-                                      return value.map((holding, i) => {
+                                      return dedupeByField(
+                                        value,
+                                        'subLocation',
+                                      ).map((holding, i) => {
                                         return (
                                           <p
                                             key={`${holding.subLocation}-${i}`}
