@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.1] - 2020-02-04
 
 - Make random button animate during randomisation
+- Add config to web mode logs
 
 ## [1.1.0] - 2020-01-20
 
