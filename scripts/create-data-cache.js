@@ -42,7 +42,7 @@ function createApolloClient(initialState = {}) {
     ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
     link: new HttpLink({
       // uri: 'https://dxlab-graphql.now.sh/graphql',
-      uri: process.env.GRAPHQL_URL,
+      uri: process.env.OFF_THE_SHELF_GRAPHQL_URL,
       credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
       fetch,
     }),
