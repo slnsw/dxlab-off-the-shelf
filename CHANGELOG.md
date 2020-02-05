@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2020-02-05
+
+- Fix `gallery` mode routing issues
+- Use larger images for BookCard in `gallery` mode
+- Update `data.json` file
+
 ## [1.1.1] - 2020-02-04
 
 - Make random button animate during randomisation
