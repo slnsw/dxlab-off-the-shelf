@@ -18,6 +18,7 @@ type Props = {
   basePathnameHref?: string;
   basePathnameAs?: string;
   className?: string;
+  mode?: 'web' | 'gallery';
   isActive?: boolean;
   onClick?: Function;
   onRender?: Function;
@@ -31,6 +32,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
   basePathnameHref,
   basePathnameAs,
   className,
+  mode,
   isActive = false,
   onClick,
   onRender,
@@ -193,7 +195,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
             <React.Fragment key={book.id}>
               <BookCard
                 id={book.id}
-                urlHref={`${basePathnameAs}/book/[id]`}
+                urlHref={`${basePathnameHref}/book/[id]`}
                 urlAs={`${basePathnameAs}/book/${book.id}`}
                 // index={i}
                 title={book.title}
@@ -208,6 +210,7 @@ const BookShelf: React.FunctionComponent<Props> = ({
                 scrollDirection={scrollDirection}
                 scrollDelta={scrollDeltaRef.current}
                 containerElement={node}
+                mode={mode}
                 onClick={onClick}
                 onRender={handleBookCardRender}
               />

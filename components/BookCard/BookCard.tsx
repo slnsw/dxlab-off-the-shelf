@@ -23,6 +23,7 @@ type Props = {
   scrollDirection?: 'left' | 'right';
   scrollDelta?: number;
   containerElement?: HTMLElement;
+  mode: 'gallery' | 'web';
   className?: string;
   onClick?: Function;
   onRender?: Function;
@@ -43,6 +44,7 @@ const BookCard: React.FunctionComponent<Props> = ({
   scrollDirection = null,
   scrollDelta = 0,
   // containerElement,
+  mode,
   className,
   onClick,
   onRender,
@@ -62,7 +64,9 @@ const BookCard: React.FunctionComponent<Props> = ({
   // becomes
   // https://res.cloudinary.com/dxlab/image/upload/h_512,f_jpg,q_60,b_rgb:060606/off-the-shelf/2019/10/IMG_20190812_141549-final-677x1024.png
 
-  const cloudImgUrl = `https://res.cloudinary.com/dxlab/image/upload/h_512,f_jpg,q_60,b_rgb:060606/off-the-shelf/${imageUrl.slice(
+  const srcImageHeight = mode === 'gallery' ? 1024 : 512;
+
+  const cloudImgUrl = `https://res.cloudinary.com/dxlab/image/upload/h_${srcImageHeight},f_jpg,q_60,b_rgb:060606/off-the-shelf/${imageUrl.slice(
     61,
   )}`;
 

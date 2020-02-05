@@ -189,6 +189,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             basePathnameAs={basePathnameAs}
             basePathnameHref={basePathnameHref}
             isActive={isActive}
+            mode={mode}
             className={css.bookShelf}
             onClick={onBookClick}
             onRender={(booksInView) => {
@@ -203,6 +204,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             basePathnameAs={basePathnameAs}
             basePathnameHref={basePathnameHref}
             isActive={isActive}
+            mode={mode}
             className={css.bookShelf}
             onClick={onBookClick}
             onRender={(booksInView) => {
@@ -217,6 +219,7 @@ const BookShelves: React.FunctionComponent<Props> = ({
             basePathnameAs={basePathnameAs}
             basePathnameHref={basePathnameHref}
             isActive={isActive}
+            mode={mode}
             className={css.bookShelf}
             onClick={onBookClick}
             onRender={(booksInView) => {
