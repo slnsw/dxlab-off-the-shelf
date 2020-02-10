@@ -5,6 +5,10 @@ import { NextPageContext } from 'next';
  * @param nextPageContext
  */
 const checkPageSecurity = ({ req }: NextPageContext): boolean => {
+  if (!req) {
+    return true;
+  }
+
   // --------------------------------------------------------------------------
   // EDIT: Add whitelisted ips or hosts below:
   const allowedIps = [process.env.OFF_THE_SHELF_CLIENT_IP];
