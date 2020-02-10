@@ -6,6 +6,7 @@ import OffTheShelfApp from '../components/OffTheShelfApp';
 import { withApollo } from '../lib/apollo';
 import { createHealthCheck } from '../lib/health-check';
 import * as configs from '../configs';
+import checkPageSecurity from '../lib/check-page-security';
 
 const GalleryPage = ({ query }) => {
   const position = query && query.position ? query.position : null;
@@ -55,7 +56,24 @@ const GalleryPage = ({ query }) => {
   );
 };
 
-GalleryPage.getInitialProps = ({ query, pathname, res }) => {
+const redirectUrl = 'https://dxlab.sl.nsw.gov.au/off-the-shelf';
+
+GalleryPage.getInitialProps = (context) => {
+  const { query, pathname, res } = context;
+
+  if (checkPageSecurity(context) === false) {
+    if (res) {
+      res.writeHead(302, {
+        Location: redirectUrl,
+      });
+      res.end();
+    } else {
+      Router.push(redirectUrl);
+    }
+
+    return {};
+  }
+
   if (pathname === '/gallery') {
     if (res) {
       res.writeHead(302, {
