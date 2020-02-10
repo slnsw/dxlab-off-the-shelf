@@ -35,6 +35,9 @@ OFF_THE_SHELF_FB_APP_ID=XXXXXX
 OFF_THE_SHELF_GTM_ID=GTM-XXXXXXX
 OFF_THE_SHELF_LEFT_HEALTHCHECK_URL=https://hc-ping.com/XXXXXXXXXXXXXXXXXXXXX
 OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL=https://hc-ping.com/XXXXXXXXXXXXXXXXXXXXX
+
+# The /gallery route only allows access to this IP. In Zeit Now, it is set as the public IP of the two gallery PCs
+OFF_THE_SHELF_CLIENT_IP=XXXXXX
 ```
 
 ### Staging and Production
