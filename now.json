@@ -6,17 +6,23 @@
     { "src": "/off-the-shelf/assets/_next/(.*)", "dest": "/_next/$1" }
   ],
   "env": {
+    "OFF_THE_SHELF_GRAPHQL_URL": "@off_the_shelf_graphql_url",
     "OFF_THE_SHELF_GTM_ID": "@off_the_shelf_gtm_id",
+    "OFF_THE_SHELF_BASE_URL": "@off_the_shelf_base_url",
+    "OFF_THE_SHELF_FB_APP_ID": "@off_the_shelf_fb_app_id",
+    "OFF_THE_SHELF_CLIENT_IP": "@off_the_shelf_client_ip",
     "OFF_THE_SHELF_LEFT_HEALTHCHECK_URL": "@off_the_shelf_left_healthcheck_url",
-    "OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL": "@off_the_shelf_right_healthcheck_url",
-    "OFF_THE_SHELF_CLIENT_IP": "@off_the_shelf_client_ip"
+    "OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL": "@off_the_shelf_right_healthcheck_url"
   },
   "build": {
     "env": {
+      "OFF_THE_SHELF_GRAPHQL_URL": "@off_the_shelf_graphql_url",
       "OFF_THE_SHELF_GTM_ID": "@off_the_shelf_gtm_id",
+      "OFF_THE_SHELF_BASE_URL": "@off_the_shelf_base_url",
+      "OFF_THE_SHELF_FB_APP_ID": "@off_the_shelf_fb_app_id",
+      "OFF_THE_SHELF_CLIENT_IP": "@off_the_shelf_client_ip",
       "OFF_THE_SHELF_LEFT_HEALTHCHECK_URL": "@off_the_shelf_left_healthcheck_url",
-      "OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL": "@off_the_shelf_right_healthcheck_url",
-      "OFF_THE_SHELF_CLIENT_IP": "@off_the_shelf_client_ip"
+      "OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL": "@off_the_shelf_right_healthcheck_url"
     }
   }
 }
