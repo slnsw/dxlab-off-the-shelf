@@ -126,14 +126,23 @@ const BookCardModal: React.FunctionComponent<Props> = ({
               isActive={true}
               className={css.imageBorders}
             />
-
-            <motion.img
-              src={imageUrl}
-              alt={book.title}
-              className={css.image}
-              animate={{ x: 0 }}
-              transition={{ from: '100%', type: 'spring', damping: 15 }}
-            />
+            {mode === 'gallery' ? (
+              <motion.img
+                src={imageUrl}
+                alt={book.title}
+                className={css.image}
+                animate={{ x: 0 }}
+                transition={{ from: '100%', type: 'spring', damping: 15 }}
+              />
+            ) : (
+              <img
+                src={imageUrl}
+                alt={book.title}
+                className={css.image}
+                animate={{ x: 0 }}
+                transition={{ from: '100%', type: 'spring', damping: 15 }}
+              />
+            )}
           </div>
         )}
 
