@@ -60,7 +60,6 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
     return null;
   }
-
   const { primoRecord } = book;
   const record = primoRecord || {};
   const { creator, description } = record;
