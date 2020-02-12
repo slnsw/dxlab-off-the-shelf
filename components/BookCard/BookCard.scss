@@ -4,6 +4,7 @@
   position: relative;
   display: block;
   margin-right: $baseline-2;
+  cursor: pointer;
 
   @include media-sm {
     margin-right: $gutter-desktop;
