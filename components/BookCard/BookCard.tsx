@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 
@@ -10,8 +10,8 @@ import css from './BookCard.scss';
 
 type Props = {
   id: number;
-  urlHref: string;
-  urlAs: string;
+  // urlHref: string;
+  // urlAs: string;
   // index: number;
   title: string;
   imageUrl: string;
@@ -33,8 +33,8 @@ const BookCard: React.FunctionComponent<Props> = ({
   id,
   // index,
   title,
-  urlHref,
-  urlAs,
+  // urlHref,
+  // urlAs,
   imageUrl,
   imageWidth = 0,
   imageHeight = 0,
@@ -96,55 +96,58 @@ const BookCard: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <Link href={urlHref} as={urlAs}>
-      <a>
-        <motion.article
-          id={`bookCard-${id}`}
-          className={[css.bookCard, className || ''].join(' ')}
-          animate={{
-            rotate,
-          }}
-          transition={{
-            delay: Math.random() * 0.2,
-            duration: 0.4,
-            type: 'spring',
-            damping: isScrolling ? 10 : 4,
-            stiffness: 300,
-          }}
-          style={{
-            originX,
-            originY: 1,
-          }}
-          ref={ref}
-        >
-          <motion.img
-            src={cloudImgUrl}
-            alt={title}
-            className={css.image}
-            animate={{
-              y: isActive ? 0 : imageHeight + gutter,
-            }}
-            transition={{
-              delay: Math.random() * 0.4 + animationDelay,
-              type: 'spring',
-              damping: 20,
-              stiffness: 50,
-              mass: 2,
-            }}
-            initial={false}
-            style={{
-              width: imageWidth,
-              height: imageHeight,
-            }}
-            onClick={(e) => {
-              if (typeof onClick === 'function') {
-                onClick(e, { id, title, imageUrl });
-              }
-            }}
-          />
-        </motion.article>
-      </a>
-    </Link>
+    // We had to remove this <Link> from wrapping the book as after about ten minutes
+    // it slowed down the scrolling and made it randomly jerky and broken. Downside of
+    // this is that keyboard navigation of the content is not possible.
+    // <Link href={urlHref} as={urlAs}>
+    //   <a>
+    <motion.article
+      id={`bookCard-${id}`}
+      className={[css.bookCard, className || ''].join(' ')}
+      animate={{
+        rotate,
+      }}
+      transition={{
+        delay: Math.random() * 0.2,
+        duration: 0.4,
+        type: 'spring',
+        damping: isScrolling ? 10 : 4,
+        stiffness: 300,
+      }}
+      style={{
+        originX,
+        originY: 1,
+      }}
+      ref={ref}
+    >
+      <motion.img
+        src={cloudImgUrl}
+        alt={title}
+        className={css.image}
+        animate={{
+          y: isActive ? 0 : imageHeight + gutter,
+        }}
+        transition={{
+          delay: Math.random() * 0.4 + animationDelay,
+          type: 'spring',
+          damping: 20,
+          stiffness: 50,
+          mass: 2,
+        }}
+        initial={false}
+        style={{
+          width: imageWidth,
+          height: imageHeight,
+        }}
+        onClick={(e) => {
+          if (typeof onClick === 'function') {
+            onClick(e, { id, title, imageUrl });
+          }
+        }}
+      />
+    </motion.article>
+    //   </a>
+    // </Link>
   );
 };
 
