@@ -3,6 +3,7 @@
 All books published in NSW, and many from beyond, live in your State Library — millions of them in a maze of shelves underground. A digital experience in the galleries, Off the Shelf encourages the reader to virtually browse the Library’s book collection and uncover the many intriguing, perplexing and playful volumes waiting to be read. From bodice rippers to banksia trees, cats to catafalques, turnips to teleology — whatever you’re into, we’ve got a book for it.
 
 Visit the website: [dxlab.sl.nsw.gov.au/off-the-shelf](https://dxlab.sl.nsw.gov.au/off-the-shelf)
+Read the blog post: [https://dxlab.sl.nsw.gov.au/blog/off-the-shelf-online](https://dxlab.sl.nsw.gov.au/blog/off-the-shelf-online)
 
 > This repo is for reference only! A custom GraphQL server is required to run this app properly. Feel free to check out the code, but please note it is highly experimental in nature.
 
