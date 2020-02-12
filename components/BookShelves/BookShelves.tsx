@@ -17,8 +17,8 @@ type Props = {
   isActive?: boolean;
   isIntervalActive?: boolean;
   position?: 'left' | 'right' | 'test';
-  basePathnameAs: string;
-  basePathnameHref: string;
+  // basePathnameAs: string;
+  // basePathnameHref: string;
   booksTotal?: number;
   mode: 'gallery' | 'web';
   className?: string;
@@ -29,8 +29,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
   isActive = false,
   isIntervalActive = false,
   position = 'left',
-  basePathnameAs,
-  basePathnameHref,
+  // basePathnameAs,
+  // basePathnameHref,
   booksTotal = configs.NUMBER_OF_BOOKS_TO_DISPLAY,
   mode = 'gallery',
   className,
@@ -186,8 +186,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
             scrollToBook={currentBooks[0]}
             index={0}
             id="bookShelf-0"
-            basePathnameAs={basePathnameAs}
-            basePathnameHref={basePathnameHref}
+            // basePathnameAs={basePathnameAs}
+            // basePathnameHref={basePathnameHref}
             isActive={isActive}
             mode={mode}
             className={css.bookShelf}
@@ -201,8 +201,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
             scrollToBook={currentBooks[1]}
             index={1}
             id="bookShelf-1"
-            basePathnameAs={basePathnameAs}
-            basePathnameHref={basePathnameHref}
+            // basePathnameAs={basePathnameAs}
+            // basePathnameHref={basePathnameHref}
             isActive={isActive}
             mode={mode}
             className={css.bookShelf}
@@ -216,8 +216,8 @@ const BookShelves: React.FunctionComponent<Props> = ({
             scrollToBook={currentBooks[2]}
             index={2}
             id="bookShelf-2"
-            basePathnameAs={basePathnameAs}
-            basePathnameHref={basePathnameHref}
+            // basePathnameAs={basePathnameAs}
+            // basePathnameHref={basePathnameHref}
             isActive={isActive}
             mode={mode}
             className={css.bookShelf}
