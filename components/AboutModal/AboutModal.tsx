@@ -106,7 +106,7 @@ const AboutModal: React.FunctionComponent<Props> = ({
                   <a href="https://www.sl.nsw.gov.au/exhibitions/shelf">
                     exhibition
                   </a>{' '}
-                  is currently on display in the galleries, until March 22.{' '}
+                  is currently on display in the galleries, until the 7th April.{' '}
                   <a href="https://www.sl.nsw.gov.au/exhibitions/shelf">
                     https://www.sl.nsw.gov.au/exhibitions/shelf
                   </a>
