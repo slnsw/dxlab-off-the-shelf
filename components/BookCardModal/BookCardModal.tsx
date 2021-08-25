@@ -1,4 +1,5 @@
 import * as React from 'react';
+import fetch from 'isomorphic-unfetch';
 // import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -11,7 +12,7 @@ import Loader from '../Loader';
 import ShareBox from '../ShareBox';
 
 import { buildHeadTitle } from '../../lib';
-import useBookData from '../../lib/hooks/use-book-data';
+// import useBookData from '../../lib/hooks/use-book-data';
 import { dedupeByField } from '../../lib/dedupe';
 
 import css from './BookCardModal.scss';
@@ -43,32 +44,74 @@ const BookCardModal: React.FunctionComponent<Props> = ({
   className,
   onClose,
 }) => {
-  const {
-    loading,
-    error,
-    book = {
-      primoRecord: {},
-      sizes: {
-        medium: null,
-        large: null,
-      },
+  // const {
+  //   loading,
+  //   error,
+  //   book = {
+  //     primoRecord: {},
+  //     sizes: {
+  //       medium: null,
+  //       large: null,
+  //     },
+  //   },
+  // } = useBookData(id);
+
+  const [books, setBooks] = React.useState([]);
+  const [book, setBook] = React.useState({
+    primoRecord: {},
+    sizes: {
+      medium: null,
+      large: null,
     },
-  } = useBookData(id);
+  });
+  const [primoRecord, setPrimoRecord] = React.useState({});
+  const [loading, setLoading] = React.useState(true);
+  // const error = !id;
+  React.useEffect(() => {
+    fetch('/off-the-shelf/data/bookData.json')
+      .then((r) => r.json())
+      .then((data) => {
+        setBooks(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
 
-  if (error) {
-    console.log(error);
+  React.useEffect(() => {
+    const temp = books.filter((b) => b.id === id);
+    console.log('book data: ', temp[0]);
+    setBook(
+      temp[0] || {
+        primoRecord: {},
+        sizes: {
+          medium: null,
+          large: null,
+        },
+      },
+    );
+    console.log(`${books.length} items retrieved from bookData.json`);
+  }, [books]);
 
-    return null;
-  }
+  React.useEffect(() => {
+    setPrimoRecord(book && book.primoRecord);
+  }, [book]);
 
-  const { primoRecord } = book;
-  const record = primoRecord || {};
-  const { creator, description } = record;
+  // if (error) {
+  //   console.log('error:', error);
+  //   return null;
+  // }
+
+  // const { primoRecord } = book;
+  // const record = primoRecord || {};
+  // const { creator, description } = record;
 
   const showExtraContent = mode === 'gallery';
 
   const rawImageUrl =
-    (book.sizes.medium && book.sizes.medium.sourceUrl) || initialImageUrl;
+    (book && book.sizes && book.sizes.medium && book.sizes.medium.sourceUrl) ||
+    initialImageUrl;
 
   // To do magic Cloudinary stuff (resize image to 1024 tall, convert to MUCH smaller 60% JPG with same background colour as site):
   // https://newselfwales.dxlab.sl.nsw.gov.au/app/uploads/sites/3/2019/10/IMG_20190812_141549-final-677x1024.png
@@ -81,12 +124,19 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       'https://newselfwales.dxlab.sl.nsw.gov.au/app/uploads/sites/3',
       'https://res.cloudinary.com/dxlab/image/upload/h_1024,f_jpg,q_60,b_rgb:060606/off-the-shelf',
     );
-  const imageWidth = book.sizes.medium && book.sizes.medium.width;
-  const imageHeight = book.sizes.medium && book.sizes.medium.height;
+  const imageWidth =
+    book && book.sizes && book.sizes.medium && book.sizes.medium.width;
+  const imageHeight =
+    book && book.sizes && book.sizes.medium && book.sizes.medium.height;
 
-  const primoLink = primoRecord.id
-    ? `https://search.sl.nsw.gov.au/primo-explore/fulldisplay?docid=${primoRecord.id}&vid=SLNSW`
-    : null;
+  const primoLink =
+    primoRecord && primoRecord.id
+      ? `https://search.sl.nsw.gov.au/primo-explore/fulldisplay?docid=${primoRecord.id}&vid=SLNSW`
+      : null;
+
+  if (!id) {
+    return null;
+  }
 
   return (
     <Modal
@@ -96,17 +146,19 @@ const BookCardModal: React.FunctionComponent<Props> = ({
       onClose={onClose}
     >
       <SocialMetaHead
-        title={book.title}
-        description={description}
+        title={book && book.title}
+        description={
+          primoRecord && primoRecord.record && primoRecord.record.description
+        }
         imageUrl={imageUrl}
-        imageAlt={book.title}
+        imageAlt={book && book.title}
         imageWidth={imageWidth}
         imageHeight={imageHeight}
         baseUrl={process.env.OFF_THE_SHELF_BASE_URL}
       />
 
       <Head>
-        {book.title && (
+        {book && book.title && (
           <title>{buildHeadTitle(book.title)}</title>
 
           // NOTE: Not working for client-side navigation
@@ -129,7 +181,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
             {mode === 'gallery' ? (
               <motion.img
                 src={imageUrl}
-                alt={book.title}
+                alt={book && book.title}
                 className={css.image}
                 animate={{ x: 0 }}
                 transition={{ from: '100%', type: 'spring', damping: 15 }}
@@ -137,7 +189,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
             ) : (
               <img
                 src={imageUrl}
-                alt={book.title}
+                alt={book && book.title}
                 className={css.image}
                 animate={{ x: 0 }}
                 transition={{ from: '100%', type: 'spring', damping: 15 }}
@@ -175,14 +227,22 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                 }}
               >
                 <>
-                  <h1 dangerouslySetInnerHTML={{ __html: book.title }}></h1>
-                  {creator && <h2 className={css.creator}>{creator}</h2>}
+                  <h1
+                    dangerouslySetInnerHTML={{ __html: book && book.title }}
+                  ></h1>
+                  {primoRecord &&
+                    primoRecord.record &&
+                    primoRecord.record.creator && (
+                      <h2 className={css.creator}>{creator}</h2>
+                    )}
 
                   {mode === 'web' && <div className={css.headingDivider}></div>}
 
-                  {description && (
-                    <p className={css.description}>{description}</p>
-                  )}
+                  {primoRecord &&
+                    primoRecord.record &&
+                    primoRecord.record.description && (
+                      <p className={css.description}>{description}</p>
+                    )}
 
                   <div className={css.table}>
                     {primoRecord &&
@@ -228,15 +288,16 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                                     case 'subjects':
                                       return (
                                         <ul>
-                                          {book.primoRecord.subjects.map(
-                                            (subject, i) => {
-                                              return (
-                                                <li key={`${subject}-${i}`}>
-                                                  {subject}
-                                                </li>
-                                              );
-                                            },
-                                          )}
+                                          {book &&
+                                            book.primoRecord.subjects.map(
+                                              (subject, i) => {
+                                                return (
+                                                  <li key={`${subject}-${i}`}>
+                                                    {subject}
+                                                  </li>
+                                                );
+                                              },
+                                            )}
                                         </ul>
                                       );
                                     case 'callNumber':
@@ -274,8 +335,12 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
                   {mode === 'web' && (
                     <ShareBox
-                      title={book.title}
-                      text={description}
+                      title={book && book.title}
+                      text={
+                        primoRecord &&
+                        primoRecord.record &&
+                        primoRecord.record.description
+                      }
                       baseUrl={process.env.OFF_THE_SHELF_BASE_URL}
                       fbAppId={process.env.OFF_THE_SHELF_FB_APP_ID}
                       className={css.shareBox}
