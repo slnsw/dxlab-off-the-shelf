@@ -1,5 +1,4 @@
 /* eslint-disable */
-// https://github.com/zeit/next.js/blob/v9.0.7/examples/with-apollo/lib/apollo.js
 
 const { ApolloClient } = require('apollo-client');
 const { InMemoryCache } = require('apollo-cache-inmemory');
@@ -52,104 +51,123 @@ function createApolloClient(initialState = {}) {
 
 const client = initApolloClient();
 
-const BOOKS = /* GraphQL */ gql`
-  query getBooks($limit: Int!, $offset: Int!) {
+const BOOK = /* GraphQL */ gql`
+  query getBook($id: Int) {
     offTheShelf {
-      books(limit: $limit, offset: $offset) {
+      book(id: $id) {
         id
         title
         sizes {
-          thumbnail {
-            sourceUrl
-            width
-            height
-          }
           medium {
             sourceUrl
             width
             height
+          }
+          large {
+            sourceUrl
+            width
+            height
+          }
+        }
+        primoRecord {
+          id
+          callNumber
+          referenceCode
+          date
+          format
+          type
+          creator
+          description
+          subjects
+          topics
+          creationDate
+          isbn
+          dewey
+          publisher
+          language
+          notes
+          access
+          exhibitions
+          physicalDescription
+          accessConditions
+          history
+          source
+          copyright
+          personNames
+          holdings {
+            mainLocation
+            status
+            subLocation
           }
         }
       }
     }
   }
 `;
-
-const getData = async (limit, offset) => {
+const errIds = [];
+const getBookData = async (id) => {
+  // const hasId = Boolean(id);
   try {
     const result = await client.query({
-      query: BOOKS,
+      query: BOOK,
       variables: {
-        limit: limit,
-        offset: offset,
+        id,
       },
     });
 
     return result;
   } catch (e) {
     console.log(e);
-
+    // console.log('id', id);
+    errIds.push(id);
     return null;
   }
 };
 
-const createDataCache = async () => {
-  let offset = 0;
-  const data1 = await getData(100, offset);
-  const books1 =
-    data1 && data1.data.offTheShelf && data1.data.offTheShelf.books;
+const createBooksJsonFile = async () => {
+  let ids = [];
+  let output = [];
+  try {
+    const data = fs.readFileSync(
+      __dirname + '/../public/off-the-shelf/data/data.json',
+      'utf8',
+    );
 
-  offset = 100;
-  const data2 = await getData(100, offset);
-  const books2 =
-    data2 && data2.data.offTheShelf && data2.data.offTheShelf.books;
+    ids = JSON.parse(data).map((i) => {
+      return i.id;
+    });
+  } catch (err) {
+    console.error(err);
+  }
 
-  offset = 200;
-  const data3 = await getData(100, offset);
-  const books3 =
-    data3 && data3.data.offTheShelf && data3.data.offTheShelf.books;
-
-  offset = 300;
-  const data4 = await getData(100, offset);
-  const books4 =
-    data4 && data4.data.offTheShelf && data4.data.offTheShelf.books;
-
-  offset = 400;
-  const data5 = await getData(100, offset);
-  const books5 =
-    data5 && data5.data.offTheShelf && data5.data.offTheShelf.books;
-
-  offset = 500;
-  const data6 = await getData(100, offset);
-  const books6 =
-    data6 && data6.data.offTheShelf && data6.data.offTheShelf.books;
-
-  offset = 600;
-  const data7 = await getData(100, offset);
-  const books7 =
-    data7 && data7.data.offTheShelf && data7.data.offTheShelf.books;
-
-  const books = [
-    ...(books1 || []),
-    ...(books2 || []),
-    ...(books3 || []),
-    ...(books4 || []),
-    ...(books5 || []),
-    ...(books6 || []),
-    ...(books7 || []),
-  ];
+  for (let x = 0; x < ids.length; x++) {
+    // ids.map(async (id) => {
+    let id = ids[x];
+    console.log(id);
+    // if (id) {
+    const bookResposnse = await getBookData(id);
+    const book =
+      bookResposnse &&
+      bookResposnse.data.offTheShelf &&
+      bookResposnse.data.offTheShelf.book;
+    output.push(book);
+    // if (id == 1289) {
+    // console.log(output);
+    // }
+  }
+  // });
+  // console.log(output.length);
 
   fs.writeFile(
-    __dirname + '/../public/off-the-shelf/data/data.json',
-    JSON.stringify(books),
+    __dirname + '/../public/off-the-shelf/data/bookData.json',
+    JSON.stringify(output),
     function(err) {
       if (err) {
         return console.log(err);
       }
-      console.log(`The file was saved with ${books.length} items`);
+      console.log(`The file was saved with ${output.length} items`);
     },
   );
-  // console.log(books.length);
 };
 
-createDataCache();
+createBooksJsonFile();

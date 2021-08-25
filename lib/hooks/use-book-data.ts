@@ -70,7 +70,7 @@ const useBookData = (id: number) => {
   //   console.log(error);
   //   return null;
   // }
-
+  // console.log(book);
   return {
     loading,
     error,
