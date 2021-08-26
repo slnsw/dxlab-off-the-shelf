@@ -45,6 +45,16 @@ module.exports = {
     ],
     'linebreak-style': 0,
     'react-hooks/exhaustive-deps': 0,
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
   settings: {
     // Enable Typescript imports to be recognised
