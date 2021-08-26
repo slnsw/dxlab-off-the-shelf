@@ -58,13 +58,29 @@ const BookCardModal: React.FunctionComponent<Props> = ({
 
   const [books, setBooks] = React.useState([]);
   const [book, setBook] = React.useState({
-    primoRecord: {},
+    id: 0,
+    title: '',
+    primoRecord: {
+      id: '',
+      access: '',
+      accessConditions: '',
+      creator: '',
+      description: '',
+      subjects: [],
+    },
     sizes: {
       medium: null,
       large: null,
     },
   });
-  const [primoRecord, setPrimoRecord] = React.useState({});
+  const [primoRecord, setPrimoRecord] = React.useState({
+    id: '',
+    access: '',
+    accessConditions: '',
+    creator: '',
+    description: '',
+    subjects: [],
+  });
   const [loading, setLoading] = React.useState(true);
   // const error = !id;
   React.useEffect(() => {
@@ -84,7 +100,15 @@ const BookCardModal: React.FunctionComponent<Props> = ({
     console.log('book data: ', temp[0]);
     setBook(
       temp[0] || {
-        primoRecord: {},
+        id: 0,
+        title: '',
+        primoRecord: {
+          id: '',
+          access: '',
+          accessConditions: '',
+          record: '',
+          subjects: [],
+        },
         sizes: {
           medium: null,
           large: null,
@@ -147,9 +171,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
     >
       <SocialMetaHead
         title={book && book.title}
-        description={
-          primoRecord && primoRecord.record && primoRecord.record.description
-        }
+        description={primoRecord && primoRecord.description}
         imageUrl={imageUrl}
         imageAlt={book && book.title}
         imageWidth={imageWidth}
@@ -191,8 +213,8 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                 src={imageUrl}
                 alt={book && book.title}
                 className={css.image}
-                animate={{ x: 0 }}
-                transition={{ from: '100%', type: 'spring', damping: 15 }}
+                // animate={{ x: 0 }}
+                // transition={{ from: '100%', type: 'spring', damping: 15 }}
               />
             )}
           </div>
@@ -230,19 +252,15 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                   <h1
                     dangerouslySetInnerHTML={{ __html: book && book.title }}
                   ></h1>
-                  {primoRecord &&
-                    primoRecord.record &&
-                    primoRecord.record.creator && (
-                      <h2 className={css.creator}>{creator}</h2>
-                    )}
+                  {primoRecord && primoRecord.creator && (
+                    <h2 className={css.creator}>{primoRecord.creator}</h2>
+                  )}
 
                   {mode === 'web' && <div className={css.headingDivider}></div>}
 
-                  {primoRecord &&
-                    primoRecord.record &&
-                    primoRecord.record.description && (
-                      <p className={css.description}>{description}</p>
-                    )}
+                  {primoRecord && primoRecord.description && (
+                    <p className={css.description}>{primoRecord.description}</p>
+                  )}
 
                   <div className={css.table}>
                     {primoRecord &&
@@ -336,11 +354,7 @@ const BookCardModal: React.FunctionComponent<Props> = ({
                   {mode === 'web' && (
                     <ShareBox
                       title={book && book.title}
-                      text={
-                        primoRecord &&
-                        primoRecord.record &&
-                        primoRecord.record.description
-                      }
+                      text={primoRecord && primoRecord.description}
                       baseUrl={process.env.OFF_THE_SHELF_BASE_URL}
                       fbAppId={process.env.OFF_THE_SHELF_FB_APP_ID}
                       className={css.shareBox}
