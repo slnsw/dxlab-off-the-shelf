@@ -109,7 +109,7 @@ const BookCard: React.FunctionComponent<Props> = ({
       }}
       transition={{
         delay: Math.random() * 0.2,
-        duration: 0.4,
+        // duration: 0.4,
         type: 'spring',
         damping: isScrolling ? 10 : 4,
         stiffness: 300,
