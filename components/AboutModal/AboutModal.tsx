@@ -102,11 +102,11 @@ const AboutModal: React.FunctionComponent<Props> = ({
 
               {mode === 'web' && (
                 <p>
-                  This{' '}
+                  This experience was previously on display as an interactive{' '}
                   <a href="https://www.sl.nsw.gov.au/exhibitions/shelf">
                     exhibition
-                  </a>{' '}
-                  is currently on display in the galleries, until April 7.{' '}
+                  </a>
+                  .{' '}
                   <a href="https://www.sl.nsw.gov.au/exhibitions/shelf">
                     https://www.sl.nsw.gov.au/exhibitions/shelf
                   </a>
