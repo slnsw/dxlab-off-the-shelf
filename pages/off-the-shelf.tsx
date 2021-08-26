@@ -2,7 +2,7 @@ import React from 'react';
 
 import OffTheShelfApp from '../components/OffTheShelfApp';
 
-import { withApollo } from '../lib/apollo';
+// import { withApollo } from '../lib/apollo';
 import * as configs from '../configs';
 
 const OffTheShelfPage = ({ query }) => {
@@ -39,4 +39,4 @@ OffTheShelfPage.getInitialProps = ({ query, pathname }) => {
   };
 };
 
-export default withApollo(OffTheShelfPage);
+export default OffTheShelfPage;

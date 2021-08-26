@@ -3,7 +3,7 @@ import Router from 'next/router';
 
 import OffTheShelfApp from '../components/OffTheShelfApp';
 
-import { withApollo } from '../lib/apollo';
+// import { withApollo } from '../lib/apollo';
 import { createHealthCheck } from '../lib/health-check';
 import * as configs from '../configs';
 import checkPageSecurity from '../lib/check-page-security';
@@ -91,4 +91,4 @@ GalleryPage.getInitialProps = (context) => {
   };
 };
 
-export default withApollo(GalleryPage);
+export default GalleryPage;
