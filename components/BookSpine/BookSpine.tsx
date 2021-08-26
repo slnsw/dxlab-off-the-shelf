@@ -35,7 +35,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
   scrollDelta = 0,
   animationDelay = 0,
 }) => {
-  const [originX, setOriginX] = React.useState();
+  const [originX, setOriginX] = React.useState(0);
   const h = id % 5; // Math.floor(Math.random() * 5);
 
   const mediaQuery = useMediaQuery();
