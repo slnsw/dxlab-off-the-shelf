@@ -50,7 +50,7 @@ const BookCard: React.FunctionComponent<Props> = ({
   onRender,
 }) => {
   const [ref, inView, entry] = useInView();
-  const [originX, setOriginX] = React.useState();
+  const [originX, setOriginX] = React.useState(0);
 
   const mediaQuery = useMediaQuery();
   const gutter = ['xs', 'sm'].includes(mediaQuery)
