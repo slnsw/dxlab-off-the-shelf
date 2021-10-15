@@ -98,7 +98,7 @@ const BookSpine: React.FunctionComponent<Props> = ({
       }}
     >
       <img
-        src={`https://dxlab.sl.gov.au/spines/${id}.png`}
+        src={`https://dxlab.sl.nsw.gov.au/spines/${id}.png`}
         className={[css.image, isEdge ? css.edgeHeight : nonEdgeHeight].join(
           ' ',
         )}
