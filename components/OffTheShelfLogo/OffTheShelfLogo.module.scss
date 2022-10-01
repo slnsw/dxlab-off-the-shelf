@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 @import '../../styles/global.scss';
 
 $logoWidth: 450px;
@@ -13,8 +15,8 @@ $divBordersHeight: 340px;
   min-width: $logoWidth;
 
   &.sm {
-    width: $logoWidth/2;
-    min-width: $logoWidth/2;
+    width: math.div($logoWidth, 2);
+    min-width: math.div($logoWidth, 2);
   }
 }
 
@@ -26,9 +28,9 @@ $divBordersHeight: 340px;
   width: $textWidth;
 
   &.sm {
-    top: $textTop/2;
-    left: $textLeft/2;
-    width: $textWidth/2;
+    top: math.div($textTop, 2);
+    left: math.div($textLeft, 2);
+    width: math.div($textWidth, 2);
   }
 }
 
@@ -37,6 +39,6 @@ $divBordersHeight: 340px;
   height: $divBordersHeight;
 
   &.sm {
-    height: $divBordersHeight/2;
+    height: math.div($divBordersHeight, 2);
   }
 }

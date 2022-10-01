@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 @import '../../styles/global.scss';
 
 .bookCardModal {
@@ -337,7 +339,7 @@ $colour-black-transparent-20: rgba(0, 0, 0, 0.2);
   margin-top: $baseline-4;
   padding: $baseline-2;
   font-size: $font-size-sm;
-  border: $baseline/2 solid $colour-teal;
+  border: math.div($baseline, 2) solid $colour-teal;
   border-right: none;
   border-bottom: none;
 
@@ -347,7 +349,7 @@ $colour-black-transparent-20: rgba(0, 0, 0, 0.2);
     margin-left: $baseline-8;
     // margin-bottom: $baseline-4;
     padding: $baseline-4;
-    border: $baseline/2 solid $colour-teal;
+    border: math.div($baseline, 2) solid $colour-teal;
     border-right: none;
     border-bottom: none;
   }
