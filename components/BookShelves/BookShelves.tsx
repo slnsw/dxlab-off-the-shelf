@@ -11,7 +11,7 @@ import { usePrevious } from '../../lib/hooks';
 import knuthShuffle from '../../lib/knuthShuffle';
 import * as configs from '../../configs';
 
-import css from './BookShelves.scss';
+import css from './BookShelves.module.scss';
 
 type Props = {
   isActive?: boolean;

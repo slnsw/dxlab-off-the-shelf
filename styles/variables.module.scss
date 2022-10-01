@@ -1,0 +1,28 @@
+@import './variables.scss';
+
+:export {
+  /* stylelint-disable */
+  baseline: $baseline;
+  media-xs: $container-width-xs;
+  media-sm: $container-width-sm;
+  media-md: $container-width-md;
+  media-lg: $container-width-lg;
+  media-xlg: $container-width-xlg;
+  media-xxlg: $container-width-xxlg;
+  font-scale: $font-scale;
+  font-family-primary: $font-family-primary;
+  // font-family-secondary: $font-family-secondary;
+  colour-primary: $colour-primary;
+  colour-secondary: $colour-secondary;
+  colour-highlight: $colour-highlight;
+  colour-yellow: $colour-yellow;
+  colour-teal: $colour-teal;
+  colour-black: $colour-black;
+  colour-white: $colour-white;
+  colour-grey-800: $colour-grey-800;
+  colour-grey-900: $colour-grey-900;
+  border-radius: $border-radius;
+  border-radius-md: $border-radius-md;
+  border-radius-lg: $border-radius-lg;
+  /* stylelint-enable */
+}

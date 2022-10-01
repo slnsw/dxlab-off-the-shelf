@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import { motion } from 'framer-motion';
 
-import css from './OffTheShelfLogoDivBorders.scss';
+import css from './OffTheShelfLogoDivBorders.module.scss';
 
 type Props = {
   strokeWidth?: number;

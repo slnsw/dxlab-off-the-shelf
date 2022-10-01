@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import css from './OffTheShelfLogoText.scss';
-import variables from '../../styles/variables.scss';
+import css from './OffTheShelfLogoText.module.scss';
+import variables from '../../styles/variables.module.scss';
 
 type Props = {
   isActive?: boolean;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import css from './Overlay.scss';
+import css from './Overlay.module.scss';
 
 type Props = {
   isActive?: boolean;

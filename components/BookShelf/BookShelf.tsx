@@ -8,7 +8,7 @@ import * as configs from '../../configs';
 import { useDimensions, usePrevious, useMediaQuery } from '../../lib/hooks';
 import { createScrollToItem } from '../../lib/scroll-to-item';
 
-import css from './BookShelf.scss';
+import css from './BookShelf.module.scss';
 
 type Props = {
   books: any[];

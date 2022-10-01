@@ -15,7 +15,7 @@ import { buildHeadTitle } from '../../lib';
 // import useBookData from '../../lib/hooks/use-book-data';
 import { dedupeByField } from '../../lib/dedupe';
 
-import css from './BookCardModal.scss';
+import css from './BookCardModal.module.scss';
 import SocialMetaHead from '../SocialMetaHead';
 
 type Props = {

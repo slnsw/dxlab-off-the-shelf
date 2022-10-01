@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import OffTheShelfLogoBorder from '../OffTheShelfLogoBorder';
 
-import css from './OffTheShelfLogoBorders.scss';
+import css from './OffTheShelfLogoBorders.module.scss';
 
 type Props = {
   strokeWidth?: number;

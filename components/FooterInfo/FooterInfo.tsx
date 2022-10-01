@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
 
-import css from './FooterInfo.scss';
+import css from './FooterInfo.module.scss';
 
 type Props = {
   className?: string;
