@@ -38,13 +38,13 @@ OFF_THE_SHELF_GTM_ID=GTM-XXXXXXX
 OFF_THE_SHELF_LEFT_HEALTHCHECK_URL=https://hc-ping.com/XXXXXXXXXXXXXXXXXXXXX
 OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL=https://hc-ping.com/XXXXXXXXXXXXXXXXXXXXX
 
-# The /gallery route only allows access to this IP. In Zeit Now, it is set as the public IP of the two gallery PCs
+# The /gallery route only allows access to this IP. In Vercel, it is set as the public IP of the two gallery PCs
 OFF_THE_SHELF_CLIENT_IP=XXXXXX
 ```
 
 ### Staging and Production
 
-No `.env` files are required for staging and production deployments. This app uses `now.json`, `now.staging.json` and `now.dev.json` files to point to Zeit Now's **secrets** during build and runtime.
+No `.env` files are required for staging and production deployments. This app uses `vercel.json`, `vercel.staging.json` and `vercel.dev.json` files to point to Vercel's **secrets** during build and runtime.
 
 ## Deployment
 
@@ -54,12 +54,12 @@ $ npm run deploy:prod
 
 # Staging
 $ npm run deploy:staging
-$ now alias dxlab-off-the-shelf-[new-id].now.sh dxlab-staging-off-the-shelf
+$ vercel alias dxlab-off-the-shelf-[new-id].now.sh dxlab-staging-off-the-shelf
 # NOTE: Still working out how to auto alias
 
 # Dev
 $ npm run deploy:dev
-$ now alias dxlab-off-the-shelf-[new-id].now.sh dxlab-dev-off-the-shelf
+$ vercel alias dxlab-off-the-shelf-[new-id].now.sh dxlab-dev-off-the-shelf
 # NOTE: Still working out how to auto alias
 ```
 
