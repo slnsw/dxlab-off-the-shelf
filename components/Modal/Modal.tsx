@@ -5,7 +5,7 @@ import Overlay from '../Overlay';
 
 import { useKeyPress, useWindowSize } from '../../lib/hooks';
 
-import css from './Modal.scss';
+import css from './Modal.module.scss';
 
 export type Props = {
   isActive?: boolean;

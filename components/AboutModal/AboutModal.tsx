@@ -10,7 +10,7 @@ import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
 import { buildHeadTitle } from '../../lib';
 import pkg from '../../package.json';
 
-import css from './AboutModal.scss';
+import css from './AboutModal.module.scss';
 import FooterInfo from '../FooterInfo';
 
 type Props = {

@@ -3,7 +3,7 @@ import * as React from 'react';
 import OffTheShelfLogoText from '../OffTheShelfLogoText';
 import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
 
-import css from './OffTheShelfLogo.scss';
+import css from './OffTheShelfLogo.module.scss';
 
 type Props = {
   isActive?: boolean;

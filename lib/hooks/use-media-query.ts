@@ -1,6 +1,6 @@
 import { useWindowSize } from '.';
 
-import variables from '../../styles/variables.scss';
+import variables from '../../styles/variables.module.scss';
 
 /**
  * Get media query value

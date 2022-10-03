@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import css from './Loader.scss';
+import css from './Loader.module.scss';
 
-import variables from '../../styles/variables.scss';
+import variables from '../../styles/variables.module.scss';
 
 type Props = {
   strokeWidth?: number;

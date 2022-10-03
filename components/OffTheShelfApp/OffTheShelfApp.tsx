@@ -11,7 +11,7 @@ import { createIdleTimer } from '../../lib/idle-timer';
 import { useInterval, useDocumentVisibility } from '../../lib/hooks';
 import * as configs from '../../configs';
 
-import css from './OffTheShelfApp.scss';
+import css from './OffTheShelfApp.module.scss';
 import Loader from '../Loader';
 
 declare global {

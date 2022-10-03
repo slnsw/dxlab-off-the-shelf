@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import * as configs from '../../configs';
 import { useMediaQuery } from '../../lib/hooks';
 
-import css from './BookCard.scss';
+import css from './BookCard.module.scss';
 
 type Props = {
   id: number;

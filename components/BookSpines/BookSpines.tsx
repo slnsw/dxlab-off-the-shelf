@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import BookSpine from '../BookSpine';
 
-import css from './BookSpines.scss';
+import css from './BookSpines.module.scss';
 
 type Props = {
   className?: string;

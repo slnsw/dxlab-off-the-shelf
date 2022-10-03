@@ -4,7 +4,7 @@ import Link from 'next/link';
 import OffTheShelfLogoText from '../OffTheShelfLogoText';
 import CTAButton from '../CTAButton';
 
-import css from './Header.scss';
+import css from './Header.module.scss';
 
 type Props = {
   basePathnameHref?: string;

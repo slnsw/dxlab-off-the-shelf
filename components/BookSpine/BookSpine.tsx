@@ -8,7 +8,7 @@ import { useMediaQuery } from '../../lib/hooks';
 
 import * as configs from '../../configs';
 
-import css from './BookSpine.scss';
+import css from './BookSpine.module.scss';
 
 type Props = {
   className?: string;

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import Button from '../Button';
 
-import css from './CTAButton.scss';
+import css from './CTAButton.module.scss';
 
 interface Props {
   size?: 'sm' | 'md';

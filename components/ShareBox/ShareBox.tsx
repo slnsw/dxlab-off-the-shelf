@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import OffTheShelfLogoDivBorders from '../OffTheShelfLogoDivBorders';
 
-import css from './ShareBox.scss';
+import css from './ShareBox.module.scss';
 
 type Props = {
   title: string;

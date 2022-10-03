@@ -4,9 +4,9 @@ import { motion, useAnimation } from 'framer-motion';
 
 import useDimensions from '../../lib/hooks/use-dimensions';
 
-import css from './OffTheShelfLogoBorder.scss';
+import css from './OffTheShelfLogoBorder.module.scss';
 
-import variables from '../../styles/variables.scss';
+import variables from '../../styles/variables.module.scss';
 
 type Props = {
   index?: number;

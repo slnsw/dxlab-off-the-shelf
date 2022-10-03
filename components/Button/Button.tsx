@@ -1,7 +1,7 @@
 // @ts-nocheck
 import * as React from 'react';
 
-import css from './Button.scss';
+import css from './Button.module.scss';
 
 /* eslint css-modules/no-unused-class: [2, { markAsUsed: ['sm'] }] */
 
