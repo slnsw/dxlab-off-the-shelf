@@ -25,5 +25,6 @@
       "OFF_THE_SHELF_RIGHT_HEALTHCHECK_URL": "@off_the_shelf_right_healthcheck_url"
     }
   },
-  "regions": ["syd1"]
+  "regions": ["syd1"],
+  "trailingSlash": false
 }

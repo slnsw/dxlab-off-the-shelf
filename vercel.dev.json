@@ -21,5 +21,6 @@
       "OFF_THE_SHELF_CLIENT_IP": "@off_the_shelf_client_ip"
     }
   },
-  "regions": ["syd1"]
+  "regions": ["syd1"],
+  "trailingSlash": false
 }
